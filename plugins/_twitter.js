@@ -3,7 +3,7 @@ const axios = require('axios');
 module.exports = {
   name: 'twitter',
   description: 'Downloads Twitter videos',
-  async xstart(vorterx, m, { args, text, quoted }) {
+  async xstart(vorterx, m, { args, text, quoted, xReact }) {
     
     if (!args[0]) {
       await xReact('❌');
@@ -14,7 +14,7 @@ module.exports = {
       const response = await axios.get(`https://api.neoxr.eu/api/twitter?url=${args[0]}&apikey=LOLCff`);    
       if (!response.data || !response.data.video_url) {
       await xReact('❌');
-        return m.reply('_❌ Failed to fetch the video URL from Twitter._');
+        return m.reply('_❌ Failed to fetch the video from your URL._');
       }
 
       await xReact('📤');
