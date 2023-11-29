@@ -26,7 +26,11 @@ module.exports = {
       const getFile = await axios.get(mediaUrl, { responseType: 'stream' });
       const fileBuffer = getFile.data;
 
-      const caption = `Name: ${original_name}\nVersion: ${version}\nSize: ${size}\nWebsite: ${website}`;
+      const caption = `
+      *〄_Name*: ${original_name}\n
+      *〄_Version*: ${version}\n
+      *〄_Size*: ${size}\n
+      *〄_Website*: ${website}`;
       vorterx.sendMessage(m.from, { document: { buffer: fileBuffer, mimetype: mime }, caption });
     } catch (error) {
       console.error(error);
