@@ -2,6 +2,7 @@ const axios = require('axios');
 
 module.exports = {
   name: 'fancy',
+  category: 'Convert',
   async xstart(vorterx, m, { text, args, quoted, xReact }) {
     
     if (args.length < 2) { 
@@ -18,7 +19,7 @@ module.exports = {
       return m.reply('Please provide a number of fancy levels between 1 and 20.');
     }
 
-    const customText = args.slice(1).join(' ');
+    const vorterxTXT= args.slice(1).join(' ');
     try {
       await xReact('📇');
       const get = await axios.get(`https://api.botcahx.live/api/tools/styletext?text=${encodeURIComponent(customText)}&apikey=29y8XIYL`);
