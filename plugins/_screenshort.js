@@ -7,19 +7,19 @@ module.exports = {
   async xstart(vorterx, m, { text, args, quoted, xReact }) {
      
     if (args.length === 0) {
-      vorterx.sendMessage(m.from, 'Invalid command. Please provide a URL.', 'text', { quoted: m });
-      return;
+      await xReact('❌');
+       return m.reply('_Invalid command. Please provide a URL._');
     }
 
     const url = args[0];
     const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
     if (!url.match(urlRegex)) {
-      vorterx.sendMessage(m.from, 'Invalid URL format. Please provide a valid URL.', 'text', { quoted: m });
-      return;
+      await xReact('❌');
+      return m.reply('_Invalid URL format. Please provide a valid URL._');
     }
    
-    await xReact('📸');
     try {
+      await xReact('📸');
       const response = await axios.get(`https://vihangayt.me/tools/ssweb?url=${encodeURIComponent(url)}`);
       if (response.status !== 200) {
         m.reply('Error occurred on API.');
