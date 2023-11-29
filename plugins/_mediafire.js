@@ -16,17 +16,17 @@ module.exports = {
 
     const apiUrl = `https://vihangayt.me/download/mediafire?url=${encodeURIComponent(mediaFireUrl)}`;
 
-    try {
-      await xReact('📤');
-      const getAnu = await axios.get(apiUrl);
-      const { direct_link, original_name, size, version, website } = getAnu.data;
+   try {
+     await xReact('📤');
+     const getAnu = await axios.get(apiUrl);
+     const { direct_link, original_name, size, version, website } = getAnu.data;
 
-      const mediaUrl = direct_link;
+     const mediaUrl = direct_link;
 
-      const getFile = await axios.get(mediaUrl, { responseType: 'stream' });
-      const fileBuffer = getFile.data;
+     const getFile = await axios.get(mediaUrl, { responseType: 'stream' });
+     const fileBuffer = getFile.data;
 
-      const caption = `
+     const caption = `
   ❲❒❳ 𝙈𝙀𝘿𝙄𝘼𝙁𝙄𝙍𝙀 𝘿𝙉𝙇\n\n
  *〄_Name*: ${original_name}
  *〄_Version*: ${version}
