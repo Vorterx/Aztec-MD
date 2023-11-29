@@ -15,10 +15,9 @@ module.exports = {
       const deviceId = quoted ? quoted.id : m.key.id;
       const deviceInfo = await getDevice(deviceId);
       const userMention = `USER: @${m.mentionedJid || m.sender.id}`;
-      const userNumber = `NUMBER: ${m.sender.number}`;
       const device = `DEVICE: ${deviceInfo}`;
       
-      const replyMsg = `${userMention}\n${userNumber}\n${device}`;
+      const replyMsg = `${userMention}\n${device}`;
       const imageUrl = 'https://graph.org/file/1c594cbc8d4c25046b803.jpg';
       
       vorterx.sendMessage(m.from, {
