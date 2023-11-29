@@ -15,7 +15,6 @@ module.exports = {
     }
 
     const apiUrl = `https://vihangayt.me/download/mediafire?url=${encodeURIComponent(mediaFireUrl)}`;
-
     try {
       await xReact('📤');
       const getAnu = await axios.get(apiUrl);
