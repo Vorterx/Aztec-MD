@@ -34,14 +34,15 @@ module.exports = {
         const filename = `${Date.now()}.mp4`;
         videoStream.pipe(fs.createWriteStream(filename));
         const captionMessage = `
-        TITLE: ${videoInfo.title}
-        VID ID: ${videoInfo.video_id}
-        PUBLISHED: ${videoInfo.published}
-        UPLOADED: ${videoInfo.uploaded}
-        SIZE: ${videoInfo.size}
-        QUALITY: ${highestQualityFormat.quality_label}
-        `;
-
+    ╭─🎵 
+    │ 🎧 TITLE: ${videoInfo.title}
+    ├ 🆔 VID ID: ${videoInfo.video_id}
+    ├    PUBLISHED: ${videoInfo.published}
+    ├ ⏰ UPLOADED: ${videoInfo.uploaded}
+    │    SIZE: ${videoInfo.size}
+    ├─🔗 QUALITY: ${highestQualityFormat.quality_label}
+    │
+    ╰─────────    `;
        vorterx.sendMessage(m.from, {
           url: `file://${filename}`,
           caption: captionMessage,
