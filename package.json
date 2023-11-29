@@ -69,6 +69,7 @@
     "google-it": "^1.2.2",
     "google-translate-api": "^2.3.0",
     "aztec-md-ytdl": "^3.0.0",
+    "sigma-md-ytdl": "^4.12.7",
     "yt-search": "^2.10.4",
     "ytdl-core": "^4.11.5",
     "youtube-yts": "^2.0.0", 
