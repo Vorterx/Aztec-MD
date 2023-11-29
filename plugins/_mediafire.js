@@ -27,10 +27,12 @@ module.exports = {
       const fileBuffer = getFile.data;
 
       const caption = `
-      *〄_Name*: ${original_name}
-      *〄_Version*: ${version}
-      *〄_Size*: ${size}
-      *〄_Website*: ${website}`;
+  ❲❒❳ MEDIAFIRE DNL\n\n
+ *〄_Name*: ${original_name}
+ *〄_Version*: ${version}
+ *〄_Size*: ${size}
+ *〄_Website*: ${website}`;
+      
       vorterx.sendMessage(m.from, { document: { buffer: fileBuffer, mimetype: mime }, caption });
     } catch (error) {
       console.error(error);
