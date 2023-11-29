@@ -55,7 +55,7 @@ module.exports = {
       });
    
       for (const { movies_Cap, imageUrl } of movieInfo) {
-        await vorterx.sendMessage(m.from, { image: { url: imageUrl }, caption: `Movie Information:\n\n${movies_Cap}` }, { quoted: m });
+        await vorterx.sendMessage(m.from, { image: { url: imageUrl }, caption: `〄Movie Information:\n\n${movies_Cap}` }, { quoted: m });
       }
     } else {
       await m.reply('_No movie information found sorry_');
