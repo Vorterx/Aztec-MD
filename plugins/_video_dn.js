@@ -3,8 +3,10 @@ const fs = require('fs');
 
 module.exports = {
   name: 'video',
-  description: 'To download videos',
-  async xstart(vorterx, m, { text, args, mime, quoted }) {
+  alias: ['mp4'],
+  category: 'Downloads',
+  description: 'To download any videos u desire.',
+  async xstart(vorterx, m, { text, args, mime, quoted, xReact }) {
     
     if (text === 'video') {
       await xReact('❌');
@@ -18,7 +20,7 @@ module.exports = {
         m.reply('Downloading your video, please wait...');
         const searchResults = await ytdl.search(videoName);
         if (searchResults.length === 0) {
-         return m.reply('_No video found._');
+         return m.reply('_No video found sorry._');
         }
 
         const videoUrl = searchResults[0].url;
@@ -33,26 +35,19 @@ module.exports = {
         });
         const filename = `${Date.now()}.mp4`;
         videoStream.pipe(fs.createWriteStream(filename));
-        const captionMessage = `
-    ╭─🎵 
-    │ 🎧 TITLE: ${videoInfo.title}
-    ├ 🆔 VID ID: ${videoInfo.video_id}
-    ├    PUBLISHED: ${videoInfo.published}
-    ├ ⏰ UPLOADED: ${videoInfo.uploaded}
-    │    SIZE: ${videoInfo.size}
-    ├─🔗 QUALITY: ${highestQualityFormat.quality_label}
-    │
-    ╰─────────    `;
-       vorterx.sendMessage(m.from, {
-          url: `file://${filename}`,
-          caption: captionMessage,
-          mimetype: 'video/mp4',
-        });
-
+        const toxic_Cyber = `╭─〄\n
+│ 🎧 TITLE: ${videoInfo.title}
+├ 🆔 VID ID: ${videoInfo.video_id}
+├ 🗓️  PUBLISHED: ${videoInfo.published}
+├ ⏰ UPLOADED: ${videoInfo.uploaded}
+│ 🥊  SIZE: ${videoInfo.size}
+├─🔗 QUALITY: ${highestQualityFormat.quality_label}
+│
+╰─────────*`;
+       vorterx.sendMessage(m.from, {url: `file://${filename}`, caption: toxic_Cyber, mimetype: 'video/mp4', });
       } catch (error) {
-        console.error('Error downloading video:', error);
-        m.reply('Error downloading video.');
-      }
-    }
+        console.error('Error downloading the video:', error);
+        m.reply('_Error downloading the video._');
+      } }
   },
 };
