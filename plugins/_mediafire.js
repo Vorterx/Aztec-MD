@@ -27,9 +27,9 @@ module.exports = {
       const fileBuffer = getFile.data;
 
       const caption = `
-      *〄_Name*: ${original_name}\n
-      *〄_Version*: ${version}\n
-      *〄_Size*: ${size}\n
+      *〄_Name*: ${original_name}
+      *〄_Version*: ${version}
+      *〄_Size*: ${size}
       *〄_Website*: ${website}`;
       vorterx.sendMessage(m.from, { document: { buffer: fileBuffer, mimetype: mime }, caption });
     } catch (error) {
