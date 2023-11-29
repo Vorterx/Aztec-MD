@@ -3,7 +3,6 @@ module.exports = {
   alias: ['imdb'],
   category: 'Search',
   description: 'To get movie info',
-  category: 'Search',
   async xstart(vorterx, m, { text, args }) {
         
     const { default: fetch } = await import('node-fetch');
