@@ -27,7 +27,7 @@ module.exports = {
       const fileBuffer = getFile.data;
 
       const caption = `
-  ❲❒❳ MEDIAFIRE DNL\n\n
+  ❲❒❳ 𝙈𝙀𝘿𝙄𝘼𝙁𝙄𝙍𝙀 𝘿𝙉𝙇\n\n
  *〄_Name*: ${original_name}
  *〄_Version*: ${version}
  *〄_Size*: ${size}
