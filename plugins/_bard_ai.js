@@ -13,9 +13,9 @@ module.exports = {
 
     try {
       await xReact('🤖');
-      const response = await axios.get(`https://api.neoxr.eu/api/bard?q=${encodeURIComponent(text)}&apikey=bv1SpA`);
+      const anu = await axios.get(`https://api.neoxr.eu/api/bard?q=${encodeURIComponent(text)}&apikey=bv1SpA`);
       
-      const { data } = response;
+      const { data } = anu;
       
       if (data && data.success && data.message) {
         await vorterx.sendMessage(m.from, data.message, `${text}`, {
