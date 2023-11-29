@@ -1,12 +1,11 @@
-/
 const axios = require('axios');
 const { createWriteStream } = require('fs');
-const { name, description } = require('./config.json');
 
 module.exports = {
   name: 'mediafire',
+  category: 'Downloads',
   description: 'To Download using media fire link',
-  async xstart(vorterx, m, { text, args, mime, quoted }) {
+  async xstart(vorterx, m, { text, args, mime, xReact, quoted }) {
     
     const urlRegExp = /(https?:\/\/[^\s]+)/g;
     const mediaFireUrl = text.match(urlRegExp)?.[0];
@@ -23,14 +22,14 @@ module.exports = {
       const response = await axios.get(apiUrl);
       const { direct_link, original_name, size, version, website } = response.data;
       
-      const downloadUrl = direct_link;
+      const mediaUrl = direct_link;
       
-      const downloadResponse = await axios.get(downloadUrl, { responseType: 'stream' });
+      const getFile = await axios.get(mediaUrl, { responseType: 'stream' });
       const fileName = original_name;
-      const filePath = `./downloads/${fileName}`;
+      const filePath = `../lib/downloads/${fileName}`;
       const writer = createWriteStream(filePath);
 
-      downloadResponse.data.pipe(writer);
+      getFile.data.pipe(writer);
 
       writer.on('finish', () => {
       const caption = `Name: ${original_name}\nVersion: ${version}\nSize: ${size}\nWebsite: ${website}`;       
