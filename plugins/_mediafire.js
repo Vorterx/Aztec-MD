@@ -1,5 +1,4 @@
 const axios = require('axios');
-const { createWriteStream } = require('fs');
 
 module.exports = {
   name: 'mediafire',
@@ -19,26 +18,16 @@ module.exports = {
 
     try {
       await xReact('📤');
-      const response = await axios.get(apiUrl);
-      const { direct_link, original_name, size, version, website } = response.data;
+      const getAnu = await axios.get(apiUrl);
+      const { direct_link, original_name, size, version, website } = getAnu.data;
 
       const mediaUrl = direct_link;
 
       const getFile = await axios.get(mediaUrl, { responseType: 'stream' });
-      const fileName = original_name;
-      const filePath = `../lib/downloads/${fileName}`;
-      const writer = createWriteStream(filePath);
+      const fileBuffer = getFile.data;
 
-      getFile.data.pipe(writer);
-      writer.on('finish', function () {
-        const caption = `Name: ${original_name}\nVersion: ${version}\nSize: ${size}\nWebsite: ${website}`;
-        vorterx.sendMessage(m.from, { file: filePath, caption });
-      });
-
-      writer.on('error', function (error) {
-        console.error(error);
-        m.reply('An error occurred while downloading the file.');
-      });
+      const caption = `Name: ${original_name}\nVersion: ${version}\nSize: ${size}\nWebsite: ${website}`;
+      vorterx.sendMessage(m.from, { document: { buffer: fileBuffer, mimetype: mime }, caption });
     } catch (error) {
       console.error(error);
       m.reply('An error occurred while downloading the file.');
