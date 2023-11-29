@@ -25,9 +25,9 @@ module.exports = {
         const { time } = pkgRply.data;
 
         const publishedDate = time[pkg.version];
-        const formattedPublishedDate = new Date(publishedDate).toLocaleDateString();
+        const formattedPublished = new Date(publishedDate).toLocaleDateString();
 
-        return `*🕹️_${pkg.name}*\n(v${pkg.version})\n*_🎗️Link*: _${pkg.links.npm}_\n*_📒Descripto*: _${pkg.description}_\n*_📇Published*: _${formattedPublishedDate}_`;
+        return `*🕹️_${pkg.name}*\n(v${pkg.version})\n*_🎗️Link*: _${pkg.links.npm}_\n*_📒Descripto*: _${pkg.description}_\n*_📇Published*: _${formattedPublished}_`;
       });
 
       const packageInfor = await Promise.all(packageInfo);
