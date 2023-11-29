@@ -30,8 +30,7 @@ module.exports = {
         if (!videoResponse.data) {
         return m.reply('_❌ Failed to download the video._');
       }
-     vorterx.sendMessage(m.from, { url: videoUrl, mimetype: 'video/mp4', caption: `📹 **TTITLE:** ${title}\n📅 **PUBLISHED:** ${publishedDate}\n📏 **SIZE:** ${size}`, file: videoResponse.data,
-      });
+     vorterx.sendMessage(m.from, { url: videoUrl, mimetype: 'video/mp4', caption: `📹 **TTITLE:** ${title}\n📅 **PUBLISHED:** ${publishedDate}\n📏 **SIZE:** ${size}`, file: videoResponse.data, });
      } catch (error) {
       m.reply('❌ An error occurred while processing the request');
     } },
