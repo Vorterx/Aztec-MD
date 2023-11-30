@@ -5,30 +5,26 @@ module.exports = {
   alias: ['pkg'],
   description: 'Searches for an npm package',
   async xstart(vorterx, m, { text }) {
+ 
     if (!text) {
       await xReact('❌');
       return m.reply('_Please provide an npm package name, e.g., npm aztec-md-ytdl_');
     }
-
     try {
       const decentX = await axios.get(`http://registry.npmjs.com/-/v1/search?text=${text}`);
       const { objects: results } = decentX.data;
-
       if (!results.length) {
         await xReact('❌');
         return m.reply(`Your research for "${text}" not found :/`);
       }
-
         await xReact('🔍');
         const pkgInfo = results.map(async ({ package: pkg }) => {
         const pkgRply = await axios.get(`https://registry.npmjs.com/${pkg.name}`);
         const { time } = pkgRply.data;
-
         const datePkg = time[pkg.version];
         const datePkg = new Date(datePkg).toLocaleDateString();
         return `*🕹️_${pkg.name}*\n(v${pkg.version})\n*_🎗️Link*: _${pkg.links.npm}_\n*_📒Descripto*: _${pkg.description}_\n*_📇Published*: _${datePkg}_`;
       });
-
       const pkgE = await Promise.all(pkgInfo);
       const xtext = pkgE.join('\n\n');
       const master_avatar = results[0].package?.publisher?.avatar;
