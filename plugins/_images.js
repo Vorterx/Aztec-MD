@@ -12,7 +12,7 @@ module.exports = {
       const query = text.trim();      
       if (!query) {
         await xReact('❌');
-        return m.reply(`Please provide the name of the image...\`\`\``);
+        return m.reply(`\`\`\`Please provide the name of the image...\`\`\``);
       }
       
       const search = 10;
