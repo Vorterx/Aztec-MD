@@ -19,6 +19,7 @@ module.exports = {
         return m.reply('_❌ Failed to fetch the video from your URL..._');
       }
 
+      m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
       await xReact('📤');
       const Url = getTtvid.data.video_url;
       const title = getTtvid.data.title;
