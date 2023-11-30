@@ -3,22 +3,20 @@ module.exports = {
   description: 'To check mods admins to the bot',
   category: 'Owner',
   async xstart(vorterx, m, { text, args, quoted, xReact }) {
-   
+  
     await xReact('✔️');
-    let azteci = '*AZTEC MODS*\n\n';
+    let azteci = '*👤 VORTERX MODS 👤*\n\n';
     const mods = process.env.MODS || '';
 
     if (mods) {
-      const sudo = mods.split(',');     
-      azteci += `${sudo.length}\n\n`;
+      const sudo = mods.split(',');
       for (let i = 0; i < sudo.length; i++) {
-        azteci += `${i + 1}. ${sudo[i]}\n`;
+        azteci += `*#${i + 1} ☞* ${sudo[i]}\n`;
       }
     } else {
-      azteci += `\`\`\`No mods are set for now\`\`\``;
+      azteci += '`No mods are set for now`';
     }
-    const img = 'https://i.ibb.co/2dvDgBd/464318-5149318-823730-thumbnail.png';   
+    const img = 'https://i.ibb.co/2dvDgBd/464318-5149318-823730-thumbnail.png';
     await vorterx.sendMessage(m.from, { image: { url: img, caption: azteci } }, { quoted: m });
   }
 };
-
