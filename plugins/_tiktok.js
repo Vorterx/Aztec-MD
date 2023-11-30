@@ -14,24 +14,20 @@ module.exports = {
 
     const apiKey = '29y8XIYL';
     let caption = '';
-
     try {
-      const downloadUrl = `https://api.botcahx.live/api/dowloader/tiktok?url=${encodeURIComponent(
+      const adUrl = `https://api.botcahx.live/api/dowloader/tiktok?url=${encodeURIComponent(
         text
       )}&apikey=${apiKey}`;
-
       await xReact('📤');
-      const response = await axios.get(downloadUrl);
-      const data = response.data;
-
+      m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
+      const res = await axios.get(adUrl);
+      const data = res.data;
       if (data.success) {
-        const videoTitle = data.result.title;
-        const videoViews = data.result.views;
-        const videoLikes = data.result.likes;
-        const videoPublished = data.result.published;
-
-        caption = `🌳TITLE: ${videoTitle}\n👀VIEWS: ${videoViews}\n👍LIKES: ${videoLikes}\n🙌PUBLISHED: ${videoPublished}`;
-
+        const Title = data.result.title;
+        const Views = data.result.views;
+        const Likes = data.result.likes;
+        const Published = data.result.published;
+        caption = `🌳TITLE: ${Title}\n👀VIEWS: ${Views}\n👍LIKES: ${Likes}\n🙌PUBLISHED: ${Published}`;
         vorterx.sendMessage(m.from, `${caption}`);
       } else {}
     } catch (error) {
