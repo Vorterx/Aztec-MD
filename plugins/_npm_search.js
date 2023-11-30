@@ -11,8 +11,8 @@ module.exports = {
     }
 
     try {
-      const response = await axios.get(`http://registry.npmjs.com/-/v1/search?text=${text}`);
-      const { objects: results } = response.data;
+      const decentX = await axios.get(`http://registry.npmjs.com/-/v1/search?text=${text}`);
+      const { objects: results } = decentX.data;
 
       if (!results.length) {
         await xReact('❌');
