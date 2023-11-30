@@ -13,7 +13,6 @@ module.exports = {
     try {
       const yts = await ytdl.getVideoInfo(text);
       const audio = ytdl.filterFormats(yts.formats, 'audioonly');
-
       if (audio.length === 0) {
         await xReact('❌');
         return m.reply("Sorry, I couldn't find any audio formats for the provided song.");
@@ -29,7 +28,6 @@ module.exports = {
       const bufferMP3 = waveMP3.bufferMP3;
       const getFileName = `${title}.mp3`;
       const results = Buffer.from(bufferMP3);
-
       const music_get = {
         document: results,
         mimetype: 'audio/mpeg',
