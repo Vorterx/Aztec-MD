@@ -12,11 +12,11 @@ module.exports = {
       const query = text.trim();      
       if (!query) {
         await xReact('❌');
-        return m.reply(`\`\`\`Please provide the name of the image...\`\`\``);
+        return m.reply(`Please provide the name of the image...\`\`\``);
       }
       
       const search = 10;
-      m.reply(`\`\`\`Downloading your\`\`\ *${search}* `\`\`\images...⏳\`\`\``);
+      m.reply(`\`\`\`Downloading your *${search}* images...⏳`);
        const results = await gis(query);
       if (results.length > 0) {
         for (let i = 0; i < search; i++) {
