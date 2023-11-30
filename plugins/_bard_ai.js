@@ -10,13 +10,10 @@ module.exports = {
       await xReact('❌');
       return m.reply(`Please provide a query. For example, use: \`\`\`What is the new update of WaBeta?\`\`\``);
     }
-
     try {
       await xReact('🤖');
-      const anu = await axios.get(`https://api.neoxr.eu/api/bard?q=${encodeURIComponent(text)}&apikey=bv1SpA`);
-      
-      const { data } = anu;
-      
+      const anu = await axios.get(`https://api.neoxr.eu/api/bard?q=${encodeURIComponent(text)}&apikey=bv1SpA`);      
+      const { data } = anu;      
       if (data && data.success && data.message) {
         await vorterx.sendMessage(m.from, data.message, `${text}`, {
           quotedMessage: m,
