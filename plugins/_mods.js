@@ -11,7 +11,7 @@ module.exports = {
     if (mods) {
       const sudo = mods.split(',');
       for (let i = 0; i < sudo.length; i++) {
-        azteci += `*#${i + 1} ☞* ${sudo[i]}\n`;
+        azteci += `*#${i + 1} 〄* ${sudo[i]}\n`;
       }
     } else {
       azteci += '`No mods are set for now`';
