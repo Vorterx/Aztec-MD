@@ -15,12 +15,10 @@ module.exports = {
       await xReact("⛔");
       return m.reply("Please provide a search term. Example: xyt hope");
     }
-
     await xReact("🎵");
     const search = await yts(text);
     const getVideo = search.videos[Math.floor(Math.random() * search.videos.length)];
     const thumbnail = await getBuffer(getVideo.thumbnail);
-
     const get_Video = `
 🎧 *${getVideo.title}*
 🆔 *ID*: ${getVideo.videoId}
@@ -29,7 +27,6 @@ module.exports = {
 👤 *Author*: ${getVideo.author.name}
 🔗 [Watch on YouTube](${getVideo.url})
     `;
-
     const D3centX = `
 ╭─🎵 *Music Search Results*
 │
