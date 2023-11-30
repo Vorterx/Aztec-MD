@@ -11,13 +11,12 @@ module.exports = {
       await xReact('❌');
       return m.reply('Provide a movie name e.g. movie Dragon ball');
     }
-
     await xReact('🎬');
+    m.reply(`\`\`\`Processing your request...⏳\`\`\``);
     const apiKey = 'bv1SpA';
     const apiUrl = `https://api.neoxr.eu/api/film?q=${text}&apikey=${apiKey}`;    
     const response = await fetch(apiUrl);
-    const data = await response.json();
-    
+    const data = await response.json();    
     if (data && data.length > 0) {      
       const movieInfo = data.map((movie) => {
         const title = movie.title;
