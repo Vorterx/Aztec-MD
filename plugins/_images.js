@@ -16,7 +16,7 @@ module.exports = {
       }
       
       const search = 10;
-      m.reply(`\`\`\`Downloading your\`\`\` *${search}* `\`\`\images...⏳\`\`\``);
+      m.reply(`\`\`\`Downloading your\`\`\ *${search}* `\`\`\images...⏳\`\`\``);
        const results = await gis(query);
       if (results.length > 0) {
         for (let i = 0; i < search; i++) {
