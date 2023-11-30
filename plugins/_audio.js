@@ -11,7 +11,7 @@ module.exports = {
       return m.reply(`Please provide a song name (e.g., ${prefix}song "Dubula by Emoh x Hurry cane")`);
     }
     try {
-      m.reply(`\`\`\`Downloading your song, please wait...⏳`\`\``);      
+      m.reply(`\`\`\`Downloading your song, please wait...⏳\`\`\``);      
       const yts = await ytdl.getVideoInfo(text);
       const audio = ytdl.filterFormats(yts.formats, 'audioonly');
       if (audio.length === 0) {
