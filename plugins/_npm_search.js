@@ -20,22 +20,20 @@ module.exports = {
       }
 
         await xReact('🔍');
-        const packageInfo = results.map(async ({ package: pkg }) => {
+        const pkgInfo = results.map(async ({ package: pkg }) => {
         const pkgRply = await axios.get(`https://registry.npmjs.com/${pkg.name}`);
         const { time } = pkgRply.data;
 
-        const publishedDate = time[pkg.version];
-        const formattedPublished = new Date(publishedDate).toLocaleDateString();
-
-        return `*🕹️_${pkg.name}*\n(v${pkg.version})\n*_🎗️Link*: _${pkg.links.npm}_\n*_📒Descripto*: _${pkg.description}_\n*_📇Published*: _${formattedPublished}_`;
+        const datePkg = time[pkg.version];
+        const datePkg = new Date(datePkg).toLocaleDateString();
+        return `*🕹️_${pkg.name}*\n(v${pkg.version})\n*_🎗️Link*: _${pkg.links.npm}_\n*_📒Descripto*: _${pkg.description}_\n*_📇Published*: _${datePkg}_`;
       });
 
-      const packageInfor = await Promise.all(packageInfo);
-      const xtext = packageInfor.join('\n\n');
+      const pkgE = await Promise.all(pkgInfo);
+      const xtext = pkgE.join('\n\n');
       const master_avatar = results[0].package?.publisher?.avatar;
       if (master_avatar) {
-        await vorterx.sendMessage(m.from, { image: { url: master_avatar,
-        caption: xtext, quoted: m,  }, });
+        await vorterx.sendMessage(m.from, { image: { url: master_avatar, caption: xtext, quoted: m,  }, });
       } else {
         m.reply(xtext);
       }
