@@ -13,15 +13,16 @@ module.exports = {
       return m.reply('_Please provide a video name._');
     }
     if (text.startsWith('video//')) {
-      const videoName = text.match(/video\/\/(.+)/i)[1];
+      const getNam = text.match(/video\/\/(.+)/i)[1];
       try {
         await xReact('📤');
         m.reply('Downloading your video, please wait...');
-        const searchResults = await ytdl.search(videoName);
-        if (searchResults.length === 0) {
+        const search = await ytdl.search(getNam);
+        if (search.length === 0) {
+          await xReact('❌');
           return m.reply('_No video found, sorry._');
         }
-        const Url = searchResults[0].url;
+        const Url = search[0].url;
         const Info = await ytdl.getInfo(Url);
         const qualityF = ytdl.chooseFormat(Info.formats, {
           quality: 'highest',
