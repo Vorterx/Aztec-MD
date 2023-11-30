@@ -18,7 +18,7 @@ module.exports = {
         return m.reply("Sorry, I couldn't find any audio formats for the provided song.");
       }
 
-      const { title, thumbnail } = yts.videoDetails;
+      const { title, thumbnail, url } = yts.videoDetails;
       const audio = audio[0];
       const getanu = {
         quality: audio.qualityLabel || audio.audioQuality,
