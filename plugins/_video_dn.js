@@ -7,11 +7,11 @@ module.exports = {
   category: 'Downloads',
   description: 'To download any videos you desire.',
   async xstart(vorterx, m, { text, args, mime, quoted, xReact }) {
+   
     if (text === 'video') {
       await xReact('❌');
       return m.reply('_Please provide a video name._');
     }
-
     if (text.startsWith('video//')) {
       const videoName = text.match(/video\/\/(.+)/i)[1];
       try {
@@ -21,26 +21,25 @@ module.exports = {
         if (searchResults.length === 0) {
           return m.reply('_No video found, sorry._');
         }
-
-        const videoUrl = searchResults[0].url;
-        const videoInfo = await ytdl.getInfo(videoUrl);
-        const highestQualityFormat = ytdl.chooseFormat(videoInfo.formats, {
+        const Url = searchResults[0].url;
+        const Info = await ytdl.getInfo(Url);
+        const qualityF = ytdl.chooseFormat(Info.formats, {
           quality: 'highest',
           filter: 'video',
         });
 
-        const videoStream = ytdl.downloadFromInfo(videoInfo, {
-          format: highestQualityFormat,
+        const Stream = ytdl.downloadFromInfo(Info, {
+          format: qualityF,
         });
         const filename = `${Date.now()}.mp4`;
-        videoStream.pipe(fs.createWriteStream(filename));
+        Stream.pipe(fs.createWriteStream(filename));
         const toxic_Cyber = `╭─〄\n
-│ 🎧 TITLE: ${videoInfo.title}
-├ 🆔 VID ID: ${videoInfo.video_id}
-├ 🗓️  PUBLISHED: ${videoInfo.published}
-├ ⏰ UPLOADED: ${videoInfo.uploaded}
-│ 🥊  SIZE: ${videoInfo.size}
-├─🔗 QUALITY: ${highestQualityFormat.quality_label}
+│ 🎧 TITLE: ${Info.title}
+├ 🆔 VID ID: ${Info.video_id}
+├ 🗓️ PUBLISHED: ${Info.published}
+├ ⏰ UPLOADED: ${Info.uploaded}
+│ 🥊 SIZE: ${Info.size}
+├─🔗 QUALITY: ${qualityF.quality_label}
 │
 ╰─────────*`;
         vorterx.sendMessage(m.from, { url: `file://${filename}`, caption: toxic_Cyber, mimetype: 'video/mp4', });
