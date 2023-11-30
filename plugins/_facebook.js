@@ -12,6 +12,7 @@ module.exports = {
   }
   try {
     await xReact('📤');
+    m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
     let res = await axios.get(`https://api.botcahx.live/api/dowloader/fbdown3?url=${text}&apikey=29y8XIYL`);
     const oUrl = res.data.url;
     const txt = `[*FB DOWNLOAD*]\n` +
