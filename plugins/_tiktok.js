@@ -11,7 +11,6 @@ module.exports = {
       await xReact('❌');
       return m.reply('Please provide a valid TikTok video URL.');
     }
-
     const apiKey = '29y8XIYL';
     let caption = '';
     try {
