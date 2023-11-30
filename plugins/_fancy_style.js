@@ -22,7 +22,7 @@ module.exports = {
     const vorterxTXT= args.slice(1).join(' ');
     try {
       await xReact('📇');
-      const get = await axios.get(`https://api.botcahx.live/api/tools/styletext?text=${encodeURIComponent(customText)}&apikey=29y8XIYL`);
+      const get = await axios.get(`https://api.botcahx.live/api/tools/styletext?text=${encodeURIComponent(vorterxTXT)}&apikey=29y8XIYL`);
       if (get.data) {
         let sendFancy = get.data;
         for (let i = 0; i < userStyle; i++) {
