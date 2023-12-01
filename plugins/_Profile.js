@@ -40,10 +40,10 @@ module.exports = {
     } catch (e) {}
     
     const getColor = () => {
-      const letters = '0123456789ABCDEF';
+      const css = '0123456789ABCDEF';
       let color = '#';
       for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
+        color += css[Math.floor(Math.random() * 16)];
       }
       return color;
     };
