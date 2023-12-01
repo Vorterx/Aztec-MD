@@ -6,9 +6,7 @@
 //                     |
 //                     |
 //                     -------------------
-const fs = require('fs');
 require('dotenv').config();
-const chalk = require('chalk');
 
 let config = {
   botName: process.env.BOTNAME || 'AZTEC MD',
