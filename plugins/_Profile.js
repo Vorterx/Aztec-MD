@@ -52,8 +52,8 @@ module.exports = {
       headerColor: getColor(),
     };
     
-    const animatedProfileImage = await vorterx.loadProfilePicture(user.id, 'image');
-    mSg.image.animated = animatedProfileImage.isAnimated;
+    const animatedPlp = await vorterx.loadProfilePicture(user.id, 'image');
+    mSg.image.animated = animatedPlp.isAnimated;
     vorterx.sendMessage(m.from, mSg, { quoted: m });
   },
 };
