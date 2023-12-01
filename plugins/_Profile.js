@@ -26,7 +26,7 @@ module.exports = {
 
     const txt = userLevel.xp;
     const mssG = `
-〄P R O F  I L E : D E S C\n\n
+*〄P R O F  I L E : D E S C*\n\n
 *👤 User Number*: ${m.sender.user.replace(/@c.us/g, '')}
 *👥 Username*: ${m.pushName}
 *⚡ Bio*: ${bioText}
