@@ -2,7 +2,7 @@
   "name": "vorterx",
   "version": "3.0.0",
   "engines": {
-  "node": "16.11.0"
+  "node": "21.1.0"
   },
   "main": "core.js",
   "scripts": {
