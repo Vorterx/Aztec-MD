@@ -1,10 +1,6 @@
 const { MessageType } = require("@whiskeysockets/baileys");
 
-module.exports = {
-  name: "(listrequest|look)",
-  category: "Group",
-  description: "To check the requests on a group from users who want to join",
-  async xstart(vorterx, m, { args, mime, isBotAdmin, isAdmin, isGroup, quoted, text, xReact }) {
+module.exports = { name: "(listrequest|look)", category: "Group", description: "To check the requests on a group from users who want to join", async xstart(vorterx, m, { args, mime, isBotAdmin, isAdmin, isGroup, quoted, text, xReact }) {
   
     if (!isBotAdmin) {
       await xReact('❌');
