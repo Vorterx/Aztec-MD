@@ -1,61 +1,61 @@
-  {
+{
   "name": "WhatsApp Chatbot",
   "description": "multi bot with rich features made by Vorterx team",
   "keywords": [
-  "aztec",
-  "diego"
+    "aztec",
+    "diego"
   ],
   "repository": "https://github.com/Vorterx/Aztec-MD.git",
   "logo": "https://i.ibb.co/BwZZ2NN/ec5d0fba-ddc7-476c-afad-01e5fb9a4e7c-channel-offline-image-1920x1080.jpg",
   "env": {
     "PREFIX": {
-     "description": "Prefix of your bot Ex: . , / , # , & etc. Put anythong except @ (Default is .)",
-     "required": false
+      "description": "Prefix of your bot Ex: . , / , # , & etc. Put anything except @ (Default is .)",
+      "required": false
     },
     "BOTNAME": {
-     "description": "Put your bot name here as its required."
+      "description": "Put your bot name here as it's required."
     },
     "SESSION_ID": {
-    "description": "A sessionld that you scanned paste it here."
+      "description": "A session ID that you scanned. Paste it here."
     },
     "LEVEL_UP": {
-    "description": "To enable auto level up set true or false or enable or disable",
+      "description": "To enable auto level up, set true or false or enable or disable"
     },
     "LANG": {
-    "description": "Choose images to show on menu available images(VOR_TERX)",
+      "description": "Choose images to show on menu. Available images (VOR_TERX)"
     },
     "OWNER_NAME": {
-    "description": "Add your name (e.g diegosonTech or suhailTechInfo)",
+      "description": "Add your name (e.g. diegosonTech or suhailTechInfo)"
     },
     "AUTO_READ_STATUS": {
-    "description": "Auto_Status_View use (e.g true to activate else false to disable)",
-    "required": false
+      "description": "Auto_Status_View use (e.g. true to activate, false to disable)",
+      "required": false
     },
     "AUTO_REACT": {
-    "description": "To set auto react use (e.g [on] else off.)",
+      "description": "To set auto react, use [on] or off."
     },
     "WORKTYPE": {
-    "description": "To set private or public (use e.g private/ public/ group_work.)",
+      "description": "To set private or public, use private/public/group_work."
     },
     "MENU": {
-    "description": "Choose number between 0 and 2 were 2 is aztec menu 0 suhail menu or if you want it to change randomly leave it blank",
-    "value": "2",
-    "required": false
+      "description": "Choose a number between 0 and 2, where 2 is Aztec menu, 0 is suhail menu. If you want it to change randomly, leave it blank",
+      "value": "2",
+      "required": false
     },
     "MODS": {
-    "description": "Put any phone number without + , () and spaces \",\" Ex: 27686881509 )",
-    "required": false
+      "description": "Put any phone number without +, () and spaces, e.g. 27686881509",
+      "required": false
     }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
     },
-   "buildpacks": [
-   {
-   "url": "heroku/nodejs"
-   },
-   {
-   "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
-   },
-   {
-   "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
-   }
-   ]
-   }
+    {
+      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
+    },
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+    }
+  ]
+  }
