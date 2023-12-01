@@ -4,14 +4,14 @@ module.exports = {
   name: '(profile|me|user)',
   description: 'Check your profile information',
   category: 'Misc',
-  async xstart(vorterx, m, { args }) {
-    
-    await xReact ('👤');  
-    const user = m.sender;
-    const bio = await vorterx.fetchStatus(user);
-    const bioText = bio.status;
+  async xstart(vorterx, m, { args, xReact }) {
+   
+    await xReact('👤');
+    const user = m.sender.user;
+    const bio = await vorterx.fetchBio(user);
+    const bioText = bio;
 
-    const userLevel = await Levels.fetch(user,true);
+    const userLevel = await Levels.fetch(user.id, true);
     const levelPoints = userLevel.level;
     let role = '';
 
@@ -26,7 +26,7 @@ module.exports = {
 
     const txt = userLevel.xp;
     const mssG = `
-*👤 User Number*: ${m.sender.replace(/@c.us/g, '')}
+*👤 User Number*: ${m.sender.user.replace(/@c.us/g, '')}
 *👥 Username*: ${m.pushName}
 *⚡ Bio*: ${bioText}
 *🧩 Role*: ${role}
@@ -34,21 +34,26 @@ module.exports = {
 *📥 Total Messages*: ${txt}
 `;
 
-  let profileImage;
-  try { profileImage = await vorterx.profilePictureUrl(user, 'image');
+    let profileImage;
+    try { profileImage = await vorterx.profilePictureUrl(user.id, 'image');
     } catch (e) {}
-  const getColor = () => {
+    
+    const getColor = () => {
       const letters = '0123456789ABCDEF';
       let color = '#';
       for (let i = 0; i < 6; i++) {
-      color+= letters[Math.floor(Math.random() * 16)];
+        color += letters[Math.floor(Math.random() * 16)];
       }
       return color;
     };
-  const mSg = { image: { url: profileImage, animated: false, }, caption: mssG, headerType: 4, headerColor: getColor(), };
-    const animatedProfileImage = await vorterx.loadProfilePicture(user, 'image');
+    
+    const mSg = {
+      image: { url: profileImage, animated: false }, caption: mssG, headerType: 4,
+      headerColor: getColor(),
+    };
+    
+    const animatedProfileImage = await vorterx.loadProfilePicture(user.id, 'image');
     mSg.image.animated = animatedProfileImage.isAnimated;
-    vorterx.sendMessage(m.from, mSg, { quoted: m,
-    });
+    vorterx.sendMessage(m.from, mSg, { quoted: m });
   },
 };
