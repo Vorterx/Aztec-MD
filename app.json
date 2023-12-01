@@ -35,7 +35,7 @@
     "description": "To set auto react use (e.g [on] else off.)",
     },
     "WORKTYPE": {
-    "description": "To set private or public (use e.g private/ public.)",
+    "description": "To set private or public (use e.g private/ public/ group_work.)",
     },
     "MENU": {
     "description": "Choose number between 0 and 2 were 2 is aztec menu 0 suhail menu or if you want it to change randomly leave it blank",
