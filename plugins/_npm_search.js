@@ -21,7 +21,7 @@ module.exports = {
         const pkgInfo = results.map(async ({ package: pkg }) => {
         const pkgRply = await axios.get(`https://registry.npmjs.com/${pkg.name}`);
         const { time } = pkgRply.data;
-        const datePkg = time[pkg.version];
+        const datPkg = time[pkg.version];
         const datePkg = new Date(datePkg).toLocaleDateString();
         return `*🕹️_${pkg.name}*\n(v${pkg.version})\n*_🎗️Link*: _${pkg.links.npm}_\n*_📒Descripto*: _${pkg.description}_\n*_📇Published*: _${datePkg}_`;
       });
