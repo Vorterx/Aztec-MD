@@ -1,4 +1,4 @@
-const { default: VorterxConnection, DisconnectReason, Browsers, delay, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
+const { default: makeWASocket, DisconnectReason, Browsers, delay, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const express = require('express');
@@ -39,7 +39,7 @@ async function startAztec() {
     }
     const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/');
 
-    const vorterx = new VorterxConnection({
+    const vorterx =  makeWASocket({
       logger: P({ level: "silent" }),
       printQRInTerminal: false,
       browser: Browsers.macOS("Desktop"),
@@ -90,6 +90,7 @@ async function startAztec() {
       }
 
       if (connection === "open") {
+        console.log('WhatsApp Chatbot has connected✔️');
         const version = require(__dirname + "/package.json").version;
         const BotName = require(__dirname + "/config.js").botName;
         const Mods = require(__dirname + "/config.js").mods;
