@@ -15,9 +15,6 @@
     "BOTNAME": {
       "description": "Put your bot name here as it's required."
     },
-    "SESSION_ID": {
-      "description": "A session ID that you scanned. Paste it here."
-    },
     "LEVEL_UP": {
       "description": "To enable auto level up, set true or false or enable or disable"
     },
