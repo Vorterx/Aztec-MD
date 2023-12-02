@@ -12,6 +12,9 @@ const contact = require('./connects/contact.js');
 const MessageHandler = require('./lib/message/vorterx.js');
 let cc = config.session_Id.replace(/Vorterx;;;/g, "");
 
+const app = express();
+const PORT = 3000; 
+
 async function startAztec() {
   const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
 
@@ -100,7 +103,7 @@ async function startAztec() {
     });
 
     app.get("/", (req, res) => {
-    res.send(`<img src="data:image/png;base64, ${vorterx.QR.toString('base64')} ">`);
+      res.send(`<img src="data:image/png;base64, ${vorterx.QR.toString('base64')} ">`);
     });
 
     app.listen(PORT, () => {
