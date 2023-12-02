@@ -37,6 +37,7 @@
     "fb-info-video": "^1.0.2",
     "g-i-s": "^2.1.6",
     "discord.js": "^13.3.0",
+    "discord-xp": "^1.1.16",
     "dotenv": "^16.3.1",
     "emoji-strip": "^1.0.1",
     "jimp": "^0.16.1",
