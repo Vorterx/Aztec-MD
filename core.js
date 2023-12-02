@@ -39,7 +39,7 @@ async function startAztec() {
     }
     const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/');
 
-    const vorterx = VorterxConnection({
+    const vorterx = new VorterxConnection({
       logger: P({ level: "silent" }),
       printQRInTerminal: false,
       browser: Browsers.macOS("Desktop"),
