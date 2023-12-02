@@ -21,9 +21,9 @@ module.exports = {
       }
 
       const { title, thumbnail, url } = yts.videoDetails;
-      const audio = audio[0];
+      const audi0 = audio[0];
       const getanu = {
-        quality: audio.qualityLabel || audio.audioQuality,
+        quality: audi0.qualityLabel || audi0.audioQuality,
       };
        
       const waveMP3 = await ytdl.downloadFromInfo(yts, getanu);
