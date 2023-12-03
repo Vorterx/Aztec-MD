@@ -4,8 +4,8 @@ module.exports = {
   name: "owner",
   description: "Get owner information",
   category: "user",
-  async xstart(vorterx, m, { xReact }) {
-    await xReact("✔️");
+  async xstart(vorterx, m) {
+  //  await xReact("✔️");
 
     const ownerName = config.mods;
     const userName = config.OWNER_NAME;
