@@ -14,11 +14,9 @@ let cc = config.session_Id.replace(/Vorterx;;;/g, "");
 
 const app = express();
 const PORT = 3000; 
-
 async function startAztec() {
   const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
-
-  async function MakeSession() {
+async function MakeSession() {
     if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
       if (cc.length < 30) {
         const axios = require('axios');
@@ -27,93 +25,11 @@ async function startAztec() {
       } else {
         var c = atob(cc);
         await fs.writeFileSync(__dirname + '/auth_info_baileys/creds.json', c, "utf8");
-      }
-    }
-  }
-  
-  await MakeSession();
-
-  async function main() {
+      }}}
+      await MakeSession();
+      async function main() {
     if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
+ }
+const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/');
 
-    }
-    const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/');
-
-    const vorterx =  makeWASocket({
-      logger: P({ level: "silent" }),
-      printQRInTerminal: false,
-      browser: Browsers.macOS("Desktop"),
-      qrTimeoutMs: undefined,
-      auth: state,
-      version: (await fetchLatestBaileysVersion()).version,
-    });
-
-    store.bind(vorterx.ev);
-    vorterx.cmd = new Collection();
-    vorterx.contactDB = new QuickDB().table('contacts');
-    vorterx.contact = contact;
-
-    async function readcommands() {
-      const cmdfile = fs.readdirSync("./plugins").filter((file) => file.endsWith(".js"));
-      for (const file of cmdfile) {
-        const command = require(`./plugins/${file}`);
-        vorterx.cmd.set(command.name, command);
-      }
-    }
-
-    readcommands();
-await connect();
-
-vorterx.ev.on('creds.update', saveCreds);
-vorterx.ev.on('connection.update', async (update) => {
-  const { connection, lastDisconnect } = update;
-
-  if (connection === "close") {
-    let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
-    if (reason === DisconnectReason.connectionClosed) {
-      console.log("[🐲AZTEC] Connection closed, reconnecting.");
-      startAztec();
-    } else if (reason === DisconnectReason.connectionLost) {
-      console.log("[🐏AZTEC] Connection Lost from Server, reconnecting.");
-      startAztec();
-    } else if (reason === DisconnectReason.loggedOut) {
-      console.log("[😭AZTEC] Device Logged Out, Please Delete Session and Scan Again.");
-      process.exit();
-    } else if (reason === DisconnectReason.restartRequired) {
-      console.log("[♻️AZTEC] Server starting.");
-      startAztec();
-    } else if (reason === DisconnectReason.timedOut) {
-      console.log("[🎰AZTEC] Connection Timed Out, Trying to Reconnect.");
-      startAztec();
-    } else {
-      console.log("[🌬AZTEC] Server Disconnected: Maybe Your WhatsApp Account got banned");
-    }
-  }
-
-  if (connection === "open") {
-    console.log('WhatsApp Chatbot has connected✔️');
-    const version = require(__dirname + "/package.json").version;
-    const BotName = require(__dirname + "/config.js").botName;
-    const Mods = require(__dirname + "/config.js").mods;
-    const aztec_text = `\`\`\`Vorterx connected \nversion: ${version}\nBotName: ${BotName}\nNUMBER: ${Mods}\`\`\``;
-    vorterx.sendMessage(vorterx.user.id, { text: aztec_text });
-  }
-
-  if (update.qr) {
-    vorterx.QR = qr.imageSync(update.qr);
-  }
-});
-
-app.get("/", (req, res) => {
-  res.send(`<img src="data:image/png;base64, ${vorterx.QR.toString('base64')} ">`);
-});
-
-app.listen(PORT, () => {
-  console.log(`[🚀AZTEC] Listening on port ${PORT}`);
-});
-
-main();
-}
-
-startAztec();
-}
+        
