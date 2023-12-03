@@ -80,7 +80,8 @@ module.exports = {
   category: 'General',
   description: 'Reveals menu categories commands',
 
-  async xstart(vorterx, m, { text, args, xReact }) {
+  async xstart(vorterx, m, { args, xReact }) {
+
     await xReact('Ⓜ️');
     try {
       await vorterx.sendPresenceUpdate("composing", m.from);
@@ -100,11 +101,11 @@ ${up_mid} Runtime: ${tiny(process.uptime())} seconds
 ${up_mid} Time: ${tiny(new Date().toLocaleTimeString())}
 ${up_mid} Date: ${tiny(new Date().toLocaleDateString())}
 ${up_btm}\n\n${formattedCommands}`;
-      
-  await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: amarok }, { quoted: m });
-   } catch(err) {
-   m.reply(err.toString());
-   console.log(err, 'red');
+
+      await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: amarok }, { quoted: m });
+    } catch (err) {
+      m.reply(err.toString());
+      console.log(err, 'red');
     }
   }
 };
