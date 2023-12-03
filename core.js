@@ -46,6 +46,8 @@ async function startAztec() {
     qrTimeoutMs: undefined,
     auth: state,
     version: (await fetchLatestBaileysVersion()).version,
+    getMessage: async (key) =>
+    (store.loadMessage(key.id) || {}).message || { conversation: null },
   });
 
   store.bind(vorterx.ev);
@@ -90,6 +92,7 @@ async function startAztec() {
     }
 
     if (connection === "open") {
+      console.log('Plugins loaded♻️');
      console.log('WhatsApp chatbot has connected✔️');
       const version = require(__dirname + "/package.json").version;
       const BotName = require(__dirname + "/config.js").botName;
