@@ -11,7 +11,7 @@ module.exports = {
    name: 'ping',
    category: 'Mics',
    description: 'Check the speedy',
-   async client(vorterx, m, { text, connect }) {
+   async client(vorterx, m, { connect }) {
       await connect("🏇");
 
       const fileSizeInMB = getFileSizeInMB("../lib/assiets/_speedSystem");
