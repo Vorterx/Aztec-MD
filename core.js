@@ -24,13 +24,10 @@ async function startAztec() {
   const vorterx = makeWASocket({
     logger: P({ level: "silent" }),
     printQRInTerminal: false,
-    browser: Browsers.macOS("Desktop"),
+    browser: ['Chrome (Linux)', '', ''],
     qrTimeoutMs: undefined,
     auth: state,
     version: (await fetchLatestBaileysVersion()).version,
-    getMessage: async (key) =>
-    (store.loadMessage(key.id) || {}).message || { conversation: null },
-  });
 
   store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
