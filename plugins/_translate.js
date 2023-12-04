@@ -5,9 +5,9 @@ module.exports = {
   alias: ['translate'],
   description: 'Translate any usable language',
   category: 'Extra',
-  async xstart(vorterx, m, { text, args, xReact }) {
+  async client(vorterx, m, { text, args, connect }) {
     if (!text) {
-      await xReact('👀');
+      await connect('👀');
       return m.reply('Example: tr Damn l love this Diegoson eish');
     }
 
@@ -23,7 +23,7 @@ module.exports = {
     }
    
     try {
-      await xReact('📝');
+      await connect('📝');
       const result = await translate(data, { to: lang });
       const caption = `📝Text: ${data}\n🧘Translated: ${result.text}`;
       await m.reply(caption);
