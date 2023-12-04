@@ -3,13 +3,13 @@ const axios = require('axios');
 module.exports = {
   name: 'fancy',
   category: 'Convert',
-  async xstart(vorterx, m, { text, args, quoted, xReact }) {
+  async client(vorterx, m, { text, args, quoted, connect }) {
     
     if (args.length < 2) { 
       if (args.length === 1 && text.toLowerCase() === 'fancy') {
         args.push('VORTERX');
       } else {
-        await xReact('❌');
+        await connect('❌');
         return m.reply('Please use the command in the following format: fancy [1-20] [text]');
       }
     }
@@ -19,7 +19,7 @@ module.exports = {
     }
     const vorterxTXT= args.slice(1).join(' ');
     try {
-      await xReact('📇');
+      await connect('📇');
       const get = await axios.get(`https://api.botcahx.live/api/tools/styletext?text=${encodeURIComponent(vorterxTXT)}&apikey=29y8XIYL`);
       if (get.data) {
         let sendFancy = get.data;
