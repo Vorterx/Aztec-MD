@@ -5,7 +5,7 @@ module.exports = {
   name: 'gcfullp',
   description: 'Set group full picture dp',
   category: 'Group',
-  async xstart(vorterx, m, { isAdmin, isBotAdmin, mime, connect, text, quoted, args }) {
+  async client(vorterx, m, { isAdmin, isBotAdmin, mime, connect, text, quoted, args }) {
    
     if (!isAdmin) {
       await connect("❌");
