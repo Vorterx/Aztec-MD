@@ -4,16 +4,16 @@ module.exports = {
   name: 'lyrics',
   description: 'To get the lyrics for your music',
   category: 'Search',
-  async xstart(vorterx, m, { text, args, xReact }) {
+  async client(vorterx, m, { text, args, connect }) {
     if (!text) {
-      await xReact('❌');
+      await connect('❌');
       return m.reply('Please provide a song name');
     }
 
     const apiUrl = `https://api.neoxr.eu/api/lyric?q=${encodeURIComponent(text)}&apikey=AlMiT7`;
 
     try {
-      await xReact('🍏');
+      await connect('🍏');
       const response = await axios.get(apiUrl);
       const data = response.data;
 
