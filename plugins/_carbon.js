@@ -4,7 +4,7 @@ module.exports = {
   name: 'carbon',
   description: 'Generate code snippets with Carbon',
   category: 'Makers',
-  async xstart(vorterx, m, { text, quoted, mine, arts }) {
+  async client(vorterx, m, { text, quoted, mine, args, connect }) {
 
   const apiUrl = `https://api.botcahx.live/api/maker/carbon?${text}&apikey=29y8XIYL`;
     try {
