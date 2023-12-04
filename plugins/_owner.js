@@ -4,8 +4,9 @@ module.exports = {
   name: "owner",
   description: "Get owner information",
   category: "user",
-  async xstart(vorterx, m) {
+  async client(vorterx, m, { connect}) {
 
+     await connect('👤');
     const userNumber = config.mods;
     const ownerName = config.OWNER_NAME;
     const logo = "https://i.ibb.co/v47d4BL/IMG-20230429-WA0021.jpg";
