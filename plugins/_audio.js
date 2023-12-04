@@ -1,4 +1,4 @@
-const ytdl = require('ytdl-core');
+const axios = require('axios');
 const prefix = process.env.PREFIX;
 
 module.exports = {
@@ -12,36 +12,30 @@ module.exports = {
     }
     try {
       m.reply(`\`\`\`Downloading your song, please wait...⏳\`\`\``);
-      const yts = await ytdl.getInfo(text);
-      const audio = ytdl.filterFormats(yts.formats, 'audioonly');
-      if (audio.length === 0) {
+      
+      const apiUrl = `https://api.botcahx.live/api/downloader/yt?url=${encodeURIComponent(text)}&apikey=29y8XIYL`;
+      const response = await axios.get(apiUrl);
+      
+      if (response.status !== 200 || !response.data.success) {
         await connect('❌');
-        return m.reply("Sorry, I couldn't find any audio formats for the provided song.");
+        return m.reply("Sorry, an error occurred while downloading the song.");
       }
-
-      const { title, thumbnail, video_url: url } = yts;
-      const audi0 = audio[0];
-      const getanu = {
-        quality: audi0.qualityLabel || audi0.audioQuality,
-      };
-
-      const waveMP3 = await ytdl.downloadFromInfo(yts, getanu);
-      const bufferMP3 = waveMP3.buffer;
-      const getFileName = `${title}.mp3`;
-      const results = Buffer.from(bufferMP3);
+      
+      const { title, url, thumbnail, filename, mimetype, buffer } = response.data.data;
+      
       const music_get = {
-        document: results,
-        mimetype: 'audio/mpeg',
-        filename: getFileName,
+        document: Buffer.from(buffer, 'base64'),
+        mimetype,
+        filename,
         contextInfo: {
           externalAdReply: {
             showAdAttribution: true,
             mediaType: 2,
             mediaUrl: url,
-            title: title,
+            title,
             body: 'VORTERX DNL',
             sourceUrl: url,
-            thumbnail: thumbnail,
+            thumbnail,
             waveform: [100, 0, 0, 0, 0, 0, 100],
             forwardingScore: 999,
             isForwarded: true,
