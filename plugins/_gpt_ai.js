@@ -18,8 +18,7 @@ module.exports = {
       const response = await axios.get(
         `https://api.neoxr.eu/api/gpt?q=${encodeURIComponent(text)}`
       );
-      const result = response.data;
-      const aiTurbo = result.result;
+      const aiTurbo = response.data.result;
 
       const exGpt = {
         text: aiTurbo,
