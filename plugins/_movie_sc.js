@@ -3,15 +3,15 @@ module.exports = {
   alias: ['imdb'],
   category: 'Search',
   description: 'To get movie info',
-  async xstart(vorterx, m, { text, args, xReact }) {
+  async client(vorterx, m, { text, args, connect }) {
         
     const { default: fetch } = await import('node-fetch');
     
     if (!text) {
-      await xReact('❌');
+      await connect('❌');
       return m.reply('Provide a movie name e.g. movie Dragon ball');
     }
-    await xReact('🎬');
+    await connect('🎬');
     m.reply(`\`\`\`Processing your request...⏳\`\`\``);
     const apiKey = 'bv1SpA';
     const apiUrl = `https://api.neoxr.eu/api/film?q=${text}&apikey=${apiKey}`;    
