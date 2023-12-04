@@ -20,7 +20,7 @@ module.exports = {
       );
 
       if (!response.data || !response.data.result) {
-        throw new Error("Invalid response from the API");
+        m.reply("Invalid response sorry");
       }
 
       const aiTurbo = response.data.result;
