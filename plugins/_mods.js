@@ -2,14 +2,14 @@ module.exports = {
     name: '(mods|sudos)',
     description: 'To check mods admins to the bot',
     category: 'Owner',
-    async xstart(vorterx, m, {
+    async client(vorterx, m, {
         text,
         args,
         quoted,
-        xReact
+        connect
     }) {
 
-        await xReact('✔️');
+        await connect('✔️');
         let azteci = '*👤 VORTERX MODS 👤*\n\n';
         const mods = process.env.MODS || '';
 
