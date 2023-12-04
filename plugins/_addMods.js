@@ -4,10 +4,10 @@ module.exports = {
   name: '(admod|setsudo)',
   category: 'Owner',
   description: 'To add the user as a mod to the bot',
-  async xstart(vorterx, m, { text, args, quoted, mentionByTag, xReact }) {
+  async client(vorterx, m, { text, args, quoted, mentionByTag, connect }) {
 
     if (!config.mods) {
-      await xReact('❌');
+      await connect('❌');
       return m.reply(`\`\`\`This command is for my owner only\`\`\``);
     }
     const sender = m.sender;
@@ -15,7 +15,7 @@ module.exports = {
     const isMod = config.mods.includes(sender);
 
     if (isMod) {
-      await xReact('✔️');
+      await connect('✔️');
       const mods = quoted ? quoted.sender.replace('@net.whatsapp', '') : mentionByTag[0];
       if (mods) {
         config.mods.push(mods);
