@@ -5,10 +5,10 @@ const axios = require('axios');
    alias: ['dallie'],
    description: 'To download via ai',
    category: 'GPT AI',
-   async xstart(vorterx,m,{text,args,xReact}) {
+   async client(vorterx,m,{ text, args, connect }) {
      
   if (!text) {
-    await xReact('❌');
+    await connect('❌');
     return m.reply('Please provide a text for search');
   }
 
