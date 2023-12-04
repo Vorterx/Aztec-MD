@@ -9,7 +9,7 @@ const config = require('./config.js');
 const botName = config.botName;
 const qr = require("qr-image");
 const contact = require('./connects/contact.js');
-const MessageHandler = require('./lib/index.js');
+const MessageHandler = require('./lib/client.js');
 let cc = config.session_Id.replace(/Vorterx;;;/g, "");
 
 const app = express();
