@@ -15,6 +15,7 @@ let config = {
   owner_number: process.env.OWNER_NUMBER || '27686881509',
   session_Id: process.env.SESSION_ID || 'add something',
   level_up: process.env.LEVEL_UP || '',
+  antilink: process.env.ANTILINK || 'true',
   menu: process.env.MENU || '', // 2 is the default menu Aztec, 0 is Suhail MD menu
   thumb: process.env.THUMB || 'https://imageupload.io/69vJBZbn4iPqWTZ',
   auto_react: process.env.AUTO_REACT || 'off', 
