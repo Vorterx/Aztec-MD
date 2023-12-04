@@ -15,10 +15,7 @@ module.exports = {
     try {
       const fetch = await import("node-fetch");
       const response = await fetch(
-        `https://api.botcahx.live/api/search/gpt?text=${encodeURIComponent(
-          text
-        )}&apikey=29y8XIYL`
-      );
+        `https://api.neoxr.eu/api/gpt?q=${text}`);
       const result = await response.json();
       const aiTurbo = result.result;
 
