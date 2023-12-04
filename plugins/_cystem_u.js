@@ -1,7 +1,6 @@
 const { formatp, runtime } = require("../connects/myFunc.js");
 const chalk = require("chalk");
 const { bubble } = require("@viper-x/fancytext");
-const { getLatestGPTVersion } = require("../lib/myModule.js");
 const os = require("os");
 const now = require("performance-now");
 
@@ -9,9 +8,9 @@ module.exports = {
   name: "system",
   description: "To check the system status",
   category: "user",
-  async xstart(vorterx, m, { xReact, text }) {
+  async client(vorterx, m, { connect, text }) {
     const latensi = now() - now();
-    await xReact("📟");
+    await connect("📟");
 
     let aztec = `*乂 SYSTEM - STATUS*\n\n`;
     aztec += `❲❒❳ *BotName :* ${process.env.BOTNAME}\n`;
@@ -23,7 +22,6 @@ module.exports = {
     aztec += `❲❒❳ *Runtime :* _${runtime(process.uptime())}_\n`;
     aztec += `❲❒❳ *Platform :* ${os.platform()}\n`;
     aztec += `❲❒❳ *Platform ID :* ${os.hostname()}\n\n`;
-    aztec += `❲❒❳ *Latest GPT Version :* ${await getLatestGPTVersion()}\n\n`;
     aztec += `*©vorterx-team*`;
 
     const formattedAztec = chalk.bold(aztec);
