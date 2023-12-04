@@ -12,18 +12,18 @@ module.exports = {
   name: 'yts',
   description: 'To search anything',
   category: 'Downloads',
-  async xstart(vorterx, m, { xReact, doReply, text, args }) {
+  async client(vorterx, m, {  text, connect, args }) {
     if (!text) {
-      await xReact('⛔');
+      await connect('⛔');
       return m.reply('*Provide a query example how to create Aztec*');
     }
 
-    await xReact('🔍');
+    await connect('🔍');
     try {
       const results = await yts(text);
       const videos = results.videos.slice(0, 15);
       if (videos.length === 0) {
-        await xReact('❌');
+        await connect('❌');
         return m.reply('No YouTube videos found for the given query.');
       }
 
@@ -44,7 +44,7 @@ module.exports = {
       vorterx.sendMessage(m.from, { image: { url: thumbnailUrl }, caption: response }, { quoted: m });
     } catch (error) {
       console.error(error);
-      await xReact('❌');
+      await connect('❌');
       m.reply('An error occurred while performing the YouTube search.');
     }
   },
