@@ -9,13 +9,13 @@ module.exports = {
   name: "xyt",
   description: "Search for music link",
   category: "Downloads",
-  async xstart(vorterx, m, { xReact, text }) {
+  async client(vorterx, m, { text, connect }) {
     
     if (!text) {
-      await xReact("⛔");
+      await connect("⛔");
       return m.reply("Please provide a search term. Example: xyt hope");
     }
-    await xReact("🎵");
+    await connect("🎵");
     const search = await yts(text);
     const getVideo = search.videos[Math.floor(Math.random() * search.videos.length)];
     const thumbnail = await getBuffer(getVideo.thumbnail);
