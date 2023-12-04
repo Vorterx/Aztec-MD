@@ -10,34 +10,16 @@ const botName = config.botName;
 const qr = require("qr-image");
 const contact = require('./connects/contact.js');
 const MessageHandler = require('./lib/client.js');
-let cc = config.session_Id.replace(/Vorterx;;;/g, "");
 
 const app = express();
 const PORT = 3000;
 
 async function startAztec() {
-  const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
-
-  async function MakeSession() {
-    if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
-      if (cc.length < 30) {
-        const axios = require('axios');
-        let { data } = await axios.get('https://paste.c-net.org/' + cc);
-        await fs.writeFileSync(__dirname + '/auth_info_baileys/creds.json', atob(data), "utf8");
-      } else {
-        var c = atob(cc);
-        await fs.writeFileSync(__dirname + '/auth_info_baileys/creds.json', c, "utf8");
-      }
-    }
-  }
-
-  await MakeSession();
-
+  const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) })
   async function main() {
     if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
     }
   }
-
   const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/');
   const vorterx = makeWASocket({
     logger: P({ level: "silent" }),
