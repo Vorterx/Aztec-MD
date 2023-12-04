@@ -1,16 +1,16 @@
 const gis = require('g-i-s');
-const { downloadMedia } = require('../lib/message/D3centX.js');
+const { downloadMedia } = require('../lib/index.js');
 
 module.exports = {
   name: 'img',
   alias: ['image'],
   category: 'Downloads',
   description: 'To download images',
-  async xstart(vorterx, m, { text, args, mime, quoted }) {
+  async client(vorterx, m, { text, args, mime, connect, quoted }) {
     try {
       const query = text.trim();
       if (!query) {
-        await xReact('❌');
+        await connect('❌');
         return m.reply(`\`\`\`Please provide the name of the image...\`\`\``);
       }
       
