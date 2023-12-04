@@ -12,7 +12,8 @@ module.exports = {
   name: 'yts',
   description: 'To search anything',
   category: 'Downloads',
-  async client(vorterx, m, {  text, connect, args }) {
+  async client(vorterx, m,{  connect, text, args }) {
+   
     if (!text) {
       await connect('⛔');
       return m.reply('*Provide a query example how to create Aztec*');
