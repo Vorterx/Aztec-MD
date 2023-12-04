@@ -3,19 +3,19 @@ const config = require('../config');
 module.exports = {
  name: ('delmod|removemd'),
  category: 'Owner',
- async xstart(
+ async client(
    vorterx, m, { 
      text, 
      args, 
      quoted, 
      mentionByTag, 
-     config }) {
+     connect}) {
 
   if (config.mods !== text) {
-    await xReact('❌');
+    await connect('❌');
     return m.reply('*This command is for my owner only*');
   }
-  await xReact('✔️');
+  await connect('✔️');
   let mods = config.mods.split(',');
   const mentionedId = m.quoted ? m.quoted.sender : mentionByTag[0];
   const index = mods.indexOf(mentionedId);
