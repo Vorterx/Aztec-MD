@@ -18,10 +18,11 @@ module.exports = {
       m.reply(`Downloading your *${search}* images...⏳`);
       
       const results = await gis(query);
-      if (results.length > 0) {
-        for (let i = 0; i < search; i++) {
+      if (results && results.length > 0) {
+        for (let i = 0; i < Math.min(search, results.length); i++) {
           const image = results[i];
-          const imageBuffer = await vorterx.downloadMedia(image.url);
+          const imageBuffer = await downloadMedia(image.url); 
+          // const imageBuffer = await vorterx.downloadMedia(image.url);
           
           if (imageBuffer) {
             if (!quoted) {
