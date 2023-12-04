@@ -1,5 +1,3 @@
-const config = require('../config.js');
-const vorterx = require('../lib/message/vorterx.js');
 
 /*
 ........AUTO_STATUS_VIEW
