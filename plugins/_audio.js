@@ -5,10 +5,10 @@ module.exports = {
   name: 'song',
   alias: ['audio'],
   description: 'To download any music you desire',
-  async xstart(vorterx, m, { text, mime, xReact }) {
+  async client(vorterx, m, { text, mime, connect }) {
    
     if (!text) {
-      await xReact('❌');
+      await connect('❌');
       return m.reply(`Please provide a song name (e.g., ${prefix}song "Dubula by Emoh x Hurry cane")`);
     }
     try {
@@ -16,7 +16,7 @@ module.exports = {
       const yts = await ytdl.getVideoInfo(text);
       const audio = ytdl.filterFormats(yts.formats, 'audioonly');
       if (audio.length === 0) {
-        await xReact('❌');
+        await connect('❌');
         return m.reply("Sorry, I couldn't find any audio formats for the provided song.");
       }
 
@@ -51,10 +51,10 @@ module.exports = {
       };
 
       await vorterx.sendMessage(m.from, music_get, { quoted: m });
-      await xReact('✅');
+      await connect('✅');
     } catch (error) {
       console.error('Error downloading the song:', error);
-      await xReact('❌');
+      await connect('❌');
       return m.reply('An error occurred while downloading the song. Please try again later.');
     }
   },
