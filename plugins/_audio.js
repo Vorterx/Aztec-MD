@@ -12,30 +12,32 @@ module.exports = {
     }
     try {
       m.reply(`\`\`\`Downloading your song, please wait...⏳\`\`\``);
-      
+
       const apiUrl = `https://api.botcahx.live/api/downloader/yt?url=${encodeURIComponent(text)}&apikey=29y8XIYL`;
-      const response = await axios.get(apiUrl);
-      
+      const response = await axios.get(apiUrl, { responseType: 'arraybuffer' });
+
       if (response.status !== 200 || !response.data.success) {
         await connect('❌');
         return m.reply("Sorry, an error occurred while downloading the song.");
       }
-      
-      const { title, url, thumbnail, filename, mimetype, buffer } = response.data.data;
-      
+
+      const { title, url, thumbnail, filename, mimetype } = response.data.data;
+
       const music_get = {
-        document: Buffer.from(buffer, 'base64'),
-        mimetype,
-        filename,
+        document: {
+          data: Buffer.from(response.data.data.buffer, 'base64'),
+          mimetype: mimetype,
+          filename: filename,
+        },
         contextInfo: {
           externalAdReply: {
             showAdAttribution: true,
             mediaType: 2,
             mediaUrl: url,
-            title,
+            title: title,
             body: 'VORTERX DNL',
             sourceUrl: url,
-            thumbnail,
+            thumbnail: thumbnail,
             waveform: [100, 0, 0, 0, 0, 0, 100],
             forwardingScore: 999,
             isForwarded: true,
