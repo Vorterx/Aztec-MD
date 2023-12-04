@@ -5,10 +5,10 @@ module.exports = {
   alias: ['tiktok'],
   description: 'To download tiktok videos',
   category: 'Downloads',
-  async xstart(vorterx, m, { text, args, xReact }) {
+  async client(vorterx, m, { text, args, connect }) {
     
     if (!text) {
-      await xReact('❌');
+      await connect('❌');
       return m.reply('Please provide a valid TikTok video URL.');
     }
     const apiKey = '29y8XIYL';
@@ -17,7 +17,7 @@ module.exports = {
       const adUrl = `https://api.botcahx.live/api/dowloader/tiktok?url=${encodeURIComponent(
         text
       )}&apikey=${apiKey}`;
-      await xReact('📤');
+      await connect('📤');
       m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
       const res = await axios.get(adUrl);
       const data = res.data;
