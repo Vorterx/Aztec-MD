@@ -80,9 +80,9 @@ module.exports = {
   category: 'General',
   description: 'Reveals menu categories commands',
 
-  async xstart(vorterx, m, { args, xReact }) {
+  async client(vorterx, m, { args, connect }) {
 
-    await xReact('Ⓜ️');
+    await connect('Ⓜ️');
     try {
       await vorterx.sendPresenceUpdate("composing", m.from);
 
