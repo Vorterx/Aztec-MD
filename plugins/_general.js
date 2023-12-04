@@ -9,8 +9,8 @@ module.exports = {
   alias: ['bot'],
   description: 'To check the bot alive or off',
   category: 'Mics',
-  async xstart(vorterx, m, { text, xReact }) {
-    await xReact('🧘');
+  async client(vorterx, m, { text, connect}) {
+    await connect('🧘');
 
     const image = {
       url: "https://i.ibb.co/BsYCSRV/Screenshot-20230918-093130.jpg",
@@ -63,10 +63,10 @@ ${prefix}setalive <your message>
   async setalive(vorterx, m, { text }) {
     if (isCreator(m.sender)) {
       customAliveMsg = text;
-      await xReact('✔️');
+      await connect('✔️');
       m.reply("Custom alive message set successfully!");
     } else {
-      await xReact('❌');
+      await connect('❌');
       m.reply("Sorry, you are not authorized to set the custom alive message.");
     }
   },
