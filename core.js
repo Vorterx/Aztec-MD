@@ -28,7 +28,7 @@ async function startAztec() {
     qrTimeoutMs: undefined,
     auth: state,
     version: (await fetchLatestBaileysVersion()).version,
-
+});
   store.bind(vorterx.ev);
   vorterx.cmd = new Collection();
   vorterx.contactDB = new QuickDB().table('contacts');
