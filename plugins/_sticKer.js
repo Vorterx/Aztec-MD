@@ -5,15 +5,15 @@ module.exports = {
   name: 'sticker',
   alias: ['s'],
   category: 'Converct',
-  async xstart(vorterx, m, { args, quoted, xReact }) {
+  async client(vorterx, m, { args, quoted, connect }) {
    
     try {
       if (!quoted || !quoted.imageMessage) {
-        await xReact('❌');
+        await connect('❌');
         return m.reply('Provide an image to convert');
       }
 
-      await xReact('⭐');
+      await connect('⭐');
       const author = 'vorterx team';
 
       const imageUrl = quoted.imageMessage.imageUrl;
