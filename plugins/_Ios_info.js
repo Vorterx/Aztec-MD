@@ -5,10 +5,10 @@ module.exports = {
   alias: ['apple'],
   category: 'Search',
   description: 'Shows information and updates about iOS',
-  async start(vorterx, m, { text, args, xReact }) {
+  async connect(vorterx, m, { text, args, connect }) {
   
     try {
-       await xReact ('🍏');  
+       await connect('🍏');  
       const response = await axios.get('https://vihangayt.me/details/ios');
       const data = response.data;
       const version = data.version;
