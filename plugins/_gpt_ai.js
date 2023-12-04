@@ -1,6 +1,8 @@
 // BY VORTERX
 // @DiegosonTech
 
+const axios = require("axios");
+
 module.exports = {
   name: "gpt",
   alias: ["ai", "openai", "chatgpt"],
@@ -13,10 +15,10 @@ module.exports = {
     }
 
     try {
-      const fetch = await import("node-fetch");
-      const response = await fetch(
-        `https://api.neoxr.eu/api/gpt?q=${text}`);
-      const result = await response.json();
+      const response = await axios.get(
+        `https://api.neoxr.eu/api/gpt?q=${encodeURIComponent(text)}`
+      );
+      const result = response.data;
       const aiTurbo = result.result;
 
       const exGpt = {
