@@ -5,10 +5,10 @@ module.exports = {
   alias: ['whatsapp'],
   category: 'Search',
   description: 'Shows information and updates about wabetainfo',
-  async xstart(vorterx, m, { text, args, xReact }) {
+  async client(vorterx, m, { text, args, connect }) {
     
     try {
-      await xReact('📝');
+      await connect('📝');
       const response = await axios.get('https://vihangayt.me/details/wabetainfo');
       const data = response.data;
       const version = data.version;
