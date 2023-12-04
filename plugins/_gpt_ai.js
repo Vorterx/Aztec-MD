@@ -1,5 +1,5 @@
-//BY VORTERX
-//@DiegosonTech
+// BY VORTERX
+// @DiegosonTech
 
 module.exports = {
   name: "gpt",
@@ -9,34 +9,40 @@ module.exports = {
   async client(vorterx, m, { text, connect, args }) {
     if (!text) {
       await connect("❌");
-      return m.reply(`*Provide me a query ex who made Aztec*`);
+      return m.reply(`*Provide me a query, e.g., "Who made Aztec?"`);
     }
 
     try {
       const fetch = await import("node-fetch");
-      const response = await fetch.default(
-        `https://api.botcahx.live/api/search/gpt?text=${text}&apikey=29y8XIYL`
+      const response = await fetch(
+        `https://api.botcahx.live/api/search/gpt?text=${encodeURIComponent(
+          text
+        )}&apikey=29y8XIYL`
       );
       const result = await response.json();
       const aiTurbo = result.result;
 
-      const externalAdReply = {
-        title: "GPT TURBO 3.5K",
-        mediaType: 1,
-        mediaUrl: "",
-        sourceUrl: "",
-        showAdAttribution: true,
-        thumbnail:
-          "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png",
-        renderLarger: true,
+      const exGpt = {
+        contextInfo: {
+          externalAdReply: {
+            title: "GPT TURBO 3.5K",
+            mediaType: 1,
+            mediaUrl: "",
+            sourceUrl: "",
+            showAdAttribution: true,
+            thumbnail:
+              "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png",
+            renderLarger: true,
+          },
+        },
       };
 
-      await m.reply(`*👤USER*: ${text}\n\n*🌳AZTEC GPT RESULTS ARE*: ${aiTurbo}`, {
-        contextInfo: { externalAdReply },
-      });
+      await vorterx.sendMessage(m.from, aiTurbo, { quoted: m, ...exGpt });
+      await connect("✅");
     } catch (error) {
       console.error(error);
-      await m.reply("An error occurred while processing the request.");
+      await connect("❌");
+      return m.reply("An error occurred while processing the request.");
     }
   },
 };
