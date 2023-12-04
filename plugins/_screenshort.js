@@ -4,22 +4,22 @@ module.exports = {
   name: 'ss',
   alias: ['screenshort'],
   category: 'General',
-  async xstart(vorterx, m, { text, args, quoted, xReact }) {
+  async client(vorterx, m, { text, args, quoted, connect }) {
      
     if (args.length === 0) {
-      await xReact('❌');
+      await connect('❌');
        return m.reply('_Invalid command. Please provide a URL._');
     }
 
     const url = args[0];
     const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
     if (!url.match(urlRegex)) {
-      await xReact('❌');
+      await connect('❌');
       return m.reply('_Invalid URL format. Please provide a valid URL._');
     }
    
     try {
-      await xReact('📸');
+      await connect('📸');
       const response = await axios.get(`https://vihangayt.me/tools/ssweb?url=${encodeURIComponent(url)}`);
       if (response.status !== 200) {
         m.reply('Error occurred on API.');
