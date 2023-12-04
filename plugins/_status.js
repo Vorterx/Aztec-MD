@@ -4,9 +4,9 @@ module.exports = {
   name: 'status',
   alias: ['sx'],
   category: 'Mics',
-  async xstart(vorterx, m, { text, args, xReact }) {
+  async client(vorterx, m, { text, args, connect }) {
     
-    await xReact('🤖');
+    await connect('🤖');
     const uptime = process.uptime();
     const startTime = Date.now();
     const version = '3.0.0';
