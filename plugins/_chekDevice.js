@@ -3,15 +3,15 @@ const { getDevice } = require('@whiskeysockets/baileys');
 module.exports = {
   name: 'device',
   description: 'Check the user device being used',
-  async xstart(vorterx, m, { quoted }) {
+  async client(vorterx, m, { quoted, connect }) {
    
     try {
-      await xReact('❌');
+      await connect('❌');
       if (!quoted && !m.mentionedJid) {
         return m.reply('_Please reply to someone to get their device information._');
       }
 
-      await xReact('📱');
+      await connect('📱');
       const deviceId = quoted ? quoted.id : m.key.id;
       const deviceInfo = await getDevice(deviceId);
       const userMention = `USER: @${m.mentionedJid || m.sender.id}`;
