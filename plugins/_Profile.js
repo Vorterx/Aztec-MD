@@ -4,9 +4,9 @@ module.exports = {
   name: '(profile|me|user)',
   description: 'Check your profile information',
   category: 'Misc',
-  async xstart(vorterx, m, { args, xReact }) {
+  async client(vorterx, m, { args, text, connect }) {
    
-    await xReact('👤');
+    await connect('👤');
     const user = m.sender.user;
     const bio = await vorterx.fetchBio(user);
     const bioText = bio;
