@@ -19,8 +19,12 @@ module.exports = {
         `https://api.neoxr.eu/api/gpt?q=${encodeURIComponent(text)}`
       );
 
+      if (response.status !== 200) {
+        m.reply(`Request failed with status code ${response.status}`);
+      }
+
       if (!response.data || !response.data.result) {
-        m.reply("Invalid response sorry");
+        m.reply("Invalid response from the API");
       }
 
       const aiTurbo = response.data.result;
