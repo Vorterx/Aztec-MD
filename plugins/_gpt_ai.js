@@ -23,6 +23,7 @@ module.exports = {
       const aiTurbo = result.result;
 
       const exGpt = {
+        text: aiTurbo,
         contextInfo: {
           externalAdReply: {
             title: "GPT TURBO 3.5K",
@@ -37,7 +38,7 @@ module.exports = {
         },
       };
 
-      await vorterx.sendMessage(m.from, aiTurbo, { quoted: m, ...exGpt });
+      await vorterx.sendMessage(m.from, exGpt, { quoted: m });
       await connect("✅");
     } catch (error) {
       console.error(error);
