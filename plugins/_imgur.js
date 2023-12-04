@@ -4,10 +4,10 @@ module.exports = {
   name: 'url',
   category: 'Convert',
   description: 'Convert image to Imgur-like link',
-  async start(vorterx, m, { text, quoted, mime, args }) {
+  async client(vorterx, m, { text, quoted, connect, mime, args }) {
     
     if (text.toLowerCase() !== 'url') {
-      await xReact('❌');
+      await connect('❌');
       return m.reply('_Please reply to an image with the command "url"._');
     }
 
@@ -16,7 +16,7 @@ module.exports = {
       const isImage = imageUrl.match(/\.(jpeg|jpg|gif|png)$/);
 
       if (isImage) {
-        await xReact('✔️');
+        await connect('✔️');
         const imgurLink = `https://i.imgur.com/${imgur(7)}.jpg`;
         vorterx.sendMessage(m.from, { url: imgurLink });
       } else {
