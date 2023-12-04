@@ -5,7 +5,7 @@ const chalk = require('chalk');
 module.exports = {
   name: 'search',
   category: 'Search',
-  async xstart(vorterx, m, { args, text, xReact }) {
+  async client(vorterx, m, { args, text, connect }) {
     if (args[0] === 'search') {
       const Commands = [
         'github',
@@ -20,18 +20,18 @@ module.exports = {
 
       const helpMsg = `Available commands for search:\n\n${commandS}`;
 
-      await xReact('❌');
+      await connect('❌');
       return m.reply(helpMsg);
     }
 
     switch (args[0]) {
       case 'github': {
         if (!text) {
-          await xReact('🌵');
+          await connect('🌵');
           return m.reply(`*Please provide a git user name e.g github DiegosonTech*`);
         }
 
-        await xReact('📊');
+        await connect('📊');
         try {
           const response = await axios.get(`https://api.github.com/users/${text}`);
           const { login, name, bio, followers, public_repos, following, blog, avatar_url } = response.data;
@@ -64,7 +64,7 @@ module.exports = {
         
 case 'sc':
 case 'script':
-await xReact('🌲');
+await connect('🌲');
   try {
     const repoUrl = 'https://api.github.com/repos/Vorterx/Aztec-MD';
     const repoResponse = await axios.get(repoUrl);
@@ -94,7 +94,7 @@ await xReact('🌲');
   break;
         
       case 'google': {
-        await xReact("🔍");
+        await connect("🔍");
         google({ query: text }).then(res => {
           let aztec = `🔎 *GOOGLE SEARCH RESULTS* 🔍\n\n${text}\n\n`;
 
@@ -117,12 +117,12 @@ await xReact('🌲');
 
       case 'weather': {
         if (!text) {
-          await xReact('❌');
+          await connect('❌');
           return m.reply('*Please provide the city of the country e.g weather Johannesburg*');
         }
 
         try {
-          await xReact('🌈');
+          await connect('🌈');
           const apiKey = 'e409825a497a0c894d2dd975542234b0';
           const weatherData = await getWeatherData(text, apiKey);
 
