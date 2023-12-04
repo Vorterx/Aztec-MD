@@ -4,17 +4,17 @@ module.exports = {
   name: 'mediafire',
   category: 'Downloads',
   description: 'To Download using media fire link',
-  async xstart(vorterx, m, { text, args, mime, xReact, quoted }) {
+  async client(vorterx, m, { text, args, mime, connect, quoted }) {
    
     const urlRegExp = /(https?:\/\/[^\s]+)/g;
     const mediaFireUrl = text.match(urlRegExp)?.[0];
     if (!mediaFireUrl) {
-      await xReact('❌');
+      await connect('❌');
       return m.reply('_Please provide a MediaFire URL.');
     }
     const apiUrl = `https://vihangayt.me/download/mediafire?url=${encodeURIComponent(mediaFireUrl)}`;
     try {
-      await xReact('📤');
+      await connect('📤');
       const getAnu = await axios.get(apiUrl);
       const { direct_link, original_name, size, website } = getAnu.data;
       const mediaUrl = direct_link;
