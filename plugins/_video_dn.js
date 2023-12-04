@@ -6,20 +6,20 @@ module.exports = {
   alias: ['mp4'],
   category: 'Downloads',
   description: 'To download any videos you desire.',
-  async xstart(vorterx, m, { text, args, mime, quoted, xReact }) {
+  async client(vorterx, m, { text, args, mime, quoted, connect }) {
    
     if (text === 'video') {
-      await xReact('❌');
+      await connect('❌');
       return m.reply('_Please provide a video name._');
     }
     if (text.startsWith('video//')) {
       const getNam = text.match(/video\/\/(.+)/i)[1];
       try {
-        await xReact('📤');
+        await connect('📤');
         m.reply('Downloading your video, please wait...');
         const search = await ytdl.search(getNam);
         if (search.length === 0) {
-          await xReact('❌');
+          await connect('❌');
           return m.reply('_No video found, sorry._');
         }
         const Url = search[0].url;
