@@ -6,23 +6,23 @@ module.exports = {
   name: "xnxxdn",
   description: "Download XNXX videos",
   category: "Download",
-  async xstart(vorterx, m, { xReact, text, args }) {
+  async client(vorterx, m, { contact, text, args }) {
     const axios = require("axios");
 
     if (!text) {
-      await xReact("⛔");
+      await connect("⛔");
       m.reply("*Missing XNXX link, please provide one.*");
       return;
     }
 
     let urlYt = text;
     if (!urlYt.startsWith("https")) {
-      await xReact("⛔");
+      await connect("⛔");
       m.reply("*😏 Provide me with an XNXXVD link.*");
       return;
     }
 
-    await xReact("🍑");
+    await connect("🍑");
 
     const res = await axios(`https://raganork-network.vercel.app/api/xvideos/download?url=${text}`);
     const video = res.data;
