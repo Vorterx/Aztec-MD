@@ -5,26 +5,26 @@ module.exports = {
   name: 'gcfullp',
   description: 'Set group full picture dp',
   category: 'Group',
-  async xstart(vorterx, m, { isAdmin, isBotAdmin, mime, xReact, text, quoted, args }) {
+  async xstart(vorterx, m, { isAdmin, isBotAdmin, mime, connect, text, quoted, args }) {
    
     if (!isAdmin) {
-      await xReact("❌");
+      await connect("❌");
       return m.reply('This command is only for group admins');
     }
 
     if (!isBotAdmin) {
-      await xReact("❌");
+      await connect("❌");
       return m.reply('I must be an admin for me to help');
     }
 
     const quotedMessage = m.quoted;
 
     if (!quotedMessage || !quotedMessage.mimetype.includes('image')) {
-      await xReact("❌");
+      await connect("❌");
       return vorterx.sendMessage(m.from, { text: 'Please reply to a picture' }, { quoted: m });
     }
 
-    await xReact('📷');
+    await connect('📷');
 
     try {
       const quotedImageBuffer = await vorterx.downloadMediaMessage(quotedMessage);
@@ -37,7 +37,7 @@ module.exports = {
       await sendProfilePictureUpdatedMessage(vorterx, m.from, groupPpUrl, m);
     } catch (error) {
       console.error('An error occurred:', error);
-      await xReact("❌");
+      await connect("❌");
       return m.reply('An error occurred while setting the group profile picture');
     }
    },
