@@ -4,14 +4,14 @@ module.exports = {
   mame: 'fb',
   description: 'To download Facebook video',
   category: 'Downloads',
-  async xstart(vorterx,m,{text, xReact, args}) {
+  async client(vorterx,m,{text, connect, args}) {
 
   if (!text) {
-    await xReact('❌');
+    await connect('❌');
     return m.reply('Please provide a Facebook video URL');
   }
   try {
-    await xReact('📤');
+    await connect('📤');
     m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
     let res = await axios.get(`https://api.botcahx.live/api/dowloader/fbdown3?url=${text}&apikey=29y8XIYL`);
     const oUrl = res.data.url;
