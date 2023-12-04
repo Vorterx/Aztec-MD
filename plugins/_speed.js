@@ -14,7 +14,7 @@ module.exports = {
    async client(vorterx, m, { connect }) {
       await connect("🏇");
 
-      const fileSizeInMB = getFileSizeInMB("../lib/assiets/_speedSystem");
+      const fileSizeInMB = getFileSizeInMB("../lib/assiets/_speedSystem.js");
       const cpuSpeedResult = { speed: getCpuSpeed() }; 
       const uploadSpeedInMbps = getUploadSpeed(); 
 
