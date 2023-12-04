@@ -2,17 +2,17 @@ module.exports = {
   name: "leave",
   description: "Leave the group you are currently in",
   category: "Group",
-  async xstart(vorterx, m, { isAdmin, isGroup, xReact, isBotAdmin }) {
+  async client(vorterx, m, { isAdmin, isGroup, connect, isBotAdmin }) {
     if (!m.isGroup) {
       const reactAztec = ["❌", "🚫", "🙅‍♀️", "🤷‍♂️"];
       const vorterx_react = reactAztec[Math.floor(Math.random() * reactAztec.length)];
-      await xReact(vorterx_react);
+      await connect(vorterx_react);
       return m.reply("*🤔 Where are you heading? This command is for owner only.*");
      }
 
     const reactAztec = ["👋", "👋🏼", "🤚", "✌️", "👋🏽"];
     const vorterx_react = reactAztec[Math.floor(Math.random() * reactAztec.length)];
-    await xReact(vorterx_react);
+    await connect(vorterx_react);
 
      const Diegoson = [
       "👋 Farewell, mates! Until we meet again! 👋",
