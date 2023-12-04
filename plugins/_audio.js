@@ -1,4 +1,4 @@
-const ytdl = require('sigma-md-ytdl');
+const ytdl = require('ytdl-core');
 const prefix = process.env.PREFIX;
 
 module.exports = {
