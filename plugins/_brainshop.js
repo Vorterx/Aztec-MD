@@ -3,7 +3,7 @@ const axios = require('axios');
 let chatbotEnabled = true;
 
 module.exports = {
-  async xstart(vorterx, m, { text, args, xReact, mentionByTag }) {
+  async client(vorterx, m, { text, args, connect, mentionByTag }) {
     if (chatbotEnabled) {
       const budy = text;
       const sender = m.quoted ? m.quoted.sender : mentionByTag[0];
@@ -27,7 +27,7 @@ module.exports = {
           break;
       }
     } else {
-      await xReact('😪');
+      await connect('😪');
       await m.reply('__😪Chatbot is currently disabled by the owner__');
     }
   },
@@ -36,11 +36,11 @@ module.exports = {
     if (process.env.MODS.includes(m.sender)) {
       if (args[0] === 'on') {
         chatbotEnabled = true;
-        await xReact('🤠');
+        await connect('🤠');
         await m.reply('__🤠Chatbot is now enabled__');
       }
     } else {
-      await xReact('❌');
+      await connect('❌');
       await m.reply('__❌Only mods can enable the chatbot__');
     }
   },
@@ -49,11 +49,11 @@ module.exports = {
     if (process.env.MODS.includes(m.sender)) {
       if (args[0] === 'off') {
         chatbotEnabled = false;
-        await xReact('🔋');
+        await connect('🔋');
         await m.reply('__😪Chatbot is now disabled by the owner__');
       }
     } else {
-      await xReact('❌');
+      await connect('❌');
       await m.reply('__❌Only mods can disable the chatbot__');
     }
   }
