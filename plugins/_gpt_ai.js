@@ -6,9 +6,9 @@ module.exports = {
   alias: ["ai", "openai", "chatgpt"],
   category: "CHATGPT",
   description: "Randomly search",
-  async xstart(vorterx, m, { text, xReact, args }) {
+  async client(vorterx, m, { text, connect, args }) {
     if (!text) {
-      await xReact("❌");
+      await connect("❌");
       return m.reply(`*Provide me a query ex who made Aztec*`);
     }
 
