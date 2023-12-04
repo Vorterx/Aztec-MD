@@ -18,6 +18,11 @@ module.exports = {
       const response = await axios.get(
         `https://api.neoxr.eu/api/gpt?q=${encodeURIComponent(text)}`
       );
+
+      if (!response.data || !response.data.result) {
+        throw new Error("Invalid response from the API");
+      }
+
       const aiTurbo = response.data.result;
 
       const exGpt = {
@@ -39,7 +44,7 @@ module.exports = {
       await vorterx.sendMessage(m.from, exGpt, { quoted: m });
       await connect("✅");
     } catch (error) {
-      console.error(error.response.data);
+      console.error(error);
       await connect("❌");
       return m.reply("An error occurred while processing the request.");
     }
