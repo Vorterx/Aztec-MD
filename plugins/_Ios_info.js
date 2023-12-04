@@ -5,7 +5,7 @@ module.exports = {
   alias: ['apple'],
   category: 'Search',
   description: 'Shows information and updates about iOS',
-  async connect(vorterx, m, { text, args, connect }) {
+  async client(vorterx, m, { text, args, connect }) {
   
     try {
        await connect('🍏');  
