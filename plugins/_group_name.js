@@ -3,23 +3,23 @@ module.exports = {
   name: "gcname",
   description: "Change the group name",
   category: "Group",
-  async xstart(vorterx, m, { text, isBotAdmin, isGroup, xReact }) {
+  async client(vorterx, m, { text, isBotAdmin, isGroup, connect }) {
     if (!isGroup) {
-      await xReact("⛔");
+      await connect("⛔");
       return m.reply("⛔️ *This command is only for group admins.*");
     }
 
     if (!isBotAdmin) {
-      await xReact("⛔");
+      await connect("⛔");
       return m.reply("⛔️ *I need to be an admin to use this command.*");
     }
 
       if (!text) {
-      await xReact("⛔");
+      await connect("⛔");
       return m.reply("⛔️ *Please provide the new group name you want to update to.*");
     }
 
-    await xReact("🔉");
+    await connect("🔉");
 
     const D3centX = [
       "🎉 Group name successfully changed! 🎊",
