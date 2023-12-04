@@ -6,7 +6,7 @@ module.exports = {
   name: "xnxxdn",
   description: "Download XNXX videos",
   category: "Download",
-  async client(vorterx, m, { contact, text, args }) {
+  async client(vorterx, m, { connect, text, args }) {
     const axios = require("axios");
 
     if (!text) {
