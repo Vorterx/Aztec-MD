@@ -40,7 +40,7 @@ module.exports = {
       await vorterx.sendMessage(m.from, exGpt, { quoted: m });
       await connect("✅");
     } catch (error) {
-      console.error(error);
+      console.error(error.response.data);
       await connect("❌");
       return m.reply("An error occurred while processing the request.");
     }
