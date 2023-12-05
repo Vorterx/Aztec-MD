@@ -1,5 +1,5 @@
-const config = require('./config');
-const { getJson } = require('./utils');
+const config = require('../config.js');
+const { getJson } = require('../connects/myFunc.js');
 
 module.exports = {
   name: 'apk',
