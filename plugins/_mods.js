@@ -20,8 +20,10 @@ module.exports = {
     const img = 'https://i.ibb.co/2dvDgBd/464318-5149318-823730-thumbnail.png';
     
     const mentions = sudo.map((x) => ({
-      tag: x + '@s.whatsapp.net',
-      id: x.split('@')[0]
+      tag: '@' + x.split('@')[0],
+      id: {
+        _serialized: x
+      }
     }));
     
     await vorterx.sendMessage(
@@ -31,7 +33,7 @@ module.exports = {
           url: img,
           caption: azteci
         },
-        mentions: mentions
+        mentionedJidList: mentions.map((mention) => mention.id)
       },
       {
         quoted: m
