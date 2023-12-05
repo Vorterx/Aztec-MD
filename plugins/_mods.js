@@ -1,3 +1,4 @@
+/
 module.exports = {
   name: 'mods',
   alias: ['sudo'],
@@ -5,6 +6,7 @@ module.exports = {
   category: 'Owner',
   async client(vorterx, m, { text, args, quoted, connect }) {
     await connect('✔️');
+    
     let azteci = '*👤 VORTERX MODS 👤*\n\n';
     const mods = process.env.MODS || '';
     let sudo = [];
@@ -17,6 +19,9 @@ module.exports = {
     } else {
       azteci += '`No mods are set for now`';
     }
+    
+    azteci = azteci.trim();
+    
     const img = 'https://i.ibb.co/2dvDgBd/464318-5149318-823730-thumbnail.png';
 
     const mentions = sudo.map((x) => ({
@@ -32,7 +37,7 @@ module.exports = {
         image: {
           url: img
         },
-        body: azteci,
+        caption: azteci,
         mentionedJidList: mentions.map((mention) => mention.id)
       },
       m
