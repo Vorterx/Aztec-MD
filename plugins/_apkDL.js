@@ -1,4 +1,4 @@
-const { search, download } = require('aptoide-scraper');
+const { search, download } = require('aptoide-scraper').default;
 
 module.exports = {
   name: 'apk',
