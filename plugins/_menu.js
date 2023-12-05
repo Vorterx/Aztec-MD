@@ -33,7 +33,7 @@ module.exports = {
     let getCommands = '';
 
     for (const category in commandsByCategory) {
-      getCommands += `┌──『 ${category} 』──❖\n`;
+      getCommands += `┌──『 *${category}* 』──❖\n`;
       getCommands += commandsByCategory[category].map(plugin => `| ${plugin.name}`).join('\n');
       getCommands += '\n└─────────◉\n';
     }
