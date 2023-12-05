@@ -32,6 +32,9 @@ module.exports = {
           const repoList = repoNames.join('\n');
 
           vorterx.sendMessage(m.from, { image: { url: avatar_url, mimetype: 'image/jpeg' }, caption: rezText8 + '\n\n*📚 Repositories:*\n' + repoList }, { quoted: m });
-              }
+              } catch (error) {
+                console.error(error);
+             m.reply('An error occurred');
+        }
 }
 }
