@@ -26,12 +26,12 @@ module.exports = {
 ┆ *Name* : ${process.env.BOTNAME}
 ┆ *Owner* : ${process.env.OWNER_NAME}
 ┆ *Prefix* :  ${prefix}
-┆ *Uptime* : *0h 17m 11s*
+┆ *Time* : ${new Date().toLocaleTimeString()}
 ╰–––––––––––––––༓ 
 `;
     const messageOptions = {
       image: image,
-      caption: aliveMsg,
+      caption: tiny(aliveMsg),
       contextInfo: {
         externalAdReply: {
           title: "vorterx",
