@@ -2,7 +2,7 @@ const { tiny } = require("@viper-x/fancytext");
 const fs = require("fs");
 const path = require("path");
 
-const pluginDir = path.join(__dirname, "plugins");
+const pluginDir = path.join(__dirname);
 const pluginFiles = fs.readdirSync(pluginDir);
 const commandsByCategory = {};
 
