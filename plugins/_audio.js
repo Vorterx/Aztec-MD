@@ -4,6 +4,7 @@ const prefix = process.env.PREFIX;
 module.exports = {
   name: 'song',
   alias: ['audio'],
+  category: 'Downloads',
   description: 'To download any music you desire',
   async client(vorterx, m, { text, mime, connect }) {
     if (!text) {
