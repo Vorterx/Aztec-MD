@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { tiny } = require("@viper-x/fancytext");
 const fs = require("fs");
 const path = require("path");
 
