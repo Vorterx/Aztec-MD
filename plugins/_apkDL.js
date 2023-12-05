@@ -1,4 +1,5 @@
-const aptoideScraper = require('aptoide-scraper').default;
+const config = require('./config');
+const { getJson } = require('./utils');
 
 module.exports = {
   name: 'apk',
@@ -11,24 +12,22 @@ module.exports = {
       return m.reply('*_Please provide the name of the app you want to download._*');
     }
     try {
-      const { search, download } = aptoideScraper;
-      const results = await search(text);
-      if (results.length === 0) {
+      const data = await getJson(config.api_down + 'api/apk/download?query=' + encodeURIComponent(text));
+      if (!data) {
         await connect('❌');
         return m.reply('*No results found for the app you searched.*');
       }
       m.reply('```\nDownloading your app, please wait...\n```');
       await connect('📤');
-      const app = results[0];
-      const apks = await download(app);
-      const caption = `*〄_APKDL DOWNLOADR_〄*\n\n *📚 App Name*: ${app.title}\n*📦 Developer*: ${app.developer}\n*⬆️ Last update*: ${app.lastUpdate}\n*📥 Size*: ${app.size}\n*🤖 BotName*: ${process.env.BOTNAME}\n\n\n*_BY WhatsApp CHATBOT_*`;
+      const app = data.app;
+      const caption = `*〄_APKDL DOWNLOADR_〄*\n\n *📚 App Name*: ${app.title}\n*📦 Developer*: ${app.developer}\n*⬆️ Last update*: ${app.lastUpdate}\n*📥 Size*: ${app.size}\n*🤖 BotName*: INRL-OFFICIAL\n\n\n*_BY WhatsApp CHATBOT_*`;
       await vorterx.sendMessage(m.from, {
-        url: apks,
+        url: data.url,
         caption,
         thumbnail: { url: app.icon },
       }, 'documentMessage', {
         mimetype: 'application/vnd.android.package-archive',
-        filename: 'app.apk',
+        filename: data.name,
         quoted: m,
       });
     } catch (error) {
