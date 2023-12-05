@@ -2,7 +2,7 @@ const axios = require('axios');
 
 module.exports = {
   name: 'bard',
-  category: 'Chat-Gpt',
+  category: 'GPT AI',
   description: 'Use Bard AI for any information',
   async client(vorterx, m, { text, connect }) {
    
