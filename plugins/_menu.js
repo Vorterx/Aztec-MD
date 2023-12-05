@@ -34,7 +34,7 @@ module.exports = {
 
     for (const category in commandsByCategory) {
       getCommands += `┌──『 *${category}* 』──❖\n\n`;
-      getCommands += commandsByCategory[category].map(plugin => `| ${plugin.name}`).join('\n');
+      getCommands += commandsByCategory[category].map(plugin => ` | ${plugin.name}`).join('\n');
       getCommands += '\n\n└─────────◉\n\n';
     }
 
