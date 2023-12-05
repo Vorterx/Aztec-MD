@@ -29,9 +29,9 @@ module.exports = {
       {
         image: {
           url: img,
-          caption: azteci,
-          mentions: mentions
-        }
+          caption: azteci
+        },
+        mentions: mentions
       },
       {
         quoted: m
