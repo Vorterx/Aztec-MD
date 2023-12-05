@@ -1,4 +1,5 @@
 //
+//
 const config = require('../config.js');
 const { getJson } = require('../lib/_scrapers.js');
 
@@ -29,20 +30,17 @@ module.exports = {
 
       await connect('📤');
       m.reply(`*Downloading ${app.name}...*`);
-
+      await vorterx.sendMessage(m.from, `*Downloading ${app.name}*\n\n*Developer*: ${downloadResult.result.dev}`);
       await vorterx.sendMessage(m.from, {
         document: {
-          url: downloadResult.result.link,
-          caption: `*Downloading ${app.name}*\n\n*Developer*: ${downloadResult.result.dev}`,
-          fileName: app.name + '.apk',
-          quoted: m
-        }
-      });
+          url: downloadResult.result.link
+        },
+          fileName: app.name + '.apk'}, { quoted: m });
 
     } catch (error) {
       console.error(error);
       await connect('❌');
       return m.reply(`*Error occurred while processing your request.*\n\n${error.message}`);
-    }
+  }
   },
 };
