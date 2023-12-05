@@ -29,10 +29,11 @@ module.exports = {
     await vorterx.sendMessage(
       m.from,
       {
-        image: {
+        sticker: {
           url: img,
-          caption: azteci
+          sendImageAsSticker: true
         },
+        caption: azteci,
         mentionedJidList: mentions.map((mention) => mention.id)
       },
       {
