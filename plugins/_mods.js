@@ -18,14 +18,20 @@ module.exports = {
       azteci += '`No mods are set for now`';
     }
     const img = 'https://i.ibb.co/2dvDgBd/464318-5149318-823730-thumbnail.png';
+    
+    const mentions = sudo.map((x) => ({
+      tag: x + '@s.whatsapp.net',
+      id: x.split('@')[0]
+    }));
+    
     await vorterx.sendMessage(
       m.from,
       {
         image: {
           url: img,
-          caption: azteci
-        },
-        mentions: sudo.map((x) => x + '@s.whatsapp.net')
+          caption: azteci,
+          mentions: mentions
+        }
       },
       {
         quoted: m
