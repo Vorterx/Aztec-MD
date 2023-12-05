@@ -24,7 +24,7 @@ module.exports = {
       const pkgE = await Promise.all(pkgInfo);
       const xtext = pkgE.join('\n\n');
       const master_avatar = results[0].package?.publisher?.avatar;
-      console.log('master_avatar:', master_avatar); // Add this line
+      console.log('master_avatar:', master_avatar); 
       if (master_avatar) {
         await vorterx.sendMessage(m.from, { image: { url: master_avatar, caption: xtext, quoted: m } });
       } else {
