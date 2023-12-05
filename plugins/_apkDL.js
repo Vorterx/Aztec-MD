@@ -1,4 +1,4 @@
-const { search, download } = require('aptoide-scraper').default;
+const aptoideScraper = require('aptoide-scraper').default;
 
 module.exports = {
   name: 'apk',
@@ -6,12 +6,12 @@ module.exports = {
   description: 'To download apk',
   category: 'Downloads',
   async client(vorterx, m, { text, args, connect, quoted }) {
-
     if (!text) {
       await connect('❌');
       return m.reply('*_Please provide the name of the app you want to download._*');
     }
     try {
+      const { search, download } = aptoideScraper;
       const results = await search(text);
       if (results.length === 0) {
         await connect('❌');
@@ -31,7 +31,6 @@ module.exports = {
         filename: 'app.apk',
         quoted: m,
       });
-
     } catch (error) {
       console.error(error);
       await connect('❌');
