@@ -17,15 +17,15 @@ module.exports = {
           const { login, name, bio, followers, public_repos, following, blog, avatar_url } = response.data;
 
           const rezText8 = `
-            *乂 USER GUTHUB INFORMTN 乂*
-            _👤 Username:_ *${login}*
-            _👤 Name:_ *${name || 'N/A'}*
-            _👩‍💻 Bio:_ *${bio || 'N/A'}*
-            _🐌 Followers:_ *${followers}*
-            _🌷 Public Repos:_ *${public_repos}*
-            _👥 Following:_ *${following}*
-            _📌 Website:_ ${blog || 'N/A'}
-          `;
+*乂 USER GUTHUB INFORMTN 乂*
+_👤 Username:_ *${login}*
+_👤 Name:_ *${name || 'N/A'}*
+_👩‍💻 Bio:_ *${bio || 'N/A'}*
+_🐌 Followers:_ *${followers}*
+_🌷 Public Repos:_ *${public_repos}*
+_👥 Following:_ *${following}*
+_📌 Website:_ ${blog || 'N/A'}
+`;
 
           const userRepos = await axios.get(`https://api.github.com/users/${text}/repos`);
           const repoNames = userRepos.data.map(repo => repo.name);
