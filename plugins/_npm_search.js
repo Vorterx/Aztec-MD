@@ -23,9 +23,9 @@ module.exports = {
       });
       const pkgE = await Promise.all(pkgInfo);
       const xtext = pkgE.join('\n\n');
-      const master_avatar = results[0].package?.publisher?.avatar;
-      console.log('master_avatar:', master_avatar); 
-      if (master_avatar) {
+      const master_publisher = results[0].package?.publisher;
+      if (master_publisher && master_publisher.avatar) {
+        const master_avatar = master_publisher.avatar;
         await vorterx.sendMessage(m.from, { image: { url: master_avatar, caption: xtext, quoted: m } });
       } else {
         m.reply(xtext);
