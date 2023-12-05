@@ -15,6 +15,7 @@ const app = express();
 const PORT = 3000;
 
 if (!fs.existsSync("./auth_info_baileys/creds.json")) {
+  }
   async function startAztec() {
     const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
     const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/');
