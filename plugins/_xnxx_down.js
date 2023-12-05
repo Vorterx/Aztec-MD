@@ -5,7 +5,7 @@
 module.exports = {
   name: "xnxxdn",
   description: "Download XNXX videos",
-  category: "Download",
+  category: "Downloads",
   async client(vorterx, m, { connect, text, args }) {
     const axios = require("axios");
 
