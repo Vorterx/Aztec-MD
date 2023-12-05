@@ -7,6 +7,7 @@ module.exports = {
   description: 'Download applications from Aptoid',
   category: 'Downloads',
   async client(vorterx, m, { text, args, connect, quoted }) {
+   
     if (!text) {
       await connect('❌');
       return m.reply('*Please provide the name of the application.*');
@@ -27,16 +28,16 @@ module.exports = {
       }
 
       await connect('📤');
-      m.reply(`*Downloading ${app.name}...*`);
-
-      await vorterx.sendMessage(m.from, {
-        document: {
-          url: downloadResult.result.link,
-          caption: `*Downloading ${app.name}*\n\n*Developer*: ${downloadResult.result.dev}`,
-          fileName: app.name + '.apk',
-        },
-        quoted: m
-      });
+     return m.reply(`*Downloading ${app.name}...*`);
+    await vorterx.sendMessage(m.from, {
+  document: {
+    url: downloadResult.result.link,
+    caption: `*Developer*: ${downloadResult.result.dev}`,
+    fileName: app.name + '.apk',
+  },
+  quoted: m
+});
+      
 
     } catch (error) {
       console.error(error);
