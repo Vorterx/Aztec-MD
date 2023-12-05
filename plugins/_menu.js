@@ -33,9 +33,9 @@ module.exports = {
     let getCommands = '';
 
     for (const category in commandsByCategory) {
-      getCommands += `┌──『 *${category}* 』──❖\n`;
+      getCommands += `┌──『 *${category}* 』──❖\n\n`;
       getCommands += commandsByCategory[category].map(plugin => `| ${plugin.name}`).join('\n');
-      getCommands += '\n└─────────◉\n';
+      getCommands += '\n\n└─────────◉\n\n';
     }
 
     let up_up, up_mid, up_btm;
