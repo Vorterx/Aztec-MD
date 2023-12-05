@@ -39,19 +39,19 @@ module.exports = {
     }
 
     let up_up, up_mid, up_btm;
-    up_up = `┏━━⟪ *${tiny(process.env.BOTNAME)}* ⟫━━⦿`;
+    up_up = `┏━━⟪ *${process.env.BOTNAME}* ⟫━━⦿`;
     up_mid = `┃ ✗`;
     up_btm = `┗━━━━━━━━━━━━━━⦿`;
 
     let amarok = `${up_up}
-${up_mid} User: ${tiny(m.pushname)}
-${up_mid} Botname: ${tiny(process.env.BOTNAME)}
-${up_mid} Prefix: ${tiny(process.env.PREFIX)}
-${up_mid} Runtime: ${tiny(process.uptime())} seconds
-${up_mid} Time: ${tiny(new Date().toLocaleTimeString())}
-${up_mid} Date: ${tiny(new Date().toLocaleDateString())}
+${up_mid} User: ${m.pushname}
+${up_mid} Botname: ${process.env.BOTNAME}
+${up_mid} Prefix: ${process.env.PREFIX}
+${up_mid} Runtime: ${process.uptime()} seconds
+${up_mid} Time: ${new Date().toLocaleTimeString()}
+${up_mid} Date: ${new Date().toLocaleDateString()}
 ${up_btm}\n\n${getCommands}`;
 
-    await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: tiny(amarok) }, { quoted: m });
+    await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: amarok }, { quoted: m });
   }
 };
