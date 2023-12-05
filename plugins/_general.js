@@ -12,7 +12,7 @@ module.exports = {
     await connect('🧘');
 
     const image = {
-      url: "https://i.ibb.co/BsYCSRV/Screenshot-20230918-093130.jpg",
+      url: "https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg",
       mimetype: "image/jpeg",
     };
 
