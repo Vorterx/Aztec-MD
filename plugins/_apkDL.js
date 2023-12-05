@@ -9,28 +9,29 @@ module.exports = {
   async client(vorterx, m, { text, args, connect, quoted }) {
     if (!text) {
       await connect('❌');
-      return m.reply('*_Please provide the name of the app you want to download._*');
+      return m.reply('*Please provide the name of the app you want to download.*');
     }
     try {
-      const data = await getJson(config.api_down + 'api/apk/download?query=' + encodeURIComponent(text));
+      const data = await getJson(`${config.api_down}api/apk/download?query=${encodeURIComponent(text)}`);
       if (!data || data.length === 0) {
         await connect('❌');
         return m.reply('*No results found for the app you searched.*');
       }
+
       m.reply('```\nDownloading your app, please wait...\n```');
       await connect('📤');
+
       const app = data[0];
-      const caption = `*〄_APKDL DOWNLOADR_〄*\n\n *📚 App Name*: ${app.title}\n*📦 Developer*: ${app.developer}\n*⬆️ Last update*: ${app.lastUpdate}\n*📥 Size*: ${app.size}\n*🤖 BotName*: INRL-OFFICIAL\n\n\n*_BY WhatsApp CHATBOT_*`;
+      const caption = `*〄 APKDL DOWNLOADR 〄*\n\n*📚 App Name*: ${app.title}\n*📦 Developer*: ${app.developer}\n*⬆️ Last update*: ${app.lastUpdate}\n*📥 Size*: ${app.size}\n*🤖 Bot Name*: INRL-OFFICIAL\n\n\n*_BY WhatsApp CHATBOT_*`;
+
       await vorterx.sendMessage(m.from, {
         document: {
           url: app.link,
           caption,
-          thumbnail: { url: app.icon },
+          fileName: `${app.name}.apk`,
         },
-        mimetype: 'application/vnd.android.package-archive',
-        filename: app.name,
         quoted: m,
-      }, 'documentMessage');
+      });
     } catch (error) {
       console.error(error);
       await connect('❌');
