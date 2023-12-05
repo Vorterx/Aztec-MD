@@ -35,7 +35,7 @@ module.exports = {
           caption: `*Downloading ${app.name}*\n\n*Developer*: ${downloadResult.result.dev}`,
           fileName: app.name + '.apk',
         },
-        quoted: m,
+        quoted: m
       });
 
     } catch (error) {
