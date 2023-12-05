@@ -45,7 +45,7 @@ module.exports = {
     const up_btm = `┗━━━━━━━━━━━━━━⦿`;
 
     const amarok = `${up_up}
-${up_mid} User: ${m.pushname}
+${up_mid} User: ${m.pushName}
 ${up_mid} Botname: ${process.env.BOTNAME}
 ${up_mid} Prefix: ${process.env.PREFIX}
 ${up_mid} Runtime: ${process.uptime()} seconds
@@ -57,7 +57,7 @@ ${up_btm}\n\n${getCommands}\n\n\n*©WHATSAPP CHATBOT*`;
       image: {
         url: chat_v
       },
-      caption: amarok,
+      caption: tiny(amarok),
       headerType: 2,
       contextInfo: {
         externalAdReply: {
