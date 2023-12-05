@@ -50,8 +50,24 @@ ${up_mid} Prefix: ${process.env.PREFIX}
 ${up_mid} Runtime: ${process.uptime()} seconds
 ${up_mid} Time: ${new Date().toLocaleTimeString()}
 ${up_mid} Date: ${new Date().toLocaleDateString()}
-${up_btm}\n\n${getCommands}`;
+${up_btm}\n\n${getCommands}\n\n\n*©WHATSAPP CHATBOT*`;
 
-    await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: amarok }, { quoted: m });
+     let chatBot = {
+        image: aztec,
+        caption: amarok,
+        headerType: 2,
+        contextInfo: {
+            externalAdReply: {
+            title: 'vorterx bot',
+            body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
+            mediaType: 2,
+            thumbnail: anexa,
+            sourceUrl: 'wa.me/27686881509',
+            mediaUrl: '',
+            },
+        },
+    };
+
+await vorterx.sendMessage(m.from, chatBot,  { quoted: m})
   }
 };
