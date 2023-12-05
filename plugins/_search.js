@@ -6,8 +6,13 @@ module.exports = {
   name: 'google',
   category: 'Search',
   async client(vorterx, m, { args, text, connect }) {
-     
+
+    if(!text) {
+      await connect('❌');
+      return m.reply(`\`\`\`Please provide a query\`\`\``);
+    }     
     await connect("🔍");
+    try {
         google({ query: text }).then(res => {
           let aztec = `🔎 *GOOGLE SEARCH RESULTS* 🔍\n\n${text}\n\n`;
 
@@ -25,4 +30,6 @@ module.exports = {
           console.error(err);
         });
       }
+}
+
 }
