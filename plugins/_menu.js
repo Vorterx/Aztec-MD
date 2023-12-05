@@ -1,4 +1,4 @@
-const { tiny } = require("@viper-x/fancytext");
+const axios = require('axios');
 const fs = require("fs");
 const path = require("path");
 
@@ -10,13 +10,15 @@ for (const file of pluginFiles) {
   if (!file.endsWith('.js') || file === 'menu.js') {
     continue;
   }
-    const plugin = require(path.join(pluginDir, file));
-  const category = plugin.category;
   
+  const plugin = require(path.join(pluginDir, file));
+  const category = plugin.category;
+
   if (!commandsByCategory[category]) {
     commandsByCategory[category] = [];
   }
-  commandsByCategory[category].push(...plugin.commands);
+  
+  commandsByCategory[category].push(plugin);
 }
 
 module.exports = {
@@ -26,15 +28,15 @@ module.exports = {
   description: 'Reveals menu categories commands',
 
   async client(vorterx, m, { args, connect }) {
-    
     await connect('Ⓜ️');
     let getCommands = '';
+
     for (const category in commandsByCategory) {
       getCommands += `┌──『 ${category} 』──❖\n`;
-      getCommands += commandsByCategory[category].map(cmd => `| ${cmd}`).join('\n');
+      getCommands += commandsByCategory[category].map(plugin => `| ${plugin.name}`).join('\n');
       getCommands += '\n└─────────◉\n';
     }
-    
+
     let up_up, up_mid, up_btm;
     up_up = `┏━━⟪ *${tiny(process.env.BOTNAME)}* ⟫━━⦿`;
     up_mid = `┃ ✗`;
