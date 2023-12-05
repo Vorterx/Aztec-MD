@@ -22,14 +22,15 @@ module.exports = {
       const app = data[0];
       const caption = `*〄_APKDL DOWNLOADR_〄*\n\n *📚 App Name*: ${app.title}\n*📦 Developer*: ${app.developer}\n*⬆️ Last update*: ${app.lastUpdate}\n*📥 Size*: ${app.size}\n*🤖 BotName*: INRL-OFFICIAL\n\n\n*_BY WhatsApp CHATBOT_*`;
       await vorterx.sendMessage(m.from, {
-        document: { url: app.link,
-        caption,
-        thumbnail: { url: app.icon },
-      }, 'documentMessage', {
+        document: {
+          url: app.link,
+          caption,
+          thumbnail: { url: app.icon },
+        },
         mimetype: 'application/vnd.android.package-archive',
-        fileName: app.name,
+        filename: app.name,
         quoted: m,
-      });
+      }, 'documentMessage');
     } catch (error) {
       console.error(error);
       await connect('❌');
