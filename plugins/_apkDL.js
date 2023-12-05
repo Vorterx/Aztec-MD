@@ -27,7 +27,7 @@ module.exports = {
         thumbnail: { url: app.icon },
       }, 'documentMessage', {
         mimetype: 'application/vnd.android.package-archive',
-        filename: data.name,
+        filename: app.name,
         quoted: m,
       });
     } catch (error) {
