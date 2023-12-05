@@ -2,7 +2,7 @@ const { mode } = require('../lib/client.js');
 const config = require('../config');
 
 module.exports = {
-  name: '(set|mod|use)',
+  name: 'set',
   description: 'To set private mode, public mode, or group work mode using cmd',
   category: 'Owner',
   async client(vorterx, m, { text, args, connect }) {
