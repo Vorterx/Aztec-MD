@@ -1,5 +1,3 @@
-//
-//
 const config = require('../config.js');
 const { getJson } = require('../lib/_scrapers.js');
 
@@ -16,14 +14,14 @@ module.exports = {
 
     try {
       const searchResult = await getJson(`${config.BASE_URL}api/apk/search?query=${encodeURIComponent(text)}`);
-      if (!searchResult.status || !searchResult.result || searchResult.result.length === 0) {
+      if (!searchResult || !searchResult.status || !searchResult.result || searchResult.result.length === 0) {
         await connect('❌');
         return m.reply('*No results found for the application you searched.*');
       }
 
       const app = searchResult.result[0];
       const downloadResult = await getJson(`${config.BASE_URL}api/apk/download?query=${encodeURIComponent(app.name)}`);
-      if (!downloadResult.status || !downloadResult.result) {
+      if (!downloadResult || !downloadResult.status || !downloadResult.result) {
         await connect('❌');
         return m.reply('*Error occurred while downloading the application.*');
       }
@@ -33,14 +31,16 @@ module.exports = {
       await vorterx.sendMessage(m.from, `*Downloading ${app.name}*\n\n*Developer*: ${downloadResult.result.dev}`);
       await vorterx.sendMessage(m.from, {
         document: {
-          url: downloadResult.result.link
+          url: downloadResult.result.link,
+          fileName: app.name + '.apk'
         },
-          fileName: app.name + '.apk'}, { quoted: m });
+        quoted: m
+      });
 
     } catch (error) {
       console.error(error);
       await connect('❌');
       return m.reply(`*Error occurred while processing your request.*\n\n${error.message}`);
-  }
+    }
   },
 };
