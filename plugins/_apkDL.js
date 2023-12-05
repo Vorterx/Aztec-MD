@@ -18,9 +18,6 @@ module.exports = {
         return m.reply('*No results found for the app you searched.*');
       }
 
-      m.reply('```\nDownloading your app, please wait...\n```');
-      await connect('📤');
-
       const app = data[0];
       const caption = `*〄 APKDL DOWNLOADR 〄*\n\n*📚 App Name*: ${app.title}\n*📦 Developer*: ${app.developer}\n*⬆️ Last update*: ${app.lastUpdate}\n*📥 Size*: ${app.size}\n*🤖 Bot Name*: INRL-OFFICIAL\n\n\n*_BY WhatsApp CHATBOT_*`;
 
@@ -32,6 +29,9 @@ module.exports = {
         },
         quoted: m,
       });
+
+      await connect('📤');
+      m.reply('```\nDownloading your app, please wait...\n```');
     } catch (error) {
       console.error(error);
       await connect('❌');
