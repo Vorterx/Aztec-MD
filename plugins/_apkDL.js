@@ -1,12 +1,11 @@
 const config = require('../config.js');
-const { getJson } = require('../connects/myFunc.js');
 
 module.exports = {
   name: 'apk',
   alias: ['app', 'getpack'],
   description: 'To download apk',
   category: 'Downloads',
-  async client(vorterx, m, { text, args, connect, quoted }) {
+  async client(vorterx, m, { text, args, connect, getJson, quoted }) {
     if (!text) {
       await connect('❌');
       return m.reply('*_Please provide the name of the app you want to download._*');
