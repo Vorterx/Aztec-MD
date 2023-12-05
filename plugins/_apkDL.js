@@ -1,5 +1,5 @@
 const config = require('../config.js');
-const { getJson } = require('../lib/client.js');
+const { getJson } = require('../lib/_scrapers.js');
 
 module.exports = {
   name: 'apk',
