@@ -15,7 +15,7 @@ let config = {
   owner_number: process.env.OWNER_NUMBER || '27686881509',
   session_Id: process.env.SESSION_ID || 'add something',
   level_up: process.env.LEVEL_UP || '',
-  api_down: process.env.API_DOWN || 'https://inrl-web-fkns.onrender.com',
+  base_url: process.env.BASE_URL || 'https://inrl-web-fkns.onrender.com',
   antilink: process.env.ANTILINK || 'true',
   menu: process.env.MENU || '', // 2 is the default menu Aztec, 0 is Suhail MD menu
   thumb: process.env.THUMB || 'https://imageupload.io/69vJBZbn4iPqWTZ',
