@@ -18,27 +18,24 @@ module.exports = {
       azteci += '`No mods are set for now`';
     }
     const img = 'https://i.ibb.co/2dvDgBd/464318-5149318-823730-thumbnail.png';
-    
+
     const mentions = sudo.map((x) => ({
-      tag: '@' + x.split('@')[0],
+      tag: x.split('@')[0],
       id: {
         _serialized: x
       }
     }));
-    
+
     await vorterx.sendMessage(
       m.from,
       {
-        sticker: {
-          url: img,
-          sendImageAsSticker: true
+        image: {
+          url: img
         },
-        caption: azteci,
+        body: azteci,
         mentionedJidList: mentions.map((mention) => mention.id)
       },
-      {
-        quoted: m
-      }
+      m
     );
   }
 };
