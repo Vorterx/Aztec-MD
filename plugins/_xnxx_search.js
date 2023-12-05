@@ -7,7 +7,7 @@ const fs = require("fs");
 module.exports = {
   name: "xnxxsh",
   description: "18 videos only",
-  category: "Download",
+  category: "Downloads",
   async client(vorterx, m, { connect, text, args }) {
     let me = fs.readFileSync("./lib/imogs.jpg");
 
