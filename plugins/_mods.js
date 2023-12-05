@@ -1,5 +1,6 @@
 module.exports = {
-    name: '(mods|sudos)',
+    name: 'mods',
+    alias: ['sudo'],
     description: 'To check mods admins to the bot',
     category: 'Owner',
     async client(vorterx, m, {
