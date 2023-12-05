@@ -1,7 +1,7 @@
 const config = require('../config');
 
 module.exports = {
- name: ('delmod|removemd'),
+ name: 'delmod',
  category: 'Owner',
  async client(
    vorterx, m, { 
