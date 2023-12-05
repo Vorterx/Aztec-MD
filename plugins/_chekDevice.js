@@ -2,6 +2,7 @@ const { getDevice } = require('@whiskeysockets/baileys');
 
 module.exports = {
   name: 'device',
+  category: 'Search'
   description: 'Check the user device being used',
   async client(vorterx, m, { quoted, connect }) {
    
