@@ -3,6 +3,7 @@ const axios = require('axios');
 module.exports = {
   name: 'npm',
   alias: ['pkg'],
+  category: 'Search',
   description: 'Searches for an npm package',
   async client(vorterx, m, { text, connect }) {
  
