@@ -1,4 +1,3 @@
-//
 const config = require('../config.js');
 const { getJson } = require('../lib/client.js');
 
@@ -42,7 +41,7 @@ module.exports = {
     } catch (error) {
       console.error(error);
       await connect('❌');
-      return m.reply('*Error occurred while processing your request.*');
+      return m.reply(`*Error occurred while processing your request.*\n\n${error.message}`);
     }
   },
 };
