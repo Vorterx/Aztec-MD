@@ -6,7 +6,7 @@ const axios = require("axios");
 module.exports = {
   name: "gpt",
   alias: ["ai", "openai", "chatgpt"],
-  category: "CHATGPT",
+  category: "GPT AI",
   description: "Randomly search",
   async client(vorterx, m, { text, connect, args }) {
     if (!text) {
