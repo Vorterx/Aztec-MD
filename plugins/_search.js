@@ -12,7 +12,6 @@ module.exports = {
       return m.reply(`\`\`\`Please provide a query\`\`\``);
     }     
     await connect("🔍");
-    try {
         google({ query: text }).then(res => {
           let aztec = `🔎 *GOOGLE SEARCH RESULTS* 🔍\n\n${text}\n\n`;
 
@@ -32,4 +31,3 @@ module.exports = {
       }
 }
 
-}
