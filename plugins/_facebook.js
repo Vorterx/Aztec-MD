@@ -7,14 +7,14 @@ module.exports = {
     const url = args[0];
 
     // Check if the URL matches the required pattern
-    const urlPattern = /^https?:\/\/(?:www\.)?fb\.watch\/\?v=\d+/i;
+    const urlPattern = /^https?:\/\/fb\.watch\/\?v=\d+/i;
     if (!url || !urlPattern.test(url)) {
-      return m.reply('Please provide a valid Facebook video URL starting with "fb.watch".');
+      return m.reply('Please provide a valid Facebook video URL starting with "https://fb.watch".');
     }
 
     try {
       console.log('URL:', url);
-      const downloadUrl = await fg.fbdl(url);
+      const downloadUrl = await fg.fbvideo(url);
       console.log('Download URL:', downloadUrl);
       await vorterx.sendMessage(m.from, { video: { url: downloadUrl } });
       // fs.writeFile('video.mp4', downloadedVideo, (err) => {
