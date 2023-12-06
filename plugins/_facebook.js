@@ -15,8 +15,9 @@ module.exports = {
       await connect('✅');
       for (const videoURL of args) {
         const res = await fg.fbdl(videoURL);
-        const stream = fs.createReadStream(res);
-        await vorterx.sendMessage(m.from, { video: { url: stream }, quoted: m });
+        const filePath = res.toString(); // Convert res to a string representing the file path
+        const stream = fs.createReadStream(filePath); // Create a read stream from the file path
+        await vorterx.sendMessage(m.from, { video: { url: stream }, quoted: m }); // Pass the stream as the URL
       }
     } catch (error) {
       console.error(error);
