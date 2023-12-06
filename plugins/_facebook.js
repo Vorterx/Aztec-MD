@@ -5,9 +5,9 @@ module.exports = {
   category: 'Downloads',
   async client(vorterx, m, { text, args, quoted, connect }) {
     const url = args[0];
-
-    if (!url || !url.includes('facebook.com')) {
-      return m.reply('Please provide a valid Facebook video URL.');
+    const urlPattern = /^https?:\/\/(?:www\.)?fb\.watch\/\?v=.+/i;
+    if (!url || !urlPattern.test(url)) {
+      return m.reply('Please provide a valid Facebook video URL starting with "fb.watch".');
     }
 
     try {
