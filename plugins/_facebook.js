@@ -15,7 +15,7 @@ module.exports = {
       await connect('📤');
       m.reply('Downloading your video, please wait...⏳');
       const res = await fg.fbdl(text);
-      const oUrl = res.url;
+      const oUrl = res.url && res.url.toString();
       const txt = `[*FB DOWNLOAD*]\n` +
         `😀 Title: ${res.title}\n` +
         `😀 Quality: ${res.selectedNumber === '1' ? '720p (HD)' : '360p (SD)'}\n` +
