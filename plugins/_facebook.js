@@ -1,4 +1,4 @@
-const fg = require('fg.fbdl');
+const fg = require('api-dylux');
 
 module.exports = {
   name: 'fb',
