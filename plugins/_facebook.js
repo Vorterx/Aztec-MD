@@ -1,5 +1,5 @@
-//
 const fg = require('api-dylux');
+const fs = require('fs');
 
 module.exports = {
   name: 'fb',
@@ -15,12 +15,13 @@ module.exports = {
       await connect('✅');
       for (const videoURL of args) {
         const res = await fg.fbdl(videoURL);
-        await vorterx.sendMessage(m.from, { video: { url: res }, quoted: m });
+        const stream = fs.createReadStream(res);
+        await vorterx.sendMessage(m.from, { video: { url: stream }, quoted: m });
       }
     } catch (error) {
       console.error(error);
       await connect('❌');
-      return m.reply('Failed to download and send the videos.');
+      return m.reply(`Failed to download and send the videos. Error: ${error.message}`);
     }
   },
 };
