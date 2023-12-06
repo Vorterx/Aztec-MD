@@ -11,7 +11,7 @@ module.exports = {
       return m.reply('Please provide a valid Facebook video URL.');
     }
 
-    try }
+    try {
       const getVideo = await dylux.fbvideo(text);
 
       // Send the downloaded video as a video message to the user
