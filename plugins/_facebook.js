@@ -1,30 +1,29 @@
-const fg = require('api-dylux');
-const urlRegex = /^(?:https?:\/\/)?(?:www\.)?(?:facebook\.com|fb\.watch)\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/i;
+//
+const dylux = require('api-dylux');
 
 module.exports = {
   name: 'fb',
-  description: 'To download Facebook video',
   category: 'Downloads',
-  async client(vorterx, m, { text, connect, args }) {
-    if (!text || !urlRegex.test(text)) {
-      await connect('❌');
-      return m.reply('Please provide a valid Facebook video URL');
+  async client(vorterx, m, { text, args, quoted, connect }) {
+
+    
+    if (!text || !text.includes('facebook.com')) {
+      return m.reply('Please provide a valid Facebook video URL.');
     }
 
-    try {
-      await connect('📤');
-      m.reply('Downloading your video, please wait...⏳');
-      const res = await fg.fbdl(text);
-      const oUrl = res.url !== null ? res.url.toString() : null;
-      const txt = `[*FB DOWNLOAD*]\n` +
-        `😀 Title: ${res.title}\n` +
-        `😀 Quality: ${res.selectedNumber === '1' ? '720p (HD)' : '360p (SD)'}\n` +
-        `🙂 Views: ${res.views}\n\n` +
-        `└───────────◉`;
-      const mSg = { video: { url: oUrl }, caption: txt };
-      await vorterx.sendMessage(m.from, mSg);
+    try }
+      const getVideo = await dylux.fbvideo(text);
+
+      // Send the downloaded video as a video message to the user
+      await vorterx.sendMessage(m.from, { video: { url: getVideo } });
+      // fs.writeFile('video.mp4', downloadedVideo, (err) => {
+      //   if (err) console.log(err);
+      //   console.log('Video saved successfully.');
+      // });
+
     } catch (error) {
-      m.reply('An error occurred while processing the video. Please ensure the video URL is valid and try again later. If the issue persists, it may be due to changes in the Facebook video structure that the code cannot handle at the moment.');
+      console.log(error);
+      m.reply(`An error occurred while downloading the Facebook video: ${error.message}`);
     }
   }
 };
