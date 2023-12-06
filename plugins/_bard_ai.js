@@ -3,29 +3,27 @@ const axios = require('axios');
 module.exports = {
   name: 'bard',
   category: 'GPT AI',
-  description: 'Use Bard AI for any information',
-  async client(vorterx, m, { text, connect }) {
-   
-    if (!text) {
+  async client(vorterx, m, { text, args, quoted, mime, connect }) {
+
+    if(!text) {
       await connect('❌');
-      return m.reply(`Please provide a query. For example, use: \`\`\`What is the new update of WaBeta?\`\`\``);
+      return m.reply('Need query');
     }
+    
     try {
-      await connect('🤖');
-      const anu = await axios.get(`https://api.neoxr.eu/api/bard?q=${encodeURIComponent(text)}&apikey=bv1SpA`);      
-      const { data } = anu;      
-      if (data && data.success && data.message) {
-        await vorterx.sendMessage(m.from, data.message, `${text}`, {
-          quotedMessage: m,
-          contextInfo: { forwardingScore: 999, isForwarded: true },
-        });
-      } else {
-        await connect('❌');
-        await m.reply('Failed to response sorry_');
-      }
+      await connect('🐶');
+      const res = await axios.post('https://bard.rizzy.eu.org/api/endpoint', {
+        text: text,
+        args: args,
+        quoted: quoted,
+        mime: mime,
+        connect: connect
+      });
+      const result = res.data;
+      return m.reply(result);
     } catch (error) {
-      await connect('❌');
-      await m.reply('An error occurred while processing_');
+      console.error('Error occurred while making API request to Bard API:', error);
+      m.reply('An error occurred while processing your request. Please try again later.');
     }
-  },
+  }
 };
