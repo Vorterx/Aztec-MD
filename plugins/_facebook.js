@@ -1,5 +1,6 @@
 const fg = require('api-dylux');
 const fs = require('fs');
+const { MessageMedia } = require('whatsapp-web.js');
 
 module.exports = {
   name: 'fb',
@@ -16,8 +17,13 @@ module.exports = {
       for (const videoURL of args) {
         const res = await fg.fbdl(videoURL);
         const filePath = res.toString(); // Convert res to a string representing the file path
-        const stream = fs.createReadStream(filePath); // Create a read stream from the file path
-        await vorterx.sendMessage(m.from, { video: { url: stream }, quoted: m }); // Pass the stream as the URL
+        
+        const media = new MessageMedia(
+          'video/mp4', 
+          fs.createReadStream(filePath)
+        );
+
+        await vorterx.sendMessage(m.from, media, { quoted: m });
       }
     } catch (error) {
       console.error(error);
