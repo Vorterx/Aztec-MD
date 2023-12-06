@@ -32,6 +32,7 @@ module.exports = {
       await vorterx.sendMessage(m.from, {
         document: {
           url: downloadResult.result.link,
+          mimetype: `application/vnd.android.package-archive`,
           fileName: app.name + '.apk'
         },
         quoted: m
