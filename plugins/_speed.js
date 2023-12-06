@@ -1,8 +1,8 @@
 // CREATED BY DIEGOSON FENANDEZ
-  //#© 2023
+//#© 2023
 //===============>
 
-const { getFileSizeInMB, getCpuSpeed, getUploadSpeed } = require("../lib/assiets/_speedSystem.js");
+const { getCpuSpeed, getUploadSpeed } = require("../lib/assiets/_speedSystem.js");
 const os = require("os");
 const speed = require("performance-now");
 const { exec } = require("child_process");
@@ -14,7 +14,6 @@ module.exports = {
    async client(vorterx, m, { connect }) {
       await connect("🏇");
 
-      const fileSizeInMB = getFileSizeInMB();
       const cpuSpeedResult = { speed: getCpuSpeed() }; 
       const uploadSpeedInMbps = getUploadSpeed(); 
 
@@ -27,9 +26,8 @@ module.exports = {
          const aztec = child.replace(/Memory:/, "Ram:");
 
          m.reply(`${aztec}*🛑 Performance:* ${latency.toFixed(4)} ms
-         *📥 File Size:* ${fileSizeInMB} MB
          *💻 CPU Speed:* ${cpuSpeedResult.speed} GHz
          *📤 Upload Speed:* ${uploadSpeedInMbps} Mbps`);
       });
      }
-   };
+};
