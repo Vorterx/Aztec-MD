@@ -17,13 +17,13 @@ module.exports = {
     const startTime = Date.now();
     const version = '3.0.0';
     const owner = process.env.OWNER_NAME;
-    const additionalInfo = 'Just do what is the best: time 🏇';
+    const additionalInfo = 'Just do what is the best:';
     const endTime = Date.now();
     const latency = endTime - startTime;
     const uptimeText = getUptimeText(uptime);
 
     const AztecBot = `
-*〄_Description:* WhatsApp Chatbot made by Diegoson.
+*〄_Description:* WhatsApp Chatbot.
 *〄_Speed:* ${latency} ms
 *〄_Uptime:* ${uptimeText}
 *〄_Version:* ${version}
