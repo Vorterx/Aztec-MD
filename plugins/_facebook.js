@@ -24,7 +24,7 @@ module.exports = {
     } catch (error) {
       console.error(error);
       await connect('❌');
-      return m.reply('An error occurred while downloading the video.');
+      return m.reply(`An error occurred while downloading the video: ${error.message}`);
     }
   },
 };
