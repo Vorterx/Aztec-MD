@@ -30,6 +30,6 @@ module.exports = {
 *〄_Owner:* ${owner}
 *〄_Additional Info:* ${additionalInfo}`;
 
-    await vorterx.updateMessage(m.from, { image: { url: 'https://i.ibb.co/s3LzSFJ/931684-7660.jpg' }, AztecBot });
+    await vorterx.sendMessage(m.from, { image: { url: 'https://i.ibb.co/s3LzSFJ/931684-7660.jpg' }, AztecBot });
   },
 };
