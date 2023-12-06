@@ -21,7 +21,7 @@ module.exports = {
 
     } catch (error) {
       console.log(error);
-      m.reply(`An error occurred while downloading the Facebook video: ${error.message`);
+      m.reply(`An error occurred while downloading the Facebook video: ${error.message}`);
     }
   }
 };
