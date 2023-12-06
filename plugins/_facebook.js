@@ -1,17 +1,21 @@
-const dylux = require('api-dylux');
+const fg = require('fg.fbdl');
 
 module.exports = {
   name: 'fb',
   category: 'Downloads',
   async client(vorterx, m, { text, args, quoted, connect }) {
     const url = args[0];
-    const urlPattern = /^https?:\/\/(?:www\.)?fb\.watch\/\?v=.+/i;
+
+    // Check if the URL matches the required pattern
+    const urlPattern = /^https?:\/\/(?:www\.)?fb\.watch\/\?v=\d+/i;
     if (!url || !urlPattern.test(url)) {
       return m.reply('Please provide a valid Facebook video URL starting with "fb.watch".');
     }
 
     try {
-      const downloadUrl = await dylux.fbvideo(url);
+      console.log('URL:', url);
+      const downloadUrl = await fg.fbdl(url);
+      console.log('Download URL:', downloadUrl);
       await vorterx.sendMessage(m.from, { video: { url: downloadUrl } });
       // fs.writeFile('video.mp4', downloadedVideo, (err) => {
       //   if (err) console.log(err);
