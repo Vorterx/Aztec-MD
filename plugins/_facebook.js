@@ -15,7 +15,10 @@ module.exports = {
       await connect('📤');
       m.reply('Downloading your video, please wait...⏳');
       const res = await fg.fbdl(text);
-      const oUrl = res.url !== null ? res.url.toString() : null;
+      if (!res.url) {
+        throw new Error('No download links were found for the video');
+      }
+      const oUrl = res.url.toString();
       const txt = `[*FB DOWNLOAD*]\n` +
         `😀 Title: ${res.title}\n` +
         `😀 Quality: ${res.selectedNumber === '1' ? '720p (HD)' : '360p (SD)'}\n` +
@@ -24,7 +27,7 @@ module.exports = {
       const mSg = { video: { url: oUrl }, caption: txt };
       await vorterx.sendMessage(m.from, mSg);
     } catch (error) {
-      m.reply(`An error occurred while processing the video: ${error}`);
+      m.reply('An error occurred while processing the video. Please ensure the video URL is valid and try again later.');
     }
   }
 };
