@@ -1,4 +1,5 @@
-const bocil = require('@bochilteam/scraper');
+
+const savefrom = require('@bochilteam/scraper');
 
 module.exports = {
   name: 'fb',
@@ -11,9 +12,9 @@ module.exports = {
     }
 
     try {
-      const videoUrl = args[0];
-      const videoData = await bocil.default.getVideoInfo(videoUrl); // Use the 'getVideoInfo' function instead of 'getFacebookVideoInfo'
-      const downloadUrl = videoData.video_download_url;
+      const url = args[0];
+      const data = await savefrom(url);
+      const downloadUrl = data.video_download_url;
 
       if (!downloadUrl) {
         await connect('❌');
