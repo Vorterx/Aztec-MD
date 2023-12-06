@@ -1,34 +1,30 @@
-const fg = require('api-dylux');
-const fs = require('fs');
-const { MessageMedia } = require('whatsapp-web.js');
+const bocil = require('@bochilteam/scraper');
 
 module.exports = {
   name: 'fb',
-  description: 'Downloads and sends Facebook videos',
-  category: ':Downloads',
-  async client(vorterx, m, { args, connect }) {
-    if (!args.length) {
+  description: 'To download Facebook videos',
+  category: 'Downloads',
+  async client(vorterx, m, { args, text, connect }) {
+    if (!args[0]) {
       await connect('❌');
-      return m.reply('Please provide at least one valid URL. I am a glitch bot, nigga.');
+      return m.reply('Please provide a URL.');
     }
 
     try {
-      await connect('✅');
-      for (const videoURL of args) {
-        const res = await fg.fbdl(videoURL);
-        const filePath = res.toString(); // Convert res to a string representing the file path
-        
-        const media = new MessageMedia(
-          'video/mp4', 
-          fs.createReadStream(filePath)
-        );
+      const videoUrl = args[0];
+      const videoData = await bocil.getFacebookVideoInfo(videoUrl);
+      const downloadUrl = videoData.video_download_url;
 
-        await vorterx.sendMessage(m.from, media, { quoted: m });
+      if (!downloadUrl) {
+        await connect('❌');
+        return m.reply('Unable to retrieve download URL for the video.');
       }
+
+      return vorterx.sendMessage(m.from, { video: { url: downloadUrl } });
     } catch (error) {
       console.error(error);
       await connect('❌');
-      return m.reply(`Failed to download and send the videos. Error: ${error.message}`);
+      return m.reply('An error occurred while downloading the video.');
     }
   },
 };
