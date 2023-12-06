@@ -24,10 +24,9 @@ module.exports = {
 
          const child = stdout.toString("utf-8");
          const aztec = child.replace(/Memory:/, "Ram:");
-
-         m.reply(`${aztec}*🛑 Performance:* ${latency.toFixed(4)} ms
-         *💻 CPU Speed:* ${cpuSpeedResult.speed} GHz
-         *📤 Upload Speed:* ${uploadSpeedInMbps} Mbps`);
+ m.reply(`${aztec}*🛑 Performance:* ${latency.toFixed(4)} ms
+*💻 CPU Speed:* ${cpuSpeedResult.speed} GHz
+*📤 Upload Speed:* ${uploadSpeedInMbps} Mbps`);
       });
      }
 };
