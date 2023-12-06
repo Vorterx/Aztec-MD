@@ -24,8 +24,7 @@ module.exports = {
       const mSg = { video: { url: oUrl }, caption: txt };
       await vorterx.sendMessage(m.from, mSg);
     } catch (error) {
-      console.error('Error downloading Facebook video:', error);
-      m.reply('An error occurred while processing the video');
+      m.reply(`An error occurred while processing the video: ${error}`);
     }
   }
 };
