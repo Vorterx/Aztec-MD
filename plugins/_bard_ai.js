@@ -1,3 +1,4 @@
+const axios = require('axios');
 
 module.exports = {
   name: 'bard',
