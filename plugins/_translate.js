@@ -6,8 +6,9 @@ module.exports = {
   description: 'Translate any usable language',
   category: 'Extra',
   async client(vorterx, m, { text, args, connect }) {
+    
     if (!text) {
-      await connect('👀');
+      await connect('❌');
       return m.reply('Example: tr Damn l love this Diegoson eish');
     }
 
@@ -25,7 +26,7 @@ module.exports = {
     try {
       await connect('📝');
       const result = await translate(data, { to: lang });
-      const caption = `📝Text: ${data}\n🧘Translated: ${result.text}`;
+      const caption = `*📝Text*: ${data}\n*🧘Translated*: ${result.text}`;
       await m.reply(caption);
     } catch (error) {
       let errorMessage = 'An error occurred while translating';
