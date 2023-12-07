@@ -7,7 +7,7 @@ module.exports = {
   category: 'Convert',
   async client(vorterx, m, { args, quoted, connect }) {
     try {
-      if (!quoted || !quoted.msg || !quoted.msg.imageMessage) {
+      if (!quoted || !quoted.type === 'image') {
         await connect('❌');
         return m.reply('Please reply to an image to convert');
       }
@@ -15,7 +15,7 @@ module.exports = {
       await connect('⭐');
       const author = 'vorterx team';
 
-      const imageUrl = quoted.msg.imageMessage.imageUrl;
+      const imageUrl = quoted.url;
       const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
       const imageBuffer = Buffer.from(response.data, 'binary');
 
