@@ -1,4 +1,4 @@
-const translate = require('google-translate-api');
+const translate = require('@vitalets/google-translate-api');
 
 module.exports = {
   name: 'tr',
@@ -21,7 +21,7 @@ module.exports = {
       lang = text.slice(0, 2);
       data = text.substring(2).trim();
     }
-   
+
     try {
       await connect('📝');
       const result = await translate(data, { to: lang });
