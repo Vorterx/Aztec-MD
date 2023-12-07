@@ -8,7 +8,7 @@ module.exports = {
   async client(vorterx, m, { args, text, connect }) {
     if (!args[0]) {
       await connect('❌');
-      return m.reply('Please provide me a video link');
+      return m.reply('Please provide a video link');
     }
 
     const url = args[0];
@@ -22,6 +22,8 @@ module.exports = {
       await vorterx.sendMessage(m.from, {
         video: {
           url: download,
+          mimetype: 'video/mp4',
+          filename: 'tiktok_video.mp4',
         },
         caption: msg,
       });
