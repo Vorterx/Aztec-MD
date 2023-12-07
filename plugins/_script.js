@@ -34,7 +34,7 @@ module.exports = {
       }
     } catch (error) {
       console.error(error);
-      m.reply('An error occurred while checking aztec md repo');
+      m.reply(`An error occurred while checking aztec md repo\n\n ${error.message}`);
     }
   }
       }
