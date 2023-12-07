@@ -1,31 +1,36 @@
+//-----------[F B D L D O W N]----
 
-const savefrom = require('@bochilteam/scraper');
-
+const bocil = require('@bochilteam/scraper');
 module.exports = {
-  name: 'fb',
-  description: 'To download Facebook videos',
-  category: 'Downloads',
-  async client(vorterx, m, { args, text, connect }) {
-    if (!args[0]) {
-      await connect('❌');
-      return m.reply('Please provide a URL.');
+    name: "fb",
+    description: "To download Facebook",
+    category: "Downloads",
+    async client(vorterx, m, {
+        connect,adreply, text, args
+    }) {
+        try {
+            if (!text) {
+                await connect("⛔");
+                return m.reply(`*Please Provide a Valid Facebook Video Link*`);
+            } else {
+                await connect("📺");
+                bocil.facebookdlv2(`${text}`).then(async (data) => {
+
+                    let aztec = `*╭────❰* *F A C B K - D W N  L D*\n  
+*❒* *TITLE*: *FACBOOK*\n
+*❒* *HD QUALTY*: *720p*\n
+*╰─────────────⭓*`;
+                    vorterx.sendMessage(m.from, {
+                        video: {
+                            url: data.result[0].url
+                        }, caption: aztec
+                    }, {
+                        quoted: m
+                    })
+                })}
+        } catch (error) {
+            vorterx.sendMessage(m.from, {
+                text: "Error occurred while processing"})
+        }
     }
-
-    try {
-      const url = args[0];
-      const data = await savefrom(url);
-      const downloadUrl = data.video_download_url;
-
-      if (!downloadUrl) {
-        await connect('❌');
-        return m.reply('Unable to retrieve download URL for the video.');
-      }
-
-      return vorterx.sendMessage(m.from, { video: { url: downloadUrl } });
-    } catch (error) {
-      console.error(error);
-      await connect('❌');
-      return m.reply(`An error occurred while downloading the video: ${error.message}`);
-    }
-  },
 };
