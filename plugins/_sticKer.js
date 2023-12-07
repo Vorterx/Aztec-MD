@@ -4,13 +4,13 @@ const { createSticker, StickerTypes } = require('wa-sticker-formatter');
 module.exports = {
   name: 'sticker',
   alias: ['s'],
-  category: 'Converct',
+  category: 'Convert',
   async client(vorterx, m, { args, quoted, connect }) {
-   
+    
     try {
       if (!quoted || !quoted.imageMessage) {
         await connect('❌');
-        return m.reply('Provide an image to convert');
+        return m.reply('Please reply to an image to convert');
       }
 
       await connect('⭐');
@@ -18,19 +18,19 @@ module.exports = {
 
       const imageUrl = quoted.imageMessage.imageUrl;
       const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-      const imageBuffer = response.data;
+      const imageBuffer = Buffer.from(response.data, 'binary');
 
       const stickerOptions = {
-        pack: author,
+        author,
         type: StickerTypes.FULL,
         quality: 70
-       };
-     const stickerData = await createSticker(imageBuffer, stickerOptions);
+      };
 
-     await vorterx.sendMessage(m.from, { sticker: stickerData }, { quoted: m });
+      const stickerData = await createSticker(imageBuffer, stickerOptions);
+      await vorterx.sendMessage(m.from, { sticker: stickerData }, { quoted: m });
     } catch (err) {
-      m.reply("An error occurred while processing");
-      console.log(err);
+      console.error(err);
+      await m.reply("An error occurred while processing the image");
     }
   }
 };
