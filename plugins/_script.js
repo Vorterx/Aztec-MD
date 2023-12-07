@@ -8,6 +8,7 @@ module.exports = {
   async client(vorterx, m, { text, args, connect }) {
    
   await connect('🌲');
+  const v_chat = "https://i.ibb.co/k3tGtpf/360-F-426466645-EAg-Vxq-HG2-XK22-Ys2-Pm-LLPgml-EDC3-Sn3-X.jpg";
   const chat_v = "https://i.ibb.co/p0RmTf2/comdlpng6934979.jpg";
   let { data } = await axios.get('https://api.github.com/repos/Vorterx/Aztec-MD')
   let cap = `
@@ -36,7 +37,7 @@ module.exports = {
           body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
           mediaType: 2,
           thumbnail: {
-            url: chat_v
+            url: v_chat
           },
           sourceUrl: 'wa.me/27686881509',
           mediaUrl: '',
