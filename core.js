@@ -12,7 +12,7 @@ const contact = require('./connects/contact.js');
 const MessageHandler = require('./lib/client.js');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 if (!fs.existsSync("./auth_info_baileys/creds.json")) {
   }
