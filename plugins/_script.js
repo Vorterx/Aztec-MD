@@ -28,13 +28,13 @@ module.exports = {
         *〄 _Scrip_URL*: *${repo.html_url}*\n\n\n*WHATSAPP CHATBOT*
         `;
         const az_git = "https://i.ibb.co/fHZz1kV/2076264-200.png";
-        vorterx.sendMessage(m.from, { url: az_git, caption: gitMsg }, { quoted: m });
+        vorterx.sendMessage(m.from, { url: az_git, caption: gitMsg, mediaType: 'image/jpeg' }, { quoted: m });
       } else {
         m.reply('The repository data is not available.');
       }
     } catch (error) {
       console.error(error);
-      m.reply(`An error occurred while checking aztec md repo\n\n ${error.message}`);
+      m.reply('An error occurred while checking aztec md repo');
     }
   }
-      }
+}
