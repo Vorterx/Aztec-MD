@@ -7,7 +7,7 @@ module.exports = {
   async client(vorterx, m, { args, text, connect }) {
     await connect('📝');
 
-    const pluginsDir = path.join(__dirname, '..');
+    const pluginsDir = path.join(__dirname, '..'); // Assuming the plugins folder is one level up from this file
 
     const commandFiles = fs.readdirSync(pluginsDir);
 
