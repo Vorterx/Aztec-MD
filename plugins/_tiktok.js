@@ -12,24 +12,28 @@ module.exports = {
     }
 
     const url = args[0];
-    const result = await fg.tiktok(url);
 
-    if (result.success) {
-      await connect('✅');
-      const { title, quality, download } = result;
-      const msg = `Title: ${title}\nQuality: ${quality}`;
+    try {
+      const result = await fg.tiktok(url);
 
-      await vorterx.sendMessage(m.from, {
-        video: {
-          url: download,
-          mimetype: 'video/mp4',
-          filename: 'tiktok_video.mp4',
-        },
-        caption: msg,
-      });
-    } else {
+      if (result.success) {
+        await connect('✅');
+
+        await vorterx.sendMessage(m.from, {
+          video: {
+            url: result.videoUrl,
+            mimetype: 'video/mp4',
+            filename: 'tiktok_video.mp4',
+          },
+        });
+      } else {
+        await connect('❌');
+        m.reply('Failed to download the TikTok video.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
       await connect('❌');
-      m.reply('Failed to download the TikTok video.');
+      m.reply('An error occurred while downloading the TikTok video.');
     }
   },
 };
