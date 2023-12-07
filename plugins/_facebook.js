@@ -1,6 +1,5 @@
-//-----------[F B D L D O W N]----
-
 const bocil = require('@bochilteam/scraper');
+
 module.exports = {
     name: "fb",
     description: "To download Facebook",
@@ -15,17 +14,14 @@ module.exports = {
             } else {
                 await connect("📤");
                 bocil.facebookdlv2(`${text}`).then(async (data) => {
-                    m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
 
-                    let title = data.result[0].title || "N/A";
-                    let size = data.result[0].size || "N/A";
-                    let likes = data.result[0].likes || "N/A";
+                    const { title, size, quality, likes } = data.result[0];
 
                     let caption = `╭–– 『*FB Downloader*』      
-┆ *Title* : ${title}
-┆ *Size* : ${size}
-┆ *Quality* : ${data.result[0].quality}
-┆ *Likes* : ${likes}
+┆ *Title* : ${title || "N/A"}
+┆ *Size* : ${size || "N/A"}
+┆ *Quality* : ${quality || "N/A"}
+┆ *Likes* : ${likes || "N/A"}
 ╰–––––––––––––––༓`;
 
                     vorterx.sendMessage(m.from, {
