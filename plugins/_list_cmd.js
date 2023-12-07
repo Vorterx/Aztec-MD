@@ -28,7 +28,7 @@ module.exports = {
       list_md += ` | ${index + 1} ${name}\n`;
     });
 
-    list_md += '\n\n└─────────◉';
+    list_md += '\n└─────────◉';
 
     m.reply(tiny(list_md));
   },
