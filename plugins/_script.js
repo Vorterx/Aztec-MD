@@ -7,7 +7,7 @@ module.exports = {
   category: 'Search',
   async client(vorterx, m, { text, args, connect }) {
     await connect('🌲');
-  const az_git = fs.readFileSync("./Assets/Atlas.jpg");
+  const az_git = fs.readFileSync("../lib/images/aztec_github.png");
   
     try {  
       if (repoData) {
