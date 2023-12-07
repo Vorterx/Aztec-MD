@@ -1,3 +1,4 @@
+//
 const fg = require('api-dylux');
 
 module.exports = {
@@ -28,12 +29,12 @@ module.exports = {
         });
       } else {
         await connect('❌');
-        m.reply('Failed to download the TikTok video.');
+        return m.reply('Failed to download the TikTok video.');
       }
     } catch (error) {
       console.error('Error:', error);
       await connect('❌');
-      m.reply('An error occurred while downloading the TikTok video.');
+      return m.reply('An error occurred while downloading the TikTok video.');
     }
   },
 };
