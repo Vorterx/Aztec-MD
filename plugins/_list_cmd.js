@@ -7,9 +7,11 @@ module.exports = {
   async client(vorterx, m, { args, text, connect }) {
     await connect('📝');
 
-    const pluginsDir = path.join(__dirname, '..');
+    const pluginsDir = path.join(__dirname, '..'); 
+    const configPath = path.join(__dirname, '../config.js'); 
 
     const commandFiles = fs.readdirSync(pluginsDir);
+
     const commandNames = commandFiles.map((file, index) => {
       const commandModule = require(path.join(pluginsDir, file));
       return `${index + 1} ${commandModule.name}`;
@@ -25,5 +27,3 @@ module.exports = {
     list_md += ' └─────────◉';
 
     m.reply(list_md);
-  },
-};
