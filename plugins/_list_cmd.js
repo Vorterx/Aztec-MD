@@ -1,12 +1,13 @@
 const fs = require('fs');
+const { tiny } = require('@viper-x/fancytext');
 const path = require('path');
 
 module.exports = {
   name: 'list',
   category: 'General',
   async client(vorterx, m, { args, text, connect }) {
+    
     await connect('📝');
-
     const pluginsDir = path.join(__dirname);
 
     const commandFiles = fs.readdirSync(pluginsDir);
@@ -21,7 +22,7 @@ module.exports = {
     });
 
     let list_md = `
-┌──『 *LIST CMDS* 』──❖\n\n`;
+┌──『 *${process.env.BOTNAME}* 』──❖\n\n`;
 
     commandNames.forEach((name, index) => {
       list_md += ` | ${index + 1} ${name}\n`;
@@ -29,6 +30,6 @@ module.exports = {
 
     list_md += '└─────────◉';
 
-    m.reply(list_md);
+    m.reply(tiny(list_md));
   },
 };
