@@ -21,13 +21,13 @@ module.exports = {
     });
 
     let list_md = `
-    ┌──『 *LIST CMDS* 』──❖\n\n`;
+┌──『 *LIST CMDS* 』──❖\n\n`;
 
     commandNames.forEach((name, index) => {
       list_md += ` | ${index + 1} ${name}\n`;
     });
 
-    list_md += ' └─────────◉';
+    list_md += '└─────────◉';
 
     m.reply(list_md);
   },
