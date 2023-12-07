@@ -8,7 +8,7 @@ module.exports = {
   category: 'Search',
   async client(vorterx, m, { text, args, connect }) {
     await connect('🌲');
-  const az_git = fs.readFileSync("../lib/images/aztec_github.png");
+  const az_git = fs.readFileSync("./lib/images/aztec_github.png");
   
     try {  
       if (repoData) {
@@ -30,9 +30,9 @@ module.exports = {
         `;
         await vorterx.sendMessage(m.from, {image: { url: az_git}, caption: gitMsg}, { quoted: m });
       } else {
-        const repoUrl = 'https://api.github.com/repos/Vorterx/Aztec-MD';
-        const repoResponse = await axios.get(repoUrl);
-        const repo = repoResponse.data;
+        const gitApi = 'https://api.github.com/repos/Vorterx/Aztec-MD';
+        const res = await axios.get(gitApi);
+        const repo = res.data;
 
         if (repo) {
           repoData = repo;
