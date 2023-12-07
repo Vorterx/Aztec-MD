@@ -22,7 +22,8 @@ module.exports = {
   
   *〄 _Updated_At*: ${new Date(data?.updated_at).toLocaleDateString()||"undefined"}
   
-  *〄 _Scrip_URL*: ${data?.html_url}
+  *〄 _Scrip_URL*: ${data?.html_url}\n\n*ʙʏ ᴡʜᴀᴛꜱᴀᴘᴘ ᴄʜᴀᴛʙᴏᴛ*
+
 `;
 
  const chatBot = {
