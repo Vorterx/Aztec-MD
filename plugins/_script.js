@@ -7,6 +7,8 @@ module.exports = {
   category: 'Search',
   async client(vorterx, m, { text, args, connect }) {
     await connect('🌲');
+  const az_git = fs.readFileSync("./Assets/Atlas.jpg");
+  
     try {  
       if (repoData) {
         const repo = repoData;
@@ -25,8 +27,7 @@ module.exports = {
         
         *〄 _Scrip_URL*: *${repo.html_url}*\n\n\n*WHATSAPP CHATBOT*
         `;
-        const az_git = "https://i.ibb.co/fHZz1kV/2076264-200.png";
-        await vorterx.sendMessage(m.from, { url: az_git, caption: gitMsg, mediaType: 'image/jpeg' }, { quoted: m });
+        await vorterx.sendMessage(m.from, {image: { url: az_git}, caption: gitMsg}, { quoted: m });
       } else {
         const repoUrl = 'https://api.github.com/repos/Vorterx/Aztec-MD';
         const repoResponse = await axios.get(repoUrl);
@@ -50,8 +51,7 @@ module.exports = {
           
           *〄 _Scrip_URL*: *${repo.html_url}*\n\n\n*WHATSAPP CHATBOT*
           `;
-          const az_git = "https://i.ibb.co/fHZz1kV/2076264-200.png";
-          await vorterx.sendMessage(m.from, { url: az_git, caption: gitMsg, mediaType: 'image/jpeg' }, { quoted: m });
+        await vorterx.sendMessage(m.from, {image:{ url: az_git}, caption: gitMsg}, { quoted: m });
         } else {
           await m.reply('The repository data is not available.');
         }
