@@ -8,7 +8,6 @@ module.exports = {
     await connect('📝');
 
     const pluginsDir = path.join(__dirname, '..');
-    const configPath = path.join(__dirname, '../config.js'); 
 
     const commandFiles = fs.readdirSync(pluginsDir);
 
@@ -27,5 +26,5 @@ module.exports = {
     list_md += ' └─────────◉';
 
     m.reply(list_md);
-  }
-}; 
+  },
+};
