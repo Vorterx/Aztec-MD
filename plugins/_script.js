@@ -8,7 +8,7 @@ module.exports = {
   async client(vorterx, m, { text, args, connect }) {
    
   await connect('🌲');
-  const chat_v = "https://github.com/Vorterx/Aztec-MD/blob/main/lib/images/aztec_github.png";
+  const chat_v = "https://i.ibb.co/p0RmTf2/comdlpng6934979.jpg";
   let { data } = await axios.get('https://api.github.com/repos/Vorterx/Aztec-MD')
   let cap = `
   *乂 AZTEC-MD MD INFORMATION 乂*
