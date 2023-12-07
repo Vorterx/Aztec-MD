@@ -7,20 +7,24 @@ module.exports = {
   async client(vorterx, m, { args, text, connect }) {
     await connect('📝');
 
-    const pluginsDir = path.join(__dirname, '..'); // Assuming the plugins folder is one level up from this file
+    const pluginsDir = path.join(__dirname);
 
     const commandFiles = fs.readdirSync(pluginsDir);
 
-    const commandNames = commandFiles.map((file, index) => {
+    const commandNames = [];
+
+    commandFiles.forEach((file) => {
       const commandModule = require(path.join(pluginsDir, file));
-      return `${index + 1} ${commandModule.name}`;
+      if (commandModule && commandModule.name) {
+        commandNames.push(commandModule.name);
+      }
     });
 
     let list_md = `
     ┌──『 *LIST CMDS* 』──❖\n\n`;
 
-    commandNames.forEach((name) => {
-      list_md += ` | ${name}\n`;
+    commandNames.forEach((name, index) => {
+      list_md += ` | ${index + 1} ${name}\n`;
     });
 
     list_md += ' └─────────◉';
