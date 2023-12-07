@@ -1,4 +1,4 @@
-const { tiktokdl } = require('@bochilteam/scraper');
+const fg = require('api-dylux');
 
 module.exports = {
   name: 'tik',
@@ -6,14 +6,13 @@ module.exports = {
   category: 'Downloads',
   description: 'To download TikTok videos',
   async client(vorterx, m, { args, text, connect }) {
-   
     if (!args[0]) {
       await connect('❌');
-      return m.reply('Please provide me a link video');
+      return m.reply('Please provide me a video link');
     }
 
     const url = args[0];
-    const result = await tiktokdl(url);
+    const result = await fg.tiktok(url);
 
     if (result.success) {
       await connect('✅');
@@ -23,8 +22,6 @@ module.exports = {
       await vorterx.sendMessage(m.from, {
         video: {
           url: download,
-          mimetype: 'video/mp4',
-          filename: 'tiktok_video.mp4',
         },
         caption: msg,
       });
