@@ -6,21 +6,22 @@ module.exports = {
     description: "To download Facebook",
     category: "Downloads",
     async client(vorterx, m, {
-        connect, adreply, text, args
+        connect, text, args
     }) {
         try {
             if (!text) {
-                await connect("⛔");
+                await connect("❌");
                 return m.reply(`*Please Provide a Valid Facebook Video Link*`);
             } else {
-                await connect("📺");
+                await connect("📤");
                 bocil.facebookdlv2(`${text}`).then(async (data) => {
+                    m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
 
                     let title = data.result[0].title || "N/A";
                     let size = data.result[0].size || "N/A";
                     let likes = data.result[0].likes || "N/A";
 
-                    let caption = `╭–– 『 *FB Downloader』      
+                    let caption = `╭–– 『*FB Downloader*』      
 ┆ *Title* : ${title}
 ┆ *Size* : ${size}
 ┆ *Quality* : ${data.result[0].quality}
