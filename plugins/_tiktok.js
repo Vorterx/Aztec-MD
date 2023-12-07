@@ -1,4 +1,3 @@
-//
 const fg = require('api-dylux');
 
 module.exports = {
@@ -12,21 +11,21 @@ module.exports = {
       return m.reply('Please provide a video link');
     }
 
-    const url = args[0];
-
     try {
-      const result = await fg.tiktok(url);
+      const result = await fg.tiktok2(args[0]);
 
       if (result.success) {
         await connect('✅');
 
-        await vorterx.sendMessage(m.from, {
-          video: {
-            url: result.videoUrl,
-            mimetype: 'video/mp4',
-            filename: 'tiktok_video.mp4',
-          },
-        });
+        for (const video of result.videos) {
+          await vorterx.sendMessage(m.from, {
+            video: {
+              url: video.videoUrl,
+              mimetype: 'video/mp4',
+              filename: 'tiktok_video.mp4',
+            },
+          });
+        }
       } else {
         await connect('❌');
         return m.reply('Failed to download the TikTok video.');
@@ -34,7 +33,7 @@ module.exports = {
     } catch (error) {
       console.error('Error:', error);
       await connect('❌');
-      return m.reply('An error occurred while downloading the TikTok video.');
+      return m.reply(`An error occurred while downloading the TikTok video: ${error.message}`);
     }
   },
 };
