@@ -1,12 +1,10 @@
-//-----------[F B D L D O W N]----
-
 const bocil = require('@bochilteam/scraper');
 module.exports = {
     name: "fb",
     description: "To download Facebook",
     category: "Downloads",
     async client(vorterx, m, {
-        connect,adreply, text, args
+        connect, adreply, text, args
     }) {
         try {
             if (!text) {
@@ -16,21 +14,27 @@ module.exports = {
                 await connect("📺");
                 bocil.facebookdlv2(`${text}`).then(async (data) => {
 
-                    let aztec = `*╭────❰* *F A C B K - D W N  L D*\n  
-*❒* *TITLE*: *FACBOOK*\n
-*❒* *HD QUALTY*: *720p*\n
-*╰─────────────⭓*`;
+                    let caption = `╭–– 『 *FB Downloader』      
+┆ *Title* : ${data.result[0].title}
+┆ *Size* : ${data.result[0].size}
+┆ *Quality* : ${data.result[0].quality}
+┆ *Likes* : ${data.result[0].likes}
+╰–––––––––––––––༓`;
+
                     vorterx.sendMessage(m.from, {
                         video: {
                             url: data.result[0].url
-                        }, caption: aztec
+                        },
+                        caption: caption
                     }, {
                         quoted: m
-                    })
-                })}
+                    });
+                });
+            }
         } catch (error) {
             vorterx.sendMessage(m.from, {
-                text: "Error occurred while processing"})
+                text: "Error occurred while processing"
+            });
         }
     }
 };
