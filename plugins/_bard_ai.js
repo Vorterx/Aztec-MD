@@ -1,19 +1,20 @@
-const axios = require('axios');
+const axios = require("axios");
 
 module.exports = {
   name: 'bard',
   category: 'GPT AI',
   description: 'Search or ask anything using bard',
-  async client(vorterx, m, { args, mime, quoted, text, connect }) {
-  
+  async client(vorterx, m, { args, mime, quoted, connect }) {
     if (!args[0]) {
       await connect('❌');
       return m.reply('_Please provide a search term._');
     }
-    console.log("Text:", args[0]);
+
+    const text = args[0];
+    console.log("Text:", text);
 
     try {
-      const response = await axios.get(`https://api.guruapi.tech/api/bard?${encodeURIComponent(args[0])}`);
+      const response = await axios.get(`https://api.guruapi.tech/api/bard?text=${encodeURIComponent(text)}`);
       
       if (response && response.data) {
         const result = response.data;
@@ -24,9 +25,9 @@ module.exports = {
         m.reply('_No result found for the given search term._');
       }
     } catch (error) {
-      console.error('Error fetching data from the bard:', error);
+      console.error('Error fetching data from the bard API:', error);
       await connect('❌');
-      m.reply(`_Error fetching data from the bard: ${error.message}_`);
+      m.reply(`_Error fetching data from the bard API: ${error.message}_`);
     }
   },
 };
