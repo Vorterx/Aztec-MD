@@ -11,7 +11,7 @@ module.exports = {
     }
 
     const text = args[0];
-    console.log("Text:", text);
+    console.log(text);
 
     try {
       const response = await axios.get(`https://api.guruapi.tech/api/bard?text=${encodeURIComponent(text)}`);
