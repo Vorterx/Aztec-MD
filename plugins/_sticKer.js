@@ -6,9 +6,8 @@ module.exports = {
   alias: ['s'],
   category: 'Convert',
   async client(vorterx, m, { args, quoted, connect }) {
-    
     try {
-      if (!quoted || !quoted.imageMessage) {
+      if (!quoted || !quoted.msg || !quoted.msg.imageMessage) {
         await connect('❌');
         return m.reply('Please reply to an image to convert');
       }
@@ -16,7 +15,7 @@ module.exports = {
       await connect('⭐');
       const author = 'vorterx team';
 
-      const imageUrl = quoted.imageMessage.imageUrl;
+      const imageUrl = quoted.msg.imageMessage.imageUrl;
       const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
       const imageBuffer = Buffer.from(response.data, 'binary');
 
@@ -27,6 +26,7 @@ module.exports = {
       };
 
       const stickerData = await createSticker(imageBuffer, stickerOptions);
+
       await vorterx.sendMessage(m.from, { sticker: stickerData }, { quoted: m });
     } catch (err) {
       console.error(err);
