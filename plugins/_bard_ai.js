@@ -12,7 +12,7 @@ module.exports = {
     
     try {
       await connect('🐶');
-      const res = await axios.post('https://bard.rizzy.eu.org/api/endpoint', {
+      const res = await axios.post(`https://api.guruapi.tech/api/bard?text=${text} `, {
         text: text,
         args: args,
         quoted: quoted,
