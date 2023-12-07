@@ -2,7 +2,7 @@ module.exports = {
 name:"open",
 description: "To Open the group",
 category: "Group",
-async(vorterx, m, { connect, isAdmin, isBotAdmin, isGroup}) {
+async client(vorterx, m, { connect, isAdmin, isBotAdmin, isGroup}) {
 
 if(!m.isGroup) { 
 await connect("❌"); return m.reply("*👋 Sorry this command is for admins only*");
