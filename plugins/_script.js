@@ -1,6 +1,5 @@
 const axios = require('axios');
 const fs = require('fs');
-const fs = require('fs');
 
 module.exports = {
   name: 'script',
@@ -9,7 +8,7 @@ module.exports = {
   async client(vorterx, m, { text, args, connect }) {
    
   await connect('🌲');
-  let chat_v = fs.readFileSync("./lib/images/aztec_github.png");
+  let chat_v = fs.readFileSync('./lib/images/aztec_github.png');
   let { data } = await axios.get('https://api.github.com/repos/Vorterx/Aztec-MD')
   let cap = `
   *乂 AZTEC-MD MD INFORMATION 乂*
