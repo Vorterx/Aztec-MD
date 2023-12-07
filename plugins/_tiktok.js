@@ -1,37 +1,36 @@
-const axios = require('axios');
+const { tiktokdl } = require('@bochilteam/scraper');
 
 module.exports = {
   name: 'tik',
   alias: ['tiktok'],
-  description: 'To download tiktok videos',
   category: 'Downloads',
-  async client(vorterx, m, { text, args, connect }) {
-    
-    if (!text) {
+  description: 'To download TikTok videos',
+  async client(vorterx, m, { args, text, connect }) {
+   
+    if (!args[0]) {
       await connect('❌');
-      return m.reply('Please provide a valid TikTok video URL.');
+      return m.reply('Please provide me a link video');
     }
-    const apiKey = '29y8XIYL';
-    let caption = '';
-    try {
-      const adUrl = `https://api.botcahx.live/api/dowloader/tiktok?url=${encodeURIComponent(
-        text
-      )}&apikey=${apiKey}`;
-      await connect('📤');
-      m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
-      const res = await axios.get(adUrl);
-      const data = res.data;
-      if (data.success) {
-        const Title = data.result.title;
-        const Views = data.result.views;
-        const Likes = data.result.likes;
-        const Published = data.result.published;
-        caption = `🌳TITLE: ${Title}\n👀VIEWS: ${Views}\n👍LIKES: ${Likes}\n🙌PUBLISHED: ${Published}`;
-        vorterx.sendMessage(m.from, `${caption}`);
-      } else {}
-    } catch (error) {
-      console.error('An error occurred:', error);
-      m.reply('An error occurred while processing the TikTok video');
+
+    const url = args[0];
+    const result = await tiktokdl(url);
+
+    if (result.success) {
+      await connect('✅');
+      const { title, quality, download } = result;
+      const msg = `Title: ${title}\nQuality: ${quality}`;
+
+      await vorterx.sendMessage(m.from, {
+        video: {
+          url: download,
+          mimetype: 'video/mp4',
+          filename: 'tiktok_video.mp4',
+        },
+        caption: msg,
+      });
+    } else {
+      await connect('❌');
+      m.reply('Failed to download the TikTok video.');
     }
-  }
+  },
 };
