@@ -5,16 +5,15 @@ module.exports = {
   category: 'GPT AI',
   description: 'Search or ask anything using bard',
   async client(vorterx, m, { args, mime, quoted, text, connect }) {
+  
     if (!args[0]) {
       await connect('❌');
       return m.reply('_Please provide a search term._');
     }
-
-    const text = args[0];
-    console.log("Text:", text);
+    console.log("Text:", args[0]);
 
     try {
-      const response = await axios.get(`https://api.guruapi.tech/api/bard?${encodeURIComponent(text)}`);
+      const response = await axios.get(`https://api.guruapi.tech/api/bard?${encodeURIComponent(args[0])}`);
       
       if (response && response.data) {
         const result = response.data;
