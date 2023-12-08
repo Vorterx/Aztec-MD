@@ -22,7 +22,7 @@ module.exports = {
         const firstVideo = videos[0];
 
         // Check if the video has a valid URL
-        if (firstVideo.url) {
+        if (firstVideo.url && typeof firstVideo.url === 'string') {
           const audioStream = await ytdl(firstVideo.url, { filter: 'audioonly' });
 
           await connect('✅');
