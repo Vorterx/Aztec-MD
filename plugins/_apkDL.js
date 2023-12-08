@@ -1,15 +1,15 @@
-module.eports = {
+module.exports = {
   name: 'img',
   category: 'Downloads',
   async client(vorterx, m, { args }) {
     const gis = require('g-i-s');
 
     try {
-      if (!args || typeof args !== 'string') {
+      if (!args || !Array.isArray(args) || args.length === 0) {
         return m.reply('Please provide an image name.');
       }
 
-      const query = String(args).trim();
+      const query = args.join(' ').trim();
       const images = await gis(query, { max: 10 });
 
       if (images.length === 0) {
