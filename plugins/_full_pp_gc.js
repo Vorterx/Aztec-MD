@@ -8,8 +8,8 @@ const axios = require('axios');
 const streamPipeline = promisify(pipeline);
 
 function vorterx_react(emojis) {
-const Index = Math.floor(Math.random() * emojis.length);
-return emojis[Index];
+  const Index = Math.floor(Math.random() * emojis.length);
+  return emojis[Index];
 }
 
 module.exports = {
@@ -19,27 +19,28 @@ module.exports = {
   category: 'Downloads',
   async client(vorterx, m, { connect, text }) {
     if (!text) {
-     await connect('❌');
-     return m.reply('Please provide the name of a song.');
+      await connect('❌');
+      return m.reply('Please provide the name of a song.');
     }
 
     try {
       const query = encodeURIComponent(text);
       const response = await axios.get(`https://gurubot.com/ytsearch?text=${query}`);
-      const final = response.data.results[0];
-      if (!final) {
-      await connect('❌');
-       m.reply('Could not proceed, sorry');
-      return;
+      const results = response.data.results;
+      if (!results || results.length === 0) {
+        await connect('❌');
+        m.reply('Could not proceed, sorry');
+        return;
       }
 
+      const final = results[0];
       const { title, thumbnail, duration, views, uploaded, url } = final;
       const replyMessage = `Downloading your '${title}'... ⏳`;
       await vorterx.sendMessage(m.from, replyMessage, { quoted: m });
 
       const audioStream = ytdl(url, {
-       filter: 'audioonly',
-       quality: 'highestaudio',
+        filter: 'audioonly',
+        quality: 'highestaudio',
       });
 
       const { path: tmpDir } = await tmp.dir();
@@ -48,7 +49,7 @@ module.exports = {
 
       const doc = {
         audio: {
-        url: `${tmpDir}/${title}.mp3`,
+          url: `${tmpDir}/${title}.mp3`,
         },
         mimetype: 'audio/mpeg',
         ptt: false,
@@ -63,8 +64,9 @@ module.exports = {
             body: 'SONG DOWNLOADED',
             sourceUrl: url,
             thumbnail: thumbnail,
-          }, },
-        };
+          },
+        },
+      };
 
       await vorterx.sendMessage(m.from, doc, { quoted: m });
       const emojis = ['🎵', '🎶', '🎧', '🎼', '🎤'];
@@ -73,9 +75,12 @@ module.exports = {
       await connect(aztec_react);
 
       fs.unlink(`${tmpDir}/${title}.mp3`, (err) => {
-      if (err) {} 
-      else {}
+        if (err) {
+          console.error(err);
+        }
       });
-      } catch (error) {
+    } catch (error) {
       console.error(error);
-     }},};
+    }
+  },
+};
