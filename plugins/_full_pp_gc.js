@@ -17,7 +17,7 @@ module.exports = {
   alias: ['play', 'audio'],
   description: 'To download random music',
   category: 'Downloads',
-  async xstart(vorterx, m, { connect, text, doReply }) {
+  async client(vorterx, m, { connect, text }) {
     if (!text) {
      await connect('❌');
      return m.reply('Please provide the name of a song.');
