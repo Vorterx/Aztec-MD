@@ -1,26 +1,31 @@
-const axios = require('axios');
-
 module.exports = {
-  name: 'apk',
+  name: 'img',
   category: 'Downloads',
-  description: 'Download and send any APK you desire',
   async client(vorterx, m, { args }) {
     
-    if (!args[0]) {
-      return m.reply('Please provide an app ID to download.');
-    }
+    const gis = require('g-i-s');
+
     try {
-      const apps = `https://vihangayt.me/download/apk?id=${args[0]}`;
-      const res = await axios.get(apps, { responseType: 'arraybuffer' });
-      const apkBuffer = res.data;
-      vorterx.sendMessage(m.from, apkBuffer, { sendMediaAsDocument: true, mimetype: 'application/vnd.android.package-archive', filename: `${args[0]}.apk` })
-        .catch((error) => {
-          console.error(error);
-          m.reply('Failed to send APK.');
-        });
-    } catch (error) {
+      if (!args || typeof args !== 'string') {
+        return m.reply('Please provide an image name.');
+      }
+
+      const query = args.trim();
+      const images = await gis(query, { max: 10 });
+
+      if (images.length === 0) {
+        m.reply('No images found for the given query.');
+      }
+      await m.reply(`Downloading 10 images for ${query}`);
+
+      for (let i = 0; i < 10; i++) {
+        const item = images[i];
+        const imageUrl = item.url;
+        await vorterx.sendMessage(imageUrl, {}, 'image');
+      }
+ } catch (error) {
       console.error(error);
-      m.reply('Failed to download APK.');
+      m.reply('An error occurred while processing the request.');
     }
   },
 };
