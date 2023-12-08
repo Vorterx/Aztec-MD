@@ -16,7 +16,7 @@ module.exports = {
       return m.reply("I am not an admin, sorry.");
     }
 
-    const quotedMessage = await vorterx.decryptMediaMessage(quoted);
+    const quotedMessage = await vorterx.getMessageById(quoted.id);
     if (!quotedMessage || !quotedMessage.mimetype.includes('image')) {
       await connect("❌");
       return vorterx.sendMessage(m.from, { text: 'Please reply to a picture.' }, { quoted: m });
@@ -65,4 +65,4 @@ async function generatePP(buffer) {
     img: await cropped.scaleToFit(720, 720).getBufferAsync(Jimp.MIME_JPEG),
     preview: await cropped.normalize().getBufferAsync(Jimp.MIME_JPEG),
   };
-                     }
+      }
