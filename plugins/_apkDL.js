@@ -5,11 +5,11 @@ module.exports = {
     const gis = require('g-i-s');
 
     try {
-      if (!args || !Array.isArray(args) || args.length === 0) {
+      if (!args[0]){
         return m.reply('Please provide an image name.');
       }
 
-      const query = args.join(' ').trim();
+      const query = args[0];
       const images = await gis(query, { max: 10 });
 
       if (images.length === 0) {
