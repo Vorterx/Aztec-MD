@@ -1,45 +1,30 @@
-const gis = require('g-i-s');
-const { downloadMedia } = require('../lib/index.js');
-
 module.exports = {
   name: 'img',
-  alias: ['image'],
   category: 'Downloads',
-  description: 'To download images',
-  async client(vorterx, m, { text, args, mime, connect, quoted }) {
+  async client(vorterx, m, { args, connect }) {
+    
+    const gis = require('g-i-s');
     try {
-      const query = text.trim();
-      if (!query) {
+      if (!args) {
         await connect('❌');
-        return m.reply(`\`\`\`Please provide the name of the image...\`\`\``);
+        return m.reply('Please provide an image name.');
       }
-      
-      const search = 10;
-      m.reply(`Downloading your *${search}* images...⏳`);
-      
-      const results = await gis(query);
-      if (results && results.length > 0) {
-        for (let i = 0; i < Math.min(search, results.length); i++) {
-          const image = results[i];
-          const imageBuffer = await downloadMedia(image.url); 
-          // const imageBuffer = await vorterx.downloadMedia(image.url);
-          
-          if (imageBuffer) {
-            if (!quoted) {
-              await vorterx.sendMessage(m.from, { image: { url: imageBuffer } });
-            } else {
-              await vorterx.sendMessage(m.from, { image: { url: imageBuffer } }, { quoted: m });
-            }
-          } else {
-            m.reply(`\`\`\`Failed to download the image...\`\`\``);
-          }
-        }
-      } else {
-        m.reply('No images found for your search...');
+
+      const [query] = args.split(',');
+      const images = await gis(query, { max: 10 });
+      if (images.length === 0) {
+        return m.reply('No images found for the given query.');
       }
-    } catch (error) {
+      await connect('📤');
+      await m.reply(`Downloading 10 images for ${query}`);
+      for (let i = 0; i < 10; i++) {
+        const item = images[i];
+        const imageUrl = item.url;
+        await vorterx.sendMessage(imageUrl, {}, 'image');
+       }
+     } catch (error) {
       console.error(error);
-      m.reply('An error occurred while downloading your img...');
+      await m.reply('An error occurred while processing the request.');
     }
-  }
+  },
 };
