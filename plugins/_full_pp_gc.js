@@ -1,4 +1,5 @@
-const ytdl = require('sigma-md-ytdl');
+const ytdl = require('ytdl-core-discord');
+const search = require('yt-search');
 
 module.exports = {
   name: 'song',
@@ -11,14 +12,17 @@ module.exports = {
 
     try {
       await connect('🎵');
-      const videoInfo = await ytdl.getInfo(args.join(' '));
-      const audioFormat = ytdl.chooseFormat(videoInfo.formats, { quality: 'highestaudio' });
 
-      
-      const songBuffer = await ytdl.downloadFromInfo(videoInfo, audioFormat);
+      // Use yt-search to search for the song
+      const songName = args.join(' ');
+      const { videos } = await search(songName);
+      const firstVideo = videos[0];
+
+      // Use ytdl-core-discord to download the song
+      const audioStream = await ytdl(firstVideo.url, { filter: 'audioonly' });
 
       await connect('✅');
-      vorterx.sendMessage(m.from, { audio: songBuffer }, { mimetype: 'audio/mp3', quoted: m });
+      vorterx.sendMessage(m.from, { audio: audioStream }, { mimetype: 'audio/mp3', quoted: m });
     } catch (error) {
       await connect('❌');
       vorterx.sendMessage(m.from, { text: `An error occurred: ${error.message}` }, { quoted: m });
