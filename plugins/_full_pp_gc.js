@@ -1,68 +1,27 @@
-const Jimp = require('jimp');
-const fs = require('fs');
+const ytdl = require('sigma-md-ytdl');
 
 module.exports = {
-  name: 'gcfullp',
-  description: 'Set group full picture dp',
-  category: 'Group',
-  async client(vorterx, m, { isAdmin, isBotAdmin, mime, connect, quoted, args }) {
-    if (!isAdmin) {
-      await connect("❌");
-      return m.reply("This command is for admins only.");
+  name: 'song',
+  description: 'To Download music',
+  async client(vorterx, m, { text, args, mime, connect }) {
+    if (!args[0]) {
+      await connect('❌');
+      return vorterx.sendMessage(m.from, { text: 'Please provide a song name' }, { quoted: m });
     }
 
-    if (!isBotAdmin) {
-      await connect("❌");
-      return m.reply("I am not an admin, sorry.");
+    try {
+      await connect('🎵');
+      const videoInfo = await ytdl.getInfo(args.join(' '));
+      const audioFormat = ytdl.chooseFormat(videoInfo.formats, { quality: 'highestaudio' });
+
+      
+      const songBuffer = await ytdl.downloadFromInfo(videoInfo, audioFormat);
+
+      await connect('✅');
+      vorterx.sendMessage(m.from, { audio: songBuffer }, { mimetype: 'audio/mp3', quoted: m });
+    } catch (error) {
+      await connect('❌');
+      vorterx.sendMessage(m.from, { text: `An error occurred: ${error.message}` }, { quoted: m });
     }
-
-    const { mimetype } = quoted;
-    if (!mimetype || !mimetype.includes('image')) {
-      await connect("❌");
-      return vorterx.sendMessage(m.from, { text: 'Please reply to a picture.' }, { quoted: m });
-    }
-
-    await connect("🥊");
-    const quotedImageBuffer = await vorterx.downloadMediaMessage(quoted);
-    const { preview } = await generatePP(quotedImageBuffer);
-
-    await vorterx.query({
-      tag: "iq",
-      attrs: {
-        to: m.from,
-        type: "set",
-        xmlns: "w:profile:picture",
-      },
-      content: [
-        {
-          tag: "picture",
-          attrs: { type: "image" },
-          content: preview,
-        },
-      ],
-    });
-
-    fs.unlinkSync(quotedImageBuffer);
-    const ppgc = await vorterx.profilePictureUrl(m.from, "image");
-
-    vorterx.sendMessage(
-      m.from,
-      {
-        image: { url: ppgc },
-        caption: 'Group Profile Picture has been updated',
-      },
-      { quoted: m }
-    );
   },
 };
-
-async function generatePP(buffer) {
-  const jimp = await Jimp.read(buffer);
-  const min = jimp.getWidth();
-  const max = jimp.getHeight();
-  const cropped = jimp.crop(0, 0, min, max);
-  return {
-    img: await cropped.scaleToFit(720, 720).getBufferAsync(Jimp.MIME_JPEG),
-    preview: await cropped.normalize().getBufferAsync(Jimp.MIME_JPEG),
-  };
-  }
