@@ -9,7 +9,7 @@ module.exports = {
     
     if (!text) {
       await connect('❌');
-      return m.reply('Example: tr Damn l love this Diegoson eish');
+      return m.reply('Example: tr zu Damn l love this Diegoson eish');
     }
 
     let lang;
@@ -26,7 +26,7 @@ module.exports = {
     try {
       await connect('📝');
       const result = await translate(data, { to: lang });
-      const caption = `*📝Text*: ${data}\n*🧘Translated*: ${result.text}`;
+      const caption = `*📝TEXT*: ${data}\n\n*🧘 TRANSLATED*: ${result.text}`;
       await m.reply(caption);
     } catch (error) {
       let errorMessage = 'An error occurred while translating';
