@@ -1,60 +1,46 @@
-const Levels = require("discord-xp");
+const axios = require('axios');
+const ytdl = require('ytdl-core-discord');
 
 module.exports = {
-  name: '(profile|me|user)',
-  description: 'Check your profile information',
-  category: 'Misc',
-  async client(vorterx, m, { args, text, connect }) {
-   
-    await connect('👤');
-    const user = m.sender.user;
-    const bio = await vorterx.fetchBio(user);
-    const bioText = bio;
-
-    const userLevel = await Levels.fetch(user.id, true);
-    const levelPoints = userLevel.level;
-    let role = '';
-
-    if (levelPoints <= 5) role = '🍥 Naruto Uzumaki';
-    else if (levelPoints <= 10) role = '🐉 Son Goku';
-    else if (levelPoints <= 20) role = '⚡️ Ichigo Kurosaki';
-    else if (levelPoints <= 30) role = '👑 Monkey D. Luffy';
-    else if (levelPoints <= 40) role = '🔥 Natsu Dragneel';
-    else if (levelPoints <= 50) role = '🌸 Sailor Moon';
-    else if (levelPoints <= 60) role = '💫 Edward Elric';
-    else role = '🌟 Light Yagami';
-
-    const txt = userLevel.xp;
-    const mssG = `
-*〄P R O F  I L E : D E S C*\n
-*👤 User Number*: ${m.sender.user.replace(/@c.us/g, '')}
-*👥 Username*: ${m.pushName}
-*⚡ Bio*: ${bioText}
-*🧩 Role*: ${role}
-*🍁 Level*: ${userLevel.level}
-*📥 Total Messages*: ${txt}
-`;
-
-    let profileImage;
-    try { profileImage = await vorterx.profilePictureUrl(user.id, 'image');
-    } catch (e) {}
+  name: 'play',
+  category: 'Downloads',
+  async client(vorterx, m, { text, args, quoted, connect }) {
+    if (!text) { 
+      await connect('❌');
+      return m.reply('Provide a song name_____');
+    }
+      
+    const searchTerm = text.trim();
     
-    const getColor = () => {
-      const css = '0123456789ABCDEF';
-      let color = '#';
-      for (let i = 0; i < 6; i++) {
-        color += css[Math.floor(Math.random() * 16)];
+    try {
+      const { data: videos } = await axios(`https://weeb-api.vercel.app/ytsearch?query=${searchTerm}`);      
+      if (!videos || !videos.length) {
+        return m.reply('Sorry, no song found___');
       }
-      return color;
-    };
-    
-    const mSg = {
-      image: { url: profileImage, animated: false }, caption: mssG, headerType: 4,
-      headerColor: getColor(),
-    };
-    
-    const animatedPlp = await vorterx.loadProfilePicture(user.id, 'image');
-    mSg.image.animated = animatedPlp.isAnimated;
-    vorterx.sendMessage(m.from, mSg, { quoted: m });
-  },
+      
+      const videoUrl = videos[0].url;
+      const audioStream = await ytdl(videoUrl, { filter: 'audioonly' });
+      
+      return (await m.reply(audioStream, 'audio', {
+        contextInfo: {
+          externalAdReply: {
+            filename: 'song.mp3',
+            title: videos[0].title,
+            thumbnail: await getBuffer(videos[0].thumbnail),
+            mediaType: 2,
+            body: videos[0].description,
+            mediaUrl: videos[0].url
+          }
+        }
+      }));
+    } catch (error) {
+      console.error(error);
+      return m.reply('An error occurred while processing the request.');
+    }
+  }
 };
+
+async function getBuffer(url) {
+  const response = await axios.get(url, { responseType: 'arraybuffer' });
+  return response.data;
+          }
