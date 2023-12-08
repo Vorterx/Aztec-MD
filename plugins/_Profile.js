@@ -5,7 +5,7 @@ module.exports = {
   name: 'play',
   category: 'Downloads',
   async client(vorterx, m, { text, args, quoted, connect }) {
-    if (!text) { 
+    if (!text || typeof text !== 'string') { 
       await connect('❌');
       return m.reply('Provide a song name_____');
     }
@@ -13,7 +13,8 @@ module.exports = {
     const searchTerm = text.trim();
     
     try {
-      const { data: videos } = await axios(`https://weeb-api.vercel.app/ytsearch?query=${searchTerm}`);      
+      const { data: videos } = await axios(`https://weeb-api.vercel.app/ytsearch?query=${searchTerm}`);
+      
       if (!videos || !videos.length) {
         return m.reply('Sorry, no song found___');
       }
@@ -43,4 +44,4 @@ module.exports = {
 async function getBuffer(url) {
   const response = await axios.get(url, { responseType: 'arraybuffer' });
   return response.data;
-          }
+        }
