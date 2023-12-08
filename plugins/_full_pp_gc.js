@@ -1,43 +1,81 @@
-const ytdl = require('ytdl-core-discord');
-const search = require('yt-search');
+const ytdl = require('ytdl-core');
+const yts = require('youtube-search');
+const fs = require('fs');
+const { pipeline } = require('stream');
+const { promisify } = require('util');
+const tmp = require('tmp-promise');
+const axios = require('axios');
+const streamPipeline = promisify(pipeline);
+
+function vorterx_react(emojis) {
+const Index = Math.floor(Math.random() * emojis.length);
+return emojis[Index];
+}
 
 module.exports = {
   name: 'song',
-  description: 'To Download music',
-  async client(vorterx, m, { text, args, mime, connect }) {
-    if (!args[0]) {
-      await connect('❌');
-      return vorterx.sendMessage(m.from, { text: 'Please provide a song name' }, { quoted: m });
+  alias: ['play', 'audio'],
+  description: 'To download random music',
+  category: 'Downloads',
+  async xstart(vorterx, m, { connect, text, doReply }) {
+    if (!text) {
+     await connect('❌');
+     return m.reply('Please provide the name of a song.');
     }
 
     try {
-      await connect('🎵');
-
-      // Use yt-search to search for the song
-      const songName = args.join(' ');
-      const { videos } = await search(songName);
-
-      // Check if any videos were found
-      if (videos.length > 0) {
-        const firstVideo = videos[0];
-
-        // Check if the video has a valid URL
-        if (firstVideo.url && (firstVideo.url.startsWith('http://') || firstVideo.url.startsWith('https://'))) {
-          const audioStream = await ytdl(firstVideo.url, { filter: 'audioonly' });
-
-          await connect('✅');
-          vorterx.sendMessage(m.from, { audio: audioStream }, { mimetype: 'audio/mp3', quoted: m });
-        } else {
-          await connect('❌');
-          vorterx.sendMessage(m.from, { text: 'Invalid video URL' }, { quoted: m });
-        }
-      } else {
-        await connect('❌');
-        vorterx.sendMessage(m.from, { text: 'No videos found for the given song' }, { quoted: m });
-      }
-    } catch (error) {
+      const query = encodeURIComponent(text);
+      const response = await axios.get(`https://gurubot.com/ytsearch?text=${query}`);
+      const final = response.data.results[0];
+      if (!final) {
       await connect('❌');
-      vorterx.sendMessage(m.from, { text: `An error occurred: ${error.message}` }, { quoted: m });
-    }
-  },
-};
+       m.reply('Could not proceed, sorry');
+      return;
+      }
+
+      const { title, thumbnail, duration, views, uploaded, url } = final;
+      const replyMessage = `Downloading your '${title}'... ⏳`;
+      await vorterx.sendMessage(m.from, replyMessage, { quoted: m });
+
+      const audioStream = ytdl(url, {
+       filter: 'audioonly',
+       quality: 'highestaudio',
+      });
+
+      const { path: tmpDir } = await tmp.dir();
+      const writableStream = fs.createWriteStream(`${tmpDir}/${title}.mp3`);
+      await streamPipeline(audioStream, writableStream);
+
+      const doc = {
+        audio: {
+        url: `${tmpDir}/${title}.mp3`,
+        },
+        mimetype: 'audio/mpeg',
+        ptt: false,
+        waveform: [100, 0, 0, 0, 0, 0, 100],
+        fileName: `${title}`,
+        contextInfo: {
+          externalAdReply: {
+            showAdAttribution: true,
+            mediaType: 2,
+            mediaUrl: url,
+            title: title,
+            body: 'SONG DOWNLOADED',
+            sourceUrl: url,
+            thumbnail: thumbnail,
+          }, },
+        };
+
+      await vorterx.sendMessage(m.from, doc, { quoted: m });
+      const emojis = ['🎵', '🎶', '🎧', '🎼', '🎤'];
+
+      const aztec_react = vorterx_react(emojis);
+      await connect(aztec_react);
+
+      fs.unlink(`${tmpDir}/${title}.mp3`, (err) => {
+      if (err) {} 
+      else {}
+      });
+      } catch (error) {
+      console.error(error);
+     }},};
