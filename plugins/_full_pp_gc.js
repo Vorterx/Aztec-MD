@@ -19,13 +19,18 @@ module.exports = {
 
       // Check if any videos were found
       if (videos.length > 0) {
-
-        // Use ytdl-core-discord to download the first video as audio
         const firstVideo = videos[0];
-        const audioStream = await ytdl(firstVideo.url, { filter: 'audioonly' });
 
-        await connect('✅');
-        vorterx.sendMessage(m.from, { audio: audioStream }, { mimetype: 'audio/mp3', quoted: m });
+        // Check if the video has a valid URL
+        if (firstVideo.url) {
+          const audioStream = await ytdl(firstVideo.url, { filter: 'audioonly' });
+
+          await connect('✅');
+          vorterx.sendMessage(m.from, { audio: audioStream }, { mimetype: 'audio/mp3', quoted: m });
+        } else {
+          await connect('❌');
+          vorterx.sendMessage(m.from, { text: 'Invalid video URL' }, { quoted: m });
+        }
       } else {
         await connect('❌');
         vorterx.sendMessage(m.from, { text: 'No videos found for the given song' }, { quoted: m });
