@@ -1,47 +1,26 @@
-const config = require('../config.js');
-const { getJson } = require('../lib/_scrapers.js');
+const axios = require('axios');
 
 module.exports = {
   name: 'apk',
-  alias: ['app', 'getpack'],
-  description: 'Download applications from Aptoid',
   category: 'Downloads',
-  async client(vorterx, m, { text, args, connect, quoted }) {
-    if (!text) {
-      await connect('❌');
-      return m.reply('*Please provide the name of the application.*');
+  description: 'Download and send any APK you desire',
+  async client(vorterx, m, { args }) {
+    
+    if (!args[0]) {
+      return m.reply('Please provide an app ID to download.');
     }
-
     try {
-      const searchResult = await getJson(`${config.BASE_URL}api/apk/search?query=${encodeURIComponent(text)}`);
-      if (!searchResult || !searchResult.status || !searchResult.result || searchResult.result.length === 0) {
-        await connect('❌');
-        return m.reply('*No results found for the application you searched.*');
-      }
-
-      const app = searchResult.result[0];
-      const downloadResult = await getJson(`${config.BASE_URL}api/apk/download?query=${encodeURIComponent(app.name)}`);
-      if (!downloadResult || !downloadResult.status || !downloadResult.result) {
-        await connect('❌');
-        return m.reply('*Error occurred while downloading the application.*');
-      }
-
-      await connect('📤');
-      m.reply(`*Downloading ${app.name}...*`);
-      await vorterx.sendMessage(m.from, `*Downloading ${app.name}*\n\n*Developer*: ${downloadResult.result.dev}`);
-      await vorterx.sendMessage(m.from, {
-        document: {
-          url: downloadResult.result.link,
-          mimetype: `application/vnd.android.package-archive`,
-          fileName: app.name + '.apk'
-        },
-        quoted: m
-      });
-
+      const apps = `https://vihangayt.me/download/apk?id=${args[0]}`;
+      const res = await axios.get(apps, { responseType: 'arraybuffer' });
+      const apkBuffer = res.data;
+      vorterx.sendMessage(m.from, apkBuffer, { sendMediaAsDocument: true, mimetype: 'application/vnd.android.package-archive', filename: `${args[0]}.apk` })
+        .catch((error) => {
+          console.error(error);
+          m.reply('Failed to send APK.');
+        });
     } catch (error) {
       console.error(error);
-      await connect('❌');
-      return m.reply(`*Error occurred while processing your request.*\n\n${error.message}`);
+      m.reply('Failed to download APK.');
     }
   },
 };
