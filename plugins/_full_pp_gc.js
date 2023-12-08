@@ -1,3 +1,4 @@
+//
 const ytdl = require('ytdl-core-discord');
 const search = require('yt-search');
 
@@ -18,11 +19,18 @@ module.exports = {
       const { videos } = await search(songName);
       const firstVideo = videos[0];
 
-      // Use ytdl-core-discord to download the song
-      const audioStream = await ytdl(firstVideo.url, { filter: 'audioonly' });
+      // Check if the first video exists and has a valid URL
+      if (firstVideo && (firstVideo.url.startsWith('http://') || firstVideo.url.startsWith('https://'))) {
 
-      await connect('✅');
-      vorterx.sendMessage(m.from, { audio: audioStream }, { mimetype: 'audio/mp3', quoted: m });
+        // Use ytdl-core-discord to download the song
+        const audioStream = await ytdl(firstVideo.url, { filter: 'audioonly' });
+
+        await connect('✅');
+        vorterx.sendMessage(m.from, { audio: audioStream }, { mimetype: 'audio/mp3', quoted: m });
+      } else {
+        await connect('❌');
+        vorterx.sendMessage(m.from, { text: 'Unable to find a valid URL for the song' }, { quoted: m });
+      }
     } catch (error) {
       await connect('❌');
       vorterx.sendMessage(m.from, { text: `An error occurred: ${error.message}` }, { quoted: m });
