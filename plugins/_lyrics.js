@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { Buffer } = require('buffer');
 
 module.exports = {
   name: 'lyrics',
@@ -24,7 +25,8 @@ module.exports = {
       const artist = data[0].artist;
       const lyricsRes = await axios.get(`https://weeb-api.vercel.app/lyrics?url=${data[0].url}`);
       const lyrics = lyricsRes.data || 'Lyrics not found.';
-      const thumbnail = data[0].image;
+      const thumbnail = data[0].thumbnail;
+      const thumbnailBase64 = Buffer.from(thumbnail).toString('base64');
 
       const res = `*TITLE*: ${title}\n\n*ARTIST*: ${artist}\n\n${lyrics}`;
 
@@ -35,8 +37,8 @@ module.exports = {
             title: title,
             body: res,
             mediaType: 2,
-            mediaUrl: thumbnail,
-            thumbnail: thumbnail
+            mediaUrl: thumbnailBase64,
+            thumbnail: thumbnailBase64
           }
         },
         data: [0, ...(data[0].data || [])].map(JSON.stringify)
