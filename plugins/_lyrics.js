@@ -6,13 +6,13 @@ module.exports = {
   async client(vorterx, m, { text, args, connect }) {
    
     try {
-      if (!text || typeof text !== 'string') {
+      if (!m.text || typeof m.text !== 'string') {
         await connect('❌');
         return m.reply('Please provide a song name or artist.');
       }
 
-      const search = encodeURIComponent(text.trim());
-      const { data } = await axios(`https://weeb-api.vercel.app/genius?query=${search}`);
+      const search = encodeURIComponent(m.text.trim());
+      const { data } = await axios.get(`https://weeb-api.vercel.app/genius?query=${search}`);
 
       if (!data || data.error) {
         m.reply('Lyrics not found for the given song or artist.');
@@ -20,7 +20,7 @@ module.exports = {
 
       const title = data.title;
       const artist = data.artist;
-      const lyrics =  await axios(`https://weeb-api.vercel.app/lyrics?url=${data.url}`);
+      const lyrics =  await axios.get(`https://weeb-api.vercel.app/lyrics?url=${data.url}`);
 
       const res = `*Title*: ${title}\n*Artist*: ${artist}\n\n${lyrics.data}`;
 
