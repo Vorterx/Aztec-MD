@@ -1,34 +1,26 @@
-//.
 const axios = require('axios');
 
 module.exports = {
   name: 'lyrics',
   category: 'Search',
   async client(vorterx, m, { text, args, connect }) {
+    if (!args[0]) {
+      await connect('❌');
+      return m.reply('Please provide a song name or artist.');
+    }
+
     try {
-      if (text === undefined || typeof text !== 'string') {
-        await connect('❌');
-        return m.reply('Please provide a song name or artist.');
-      }
-
-      const search = encodeURIComponent(text.trim());
+      const search = args[0].trim();
       const { data } = await axios.get(`https://weeb-api.vercel.app/genius?query=${search}`);
-
       if (!data || data.error) {
         return m.reply('Lyrics not found for the given song or artist.');
       }
-
-      const title = data.title || 'Unknown Title';
-      const artist = data.artist || 'Unknown Artist';
       const { data: lyricsData } = await axios.get(`https://weeb-api.vercel.app/lyrics?url=${data.url}`);
-
-      const res = `*Title*: ${title}\n*Artist*: ${artist}\n\n${lyricsData}`;
-
-      return vorterx.sendMessage(m.from, res, {
+      return vorterx.sendMessage(m.from, {
         contextInfo: {
           externalAdReply: {
-            title: title,
-            body: res,
+            title: 'hello',
+            body: lyricsData,
             mediaType: 2,
             mediaUrl: data.thumbnail
           }
