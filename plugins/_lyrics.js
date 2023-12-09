@@ -6,12 +6,12 @@ module.exports = {
   async client(vorterx, m, { text, args, connect }) {
    
     try {
-      if (!m.text || typeof m.text !== 'string') {
+      if (!text || typeof text !== 'string') {
         await connect('❌');
         return m.reply('Please provide a song name or artist.');
       }
 
-      const search = encodeURIComponent(m.text.trim());
+      const search = encodeURIComponent(text.trim());
       const { data } = await axios.get(`https://weeb-api.vercel.app/genius?query=${search}`);
 
       if (!data || data.error) {
@@ -24,7 +24,7 @@ module.exports = {
 
       const res = `*Title*: ${title}\n*Artist*: ${artist}\n\n${lyrics.data}`;
 
-      return vorterx.sendMessage(m.from, {text: res,
+      return vorterx.sendMessage(m.from, text: res, {
         contextInfo: {
           externalAdReply: {
             title: title,
