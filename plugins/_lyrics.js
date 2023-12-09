@@ -21,14 +21,13 @@ module.exports = {
           externalAdReply: {
             title: 'hello',
             body: lyricsData,
-            mediaType: 2,
-            mediaUrl: data.thumbnail
-          }
-        }
+            mediaType: 0,
+          },
+        },
       });
     } catch (error) {
       console.error(error);
       return m.reply('An error occurred while fetching the lyrics.');
     }
-  }
+  },
 };
