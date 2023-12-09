@@ -1,7 +1,7 @@
 const config = require('../config');
 
 module.exports = {
-  name: '(admod|setsudo)',
+  name: 'setsudo',
   category: 'Owner',
   description: 'To add the user as a mod to the bot',
   async client(vorterx, m, { text, args, quoted, mentionByTag, connect }) {
