@@ -49,3 +49,8 @@ module.exports = {
     }
   }
 };
+
+async function getBuffer(url) {
+  const response = await axios.get(url, { responseType: 'arraybuffer' });
+  return response.data;
+}
