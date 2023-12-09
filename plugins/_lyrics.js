@@ -4,11 +4,10 @@ module.exports = {
   name: 'lyrics',
   category: 'Search',
   async client(vorterx, m, { text, args, connect }) {
-    
     try {
       if (!text || typeof text !== 'string') {
         await connect('❌');
-        return m.reply(`\`\`\`Please provide a song name or artist.e.g Dior by pop smoke...⏳\`\`\``);
+        return m.reply(`Please provide a song name or artist. For example, "Dior by Pop Smoke"`);
       }
 
       const search = encodeURIComponent(text.trim());
@@ -23,14 +22,9 @@ module.exports = {
 
       const title = data[0].title;
       const artist = data[0].artist;
-      const lyricsUrl = data[0].url;
-
-      if (!lyricsUrl || typeof lyricsUrl !== 'string') {
-        return m.reply('Invalid lyrics URL.');
-      }
-
-      const lyricsRes = await axios.get(`https://weeb-api.vercel.app/lyrics?url=${lyricsUrl}`);
+      const lyricsRes = await axios.get(`https://weeb-api.vercel.app/lyrics?url=${data[0].url}`);
       const lyrics = lyricsRes.data || 'Lyrics not found.';
+      const thumbnail = data[0].image;
 
       const res = `*TITLE*: ${title}\n\n*ARTIST*: ${artist}\n\n${lyrics}`;
 
@@ -41,8 +35,8 @@ module.exports = {
             title: title,
             body: res,
             mediaType: 2,
-            mediaUrl: data[0].thumbnail,
-            thumbnail: await getBuffer(data[0].thumbnail)
+            mediaUrl: thumbnail,
+            thumbnail: thumbnail
           }
         },
         data: [0, ...(data[0].data || [])].map(JSON.stringify)
@@ -55,8 +49,3 @@ module.exports = {
     }
   }
 };
-
-async function getBuffer(url) {
-  const response = await axios.get(url, { responseType: 'arraybuffer' });
-  return response.data;
-    }
