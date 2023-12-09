@@ -1,3 +1,4 @@
+//.
 const axios = require('axios');
 
 module.exports = {
@@ -5,7 +6,7 @@ module.exports = {
   category: 'Search',
   async client(vorterx, m, { text, args, connect }) {
     try {
-      if (!text || typeof text !== 'string') {
+      if (text === undefined || typeof text !== 'string') {
         await connect('❌');
         return m.reply('Please provide a song name or artist.');
       }
