@@ -2,8 +2,9 @@ module.exports = {
 	name: "eval",
 	alias: ["ev", ">", "e"],
 	category: "Owner",
+	owner: true,
 	async client(vorterx,m,{ args }) {
-		
+
     let code = args.join(" ");
 		let text = "";
 		try {
