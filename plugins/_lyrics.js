@@ -26,7 +26,7 @@ module.exports = {
       const lyricsRes = await axios.get(`https://weeb-api.vercel.app/lyrics?url=${data[0].url}`);
       const lyrics = lyricsRes.data || 'Lyrics not found.';
       const thumbnail = data[0].thumbnail;
-      const thumbnailBase64 = Buffer.from(thumbnail).toString('base64');
+      const thumbnailBase64 = thumbnail ? Buffer.from(thumbnail).toString('base64') : '';
 
       const res = `*TITLE*: ${title}\n\n*ARTIST*: ${artist}\n\n${lyrics}`;
 
