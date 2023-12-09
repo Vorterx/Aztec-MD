@@ -5,6 +5,7 @@ module.exports = {
   name: 'lyrics',
   category: 'Search',
   async client(vorterx, m, { text, args, connect }) {
+  
     try {
       if (!text || typeof text !== 'string') {
         await connect('❌');
