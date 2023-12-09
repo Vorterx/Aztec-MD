@@ -16,7 +16,7 @@ module.exports = {
         return m.reply('Lyrics not found for the given song or artist.');
       }
       const { data: lyricsData } = await axios.get(`https://weeb-api.vercel.app/lyrics?url=${data.url}`);
-      return vorterx.sendMessage(m.from, lyricsData);
+      return m.reply(lyricsData);
     } catch (error) {
       console.error(error);
       return m.reply('An error occurred while fetching the lyrics.');
