@@ -2,34 +2,41 @@ const axios = require('axios');
 
 module.exports = {
   name: 'lyrics',
-  description: 'To get the lyrics for your music',
-  category: 'Search',
+ category: 'Search',
   async client(vorterx, m, { text, args, connect }) {
+    
     if (!text) {
       await connect('❌');
-      return m.reply('Please provide a song name');
+      return m.reply('Please provide a song name or artist.');
     }
-
-    const apiUrl = `https://api.neoxr.eu/api/lyric?q=${encodeURIComponent(text)}&apikey=AlMiT7`;
-
+    
     try {
-      await connect('🍏');
-      const response = await axios.get(apiUrl);
-      const data = response.data;
-
-      if (response.status === 200) {
-        const lyrics = data.lyrics;
-        const thumbnail = data.thumbnail;
-
-        const sendLyrics = `Lyrics for "${text}":\n\n${lyrics}`;
-        vorterx.sendMessage(m.from, { image: { url: thumbnail, caption: sendLyrics } });
-      } else {
-        const errorMessage = data.message || 'Unknown error occurred';
-        vorterx.sendMessage(m.from, `Failed to get lyrics: ${errorMessage}`, 'text');
+      const search = encodeURIComponent(text.trim());
+      const { data } = await axios(`https://weeb-api.vercel.app/genius?query=${search}`);
+      
+      if (!data || !data.lyrics) {
+        return m.reply('Lyrics not found for the given song or artist.');
       }
+      
+      const title = data.title;
+      const artist = data.artist;
+      const lyrics = data.lyrics;
+      
+      const res = `*Title*: ${title}\n*Artist*: ${artist}\n\n${lyrics}`;
+      
+      return m.reply(res, 'from', {
+        contextInfo: {
+          externalAdReply: {
+            title: title,
+            body: res,
+            mediaType: 2,
+            mediaUrl: data.thumbnail
+          }
+        }
+      });
     } catch (error) {
       console.error(error);
-      m.reply('An error occurred while fetching lyrics', 'text');
+      return m.reply('An error occurred while fetching the lyrics.');
     }
-  },
+  }
 };
