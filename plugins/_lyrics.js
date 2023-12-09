@@ -35,7 +35,8 @@ module.exports = {
             title: title,
             body: res,
             mediaType: 2,
-            mediaUrl: data[0].thumbnail
+            mediaUrl: data[0].thumbnail,
+            thumbnail: data[0].thumbnail 
           }
         },
         data: [0, ...(data[0].data || [])].map(JSON.stringify)
