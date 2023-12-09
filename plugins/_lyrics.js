@@ -3,15 +3,14 @@ const axios = require('axios');
 module.exports = {
   name: 'lyrics',
   async client(vorterx, m, { text, args, connect }) {
-    
     if (!text) {
       await connect('❌');
       return vorterx.sendMessage(m.from, 'Please provide a song name or artist.');
     }
     
     try {
-      const search = encodeURIComponent(text.trim());
-      const { data } = await axios(`https://weeb-api.vercel.app/genius?query=${search}`);
+      const searchTerm = encodeURIComponent(text.trim());
+      const { data } = await axios(`https://weeb-api.vercel.app/genius?query=${searchTerm}`);
       
       if (!data || !data[0] || !data[0].lyrics || data[0].lyrics === 'Lyrics not found') {
         return vorterx.sendMessage(m.from, 'Lyrics not found for the given song or artist.');
@@ -21,13 +20,13 @@ module.exports = {
       const artist = data[0].artist;
       const lyrics = data[0].lyrics;
       
-      const res = `*Title*: ${title}\n*Artist*: ${artist}\n\n${lyrics}`;
+      const response = `*Title*: ${title}\n*Artist*: ${artist}\n\n${lyrics}`;
       
-      return vorterx.sendMessage(m.from, res, {
+      return vorterx.sendMessage(m.from, response, {
         contextInfo: {
           externalAdReply: {
             title: title,
-            body: res,
+            body: response,
             mediaType: 2,
             mediaUrl: data[0].thumbnail
           }
@@ -35,7 +34,7 @@ module.exports = {
       });
     } catch (error) {
       console.error(error);
-      m.reply('An error occurred while fetching the lyrics.');
+      return vorterx.sendMessage(m.from, 'An error occurred while fetching the lyrics.');
     }
   }
 };
