@@ -28,7 +28,7 @@ module.exports = {
       const thumbnail = data[0].image;
       const thumbnailBase64 = thumbnail ? Buffer.from(thumbnail).toString('base64') : '';
 
-      const res = `*TITLE*: ${title}\n\n*ARTIST*: ${artist}\n\n${lyrics}`;
+      const res = `*🌷TITLE*: ${title}\n\n*👤ARTIST*: ${artist}\n\n${lyrics}`;
 
       const msgData = {
         text: res,
