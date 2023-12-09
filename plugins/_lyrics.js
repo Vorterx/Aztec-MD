@@ -24,7 +24,7 @@ module.exports = {
 
       const res = `*Title*: ${title}\n*Artist*: ${artist}\n\n${lyrics.data}`;
 
-      return vorterx.sendMessage(m.from, text: res, {
+      return vorterx.sendMessage(m.from, { text: res,
         contextInfo: {
           externalAdReply: {
             title: title,
