@@ -13,13 +13,14 @@ module.exports = {
       const search = encodeURIComponent(text.trim());
       const { data } = await axios.get(`https://weeb-api.vercel.app/genius?query=${search}`);
 
-      if (!data || data.error) {
+      if (!data || data.length === 0) {
         return m.reply('Lyrics not found for the given song or artist.');
       }
+  console.log(data);
 
-      const title = data.title;
-      const artist = data.artist;
-      const lyricsResponse = await axios.get(`https://weeb-api.vercel.app/lyrics?url=${data.url}`);
+      const title = data[0].title;
+      const artist = data[0].artist;
+      const lyricsResponse = await axios.get(`https://weeb-api.vercel.app/lyrics?url=${data[0].url}`);
       const lyrics = lyricsResponse.data || 'Lyrics not found.';
 
       const res = `*Title*: ${title}\n*Artist*: ${artist}\n\n${lyrics}`;
@@ -31,10 +32,10 @@ module.exports = {
             title: title,
             body: res,
             mediaType: 2,
-            mediaUrl: data.thumbnail
+            mediaUrl: data[0].thumbnail
           }
         },
-        data: [0, ...(data.data || [])].map(JSON.stringify)
+        data: [0, ...(data[0].data || [])].map(JSON.stringify)
       };
 
       return vorterx.sendMessage(m.from, messageData);
