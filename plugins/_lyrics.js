@@ -4,7 +4,7 @@ module.exports = {
   name: 'lyrics',
   category: 'Search',
   async client(vorterx, m, { text, args, connect }) {
-   
+    
     try {
       if (!text || typeof text !== 'string') {
         await connect('❌');
@@ -17,13 +17,19 @@ module.exports = {
       if (!data || data.length === 0) {
         return m.reply('Lyrics not found for the given song or artist.');
       }
-      
-          console.log(data);
+
+      console.log(data);
       await connect('📝');
 
       const title = data[0].title;
       const artist = data[0].artist;
-      const lyricsRes = await axios.get(`https://weeb-api.vercel.app/lyrics?url=${data[0].url}`);
+      const lyricsUrl = data[0].url;
+
+      if (!lyricsUrl || typeof lyricsUrl !== 'string') {
+        return m.reply('Invalid lyrics URL.');
+      }
+
+      const lyricsRes = await axios.get(`https://weeb-api.vercel.app/lyrics?url=${lyricsUrl}`);
       const lyrics = lyricsRes.data || 'Lyrics not found.';
 
       const res = `*TITLE*: ${title}\n\n*ARTIST*: ${artist}\n\n${lyrics}`;
@@ -53,4 +59,4 @@ module.exports = {
 async function getBuffer(url) {
   const response = await axios.get(url, { responseType: 'arraybuffer' });
   return response.data;
-}
+    }
