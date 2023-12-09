@@ -4,8 +4,9 @@ module.exports = {
   name: 'lyrics',
   category: 'Search',
   async client(vorterx, m, { text, args, connect }) {
+  
     try {
-      if (!text || typeof text !== 'string') {
+      if (!text) {
         await connect('❌');
         return m.reply('Please provide a song name or artist.');
       }
