@@ -14,7 +14,7 @@ module.exports = {
       const search = encodeURIComponent(text.trim());
       const { data } = await axios.get(`https://weeb-api.vercel.app/genius?query=${search}`);
 
-      if (!data[0] || data.error) {
+      if (!data || data.error) {
         m.reply('Lyrics not found for the given song or artist.');
       }
 
@@ -30,9 +30,10 @@ module.exports = {
             title: title,
             body: res,
             mediaType: 2,
-            mediaUrl: data[0].thumbnail
+            mediaUrl: data.thumbnail
           }
-        }
+        },
+        data: [0]
       });
     } catch (error) {
       console.error(error);
