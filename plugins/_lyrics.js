@@ -1,10 +1,14 @@
-//
 const axios = require('axios');
 
 module.exports = {
   name: 'lyrics',
   async client(vorterx, m, { text, args, connect }) {
     try {
+      if (!m.text || typeof m.text !== 'string') {
+        await connect('❌');
+        return vorterx.sendMessage(m.from, 'Please provide a song name or artist.');
+      }
+
       const searchTerm = encodeURIComponent(m.text.trim());
       const { data } = await axios(`https://weeb-api.vercel.app/lyrics?url=${searchTerm}`);
 
@@ -30,7 +34,7 @@ module.exports = {
       });
     } catch (error) {
       console.error(error);
-      return vorterx.sendMessage(m.from, 'Please provide a song name or artist.');
+      return vorterx.sendMessage(m.from, 'An error occurred while fetching the lyrics.');
     }
   }
 };
