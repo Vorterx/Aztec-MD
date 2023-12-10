@@ -1,39 +1,37 @@
-const fg = require('api-dylux');
+const { ttdl } = require('btch-downloader');
 
 module.exports = {
-  name: 'tik',
-  alias: ['tiktok'],
+  name: 'tiktok',
+  alias: ['tik'],
   category: 'Downloads',
-  description: 'To download TikTok videos',
-  async client(vorterx, m, { args, text, connect }) {
+  async client(vorterx, m, { args, connect }) {
+   
     if (!args[0]) {
       await connect('❌');
-      return m.reply('Please provide a video link');
+      return m.reply('Please provide a valid Instagram URL.');
     }
 
     try {
-      const result = await fg.tiktok2(args[0]);
+      const url = args[0];
+      const data = await ttdl(url);
 
-      if (result.success) {
-        await connect('✅');
+      if (!data || data.length === 0) {
+        return m.reply('Failed to download the video.');
+      }
 
-        for (const video of result.videos) {
-          await vorterx.sendMessage(m.from, {
-            video: {
-              url: video.videoUrl,
-              mimetype: 'video/mp4',
-              filename: 'tiktok_video.mp4',
-            },
-          });
-        }
-      } else {
-        await connect('❌');
-        return m.reply('Failed to download the TikTok video.');
+     await connect('📤');
+      m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
+
+      for (let i of data) {
+        const { quality, size, url } = i;
+        const vidi = `╭–– *『TIKTOK Downloader』*\n┆ *Size* : N/A\n┆ *Quality* : 420p\n╰–––––––––––––––༓`;
+
+        vorterx.sendMessage(m.from, { video: { url }, caption: vidi}, {quoted: m });
       }
     } catch (error) {
-      console.error('Error:', error);
-      await connect('❌');
-      return m.reply(`An error occurred while downloading the TikTok video: ${error.message}`);
+      console.error(error);
+      return m.reply('Failed to download the video.');
     }
   },
 };
+        
