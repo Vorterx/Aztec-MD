@@ -1,4 +1,4 @@
-const { bocil } = require('@bochilteam/scraper');
+const { bochil, instagramdlv3, instagramdlv2 } = require('@bochilteam/scraper');
 
 module.exports = {
   name: 'insta',
@@ -13,12 +13,12 @@ module.exports = {
 
     try {
       let mediaUrl, caption;
-      const videoData = await bocil.instagramdlv2(args[0]);
+      const videoData = await bochil.instagramdlv2(args[0]);
 
       if (videoData) {
         mediaUrl = videoData[0]?.url;
       } else {
-        const videoDataV3 = await bocil.instagramdlv3(args[0]);
+        const videoDataV3 = await bochil.instagramdlv3(args[0]);
         mediaUrl = videoDataV3.url;
         caption = videoDataV3.title;
       }
