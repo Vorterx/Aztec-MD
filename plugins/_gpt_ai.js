@@ -19,14 +19,13 @@ module.exports = {
       if (response.status !== 200) {
         await connect("❌");
         return m.reply(`Request failed with status code ${response.status}`);
-
-        console.log(response.data);
       }
 
       if (!response.data || !response.data.result) {
         await connect("❌");
         return m.reply("Invalid response from the API");
       }
+      console.log(response.data);
 
       const aiTurbo = response.data.result;
 
