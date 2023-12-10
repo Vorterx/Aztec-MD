@@ -12,16 +12,12 @@ module.exports = {
 
     try {
       const url = args[0];
-      const data = await ttdl(url);
-
-      if (!Array.isArray(data)) {
-        return m.reply('Failed to download the video.');
-      }
+      const res = await ttdl(url);
 
       await connect('📤');
       m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
 
-      for (let i of data) {
+      for (let i of res) {
         const { quality, size, url } = i;
         const vidi = `╭–– *『TIKTOK Downloader』*\n┆ *Size* : N/A\n┆ *Quality* : 420p\n╰–––––––––––––––༓`;
 
