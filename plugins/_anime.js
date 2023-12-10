@@ -34,22 +34,22 @@ module.exports = {
       } = animeInfo;
 
       const list = `
-*ANIMATION INFORMATION*\n\n
-- 🎀**Title:** ${title}
-- 🌷**Type:** ${type}
-- 🌵**Premiered on:** ${premiered}
-- 💫**Total Episodes:** ${episodes}
-- 📈**Status:** ${status}
-- 🧧**Genres:** ${genres}
-- 🎋**Studio:** ${studios}
-- 🕹️**Score:** ${score}
-- 🌟**Rating:** ${rating}
-- 📍**Rank:** ${ranked}
-- 🎗**Popularity:** ${popularity}
-- 🎃**Trailer:** ${trailer}
-- ❄**Description:**  ${synopsis}`;
+*ANIMATION INFORMATION*\n
+-🎀*Title:* ${title}
+-🌷*Type:* ${type}
+-🌵*Premiered on:* ${premiered}
+-💫*Total Episodes:* ${episodes}
+-📈*Status:* ${status}
+-🧧*Genres:* ${genres}
+-🎋*Studio:* ${studios}
+-🕹️*Score:* ${score}
+-🌟*Rating:* ${rating}
+-📍*Rank:* ${ranked}
+-🎗*Popularity:* ${popularity}
+-🎃*Trailer:* ${trailer}
+-❄*Description:* ${synopsis}`;
 
-      await vorterx.sendMessage(m.from, { image: { url: picture }, caption: list }, { quoted: m });
+await vorterx.sendMessage(m.from, { image: { url: picture }, caption: list }, { quoted: m });
     } catch (error) {
       console.error(error);
       await connect('❌');
