@@ -2,7 +2,7 @@ module.exports = {
   name: 'bomb',
   alias: ['game'],
   category: 'GAMES 3D',
-  async client(vorterx, message, { text, args, connect }) {
+  async client(vorterx, m, { text, args, connect }) {
    
     vorterx.bomb = vorterx.bomb || {};
     const id = m.sender;
