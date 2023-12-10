@@ -8,7 +8,7 @@ function formatNumber(number) {
   return number.toLocaleString();
 }
 
-async function getMac(vorterx,m) {
+async function getBox(vorterx, m) {
   try {
     let id = m.sender;
     let timeout = 180000;
@@ -47,7 +47,8 @@ async function getMac(vorterx,m) {
           delete vorterx.bomb[id];
         });
       } else if (json.state) {
-return m.reply(`${m.from},  Box ${json.number} has been opened. Please choose another box.`);   } else {
+        return m.reply(`${m.from},  Box ${json.number} has been opened. Please choose another box.`);
+      } else {
         json.state = true;
         let changes = vorterx.bomb[id][1];
         let open = changes.filter(v => v.state && v.emot !== '💥').length;
@@ -84,14 +85,15 @@ return m.reply(`${m.from},  Box ${json.number} has been opened. Please choose an
           }
         }
       }
-    } catch (e) {
-      return vorterx.sendMessage(m.from, util.format(e), m);
     }
-    return !0;
+  } catch (e) {
+    return vorterx.sendMessage(m.from, util.format(e), m);
   }
+  return !0;
+}
 
 module.exports = {
   randomInt,
   formatNumber,
-  getMac
+  getBox
 };
