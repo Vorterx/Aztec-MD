@@ -42,26 +42,26 @@ module.exports = {
         Poster,
       } = movieInfo.data;
 
-      const movieDetails = `**MOVIE SEARCH INFORMATION**\n\n
-🎬 **Title:** ${Title}
-📅 **Year:** ${Year}
-⭐ **Rated:** ${Rated}
-📆 **Released:** ${Released}
-⏳ **Runtime:** ${Runtime}
-🌀 **Genre:** ${Genre}
-👨🏻‍💻 **Director:** ${Director}
-✍ **Writer:** ${Writer}
-👨 **Actors:** ${Actors}
-📃 **Plot:** ${Plot}
-🌐 **Language:** ${Language}
-🌍 **Country:** ${Country}
-🎖️ **Awards:** ${Awards}
-📦 **BoxOffice:** ${BoxOffice}
-🏙️ **Production:** ${Production}
-🌟 **imdbRating:** ${imdbRating}
-✅ **imdbVotes:** ${imdbVotes}`;
+      const movieDetails = `*MOVIE SEARCH INFORMATION*\n\n
+🎬*Title:* ${Title}
+📅*Year:* ${Year}
+⭐*Rated:* ${Rated}
+📆*Released:* ${Released}
+⏳*Runtime:* ${Runtime}
+🌀*Genre:* ${Genre}
+👨🏻‍💻*Director:* ${Director}
+✍*Writer:* ${Writer}
+👨*Actors:* ${Actors}
+📃*Plot:* ${Plot}
+🌐*Language:* ${Language}
+🌍*Country:* ${Country}
+🎖️*Awards:* ${Awards}
+📦*BoxOffice:* ${BoxOffice}
+🏙️*Production:* ${Production}
+🌟*imdbRating:* ${imdbRating}
+✅*imdbVotes:* ${imdbVotes}`;
 
-  await vorterx.sendMessage(m.from, { image: { url: Poster }, caption: movieDetails }, { quoted: m });
+await vorterx.sendMessage(m.from, { image: { url: Poster }, caption: movieDetails }, { quoted: m });
     } catch (error) {
       console.error(error);
       await connect('❌');
