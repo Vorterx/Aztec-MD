@@ -59,11 +59,19 @@ clearTimeout(vorterx.bomb[id][2]);
 delete vorterx.bomb[id];
 });
 } else {
-let teks = `乂  *B O M B*\n\n`;
-teks += `Kirim angka *1* - *9* untuk membuka *9* kotak nomor di bawah ini :\n\n`;
-teks += changes.slice(0, 3).map(v => v.state ? v.emot : v.number).join('') + '\n';
-teks += changes.slice(3, 6).map(v => v.state ? v.emot : v.number).join('') + '\n';
-teks += changes.slice(6).map(v => v.state ? v.emot : v.number).join('') + '\n\n';
+
+ teks += bomb.slice(0, 3).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
+
+ teks += bomb.slice(3, 6).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
+
+ teks += bomb.slice(6).map(v => (v.state ? v.emot : v.number)).join('') + '\n\n';
+ if (open >= 8) {
+  let teks = `乂  *B O M B*\n\n`;
+  teks += changes.slice(0, 3).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
+  teks += changes.slice(3, 6).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
+  teks += changes.slice(6).map(v => (v.state ? v.emot : v.number)).join('') + '\n\n';
+  if (open >= 8) {
+  let teks = `乂  *B O M B*\n\n`;
 teks += `Timeout : [ *${((timeout / 1000) / 60)} menit* ]\n`;
 teks += `Kotak berisi bom tidak terbuka : (+ *${formatNumber(reward)}*)`;
 vorterx.sendMessage(m.from, teks, m).then(() => {
