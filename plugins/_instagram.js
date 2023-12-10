@@ -5,6 +5,7 @@ module.exports = {
   alias: ['ig'],
   category: 'Downloads',
   async client(vorterx, m, { args, connect }) {
+   
     if (!args[0]) {
       await connect('❌');
       return m.reply('Please provide a valid Instagram URL.');
@@ -23,8 +24,8 @@ module.exports = {
       m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
 
       for (let i of data) {
-        const { title, quality, size, url } = i;
-        const vidi = `╭–– 『*INSTÀ Downloader*』\n┆ *Title* : ${title}\n┆ *Size* : ${size}\n┆ *Quality* : ${quality}\n╰–––––––––––––––༓`;
+        const { quality, size, url } = i;
+        const vidi = `╭–– *『INSTÀ Downloader』*\n┆ *Size* : N/A\n┆ *Quality* : 420p\n╰–––––––––––––––༓`;
 
         vorterx.sendMessage(m.from, { video: { url }, caption: vidi}, {quoted: m });
       }
