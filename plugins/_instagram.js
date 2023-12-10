@@ -1,4 +1,4 @@
-const { instagramdlv2, instagramdlv3 } = require('@bochilteam/scraper');
+const { bochil } = require('@bochilteam/scraper');
 
 module.exports = {
   name: 'insta',
