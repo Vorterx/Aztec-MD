@@ -14,21 +14,23 @@ module.exports = {
       const url = args[0];
       const data = await ttdl(url);
 
-      if (!data || typeof data[Symbol.iterator] !== 'function') {
+      if (!data || !Array.isArray(data) || data.length === 0) {
+        await connect('❌');
         return m.reply('Failed to download the video.');
       }
 
       await connect('📤');
       m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
 
-      for (let i of data) {
-        const { quality, size, url } = i;
-        const vidi = `╭–– *『TIKTOK Downloader』*\n┆ *Size* : N/A\n┆ *Quality* : 420p\n╰–––––––––––––––༓`;
+      for (const item of data) {
+        const { quality, size, url } = item;
+        const videoInfo = `╭–– *『TIKTOK Downloader』*\n┆ *Size*: ${size || 'N/A'}\n┆ *Quality*: ${quality || 'N/A'}\n╰–––––––––––––––༓`;
 
-        vorterx.sendMessage(m.from, { video: { url }, caption: vidi }, { quoted: m });
+        vorterx.sendMessage(m.from, { video: { url }, caption: videoInfo }, { quoted: m });
       }
     } catch (error) {
       console.error(error);
+      await connect('❌');
       return m.reply('Failed to download the video.');
     }
   },
