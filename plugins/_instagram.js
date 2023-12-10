@@ -26,7 +26,8 @@ module.exports = {
       for (let i of data) {
         const { title, quality, size, url } = i;
         const mge = `╭–– 『*INSTÀ Downloader*』\n┆ *Title* : ${title}\n┆ *Size* : ${size}\n┆ *Quality* : ${quality}\n╰–––––––––––––––༓`;
-        vorterx.sendMessage(m.from, { video: { url } }, { quoted: m, caption: mge });
+
+        vorterx.sendMessage(m.from, { video: { url, caption: mge } }, { quoted: m });
       }
     } catch (error) {
       console.error(error);
