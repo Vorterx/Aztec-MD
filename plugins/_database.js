@@ -13,7 +13,8 @@ async function getBox(vorterx, m) {
     let id = m.sender;
     let timeout = 180000;
     let reward = randomInt(100, 800);
-    let users = global.db.data.users[m.sender];
+    let users = {};
+
     let body = typeof m.text === 'string' ? m.text : '';
     vorterx.bomb = vorterx.bomb ? vorterx.bomb : {};
 
@@ -96,4 +97,4 @@ module.exports = {
   randomInt,
   formatNumber,
   getBox
-};
+}; 
