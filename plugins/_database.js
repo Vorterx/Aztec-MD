@@ -1,6 +1,14 @@
 const util = require('util');
 
-async function getMac(m) {
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function formatNumber(number) {
+  return number.toLocaleString();
+}
+
+async function getMac(vorterx,m) {
   try {
     let id = m.sender;
     let timeout = 180000;
@@ -65,40 +73,26 @@ async function getMac(m) {
           });
         } else {
           let teks = `乂  *B O M B*\n\n`;
-          teks += bomb.slice(0, 3).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
-          teks += bomb.slice(3, 6).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
-          teks += bomb.slice(6).map(v => (v.state ? v.emot : v.number)).join('') + '\n\n';
+          teks += changes.slice(0, 3).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
+          teks += changes.slice(3, 6).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
+          teks += changes.slice(6).map(v => (v.state ? v.emot : v.number)).join('') + '\n\n';
           if (open >= 8) {
-          let teks = `乂  *B O M B*\n\n`;
-  teks += changes.slice(0, 3).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
-  teks += changes.slice(3, 6).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
-  teks += changes.slice(6).map(v => (v.state ? v.emot : v.number)).join('') + '\n\n';
-  if (open >= 8) {
-  let teks = `乂  *B O M B*\n\n`;
-teks += `Timeout : [ *${((timeout / 1000) / 60)} menit* ]\n`;
-teks += `Kotak berisi bom tidak terbuka : (+ *${formatNumber(reward)}*)`;
-vorterx.sendMessage(m.from, teks, m).then(() => {
-users.exp += reward;
-});
-}
-}
-}
-} catch (e) {
-return vorterx.sendMessage(m.from, util.format(e), m);
-}
-return !0;
-}
-
-function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function formatNumber(number) {
-  return number.toLocaleString();
-}
+            teks += `Timeout : [ *${((timeout / 1000) / 60)} menit* ]\n`;
+            teks += `Kotak berisi bom tidak terbuka : (+ *${formatNumber(reward)}*)`;
+            vorterx.sendMessage(m.from, teks, m).then(() => {
+              users.exp += reward;
+            });
+          }
+        }
+      }
+    } catch (e) {
+      return vorterx.sendMessage(m.from, util.format(e), m);
+    }
+    return !0;
+  }
 
 module.exports = {
   randomInt,
-  formatNumber
-}
-           };
+  formatNumber,
+  getMac
+};
