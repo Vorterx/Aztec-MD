@@ -20,11 +20,7 @@ module.exports = {
       }
 
       m.reply('Downloading your video, please wait...⏳');
-      if (data.startsWith('http://') || data.startsWith('https://')) {
-        vorterx.sendMessage(m.from, { video: { url: data } }, { quoted: m });
-      } else {
-        vorterx.sendMessage(m.from, { video: { url: `https://${data}` } }, { quoted: m });
-      }
+      vorterx.sendMessage(m.from, { video: { url: data } }, { quoted: m });
     } catch (error) {
       console.error(error);
       return m.reply('Failed to download the video.');
