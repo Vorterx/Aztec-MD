@@ -19,6 +19,8 @@ module.exports = {
       if (response.status !== 200) {
         await connect("❌");
         return m.reply(`Request failed with status code ${response.status}`);
+
+        console.log(response.data);
       }
 
       if (!response.data || !response.data.result) {
