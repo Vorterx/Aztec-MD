@@ -75,14 +75,15 @@ return vorterx.sendMessage(m.from, util.format(e), m);
 return !0;
 }
 
-module.exports = 0
-
 function randomInt(min, max) {
-return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function formatNumber(number) {
-return number.toLocaleString();
+  return number.toLocaleString();
 }
 
-module.exports = handler
+module.exports = {
+  randomInt,
+  formatNumber
+};
