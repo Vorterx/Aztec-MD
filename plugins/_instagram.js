@@ -21,10 +21,15 @@ module.exports = {
 
       m.reply('Downloading your video, please wait...⏳');
       const videoUrl = Array.isArray(data) ? data[0] : String(data);
+
+      if (typeof videoUrl !== 'string') {
+        return m.reply('Invalid video URL.');
+      }
+
       vorterx.sendMessage(m.from, { video: { url: videoUrl } }, { quoted: m });
     } catch (error) {
       console.error(error);
       return m.reply('Failed to download the video.');
     }
   },
-}; 
+};
