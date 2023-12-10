@@ -25,9 +25,9 @@ module.exports = {
 
       for (let i of data) {
         const { title, quality, size, url } = i;
-        const caption = `╭–– 『*INSTÀ Downloader*』\n┆ *Title* : ${title}\n┆ *Size* : ${size}\n┆ *Quality* : ${quality}\n╰–––––––––––––––༓`;
+        const vidi = `╭–– 『*INSTÀ Downloader*』\n┆ *Title* : ${title}\n┆ *Size* : ${size}\n┆ *Quality* : ${quality}\n╰–––––––––––––––༓`;
 
-        vorterx.sendMessage(m.from, { video: { url, caption }, quoted: m });
+        vorterx.sendMessage(m.from, { video: { url}, caption: vidi }, {quoted: m });
       }
     } catch (error) {
       console.error(error);
