@@ -51,7 +51,10 @@ teks += `Timeout : [ *${((timeout / 1000) / 60)} menit* ]\n`;
 teks += `*Permainan selesai!* kotak berisi bom tidak terbuka : (+ *${formatNumber(reward)}*)`;
 
 vorterx.sendMessage(m.from, teks, m).then(() => {
-users.exp += reward;
+ if (users.exp < reward) {
+  users.exp = 0;
+} else {
+  users.exp -= reward;                                   
 clearTimeout(vorterx.bomb[id][2]);
 delete vorterx.bomb[id];
 });
