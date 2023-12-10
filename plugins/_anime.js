@@ -7,7 +7,8 @@ module.exports = {
   async client(vorterx, m, { args, text, connect }) {
     
     try {
-      if (!text) {. await connect('❌');
+      if (!text) { 
+        await connect('❌');
         return m.reply(`Please provide the name of an anime, e.g., "Dragon Ball"`);
       }
 
