@@ -19,14 +19,14 @@ async function getMac(vorterx,m) {
 
     let isSurrender = /^(givup)$/i.test(body);
     if (isSurrender) {
-      await m.reply(`🚩 Menyerah`);
+      await m.reply(`😢Surrendered.`);
       clearTimeout(vorterx.bomb[id][2]);
       delete vorterx.bomb[id];
     }
 
     if (id in vorterx.bomb && !isNaN(body)) {
       let json = vorterx.bomb[id][1].find(v => v.position == body);
-      if (!json) return m.reply(`🚩 Untuk membuka kotak kirim angka 1 - 9`);
+      if (!json) return m.reply(`To open a box, send a number from 1 to 9.`);
       if (json.emot === '💥') {
         json.state = true;
         let bomb = vorterx.bomb[id][1];
@@ -34,8 +34,8 @@ async function getMac(vorterx,m) {
         teks += bomb.slice(0, 3).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
         teks += bomb.slice(3, 6).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
         teks += bomb.slice(6).map(v => (v.state ? v.emot : v.number)).join('') + '\n\n';
-        teks += `Timeout : [ *${((timeout / 1000) / 60)} menit* ]\n`;
-        teks += `*Permainan selesai!*, kotak berisi bom terbuka : (- *${formatNumber(reward)}*)`;
+        teks += `Timeout : [ *${((timeout / 1000) / 60)} minute* ]\n`;
+        teks += `*Game over!* The box containing the bomb did not open. : (- *${formatNumber(reward)}*)`;
 
         vorterx.sendMessage(m.from, teks, m).then(() => {
           if (users.exp < reward) {
@@ -47,19 +47,18 @@ async function getMac(vorterx,m) {
           delete vorterx.bomb[id];
         });
       } else if (json.state) {
-        return m.reply(`${m.from}, 🚩 Kotak ${json.number} sudah di buka silahkan pilih kotak yang lain.`);
-      } else {
+return m.reply(`${m.from},  Box ${json.number} has been opened. Please choose another box.`);   } else {
         json.state = true;
         let changes = vorterx.bomb[id][1];
         let open = changes.filter(v => v.state && v.emot !== '💥').length;
 
         if (open >= 8) {
           let teks = `乂  *B O M B*\n\n`;
-          teks += `Kirim angka *1* - *9* untuk membuka *9* kotak nomor di bawah ini :\n\n`;
+          teks += `Send the number *1* - *9* to open the corresponding *9* boxes below. :\n\n`;
           teks += changes.slice(0, 3).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
           teks += changes.slice(3, 6).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
           teks += changes.slice(6).map(v => (v.state ? v.emot : v.number)).join('') + '\n\n';
-          teks += `Timeout : [ *${((timeout / 1000) / 60)} menit* ]\n`;
+          teks += `Timeout : [ *${((timeout / 1000) / 60)} minute* ]\n`;
           teks += `*Game over!* The box containing the bomb did not open.: (+ *${formatNumber(reward)}*)`;
 
           vorterx.sendMessage(m.from, teks, m).then(() => {
@@ -77,7 +76,7 @@ async function getMac(vorterx,m) {
           teks += changes.slice(3, 6).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
           teks += changes.slice(6).map(v => (v.state ? v.emot : v.number)).join('') + '\n\n';
           if (open >= 8) {
-            teks += `Timeout : [ *${((timeout / 1000) / 60)} menit* ]\n`;
+            teks += `Timeout : [ *${((timeout / 1000) / 60)} minute* ]\n`;
             teks += `The box containing the bomb is not opened.: (+ *${formatNumber(reward)}*)`;
             vorterx.sendMessage(m.from, teks, m).then(() => {
               users.exp += reward;
