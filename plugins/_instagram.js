@@ -19,8 +19,12 @@ module.exports = {
         return m.reply('Failed to download the video.');
       }
 
+      console.log('Data:', data); 
+
       m.reply('Downloading your video, please wait...⏳');
       const videoUrl = Array.isArray(data) ? data[0] : String(data);
+
+      console.log('Video URL:', videoUrl); 
 
       if (typeof videoUrl !== 'string') {
         return m.reply('Invalid video URL.');
