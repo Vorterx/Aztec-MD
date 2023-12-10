@@ -19,17 +19,11 @@ module.exports = {
         return m.reply('Failed to download the video.');
       }
 
-      const { mediaUrl, caption } = data;
-
-      if (!mediaUrl) {
-        return m.reply('Failed to download the video.');
-      }
-
-      m.reply('Downloading your video please wait...⏳');
-      if (mediaUrl.startsWith('http://') || mediaUrl.startsWith('https://')) {
-        vorterx.sendMessage(m.from, { video: { url: mediaUrl }, caption }, { quoted: m });
+      m.reply('Downloading your video, please wait...⏳');
+      if (data.startsWith('http://') || data.startsWith('https://')) {
+        vorterx.sendMessage(m.from, { video: { url: data } }, { quoted: m });
       } else {
-        vorterx.sendMessage(m.from, { video: { url: `https://${mediaUrl}` }, caption }, { quoted: m });
+        vorterx.sendMessage(m.from, { video: { url: `https://${data}` } }, { quoted: m });
       }
     } catch (error) {
       console.error(error);
