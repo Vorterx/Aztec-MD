@@ -1,6 +1,3 @@
-// BY VORTERX
-// @DiegosonTech
-
 const axios = require("axios");
 
 module.exports = {
@@ -20,11 +17,13 @@ module.exports = {
       );
 
       if (response.status !== 200) {
-        m.reply(`Request failed with status code ${response.status}`);
+        await connect("❌");
+        return m.reply(`Request failed with status code ${response.status}`);
       }
 
       if (!response.data || !response.data.result) {
-        m.reply("Invalid response from the API");
+        await connect("❌");
+        return m.reply("Invalid response from the API");
       }
 
       const aiTurbo = response.data.result;
