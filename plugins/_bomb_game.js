@@ -27,7 +27,7 @@ module.exports = {
       teks += array.slice(i, i + 3).map(v => (v.state ? v.emot : v.number)).join('') + '\n';
     }
 
-    teks += `\nTimeout: [ *${(timeout / 1000) / 60} minutes* ]\nIf you encounter a box with a bomb, your points will be deducted. Type "suren" to give up.`;
+    teks += `\nTimeout: [ *${(timeout / 1000) / 60} minutes* ]\nIf you encounter a box with a bomb, your points will be deducted. Type "givup" to give up.`;
 
     let msg = await vorterx.sendMessage(m.from, {
       text: teks,
