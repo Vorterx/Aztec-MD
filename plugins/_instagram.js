@@ -1,4 +1,4 @@
-const { bochil, instagramdlv3, instagramdlv2 } = require('@bochilteam/scraper');
+const { igdl } = require('btch-downloader');
 
 module.exports = {
   name: 'insta',
@@ -12,21 +12,14 @@ module.exports = {
     }
 
     try {
-      let mediaUrl, caption;
-      const videoData = await bochil.instagramdlv2(args[0]);
+      const url = args[0];
+      const data = await igdl(url);
 
-      if (videoData) {
-        mediaUrl = videoData[0]?.url;
-      } else {
-        const videoDataV3 = await bochil.instagramdlv3(args[0]);
-        mediaUrl = videoDataV3.url;
-        caption = videoDataV3.title;
-      }
-
-      if (!mediaUrl) {
+      if (!data) {
         return m.reply('Failed to download the video.');
       }
 
+      const { mediaUrl, caption } = data;
       m.reply('Downloading your video please wait...⏳');
       vorterx.sendMessage(m.from, { video: { url: mediaUrl }, caption }, { quoted: m });
     } catch (error) {
