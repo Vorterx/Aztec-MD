@@ -4,6 +4,7 @@ module.exports = {
   name: 'anime',
   category: 'Anime',
   async client(vorterx, m, { args, text, connect }) {
+    
     try {
       if (!text) {
         await connect('❌');
