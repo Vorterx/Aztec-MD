@@ -18,13 +18,11 @@ module.exports = {
     await connect('📤');
     const videoInfo = await ytdl.getInfo(text);
 
-    const vidGet = `
-      *Title:* ${videoInfo.videoDetails.title}
-      *Date:* ${videoInfo.videoDetails.uploadDate}
-      *Duration:* ${videoInfo.videoDetails.lengthSeconds}s
-      *Quality:* ${videoInfo.videoDetails.qualityLabels[0]}
-    `;
-
+const vidGet = `
+  *Title:* ${videoInfo.videoDetails.title}
+  *Date:* ${videoInfo.videoDetails.uploadDate}
+  *Duration:* ${videoInfo.videoDetails.lengthSeconds}s
+`;
     await vorterx.sendMessage(m.from, { video: { url: videoInfo.videoDetails.video_url }, caption: vidGet }, { quoted: m });
   }
 };
