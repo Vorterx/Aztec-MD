@@ -22,7 +22,6 @@ module.exports = {
   const vidGet = `╭–– *『YTMP4 DOWNDR』*
 ┆ *Title*: ${videoInfo.videoDetails.title}
 ┆ *Duration*: ${videoInfo.videoDetails.lengthSeconds}s
-┆ *Uploaded*: ${videoInfo.videoDetails.uploadDate}
 ╰–––––––––––––––༓
 `;
     await vorterx.sendMessage(m.from, { video: { url: videoInfo.videoDetails.video_url }, caption: vidGet }, 
