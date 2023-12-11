@@ -33,7 +33,7 @@ module.exports = {
       videoArray.push({ url: video.url, title: video.title });
     }
 
-    textt += "Please reply with the number of the video you want to watch (e.g., 1, 2, etc.):";
+    textt += "Please reply with the number of the video you want to watch (e.g., 1, 1.2, 2, etc.):";
 
     await vorterx.sendMessage(
       m.from,
@@ -55,16 +55,18 @@ module.exports = {
       { quoted: m }
     );
 
-    vorterx.onMessage((message) => {
-      if (message.from === m.from && message.body.match(/^\d+$/)) {
-        const selectedVideoIndex = parseInt(message.body) - 1;
-        if (selectedVideoIndex >= 0 && selectedVideoIndex < videoArray.length) {
-          const selectedVideo = videoArray[selectedVideoIndex];
-          vorterx.sendMessage(m.from, `You selected: ${selectedVideo.title}\nLink: ${selectedVideo.url}`);
-        } else {
-          vorterx.sendMessage(m.from, "Invalid selection. Please reply with a valid number.");
-        }
+    const userReply = await vorterx.waitForMessage({ from: m.from, content: /^(\d+(\.\d+)?)$/ });
+
+    if (userReply && userReply.body.match(/^(\d+(\.\d+)?)$/)) {
+      const selectedVideoIndex = parseFloat(userReply.body) - 1;
+      if (selectedVideoIndex >= 0 && selectedVideoIndex < videoArray.length) {
+        const selectedVideo = videoArray[selectedVideoIndex];
+        await vorterx.sendMessage(m.from, `You selected: ${selectedVideo.title}\nLink: ${selectedVideo.url}`);
+      } else {
+        await vorterx.sendMessage(m.from, "Invalid selection. Please reply with a valid number.");
       }
-    });
+    } else {
+      await vorterx.sendMessage(m.from, "No response received or invalid input. Please reply with the number of the video you want to watch.");
+    }
   },
 };
