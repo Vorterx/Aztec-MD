@@ -9,7 +9,7 @@ module.exports = {
     let me = fs.readFileSync("./lib/imogs.jpg");
 
     if (!text) {
-      await connect("❌");
+      await connect("⛔");
       return m.reply("Please provide a search term.");
     }
     await connect("🍑");
@@ -27,14 +27,15 @@ module.exports = {
 📽️ *Video ${index + 1}*
 🎬 Title: ${video.title}
 ⏰ Duration: ${video.duration}
+🔗 [Watch Here](${video.url})
 `;
-      textt += `${videoInfo}🔗 ${index + 1}. //name\n\n`;
+      textt += `${videoInfo}\n\n`;
       videoArray.push({ url: video.url, title: video.title });
     }
 
-    textt += "Please reply with a number:";
+    textt += "Please reply with the number of the video you want to watch (e.g., 1, 2, etc.):";
 
-    return vorterx.sendMessage(
+    await vorterx.sendMessage(
       m.from,
       {
         image: me,
@@ -53,5 +54,17 @@ module.exports = {
       },
       { quoted: m }
     );
+
+    vorterx.onMessage((message) => {
+      if (message.from === m.from && message.body.match(/^\d+$/)) {
+        const selectedVideoIndex = parseInt(message.body) - 1;
+        if (selectedVideoIndex >= 0 && selectedVideoIndex < videoArray.length) {
+          const selectedVideo = videoArray[selectedVideoIndex];
+          vorterx.sendMessage(m.from, `You selected: ${selectedVideo.title}\nLink: ${selectedVideo.url}`);
+        } else {
+          vorterx.sendMessage(m.from, "Invalid selection. Please reply with a valid number.");
+        }
+      }
+    });
   },
 };
