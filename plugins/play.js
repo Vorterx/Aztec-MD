@@ -18,7 +18,13 @@ module.exports = {
     try {
       let search = await yts(text);
       let video = search.videos[0];
-      
+
+      // Check if video is defined before accessing its properties
+      if (!video) {
+        await connect('❌');
+        return m.reply(`No video found for the given search.`);
+      }
+
       const stream = ytdl(video.url, { filter: 'audioonly' });
 
       const thumbnailBuffer = await getBuffer(video.thumbnail);
