@@ -1,6 +1,7 @@
 const ytdl = require('ytdl-core');
 const yts = require("youtube-yts");
 const fs = require('fs');
+const { getBuffer } = require('../connects/myFunc.js');
 
 module.exports = {
   name: 'song',
