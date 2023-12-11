@@ -1,59 +1,31 @@
 const ytdl = require('ytdl-core');
-const yts = require("youtube-yts");
-const fs = require('fs');
-const { getBuffer } = require('../lib/_getBuffer.js');
+
+function isUrl(string) {
+  const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+  return urlRegex.test(string);
+}
 
 module.exports = {
-  name: 'song',
+  name: 'ytmp4',
+  alias: ['ytvid'],
   category: 'Downloads',
   async client(vorterx, m, { text, args, connect }) {
-
-    const mBot = process.env.BOTNAME;
-    
-    if (!text) {
+    if (args.length < 1 || !isUrl(text) || !ytdl.validateURL(text)) {
       await connect('❌');
-      return m.reply(`Please provide a song name e.g song Dior by pop smoke`);
+      return m.reply(`*Please provide a YouTube link that I can download.*`);
     }
 
-    try {
-      let search = await yts(text);
-      let video = search.videos[0];
+    await connect('📤');
+    const videoInfo = await ytdl.getInfo(text);
 
-      // Check if video is defined before accessing its properties
-      if (!video) {
-        await connect('❌');
-        return m.reply(`No video found for the given search.`);
-      }
+     
+    if (text && (text.toString().startsWith('http://') || text.toString().startsWith('https://'))) {
+      const videoStream = ytdl(text, { quality: 'highest' });
 
-      // Check if video.thumbnail is defined before using it
-      if (!video.thumbnail) {
-        await connect('❌');
-        return m.reply(`Thumbnail not available for the selected video.`);
-      }
-
-      const stream = ytdl(video.url, { filter: 'audioonly' });
-
-      const thumbnailBuffer = await getBuffer(video.thumbnail);
-
-      await vorterx.sendMessage(m.from, {
-        audio: stream,
-        fileName: video.title + '.mp3',
-        mimetype: 'audio/mp3',
-        ptt: true,
-        contextInfo: {
-          externalAdReply: {
-            title: video.title,
-            body: mBot, 
-            thumbnail: thumbnailBuffer,
-            mediaType: 2,
-            mediaUrl: video.url,
-          }
-        },
-      }, { quoted: m });
-
-    } catch (error) {
-      console.error('Error:', error.message);
-      m.reply(`An Error occurred: ${error.message}`);
+      await vorterx.sendMessage(m.from, { video: videoStream, caption: `╭–– *『YTMP4 DOWNDR』*\n┆\n*Title*: ${videoInfo.videoDetails.title}\n┆\n*Duration*: ${videoInfo.videoDetails.lengthSeconds}s\n╰–––––––––––––––༓` }, { quoted: m });
+    } else {
+      await connect('❌');
+      return m.reply(`*Invalid URL format.*`);
     }
   }
 };
