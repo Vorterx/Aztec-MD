@@ -34,7 +34,7 @@ module.exports = {
       const thumbnailBuffer = await getBuffer(video.thumbnail);
       console.log('Thumbnail Buffer:', thumbnailBuffer);
 
-      await vorterx.sendMessage(m.from, {
+      await vorterx.sendMessage(m.from, {text:
         audio: stream,
         fileName: video.title + '.mp3',
         mimetype: 'audio/mp3',
