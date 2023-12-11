@@ -25,6 +25,12 @@ module.exports = {
         return m.reply(`No video found for the given search.`);
       }
 
+      // Check if video.thumbnail is defined before using it
+      if (!video.thumbnail) {
+        await connect('❌');
+        return m.reply(`Thumbnail not available for the selected video.`);
+      }
+
       const stream = ytdl(video.url, { filter: 'audioonly' });
 
       const thumbnailBuffer = await getBuffer(video.thumbnail);
