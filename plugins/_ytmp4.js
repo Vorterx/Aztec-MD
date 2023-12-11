@@ -17,14 +17,11 @@ module.exports = {
 
     await connect('📤');
     const videoInfo = await ytdl.getInfo(text);
-
-    // Check if item.url exists before using it
-    if (item.url && (item.url.toString().startsWith('http://') || item.url.toString().startsWith('https://'))) {
+    if (text && (text.toString().startsWith('http://') || text.toString().startsWith('https://'))) {
       const videoStream = ytdl(text, { quality: 'highest' });
 
       await vorterx.sendMessage(m.from, { video: videoStream, caption: `╭–– *『YTMP4 DOWNDR』*\n┆\n*Title*: ${videoInfo.videoDetails.title}\n┆\n*Duration*: ${videoInfo.videoDetails.lengthSeconds}s\n╰–––––––––––––––༓` }, { quoted: m });
     } else {
-      // Handle the case where item.url is undefined or doesn't match the expected format
       await connect('❌');
       return m.reply(`*Invalid URL format.*`);
     }
