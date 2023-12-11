@@ -8,6 +8,8 @@ module.exports = {
   category: 'Downloads',
   async client(vorterx, m, { text, args, connect }) {
 
+    const mBot = process.env.BOTNAME;
+    
     if (!text) {
       await connect('❌');
       return m.reply(`Please provide a song name e.g song Dior by pop smoke`);
