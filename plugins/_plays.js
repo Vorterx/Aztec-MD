@@ -1,4 +1,4 @@
-const { getBuffer } = require("../connects/myFunc.js");
+const { getBuffer } = require("../lib/_getBuffer.js");
 const yts = require("youtube-yts");
 
 module.exports = {
