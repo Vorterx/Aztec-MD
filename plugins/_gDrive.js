@@ -15,7 +15,7 @@ module.exports = {
       const result = await apiDylux.GDriveDl(args[0]);
 
       const Txt = `
-≡ *Google Drive DL*
+╭–– *『GOOGLE DRIVE DN』*
 ▢ *Name:* ${result.fileName}
 ▢ *Size:* ${result.fileSize}
 ▢ *Type:* ${result.mimetype}`;
