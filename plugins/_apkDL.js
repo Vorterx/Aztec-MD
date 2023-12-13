@@ -1,33 +1,41 @@
 module.exports = {
-  name: 'img',
+  name: 'getpack',
+  alias: ['apk', 'app'],
   category: 'Downloads',
-  async client(vorterx, m, { args }) {
-    const gis = require('g-i-s');
-
+  async client(vorterx, m, { text, connect }) {
     try {
-      if (!args[0]){
-        return m.reply('Please provide an image name.');
+      const { download } = require('aptoide-scraper');
+
+      if (!text) {
+        await connect('❌');
+        return m.reply('Please specify an app name.');
       }
 
-      const query = args[0];
-      const images = await gis(query, { max: 10 });
+      const data = await download(text);
 
-      if (images.length === 0) {
-        return m.reply('No images found for the given query.');
+      if (!data) {
+        await connect('❌');
+        return m.reply('App not found. Please check the name and try again.');
       }
 
-      await m.reply(`Downloading 10 images for ${query}`);
+      const caption = `*App Name*: ${data.name}\n*Developer*: ${data.developer}`;
 
-      for (let i = 0; i < 10; i++) {
-        const item = images[i];
-        const imageUrl = item.url;
-        await vorterx.sendMessage(imageUrl, {}, 'image');
-      }
-
-      await m.reply(`Downloaded 10 images for ${query}`);
+      await vorterx.sendMessage(
+        m.from,
+        {
+          thumbnail: { url: data.icon },
+          document: {
+            url: data.dllink,
+            mimetype: 'application/vnd.android.package-archive',
+            fileName: data.name + '.apk',
+            caption: caption,
+          },
+          quoted: m,
+        }
+      );
     } catch (error) {
       console.error(error);
-      m.reply('An error occurred while processing the request.');
+      m.reply('An error occurred while processing your request.');
     }
   },
 };
