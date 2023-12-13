@@ -1,5 +1,4 @@
 const ytdl = require('ytdl-core');
-const fs = require('fs');
 const { getBuffer, isUrl } = require('../lib/_getBuffer.js');
 
 module.exports = {
@@ -7,7 +6,7 @@ module.exports = {
   category: 'Downloads',
   async client(vorterx, m, { text, args, connect }) {
     
-    if ((text.startsWith('http://') || text.startsWith('https://')) && isUrl(text)) {
+    if (typeof text === 'string' && /^https?:\/\//.test(text) && isUrl(text)) {
       const info = await ytdl.getInfo(text);
       const audio = ytdl.downloadFromInfo(info, { quality: 'highestaudio' });
 
@@ -26,6 +25,7 @@ module.exports = {
         },
       }, { quoted: m });
     } else {
+      console.error('Invalid URL:', text);
       await connect('❌');
       return m.reply(`Please provide a valid URL...`);
     }
