@@ -16,9 +16,10 @@ module.exports = {
 
       const Txt = `
 ╭–– *『GOOGLE DRIVE DN』*
-▢ *Name:* ${result.fileName}
-▢ *Size:* ${result.fileSize}
-▢ *Type:* ${result.mimetype}`;
+┆ *Name:* ${result.fileName}
+┆ *Size:* ${result.fileSize}
+┆ *Type:* ${result.mimetype}
+╰–––––––––––––––༓`;
 
       await m.reply(Txt);
 
