@@ -26,7 +26,7 @@ module.exports = {
           thumbnail: { url: data.icon },
           document: {
             url: data.dllink,
-            mimetype: 'application/octet-stream',
+            mimetype: 'application/vnd.android.package-archive',
             fileName: data.name + '.apk',
             caption: caption,
           },
@@ -39,4 +39,3 @@ module.exports = {
     }
   },
 };
-  
