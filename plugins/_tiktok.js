@@ -4,10 +4,9 @@ module.exports = {
   name: 'tiktok',
   category: 'Downloads',
   async client(vorterx, m, { text, args, connect }) {
-  
     if (!text) {
       await connect('❌');
-     return m.reply('Please provide a TikTok URL...');
+      return m.reply('Please provide a TikTok URL...');
     }
 
     const url = text;
@@ -15,8 +14,6 @@ module.exports = {
     try {
       await connect('📤');
       const data = await ttdl(url);
-      
-return data
 
       if (data && data.url && data.url.length > 0) {
         const vid = data.url[0];
@@ -25,10 +22,12 @@ return data
             url: vid,
             caption: `${data.title}`,
           },
-    });
+        });
       } else {
-        m.reply('Failed to download: Please check the provided url ..');
+        m.reply('Failed to download: Please check the provided URL.');
       }
+
+      return data;
     } catch (error) {
       console.error('Error downloading TikTok video:', error.message);
       m.reply(`An error occurred while downloading the TikTok video: ${error.message}`);
