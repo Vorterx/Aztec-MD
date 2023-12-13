@@ -17,7 +17,7 @@ module.exports = {
       await m.reply(url)
       const data = await ttdl(url);
       
-     return data
+     await m.reply(data)
 
       if (data && data.url && data.url.length > 0) {
         const vid = data.url[0];
