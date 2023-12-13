@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-function isUrl(string) {
+function isValidUrl(string) {
   const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
   return urlRegex.test(string);
 }
@@ -8,34 +8,45 @@ function isUrl(string) {
 module.exports = {
   name: 'mediafire',
   category: 'Downloads',
-  description: 'To Download using media fire link',
-  async client(vorterx, m, { text, args, mime, connect, quoted }) {
-   
-	if (args.length == 0) {
-    await connect('❌');
-    return m.reply(`Please provide a MediaFire link...`)
-  }
-    
-	if (!isUrl(args[0]) && !args[0].includes('mediafire.com')) return replygcxeon(`The link you provided is invalid`)
-	const { mediafire } = require('../lib/_mediaDL.js')
-	const baby1 = await mediafire(text)
-	if (baby1[0].size.split('MB')[0] >= 100) {
-    await connect('❌');
-    return m.reply('Thhe file is too big sorry...')
-    const media_image = "https://graph.org/file/1cfd63c7e3a114e89c06c.jpg";
-   
-	const result4 = `*MEDIAFIRE DOWNLOADER*
+  description: 'Download files from MediaFire links',
+  async client(vorterx, m, { text, args, mime, connect }) {
+  
+  try {
+      if (args.length === 0) {
+        await connect('❌');
+        return m.reply('Please provide a valid MediaFire link.');
+      }
 
-*❖ Name* : ${baby1[0].nama}
-*❖ Size* : ${baby1[0].size}
-*❖ Mime* : ${baby1[0].mime}
-*❖ Link* : ${baby1[0].link}`
-vorterx.sendMessage(m.chat,{ image: { url: media_image } {caption: result4},{document : { url : baby1[0].link}, fileName : baby1[0].nama, mimetype: baby1[0].mime }, { quoted : m })
-}
-    
-      } catch (error) {
+      if (!isValidUrl(args[0]) && !args[0].includes('mediafire.com')) {
+        return m.reply('Invalid link provided.');
+      }
+
+      const { mediaDownloader } = require('../lib/_mediaDL.js');
+      const mediaFileInfo = await mediaDownloader(text);
+
+      if (mediaFileInfo[0].size.split('MB')[0] >= 100) {
+        await connect('❌');
+        return m.reply('The file is too large to download, sorry.');
+      }
+
+      const mediaThumbnail = 'https://graph.org/file/1cfd63c7e3a114e89c06c.jpg';
+
+      const downloadInfo = `
+╭–– *『MEDIAFIRE DOWNLOAD』*
+┆ *Name:* ${mediaFileInfo[0].name}
+┆ *Size:* ${mediaFileInfo[0].size}
+┆ *Type:* ${mediaFileInfo[0].mime}
+╰–––––––––––––––༓`;
+
+      await vorterx.sendMessage(m.from, {
+        image: { url: mediaThumbnail },
+        caption: downloadInfo,
+        document: { url: mediaFileInfo[0].link, fileName: mediaFileInfo[0].name, mimetype: mediaFileInfo[0].mime },
+        quoted: m,
+      });
+    } catch (error) {
       console.error(error);
-      m.reply('An error occurred while downloading the file.');
+      m.reply('An error occurred while processing the download.');
     }
   },
-};
+};	
