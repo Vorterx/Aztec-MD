@@ -6,29 +6,29 @@ module.exports = {
   description: 'To Download using media fire link',
   async client(vorterx, m, { text, args, mime, connect, quoted }) {
    
-    const urlRegExp = /(https?:\/\/[^\s]+)/g;
-    const mediaFireUrl = text.match(urlRegExp)?.[0];
-    if (!mediaFireUrl) {
-      await connect('❌');
-      return m.reply('_Please provide a MediaFire URL.');
-    }
-    const apiUrl = `https://vihangayt.me/download/mediafire?url=${encodeURIComponent(mediaFireUrl)}`;
-    try {
-      await connect('📤');
-      const getAnu = await axios.get(apiUrl);
-      const { direct_link, original_name, size, website } = getAnu.data;
-      const mediaUrl = direct_link;
-      const getFile = await axios.get(mediaUrl, { responseType: 'stream' });
-      const fileBuffer = getFile.data;
-      const media_image = "https://graph.org/file/1cfd63c7e3a114e89c06c.jpg";
-      const media_DNL= `
-    ❲❒❳ 𝙈𝙀𝘿𝙄𝘼𝙁𝙄𝙍𝙀 𝘿𝙉𝙇\n\n
-   *〄_Name*: ${original_name}
-   *〄_Size*: ${size}
-   *〄_Website*: ${website}`;
+	if (args.length == 0) {
+    await connect('❌');
+    return m.reply(`Please provide a MediaFire link...`)
+  }
+    
+	if (!isUrl(args[0]) && !args[0].includes('mediafire.com')) return replygcxeon(`The link you provided is invalid`)
+	const { mediafire } = require('../lib/_mediaDL.js')
+	const baby1 = await mediafire(text)
+	if (baby1[0].size.split('MB')[0] >= 100) {
+    await connect('❌');
+    return m.reply('Thhe file is too big sorry...')
+    const media_image = "https://graph.org/file/1cfd63c7e3a114e89c06c.jpg";
+   
+	const result4 = `*MEDIAFIRE DOWNLOADER*
 
-      vorterx.sendMessage(m.from, { image: { url: media_image }, document: { buffer: fileBuffer, mimetype: mime }, caption: media_DNL });
-    } catch (error) {
+*❖ Name* : ${baby1[0].nama}
+*❖ Size* : ${baby1[0].size}
+*❖ Mime* : ${baby1[0].mime}
+*❖ Link* : ${baby1[0].link}`
+vorterx.sendMessage(m.chat,{ image: { url: media_image } {caption: result4},{document : { url : baby1[0].link}, fileName : baby1[0].nama, mimetype: baby1[0].mime }, { quoted : m })
+}
+    
+      } catch (error) {
       console.error(error);
       m.reply('An error occurred while downloading the file.');
     }
