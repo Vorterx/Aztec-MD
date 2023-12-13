@@ -13,9 +13,9 @@ module.exports = {
 
       const data = await download(text);
 
-      if (!data) {
+      if (!data || !data.name || !data.developer) {
         await connect('❌');
-        return m.reply('App not found. Please check the name and try again.');
+        return m.reply('App data not found. Please check the name and try again.');
       }
 
       const inf = `*App Name*: ${data.name}\n*Developer*: ${data.developer}`;
@@ -23,7 +23,7 @@ module.exports = {
       const buttonMessage = {
         document: await download(text, { buffer: true }), 
         mimetype: 'application/vnd.android.package-archive',
-        fileName: data.name + '.apk',
+        fileName: data.name + '.apk', 
         caption: inf,
       };
 
