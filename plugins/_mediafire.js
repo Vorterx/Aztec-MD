@@ -1,5 +1,10 @@
 const axios = require('axios');
 
+function isUrl(string) {
+  const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+  return urlRegex.test(string);
+}
+
 module.exports = {
   name: 'mediafire',
   category: 'Downloads',
