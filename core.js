@@ -52,7 +52,7 @@ async function startAztec() {
 
   const vorterx = makeWASocket({
     logger: P({ level: "silent" }),
-    printQRInTerminal: process.env.SESSION_ID ? : false,
+    printQRInTerminal: process.env.SESSION_ID ? false,
     browser: ['Chrome (Linux)', '', ''],
     qrTimeoutMs: undefined,
     auth: mongoState,
