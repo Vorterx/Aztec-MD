@@ -24,7 +24,7 @@
     "OWNER_NAME": {
       "description": "Add your name (e.g. diegosonTech or suhailTechInfo)"
     },
-    "AUTO_READ_STATUS": {
+    "SESSION_ID": {
       "description": "Auto_Status_View use (e.g. true to activate, false to disable)",
       "required": false
     },
