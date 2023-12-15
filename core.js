@@ -10,7 +10,7 @@ const config = require('./config.js');
 const botName = config.botName;
 const qr = require("qr-image");
 const contact = require('./connects/contact.js');
-const MessageHandler = require('./lib/client.js');
+const { MessageHandler, vorterx } = require('./lib/client.js');
 
 const app = express();
 const PORT = process.env.PORT;
