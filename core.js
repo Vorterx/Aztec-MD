@@ -32,116 +32,132 @@ if (fs.existsSync("./auth_info_baileys/creds.json")) {
 }
 
 async function startAztec() {
-  const inMemoryStore = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
-  const { state, saveCreds } = await useMultiFileAuthState(authFilePath);
+  try {
+    console.log("Initializing...");
 
-  const mongo = new MongoClient(process.env.MONGODB, {
-    socketTimeoutMS: 1_00_000,
-    connectTimeoutMS: 1_00_000,
-    waitQueueTimeoutMS: 1_00_000,
-  });
+    const inMemoryStore = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
+    const { state, saveCreds } = await useMultiFileAuthState(authFilePath);
 
-  const authC = mongo.db(process.env.SESSION_ID).collection("auth");
-  const { state: mongoState, saveCreds: saveMongoCreds } = await useMongoDBAuthState(authC);
+    console.log("Aztec state loaded successfully.");
 
-  const mongoStore = makeMongoStore({
-    filterChats: true,
-    db: mongo.db(process.env.SESSION_ID),
-    autoDeleteStatusMessage: true
-  });
+    const mongo = new MongoClient(process.env.MONGODB, {
+      socketTimeoutMS: 1_00_000,
+      connectTimeoutMS: 1_00_000,
+      waitQueueTimeoutMS: 1_00_000,
+    });
 
-  const vorterx = makeWASocket({
-    logger: P({ level: "silent" }),
-    printQRInTerminal: false,
-    browser: ['Chrome (Linux)', '', ''],
-    qrTimeoutMs: undefined,
-    auth: mongoState,
-    version: (await fetchLatestBaileysVersion()).version,
-    store: mongoStore
-  });
+    const authC = mongo.db(process.env.SESSION_ID).collection("auth");
+    const { state: mongoState, saveCreds: saveMongoCreds } = await useMongoDBAuthState(authC);
 
-  if (mongoStore) {
-    mongoStore.bind(vorterx.ev);
-  } else {
-    console.error("Error: 'mongoStore' is undefined. Please check your code.");
-  }
+    const mongoStore = makeMongoStore({
+      filterChats: true,
+      db: mongo.db(process.env.SESSION_ID),
+      autoDeleteStatusMessage: true
+    });
 
-  vorterx.cmd = new Collection();
-  vorterx.contactDB = new QuickDB().table('contacts');
-  vorterx.contact = contact;
+    const vorterx = makeWASocket({
+      logger: P({ level: "silent" }),
+      printQRInTerminal: false,
+      browser: ['Chrome (Linux)', '', ''],
+      qrTimeoutMs: undefined,
+      auth: mongoState,
+      version: (await fetchLatestBaileysVersion()).version,
+      store: mongoStore
+    });
 
-  async function readcommands() {
-    const cmdfile = fs.readdirSync("./plugins").filter((file) => file.endsWith(".js"));
-    for (const file of cmdfile) {
-      const command = require(`./plugins/${file}`);
-      vorterx.cmd.set(command.name, command);
+    if (mongoStore) {
+      mongoStore.bind(vorterx.ev);
+    } else {
+      console.error("Error: 'mongoStore' is undefined. Please fix.");
     }
-  }
 
-  await readcommands();
+    vorterx.cmd = new Collection();
+    vorterx.contactDB = new QuickDB().table('contacts');
+    vorterx.contact = contact;
 
-  vorterx.ev.on('creds.update', async () => {
-    await saveCreds();
-    await saveMongoCreds();
-  });
-
-  vorterx.ev.on('connection.update', async (update) => {
-    const { connection, lastDisconnect } = update;
-
-    if (connection === "close") {
-      let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
-      if (reason === DisconnectReason.connectionClosed || reason === DisconnectReason.connectionLost) {
-        console.log("[🐏AZTEC] Connection closed or lost, reconnecting in 3000ms.");
-        setTimeout(() => {
-          connectWithRetry();
-        }, 3000);
-      } else if (reason === DisconnectReason.loggedOut) {
-        console.log("[😭AZTEC] Device Logged Out, Cleaning up session.");
-        await removeCreds();
-        process.exit();
-      } else if (reason === DisconnectReason.restartRequired) {
-        console.log("[♻️AZTEC] Server starting.");
-        connectWithRetry();
-      } else if (reason === DisconnectReason.timedOut) {
-        console.log("[🎰AZTEC] Connection Timed Out, Trying to Reconnect.");
-        connectWithRetry();
-      } else {
-        console.log("[🌬AZTEC] Server Disconnected: Maybe Your WhatsApp Account got banned");
+    async function readcommands() {
+      const cmdfile = fs.readdirSync("./plugins").filter((file) => file.endsWith(".js"));
+      for const (file of cmdfile) {
+        const command = require(`./plugins/${file}`);
+        vorterx.cmd.set(command.name, command);
       }
     }
 
-    if (connection === "open") {
-      console.log('Plugins loaded♻️');
-      console.log('WhatsApp chatbot has connected✔️');
-      const version = require(__dirname + "/package.json").version;
-      const BotName = require(__dirname + "/config.js").botName;
-      const Mods = require(__dirname + "/config.js").mods;
-      const aztec_text = `\`\`\`Vorterx connected \nversion: ${version}\nBotName: ${BotName}\nNUMBER: ${Mods}\`\`\``;
-      vorterx.sendMessage(vorterx.user.id, { text: aztec_text });
-    }
+    await readcommands();
 
-    if (update.qr) {
-      vorterx.QR = qr.imageSync(update.qr);
-    }
-  });
+    vorterx.ev.on('creds.update', async () => {
+      await saveCreds();
+      await saveMongoCreds();
+    });
 
-  app.get("/", (req, res) => {
-    res.end(vorterx.QR);
-  });
+    vorterx.ev.on('connection.update', async (update) => {
+      const { connection, lastDisconnect } = update;
 
-  vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx));
-  vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
+      console.log("Connection update:", connection);
 
-  await mongo.connect();
-  process.on('exit', async () => {
-    await mongo.close();
-  });
+      if (connection === "open") {
+        console.log('Connection is open!');
+        console.log('Plugins loaded♻️');
+        console.log('WhatsApp chatbot has connected✔️');
+    
+        const toxic = `Hello, I am your WhatsApp chatbot Aztec. Ready to assist you!`;
+        vorterx.sendMessage(vorterx.user.id, { text: toxic });
+      } else if (connection === "close") {
+        let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
 
-  process.on('SIGINT', async () => {
-    await mongo.close();
-    await removeCreds();
-    process.exit();
-  });
+        switch (reason) {
+          case DisconnectReason.connectionClosed:
+          case DisconnectReason.connectionLost:
+            console.log("[🐏AZTEC] Connection closed or lost, reconnecting in 3000ms.");
+            setTimeout(() => {
+              connectWithRetry();
+            }, 3000);
+            break;
+          case DisconnectReason.loggedOut:
+            console.log("[😭AZTEC] Device Logged Out, Cleaning up session.");
+            await removeCreds();
+            process.exit();
+            break;
+          case DisconnectReason.restartRequired:
+            console.log("[♻️AZTEC] Server starting.");
+            connectWithRetry();
+            break;
+          case DisconnectReason.timedOut:
+            console.log("[🎰AZTEC] Connection Timed Out, Trying to Reconnect.");
+            connectWithRetry();
+            break;
+          default:
+            console.log("[🌬AZTEC] Server Disconnected: Maybe Your WhatsApp Account got banned");
+        }
+      }
+
+      if (update.qr) {
+        vorterx.QR = qr.imageSync(update.qr);
+      }
+    });
+
+    app.get("/", (req, res) => {
+      res.end(vorterx.QR);
+    });
+
+    vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx));
+    vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
+
+    await mongo.connect();
+    process.on('exit', async () => {
+      await mongo.close();
+    });
+
+    process.on('SIGINT', async () => {
+      await mongo.close();
+      await removeCreds();
+      process.exit();
+    });
+
+  } catch (error) {
+    console.error("An error occurred during initialization:", error);
+    process.exit(1);
+  }
 }
 
 async function startServer() {
@@ -157,4 +173,5 @@ async function main() {
 
 main().catch((error) => {
   console.error("An error occurred:", error);
-});
+  process.exit(1);
+});  
