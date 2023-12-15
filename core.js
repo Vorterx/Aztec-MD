@@ -61,7 +61,7 @@ async function startAztec() {
   });
 
   if (mongoStore) {
-    mongoStore.bind(vorterx);
+    mongoStore.bind(vorterx.ev);
   } else {
     console.error("Error: 'mongoStore' is undefined. Please check your code.");
   }
