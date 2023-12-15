@@ -20,12 +20,18 @@ if (!process.env.MONGODB) {
   process.exit(1);
 }
 
+const sessionId = config.SESSION_ID;
+if (!sessionId) {
+  console.error("config.SESSION_ID is not defined.");
+  process.exit(1);
+}
+
 async function startAztec() {
   try {
     console.log("Initializing...");
 
     const inMemoryStore = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
-    const { state, saveCreds } = await useMultiFileAuthState(config.SESSION_ID);
+    const { state, saveCreds } = await useMultiFileAuthState(sessionId);
 
     console.log("Aztec state loaded successfully.");
 
@@ -35,12 +41,12 @@ async function startAztec() {
       waitQueueTimeoutMS: 1_00_000,
     });
 
-    const authC = mongo.db(process.env.SESSION_ID).collection("auth");
+    const authC = mongo.db(sessionId).collection("auth");
     const { state: mongoState, saveCreds: saveMongoCreds } = await useMongoDBAuthState(authC);
 
     const mongoStore = makeMongoStore({
       filterChats: true,
-      db: mongo.db(process.env.SESSION_ID),
+      db: mongo.db(sessionId),
       autoDeleteStatusMessage: true
     });
 
