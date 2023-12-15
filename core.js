@@ -15,6 +15,11 @@ const MessageHandler = require('./lib/client.js');
 const app = express();
 const PORT = process.env.PORT;
 
+if (!process.env.MONGODB) {
+  console.error("Mongodb url has not been provided yet...");
+  process.exit(1);
+}
+
 if (!fs.existsSync("./auth_info_baileys/creds.json")) {
   
 }
