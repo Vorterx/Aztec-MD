@@ -1,6 +1,7 @@
 const axios = require('axios');
 const { tiny } = require("@viper-x/fancytext");
 const fs = require("fs");
+const config = require("../config.js");
 const path = require("path");
 
 const pluginDir = path.join(__dirname);
@@ -51,7 +52,7 @@ ${up_mid} Prefix: ${process.env.PREFIX}
 ${up_mid} Runtime: ${process.uptime()} seconds
 ${up_mid} Time: ${new Date().toLocaleTimeString()}
 ${up_mid} Date: ${new Date().toLocaleDateString()}
-${up_btm}\n\n${getCommands}\n\n\n*©WHATSAPP CHATBOT*`;
+${up_btm}\n\n${getCommands}\n\n*${config.CAPTION}*`;
 
     const chatBot = {
       image: {
