@@ -12,6 +12,7 @@
   "author": "Diegoson",
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",
+    "@iamrony777/baileys": "^6.5.0-7",
     "@whiskeysockets/baileys": "^6.5.0",
     "@consumet/extensions": "^1.5.2",
     "@hapi/boom": "^10.0.1",
