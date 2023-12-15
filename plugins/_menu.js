@@ -28,18 +28,16 @@ module.exports = {
   alias: ['h', 'help'],
   category: 'General',
   description: 'Reveals menu categories commands',
-
   async client(vorterx, m, { args, connect }) {
    
     await connect('Ⓜ️');
-    const chat_v = "https://repository-images.githubusercontent.com/292765152/b5b54c80-ef19-11ea-9998-10a88f042830";
-    let getCommands = '';
 
-    for (const category in commandsByCategory) {
-      getCommands += `┌──『 *${category}* 』──❖\n\n`;
-      getCommands += commandsByCategory[category].map(plugin => ` | ${plugin.name}`).join('\n');
-      getCommands += '\n\n└─────────◉\n\n';
-    }
+    const allLogos = [...(config.LOGOS || []), ...(process.env.LOGOS ? process.env.LOGOS.split(',') : [])];
+    const doIndex = Math.floor(Math.random() * allLogos.length);
+    const getLogo = allLogos[doIndex];
+
+    const isImage = /\.(jpg|jpeg|png|gif)$/i.test(getLogo);
+    const mediaType = isImage ? 1 : 2;
 
     const up_up = `┏━━⟪ *${process.env.BOTNAME}* ⟫━━⦿`;
     const up_mid = `┃ ✗`;
@@ -55,8 +53,8 @@ ${up_mid} Date: ${new Date().toLocaleDateString()}
 ${up_btm}\n\n${getCommands}\n\n*${config.CAPTION}*`;
 
     const chatBot = {
-      image: {
-        url: chat_v
+      [isImage ? 'image' : 'video']: {
+        url: getLogo
       },
       caption: tiny(amarok),
       headerType: 2,
@@ -64,9 +62,9 @@ ${up_btm}\n\n${getCommands}\n\n*${config.CAPTION}*`;
         externalAdReply: {
           title: 'vorterx bot',
           body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
-          mediaType: 2,
+          mediaType,
           thumbnail: {
-            url: chat_v
+            url: getLogo
           },
           sourceUrl: 'wa.me/27686881509',
           mediaUrl: '',
