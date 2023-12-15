@@ -32,7 +32,7 @@ if (fs.existsSync("./auth_info_baileys/creds.json")) {
 }
 
 async function startAztec() {
-  const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
+  const inMemoryStore = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
   const { state, saveCreds } = await useMultiFileAuthState(authFilePath);
 
   const mongo = new MongoClient(process.env.MONGODB, {
@@ -53,7 +53,7 @@ async function startAztec() {
     }
   }
 
-  const store = makeMongoStore({
+  const mongoStore = makeMongoStore({
     filterChats: true,
     db: mongo.db(process.env.SESSION_ID),
     autoDeleteStatusMessage: true
@@ -61,15 +61,15 @@ async function startAztec() {
 
   const vorterx = makeWASocket({
     logger: P({ level: "silent" }),
-    printQRInTerminal: process.env.SESSION_ID ? true:false, //set true if u want to use SESSION_ID false if u want creds.json
+    printQRInTerminal: process.env.SESSION_ID ? true : false,
     browser: ['Chrome (Linux)', '', ''],
     qrTimeoutMs: undefined,
     auth: mongoState,
     version: (await fetchLatestBaileysVersion()).version,
-    store: store
+    store: mongoStore
   });
 
-  store.bind(vorterx.ev);
+  vorterx.ev.bind(vorterx.ev);  // assuming you meant to bind to vorterx.ev, please adjust if needed
   vorterx.cmd = new Collection();
   vorterx.contactDB = new QuickDB().table('contacts');
   vorterx.contact = contact;
