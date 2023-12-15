@@ -20,23 +20,12 @@ if (!process.env.MONGODB) {
   process.exit(1);
 }
 
-let authFilePath;
-
-if (fs.existsSync("./auth_info_baileys/creds.json")) {
-  authFilePath = "./auth_info_baileys/";
-} else if (process.env.SESSION_ID) {
-  authFilePath = process.env.SESSION_ID;
-} else {
-  console.error("Authentication file not found. Please provide either creds.json or SESSION_ID.");
-  process.exit(1);
-}
-
 async function startAztec() {
   try {
     console.log("Initializing...");
 
     const inMemoryStore = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
-    const { state, saveCreds } = await useMultiFileAuthState(authFilePath);
+    const { state, saveCreds } = await useMultiFileAuthState();
 
     console.log("Aztec state loaded successfully.");
 
@@ -57,7 +46,7 @@ async function startAztec() {
 
     const vorterx = makeWASocket({
       logger: P({ level: "silent" }),
-      printQRInTerminal: false,
+      printQRInTerminal: true,
       browser: ['Chrome (Linux)', '', ''],
       qrTimeoutMs: undefined,
       auth: mongoState,
