@@ -15,8 +15,8 @@
     "BOTNAME": {
       "description": "Put your bot name here as it's required."
     },
-    "LEVEL_UP": {
-      "description": "To enable auto level up, set true or false or enable or disable"
+    "MONGODB": {
+      "description": "Add your mongourl, url to get connected to the bot"
     },
     "LANG": {
       "description": "Choose images to show on menu. Available images (VOR_TERX)"
@@ -27,9 +27,6 @@
     "AUTO_READ_STATUS": {
       "description": "Auto_Status_View use (e.g. true to activate, false to disable)",
       "required": false
-    },
-    "AUTO_REACT": {
-      "description": "To set auto react, use [on] or off."
     },
     "WORKTYPE": {
       "description": "To set private or public, use private/public/group_work."
