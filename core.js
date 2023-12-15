@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-const { DisconnectReason, makeInMemoryStore, useMultiFileAuthState, fetchLatestBaileysVersion, makeWASocket, makeCacheableSignalKeyStore, makeMongoStore, useMongoDBAuthState, removeCreds } = require('@iamrony777/baileys');
+const { DisconnectReason, makeInMemoryStore, useMultiFileAuthState, fetchLatestBaileysVersion, makeWASocket, makeMongoStore, useMongoDBAuthState, removeCreds } = require('@iamrony777/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const express = require('express');
@@ -44,15 +44,6 @@ async function startAztec() {
   const authC = mongo.db(process.env.SESSION_ID).collection("auth");
   const { state: mongoState, saveCreds: saveMongoCreds } = await useMongoDBAuthState(authC);
 
-  async function connectWithRetry() {
-    try {
-      await vorterx.connect();
-    } catch (error) {
-      console.error("[🚫AZTEC] Connection failed, retrying in 3000ms:", error.message);
-      setTimeout(connectWithRetry, 3000);
-    }
-  }
-
   const mongoStore = makeMongoStore({
     filterChats: true,
     db: mongo.db(process.env.SESSION_ID),
@@ -69,7 +60,12 @@ async function startAztec() {
     store: mongoStore
   });
 
-  mongoStore.ev.bind(vorterx.ev); 
+  if (mongoStore) {
+    mongoStore.bind(vorterx);
+  } else {
+    console.error("Error: 'mongoStore' is undefined. Please check your code.");
+  }
+
   vorterx.cmd = new Collection();
   vorterx.contactDB = new QuickDB().table('contacts');
   vorterx.contact = contact;
