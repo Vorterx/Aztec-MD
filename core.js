@@ -75,13 +75,13 @@ async function startAztec() {
     vorterx.contactDB = new QuickDB().table('contacts');
     vorterx.contact = contact;
 
-async function readcommands() {
-  const cmdfile = fs.readdirSync("./plugins").filter((file) => file.endsWith(".js"));
-  for (const file of cmdfile) {
-    const command = require(`./plugins/${file}`);
-    vorterx.cmd.set(command.name, command);
-  }
-}
+    async function readcommands() {
+      const cmdfile = fs.readdirSync("./plugins").filter((file) => file.endsWith(".js"));
+      for (const file of cmdfile) {
+        const command = require(`./plugins/${file}`);
+        vorterx.cmd.set(command.name, command);
+      }
+    }
 
     await readcommands();
 
@@ -89,6 +89,14 @@ async function readcommands() {
       await saveCreds();
       await saveMongoCreds();
     });
+
+    async function connectWithRetry() {
+      try {
+       await vorterx.connect();
+      } catch (error) {
+        console.error("Error during reconnection:", error);
+      }
+    }
 
     vorterx.ev.on('connection.update', async (update) => {
       const { connection, lastDisconnect } = update;
@@ -174,4 +182,4 @@ async function main() {
 main().catch((error) => {
   console.error("An error occurred:", error);
   process.exit(1);
-});  
+});
