@@ -69,7 +69,7 @@ async function startAztec() {
     store: mongoStore
   });
 
-  vorterx.ev.bind(vorterx.ev);  // assuming you meant to bind to vorterx.ev, please adjust if needed
+  vorterx.ev.bind(vorterx.ev); 
   vorterx.cmd = new Collection();
   vorterx.contactDB = new QuickDB().table('contacts');
   vorterx.contact = contact;
