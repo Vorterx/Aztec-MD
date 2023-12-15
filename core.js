@@ -25,7 +25,7 @@ async function startAztec() {
     console.log("Initializing...");
 
     const inMemoryStore = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
-    const { state, saveCreds } = await useMultiFileAuthState();
+    const { state, saveCreds } = await useMultiFileAuthState(config.SESSION_ID);
 
     console.log("Aztec state loaded successfully.");
 
