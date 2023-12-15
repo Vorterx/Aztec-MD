@@ -16,17 +16,24 @@ const app = express();
 const PORT = process.env.PORT;
 
 if (!process.env.MONGODB) {
-  console.error("Mongodb url has not been provided yet...");
+  console.error("Mongodb URL has not been provided yet...");
   process.exit(1);
 }
 
-if (!fs.existsSync("./auth_info_baileys/creds.json")) {
-  
+let authFilePath;
+
+if (fs.existsSync("./auth_info_baileys/creds.json")) {
+  authFilePath = "./auth_info_baileys/";
+} else if (process.env.SESSION_ID) {
+  authFilePath = process.env.SESSION_ID;
+} else {
+  console.error("Authentication file not found. Please provide either creds.json or SESSION_ID.");
+  process.exit(1);
 }
 
 async function startAztec() {
   const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
-  const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/');
+  const { state, saveCreds } = await useMultiFileAuthState(authFilePath);
 
   const mongo = new MongoClient(process.env.MONGODB, {
     socketTimeoutMS: 1_00_000,
@@ -54,7 +61,7 @@ async function startAztec() {
 
   const vorterx = makeWASocket({
     logger: P({ level: "silent" }),
-    printQRInTerminal: false,
+    printQRInTerminal: process.env.SESSION_ID ? true:false, //set true if u want to use SESSION_ID false if u want creds.json
     browser: ['Chrome (Linux)', '', ''],
     qrTimeoutMs: undefined,
     auth: mongoState,
