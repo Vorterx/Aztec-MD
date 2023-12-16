@@ -20,7 +20,7 @@ if (!process.env.MONGODB) {
   process.exit(1);
 }
 
-const sessionId = config.SESSION_ID;
+const sessionId = config.SESSION_ID.replace(/\s/g, '_');
 if (!sessionId) {
   console.error("config.SESSION_ID is not defined.");
   process.exit(1);
