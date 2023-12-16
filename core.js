@@ -110,7 +110,7 @@ async function startAztec() {
             break;
           case DisconnectReason.loggedOut:
             console.log("[😭AZTEC] Device Logged Out, Cleaning up session.");
-            await removeCreds();
+            await state.removeCreds();
             process.exit();
             break;
           case DisconnectReason.restartRequired:
