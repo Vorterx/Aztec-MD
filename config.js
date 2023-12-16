@@ -14,13 +14,12 @@ let config = {
   SESSION_ID: process.env.SESSION_ID || 'add something',
   ANTILINK: process.env.ANTILINK || 'true',
   CAPTION: process.env.CAPTION || '𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝚅𝙾𝚁𝚃𝙴𝚁𝚇',
-  menu: process.env.MENU || '', // 2 is the default menu Aztec, 0 is Suhail MD menu
+  menu: process.env.MENU || '',
   THUMB: process.env.THUMB || 'https://imageupload.io/69vJBZbn4iPqWTZ',
   auto_read_status: process.env.AUTO_READ_STATUS || 'true',
   worktype: process.env.WORKTYPE || '',
-  mods: process.env.MODS ? process.env.MODS.split(',').map(mod => mod.replace('@net.whatsapp', '')) : [],
-  LANG: process.env.LANG || 'VOR_TERX',
-  MONGODB: process.env.MONGODB || '', // add mongodb url
+  mods: process.env.MODS ? process.env.MODS.split(',').map(mod => mod.replace('@net.whatsapp', '')) : [],  
+  MONGODB: process.env.MONGODB || '', 
   LOGOS: [
     'https://i.ibb.co/frX9YvD/OIG.jpg',
   ],
