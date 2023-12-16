@@ -51,11 +51,12 @@ async function startAztec() {
     });
 
     let vorterx = makeWASocket({
-      logger: P({ level: "silent" }),
+      version: (await fetchLatestBaileysVersion()).version,
       auth: {
       creds: state.creds,   
       keys: makeCacheableSignalKeyStore(state.keys),
     },
+    logger: P({ level: "silent" }),  
     printQRInTerminal: true,
   });
 
