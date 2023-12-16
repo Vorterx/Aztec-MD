@@ -60,14 +60,6 @@ async function startAztec() {
       store: mongoStore
     });
 
-    async function getConnect() {
-      try {
-        await vorterx.connect();
-      } catch (error) {
-        console.error("Error during reconnection:", error);
-      }
-    }
-
     if (mongoStore) {
       mongoStore.bind(vorterx.ev);
     } else {
@@ -113,7 +105,7 @@ async function startAztec() {
           case DisconnectReason.connectionLost:
             console.log("[🐏AZTEC] Connection closed or lost, reconnecting in 3000ms.");
             setTimeout(() => {
-              getConnect();
+              // Removed getConnect();
             }, 3000);
             break;
           case DisconnectReason.loggedOut:
@@ -123,11 +115,11 @@ async function startAztec() {
             break;
           case DisconnectReason.restartRequired:
             console.log("[♻️AZTEC] Server starting.");
-            getConnect();
+            // Removed getConnect();
             break;
           case DisconnectReason.timedOut:
             console.log("[🎰AZTEC] Connection Timed Out, Trying to Reconnect.");
-            getConnect();
+            // Removed getConnect();
             break;
           default:
             console.log("[🌬AZTEC] Server Disconnected: Maybe Your WhatsApp Account got banned");
