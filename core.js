@@ -26,6 +26,14 @@ if (!sessionId) {
   process.exit(1);
 }
 
+async function getConnect() {
+  try {
+    await vorterx.connect();
+  } catch (error) {
+    console.error("Error during reconnection:", error);
+  }
+}
+
 async function startAztec() {
   try {
     console.log("Initializing...");
@@ -152,14 +160,6 @@ async function startAztec() {
   } catch (error) {
     console.error("An error occurred during initialization:", error);
     process.exit(1);
-  }
-}
-
-async function getConnect() {
-  try {
-    await vorterx.connect();
-  } catch (error) {
-    console.error("Error during reconnection:", error);
   }
 }
 
