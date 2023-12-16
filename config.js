@@ -22,10 +22,7 @@ let config = {
   LANG: process.env.LANG || 'VOR_TERX',
   MONGODB: process.env.MONGODB || '', // add mongodb url
   LOGOS: [
-    'https://image.com/image1.jpg',
-    'https://gif.com/video1.mp4',
-    'https://vorterx.com/image2.jpg',
-    'https://aztec.com/video2.mp4',
+    'https://i.ibb.co/frX9YvD/OIG.jpg',
   ],
 };
 
