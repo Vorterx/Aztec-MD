@@ -38,6 +38,13 @@ module.exports = {
 
     const isImage = /\.(jpg|jpeg|png|gif)$/i.test(getLogo);
     const mediaType = isImage ? 1 : 2;
+    let getCommands = '';
+
+    for (const category in commandsByCategory) {
+      getCommands += `┌──『 *${category}* 』──❖\n\n`;
+      getCommands += commandsByCategory[category].map(plugin => ` | ${plugin.name}`).join('\n');
+      getCommands += '\n\n└─────────◉\n\n';
+  }
 
     const up_up = `┏━━⟪ *${process.env.BOTNAME}* ⟫━━⦿`;
     const up_mid = `┃ ✗`;
