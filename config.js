@@ -20,7 +20,13 @@ let config = {
   worktype: process.env.WORKTYPE || '',
   mods: process.env.MODS ? process.env.MODS.split(',').map(mod => mod.replace('@net.whatsapp', '')) : [],
   LANG: process.env.LANG || 'VOR_TERX',
-  MONGODB: process.env.MONGODB || '',//add mongodb url
+  MONGODB: process.env.MONGODB || '', // add mongodb url
+  LOGOS: [
+    'https://image.com/image1.jpg',
+    'https://gif.com/video1.mp4',
+    'https://vorterx.com/image2.jpg',
+    'https://aztec.com/video2.mp4',
+  ],
 };
 
 module.exports = config;
