@@ -26,14 +26,6 @@ if (!sessionId) {
   process.exit(1);
 }
 
-async function getConnect() {
-  try {
-    await vorterx.connect();
-  } catch (error) {
-    console.error("Error during reconnection:", error);
-  }
-}
-
 async function startAztec() {
   try {
     console.log("Initializing...");
@@ -58,7 +50,7 @@ async function startAztec() {
       autoDeleteStatusMessage: true
     });
 
-  let vorterx = makeWASocket({
+    let vorterx = makeWASocket({
       logger: P({ level: "silent" }),
       printQRInTerminal: true,
       browser: ['Chrome (Linux)', '', ''],
@@ -67,6 +59,14 @@ async function startAztec() {
       version: (await fetchLatestBaileysVersion()).version,
       store: mongoStore
     });
+
+    async function getConnect() {
+      try {
+        await vorterx.connect();
+      } catch (error) {
+        console.error("Error during reconnection:", error);
+      }
+    }
 
     if (mongoStore) {
       mongoStore.bind(vorterx.ev);
