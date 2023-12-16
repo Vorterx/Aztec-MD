@@ -7,7 +7,7 @@ const { QuickDB } = require('quick.db');
 const fs = require("fs");
 const { Collection } = require('discord.js');
 const config = require('./config.js');
-const botName = config.botName;
+const botName = process.env.BOTNAME;
 const qr = require("qr-image");
 const contact = require('./connects/contact.js');
 const { MessageHandler, vorterx } = require('./lib/client.js');
@@ -95,7 +95,7 @@ async function startAztec() {
         console.log('Plugins loaded♻️');
         console.log('WhatsApp chatbot has connected✔️');
     
-        const toxic = `Hello, I am your WhatsApp chatbot Aztec. Ready to assist you!`;
+        const toxic = `Hello, I am your WhatsApp chatbot *${botName}*. Ready to assist you!`;
         vorterx.sendMessage(vorterx.user.id, { text: toxic });
       } else if (connection === "close") {
         let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
