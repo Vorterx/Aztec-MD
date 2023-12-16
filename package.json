@@ -20,6 +20,7 @@
     "@viper-x/fancytext": "^1.0.2",
     "@xaviabot/fb-downloader": "^1.0.14",
     "@vitalets/google-translate-api": "^9.2.0",
+    "anime-quiz": "^3.0.0",
     "axios": "^0.24.0",
     "api-dylux": "^1.6.5",
     "node-os-utils": "^1.3.7",
@@ -99,5 +100,5 @@
   "url": "https://github.com/Vorterx/Aztec-MD/issues"
   },
   "homepage": "https://github.com/Vorterx/Aztec-MD#readme",
-  "description": "An awesome WhatsApp User Bot made by the Vorterx Team! Power up your chats with cool features."
+  "description": "WhatsApp Chatbot based on Whiskeysockets balys."
 }
