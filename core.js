@@ -58,7 +58,7 @@ async function startAztec() {
       autoDeleteStatusMessage: true
     });
 
-    const vorterx = makeWASocket({
+   vorterx = makeWASocket({
       logger: P({ level: "silent" }),
       printQRInTerminal: true,
       browser: ['Chrome (Linux)', '', ''],
