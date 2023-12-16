@@ -18,9 +18,6 @@
     "MONGODB": {
       "description": "Add your mongourl, url to get connected to the bot"
     },
-    "LANG": {
-      "description": "Choose images to show on menu. Available images (VOR_TERX)"
-    },
     "OWNER_NAME": {
       "description": "Add your name (e.g. diegosonTech or suhailTechInfo)"
     },
