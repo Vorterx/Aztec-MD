@@ -5,7 +5,7 @@ module.exports = { async client(vorterx, m, { args }) {
     const fs = require('fs');
     const path = require('path');
 
-    const pluginsPath = path.join(__dirname, 'plugins');
+    const pluginsPath = path.join(__dirname);
     const categories = {};
 
     fs.readdirSync(pluginsPath).forEach((file) => {
@@ -42,7 +42,7 @@ module.exports = { async client(vorterx, m, { args }) {
     const category = m.session.categories[args[0]];
 
     if (category) {
-      const categoryPath = path.join(__dirname, 'plugins', category);
+      const categoryPath = path.join(__dirname, category);
       const categoryCommands = fs.readdirSync(categoryPath);
 
       if (categoryCommands.length > 0) {
