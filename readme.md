@@ -12,6 +12,8 @@
 
 ## ***Aztec-MD***
 
+## FEW DAYS LEFT GUYS
+
 Welcome to ***Aztec MD***, a versatile and feature-packed WhatsApp bot designed to enhance your experience. lt offers a wide range of commands across various categories to cater to all your needs. Whether you're looking for fun, moderation, gaming, or utility commands.
 
 ## Installation 🚀
