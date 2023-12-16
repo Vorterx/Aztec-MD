@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-const { DisconnectReason, makeInMemoryStore, useMultiFileAuthState, fetchLatestBaileysVersion, makeWASocket, makeMongoStore, useMongoDBAuthState, removeCreds } = require('@iamrony777/baileys');
+const { DisconnectReason, makeInMemoryStore, makeCacheableSignalKeyStore, useMultiFileAuthState, fetchLatestBaileysVersion, makeWASocket, makeMongoStore, useMongoDBAuthState, removeCreds } = require('@iamrony777/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const express = require('express');
@@ -81,8 +81,8 @@ async function startAztec() {
     await readcommands();
 
     vorterx.ev.on('creds.update', async () => {
-      await saveCreds();
-      await saveMongoCreds();
+      await state.saveCreds();
+      await state.saveMongoCreds();
     });
 
     vorterx.ev.on('connection.update', async (update) => {
@@ -145,7 +145,7 @@ async function startAztec() {
 
     process.on('SIGINT', async () => {
       await mongo.close();
-      await removeCreds();
+      await state.removeCreds();
       process.exit();
     });
 
