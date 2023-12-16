@@ -70,6 +70,7 @@
     "instagram-url-direct": "^1.0.13",
     "human-readable": "^0.2.1",
     "heroku-client": "^3.1.0",
+    "https": "^1.0.0",
     "network-speed": "^2.1.1",
     "qr-image": "^3.2.0",
     "qrcode": "^1.5.1",
