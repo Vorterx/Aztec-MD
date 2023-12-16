@@ -52,13 +52,12 @@ async function startAztec() {
 
     let vorterx = makeWASocket({
       logger: P({ level: "silent" }),
-      printQRInTerminal: true,
-      browser: ['Chrome (Linux)', '', ''],
-      qrTimeoutMs: undefined,
-      auth: mongoState,
-      version: (await fetchLatestBaileysVersion()).version,
-      store: mongoStore
-    });
+      auth: {
+      creds: state.creds,   
+      keys: makeCacheableSignalKeyStore(state.keys),
+    },
+    printQRInTerminal: true,
+  });
 
     if (mongoStore) {
       mongoStore.bind(vorterx.ev);
