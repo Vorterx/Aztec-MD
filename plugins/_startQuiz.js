@@ -8,7 +8,9 @@ module.exports = {
   async client(vorterx, m, { text, args, connect }) {
     
     const user = m.pushName;
-    if (args[0] === 'startQuiz','quiz',) {
+    const startKeywords = ['startQuiz', 'quiz'];
+
+    if (startKeywords.includes(args[0])) {
       if (quizInProgress) {
         await connect('😺');
         return m.reply('The quiz is already in progress...');
