@@ -1,4 +1,4 @@
-const { doQuiz } = require('../lib/quizUtils');
+const { doQuiz } = require('../lib/client.js');
 
 let quizInProgress = false;
 module.exports = {
