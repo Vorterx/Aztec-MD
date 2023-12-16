@@ -8,7 +8,7 @@ const isImage = /\.(jpg|jpeg|png|gif)$/i.test(getLogo);
 const mediaType = isImage ? 1 : 2;
 
 module.exports = {
-  async client(vorterx, m, { args,text }) {
+  async client(vorterx, m, { args, text }) {
     if (args && args.length > 0 && args[0] === 'menu2') {
       const fs = require('fs');
       const path = require('path');
@@ -36,11 +36,11 @@ module.exports = {
         }).join('\n');
 
         const menuString = `${getMenu}${categoryText}\n\n└─────────◉\n\n`;
+
         vorterx.sendMessage(m.from, {
-          image: {[isImage ? 'image' : 'video']: {
-            url: getLogo },
+          image: { [isImage ? 'image' : 'video']: { url: getLogo } },
           text: `${menuString}Please reply to the number category below`,
-        });  
+        });
         m.session.categories = categories;
 
       } else {
@@ -64,8 +64,7 @@ module.exports = {
           const categoryText = `┌──『 *${category}Menu* 』──❖\n\n${commandListString}\n\n└─────────◉\n\n`;
 
           vorterx.sendMessage(m.from, {
-            image: { [isImage ? 'image' : 'video']: {
-              url: getLogo},
+            image: { [isImage ? 'image' : 'video']: { url: getLogo } },
             text: `${categoryText}Please reply to the number category below`,
           });
 
@@ -80,4 +79,4 @@ module.exports = {
       vorterx.sendMessage(m.from, 'Invalid command. Please use `menu2` to view the menu____❌');
     }
   }
-};
+}; 
