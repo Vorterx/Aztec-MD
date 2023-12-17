@@ -1,37 +1,31 @@
-const ytdl = require('ytdl-core');
-
-function isUrl(string) {
-  const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
-  return urlRegex.test(string);
-}
+const config = require('../config.js');
+const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 
 module.exports = {
   name: 'ytmp4',
-  alias: ['ytvid'],
   category: 'Downloads',
   async client(vorterx, m, { text, args, connect }) {
-    if (args.length < 1 || !isUrl(text) || !ytdl.validateURL(text)) {
+  
+    if (!args[0]) {
       await connect('❌');
-      return m.reply(`*Please provide a valid YouTube link that I can download.*`);
+      return m.reply('Please provide a YouTube link for me to download');
     }
 
-    await connect('📤');
-    try {
-      const videoInfo = await ytdl.getInfo(text);
+    const v_api = `https://vihangayt.me/download/ytmp4?url=${encodeURIComponent(args[0])}`;
+    const res = await fetch(v_api);
+    const vid = await res.json();
 
-      // Check if videoInfo.videoDetails.video_url exists before using it
-      if (videoInfo.videoDetails.video_url && (videoInfo.videoDetails.video_url.startsWith('http://') || videoInfo.videoDetails.video_url.startsWith('https://'))) {
-        const videoStream = ytdl(text, { quality: 'highest' });
-        await vorterx.sendMessage(m.from, { video: videoStream, caption: `╭–– *『YTMP4 DOWNDR』*\n┆\n*Title*: ${videoInfo.videoDetails.title}\n┆\n*Duration*: ${videoInfo.videoDetails.lengthSeconds}s\n╰–––––––––––––––༓` }, { quoted: m });
-      } else {
-        // Handle the case where videoInfo.videoDetails.video_url is undefined or doesn't match the expected format
-        await connect('❌');
-        return m.reply(`*Invalid URL format.*`);
+    await connect('📤')
+    const v_qualty = ['vid_360p', 'vid_720p']; 
+    let videoURL = '';
+    let i = 0;
+    while (i < v_qualty.length && !videoURL) {
+      const quality = v_qualty[i];
+      if (vid.data[quality]) {
+        videoURL = vid.data[quality];
       }
-    } catch (error) {
-      console.error('Error fetching video information:', error);
-      await connect('❌');
-      return m.reply(`*Error fetching video information.*`);
-    }
+      i++;
+    }    
+    await vorterx.sendMessage(m.from, { video: videoURL, caption: `*Title*: ${vid.data.title}\n*Quality*: ${v_qualty[i - 1]}\n\n*${config.CAPTION}*` });    
   }
 };
