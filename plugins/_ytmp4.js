@@ -3,6 +3,7 @@ const fetch = async (url) => import('node-fetch').then(module => module.default(
 
 module.exports = {
   name: 'ytmp4',
+  alias: ['vid','mp4'],
   category: 'Downloads',
   async client(vorterx, m, { text, args, connect }) {
   
