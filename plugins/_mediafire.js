@@ -1,4 +1,5 @@
 const { mediafiredl } = require('@bochilteam/scraper');
+const { tiny } = require('@viper-x/fancytext');
 const config = require('../config.js');
 
 function isValidUrl(string) {
