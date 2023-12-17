@@ -1,12 +1,13 @@
 const config = require('../config.js');
+const { tiny } = require('@viper-x/fancytext');
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 
 module.exports = {
   name: 'ytmp4',
-  alias: ['vid','mp4'],
+  alias: ['vid', 'mp4'],
   category: 'Downloads',
   async client(vorterx, m, { text, args, connect }) {
-  
+
     if (!args[0]) {
       await connect('❌');
       return m.reply('Please provide a YouTube link for me to download');
@@ -16,8 +17,8 @@ module.exports = {
     const res = await fetch(v_api);
     const vid = await res.json();
 
-    await connect('📤')
-    const v_qualty = ['vid_360p', 'vid_720p']; 
+    await connect('📤');
+    const v_qualty = ['vid_360p', 'vid_720p'];
     let videoURL = '';
     let i = 0;
     while (i < v_qualty.length && !videoURL) {
@@ -26,7 +27,8 @@ module.exports = {
         videoURL = vid.data[quality];
       }
       i++;
-    }    
-    await vorterx.sendMessage(m.from, { video: videoURL, caption: `*Title*: ${vid.data.title}\n*Quality*: ${v_qualty[i - 1]}\n\n*${config.CAPTION}*` });    
+    }
+    
+    await vorterx.sendMessage(m.from, { video: videoURL, caption: tiny(`*Title*: ${vid.data.title}\n*Quality*: ${v_qualty[i - 1]}\n\n*${config.CAPTION}*`) });
   }
 };
