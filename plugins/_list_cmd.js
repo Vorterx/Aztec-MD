@@ -9,6 +9,13 @@ module.exports = {
   async client(vorterx, m, { args, text, connect }) {
     
     await connect('📝');
+    const allLogos = [...(config.LOGOS || []), ...(process.env.LOGOS ? process.env.LOGOS.split(',') : [])];
+    const doIndex = Math.floor(Math.random() * allLogos.length);
+    const getLogo = allLogos[doIndex];
+
+    const isImage = /\.(jpg|jpeg|png|gif)$/i.test(getLogo);
+    const mediaType = isImage ? 1 : 2;
+    
     const pluginsDir = path.join(__dirname);
 
     const commandFiles = fs.readdirSync(pluginsDir);
@@ -23,16 +30,16 @@ module.exports = {
     });
 
     let list_md = `
-┏━━━━━━━━━━━━━━━━━━
-┃	*AZTEC_MD_CMD_LIST* 
-┗━━━━━━━━━━━━━━━━━━
+┏━━━━━━━━━━━━━━━
+┃	*AZTEC_MD_LIST*
+┗━━━━━━━━━━━━━━━
 ┌──────────────❖\n\n`;
 
     commandNames.forEach((name, index) => {
       list_md += ` | ${index + 1} ${name}\n`;
     });
 
-    list_md += '\n└─────────────◉'\n\n*${config.CAPTION}*;
+    list_md += `\n└─────────────◉\n\n*${config.CAPTION}*`;
 
     const chatBot = {
       [isImage ? 'image' : 'video']: {
