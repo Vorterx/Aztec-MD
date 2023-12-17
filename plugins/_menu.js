@@ -77,13 +77,13 @@ ${bottomSection}\n\n${getCommands}\n\n*${config.CAPTION}*`;
       headerType: 2,
       contextInfo: {
         externalAdReply: {
-          title: 'vorterx bot',
+          title: `*${config.CAPTION}*`,
           body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
           mediaType,
           thumbnail: {
             url: getLogo
           },
-          sourceUrl: 'wa.me/27686881509',
+          sourceUrl: `${process.env.MODS}`,
           mediaUrl: '',
         },
       },
