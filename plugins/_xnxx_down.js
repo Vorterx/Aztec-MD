@@ -1,23 +1,19 @@
-//==DN DOWNLOAD 
-
-//=======AZTEC-MD
-
 module.exports = {
   name: "xnxxdn",
   description: "Download XNXX videos",
   category: "Downloads",
   async client(vorterx, m, { connect, text, args }) {
+   
     const axios = require("axios");
-
     if (!text) {
-      await connect("⛔");
+      await connect("❌");
       m.reply("*Missing XNXX link, please provide one.*");
       return;
     }
 
     let urlYt = text;
     if (!urlYt.startsWith("https")) {
-      await connect("⛔");
+      await connect("❌");
       m.reply("*😏 Provide me with an XNXXVD link.*");
       return;
     }
@@ -28,10 +24,9 @@ module.exports = {
     const video = res.data;
 
     let ca_pe = `
-🎬 *XNXX VIDEO DOWNLOAD*
-🍑 *Title:* XNXX
-📟 *Bot Name:* ${process.env.BOTNAME}
-📤 *Download Link:* [${video}]
+*XNXX VIDEO DOWNLOAD*
+
+*${config.CAPTION}*
 `;
 
     let buttonMessage = {
