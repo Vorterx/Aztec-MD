@@ -26,9 +26,9 @@ for (const file of pluginFiles) {
 module.exports = {
   name: 'menu',
   alias: ['h', 'help'],
-  category: 'General',
   description: 'Reveals menu categories commands',
   async client(vorterx, m, { args, connect }) {
+   
     await connect('Ⓜ️');
 
     const allLogos = [...(config.LOGOS || []), ...(process.env.LOGOS ? process.env.LOGOS.split(',') : [])];
