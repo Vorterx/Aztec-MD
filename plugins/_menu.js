@@ -29,7 +29,6 @@ module.exports = {
   category: 'General',
   description: 'Reveals menu categories commands',
   async client(vorterx, m, { args, connect }) {
-   
     await connect('Ⓜ️');
 
     const allLogos = [...(config.LOGOS || []), ...(process.env.LOGOS ? process.env.LOGOS.split(',') : [])];
@@ -38,36 +37,37 @@ module.exports = {
 
     const isImage = /\.(jpg|jpeg|png|gif)$/i.test(getLogo);
     const mediaType = isImage ? 1 : 2;
+    let headerTop, midSection, bottomSection, categoryLeft, categoryRight, commandLine, categoryEnd;
+    let randomMenu = 0;
+
+    if (!process.env.MENU) { randomMenu = Math.floor(Math.random() * 2) + 1; }        
+
+    if (randomMenu == 1 || process.env.MENU.trim().startsWith("1") || process.env.MENU.toLowerCase().includes("aztec-md")) {  
+      headerTop = `┏━━⟪ *${process.env.BOTNAME}* ⟫━━⦿`;
+      midSection = `┃ ✗`;
+      bottomSection = `┗━━━━━━━━━━━━━━⦿`;
+      categoryLeft = `\n┌──『`;
+      categoryRight = `』──❖\n\n`;
+      commandLine = ` | `;
+      categoryEnd = `\n\n└─────────◉\n`;
+    }
+
     let getCommands = '';
-    var up_up, up_mid, up_btm, ctgry_L, ctgry_R, cmd_L, ctgry_end
-            var random_menu = 0 ;
-            if (!process.env.MENU) { random_menu = Math.floor(Math.random() * 0) + 1; }        
-            if (random_menu == 1 || process.env.MENU.trim().startsWith("1") || process.env.MENU.toLowerCase().includes("aztec-md")) {            
-            
 
     for (const category in commandsByCategory) {
-      getCommands += `┌──『 *${category}* 』──❖\n\n`;
-      getCommands += commandsByCategory[category].map(plugin => ` | ${plugin.name}`).join('\n');
-      getCommands += '\n\n└─────────◉\n\n';
-  }
+      getCommands += `${categoryLeft} *${category}* ${categoryRight}\n\n`;
+      getCommands += commandsByCategory[category].map(plugin => ` ${commandLine} ${plugin.name}`).join('\n');
+      getCommands += `${categoryEnd}\n\n`;
+    }
 
-    const up_up = `┏━━⟪ *${process.env.BOTNAME}* ⟫━━⦿`;
-    const up_mid = `┃ ✗`;
-    const up_btm = `┗━━━━━━━━━━━━━━⦿`;
-              ctgry_L  = `\n┌──『`
-              ctgry_R  = `』──❖\n\n`
-            cmd_L = ` | `
-              ctgry_end =`\n\n└─────────◉\n`
-            
-
-    const amarok = `${up_up}
-${up_mid} User: ${m.pushName}
-${up_mid} Botname: ${process.env.BOTNAME}
-${up_mid} Prefix: ${process.env.PREFIX}
-${up_mid} Runtime: ${process.uptime()} seconds
-${up_mid} Time: ${new Date().toLocaleTimeString()}
-${up_mid} Date: ${new Date().toLocaleDateString()}
-${up_btm}\n\n${getCommands}\n\n*${config.CAPTION}*`;
+    const amarok = `${headerTop}
+${midSection} User: ${m.pushName}
+${midSection} Botname: ${process.env.BOTNAME}
+${midSection} Prefix: ${process.env.PREFIX}
+${midSection} Runtime: ${process.uptime()} seconds
+${midSection} Time: ${new Date().toLocaleTimeString()}
+${midSection} Date: ${new Date().toLocaleDateString()}
+${bottomSection}\n\n${getCommands}\n\n*${config.CAPTION}*`;
 
     const chatBot = {
       [isImage ? 'image' : 'video']: {
