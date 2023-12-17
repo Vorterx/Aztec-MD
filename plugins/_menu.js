@@ -1,4 +1,3 @@
-//
 const axios = require('axios');
 const { tiny } = require("@viper-x/fancytext");
 const fs = require("fs");
@@ -55,6 +54,11 @@ module.exports = {
     const up_up = `┏━━⟪ *${process.env.BOTNAME}* ⟫━━⦿`;
     const up_mid = `┃ ✗`;
     const up_btm = `┗━━━━━━━━━━━━━━⦿`;
+              ctgry_L  = `\n┌──『`
+              ctgry_R  = `』──❖\n\n`
+            cmd_L = ` | `
+              ctgry_end =`\n\n└─────────◉\n`
+            
 
     const amarok = `${up_up}
 ${up_mid} User: ${m.pushName}
