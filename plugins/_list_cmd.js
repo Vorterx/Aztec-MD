@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { tiny } = require('@viper-x/fancytext');
+const config = require('../config.js');
 const path = require('path');
 
 module.exports = {
@@ -22,13 +23,16 @@ module.exports = {
     });
 
     let list_md = `
-┌──『 *${process.env.BOTNAME}* 』──❖\n\n`;
+┏━━━━━━━━━━━━━━━━━━
+┃	 *AZTEC_MD_CMD_LIST* 
+┗━━━━━━━━━━━━━━━━━━
+┌──────────────❖\n\n`;
 
     commandNames.forEach((name, index) => {
       list_md += ` | ${index + 1} ${name}\n`;
     });
 
-    list_md += '\n└─────────◉';
+    list_md += '\n└─────────────◉'\n\n*${config.CAPTION}*;
 
     m.reply(tiny(list_md));
   },
