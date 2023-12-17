@@ -1,4 +1,5 @@
 const { mediafiredl } = require('@bochilteam/scraper');
+const config = require('../config.js');
 
 function isValidUrl(string) {
   const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
@@ -24,15 +25,15 @@ module.exports = {
           const { url, filetype, filename, ext, filesizeH } = result;
 
           const v_cap = `
-╭── MEDIAFIRE DOWNLOAD ─
+╭──*『 MEDIAFIRE DOWNLOAD 』*
 │ *Name:* ${filename}
 │ *Size:* ${filesizeH}
 │ *Type:* ${filetype}
-╰───────────────────`;
+╰───────────────────༓\n\n*${config.CAPTION}*`;
 
           vorterx.sendMessage(m.from, {
             url,
-            caption: v_cap,
+            caption: tiny(v_cap),
             document: { url: filename, mimetype: ext },
             quoted: m,
           });
