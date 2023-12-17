@@ -24,7 +24,7 @@ module.exports = {
 
     let list_md = `
 ┏━━━━━━━━━━━━━━━━━━
-┃	 *AZTEC_MD_CMD_LIST* 
+┃	*AZTEC_MD_CMD_LIST* 
 ┗━━━━━━━━━━━━━━━━━━
 ┌──────────────❖\n\n`;
 
@@ -34,6 +34,26 @@ module.exports = {
 
     list_md += '\n└─────────────◉'\n\n*${config.CAPTION}*;
 
-    m.reply(tiny(list_md));
-  },
+    const chatBot = {
+      [isImage ? 'image' : 'video']: {
+        url: getLogo
+      },
+      caption: tiny(list_md),
+      headerType: 2,
+      contextInfo: {
+        externalAdReply: {
+          title: `${config.CAPTION}`,
+          body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
+          mediaType,
+          thumbnail: {
+            url: getLogo
+          },
+          sourceUrl: `${process.env.MODS}`,
+          mediaUrl: '',
+        },
+      },
+    };
+
+    await vorterx.sendMessage(m.from, chatBot, { quoted: m });
+  }
 };
