@@ -1,3 +1,4 @@
+//
 const axios = require('axios');
 const { tiny } = require("@viper-x/fancytext");
 const fs = require("fs");
@@ -39,6 +40,11 @@ module.exports = {
     const isImage = /\.(jpg|jpeg|png|gif)$/i.test(getLogo);
     const mediaType = isImage ? 1 : 2;
     let getCommands = '';
+    var up_up, up_mid, up_btm, ctgry_L, ctgry_R, cmd_L, ctgry_end
+            var random_menu = 0 ;
+            if (!process.env.MENU) { random_menu = Math.floor(Math.random() * 0) + 1; }        
+            if (random_menu == 1 || process.env.MENU.trim().startsWith("1") || process.env.MENU.toLowerCase().includes("aztec-md")) {            
+            
 
     for (const category in commandsByCategory) {
       getCommands += `┌──『 *${category}* 』──❖\n\n`;
