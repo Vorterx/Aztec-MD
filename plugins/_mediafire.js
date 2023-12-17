@@ -21,12 +21,13 @@ module.exports = {
       await m.reply(`\`\`\`Downloading your media, wait...⏳\`\`\``);
       mediafiredl(args[0])
         .then(result => {
-          const { url, filename, ext, filesizeH } = result;
+          const { url, filetype, filename, ext, filesizeH } = result;
 
           const v_cap = `
 ╭── MEDIAFIRE DOWNLOAD ─
 │ *Name:* ${filename}
 │ *Size:* ${filesizeH}
+│ *Type:* ${filetype}
 ╰───────────────────`;
 
           vorterx.sendMessage(m.from, {
