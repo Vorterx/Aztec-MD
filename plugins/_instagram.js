@@ -1,4 +1,5 @@
 const { igdl } = require('btch-downloader');
+const config = require('../config.js');
 
 module.exports = {
   name: 'insta',
@@ -19,15 +20,15 @@ module.exports = {
         return m.reply('Failed to download the video.');
       }
 
-      console.log('Data:', data);
+      console.log(data);
       await connect('📤');
       m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
 
       for (let i of data) {
         const { quality, size, url } = i;
-        const vidi = `╭–– *『INSTÀ Downloader』*\n┆ *Size* : N/A\n┆ *Quality* : 420p\n╰–––––––––––––––༓`;
+        const vidi = `*Size* : N/A\n*Quality* : 420p\n\n*${config.CAPTION}*`;
 
-        vorterx.sendMessage(m.from, { video: { url }, caption: vidi}, {quoted: m });
+        vorterx.sendMessage(m.from, { video: { url }, caption: tiny(vidi)}, {quoted: m });
       }
     } catch (error) {
       console.error(error);
