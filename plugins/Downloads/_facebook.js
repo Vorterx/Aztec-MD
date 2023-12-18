@@ -1,6 +1,6 @@
 const bocil = require('@bochilteam/scraper');
 const { tiny } = require('@viper-x/fancytext');
-const config = require('../config.js');
+const config = require('../../config.js');
 
 module.exports = {
     name: "fb",
