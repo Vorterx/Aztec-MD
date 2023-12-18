@@ -1,4 +1,4 @@
-const { getCpuSpeed, getUploadSpeed } = require("../../lib/assiets/_speedSystem.js");
+const { getCpuSpeed, getUploadSpeed, calculatePing } = require("../../lib/assiets/_speedSystem.js");
 const os = require("os");
 const speed = require("performance-now");
 const { exec } = require("child_process");
@@ -8,8 +8,8 @@ module.exports = {
    category: 'Mics',
    description: 'Check the speedy',
    async client(vorterx, m, { connect }) {
-      
-     await connect("🏇");
+     
+      await connect("🏇");
       const cpuSpeedResult = { speed: getCpuSpeed() }; 
       const uploadSpeedInMbps = getUploadSpeed(); 
 
@@ -20,9 +20,11 @@ module.exports = {
 
          const child = stdout.toString("utf-8");
          const aztec = child.replace(/Memory:/, "Ram:");
- m.reply(`${aztec}*🛑 Performance:* ${latency.toFixed(4)} ms
+         
+         m.reply(`${aztec}*🛑 Performance:* ${latency.toFixed(4)} ms
 *💻 CPU Speed:* ${cpuSpeedResult.speed} GHz
-*📤 Upload Speed:* ${uploadSpeedInMbps} Mbps`);
+*📤 Upload Speed:* ${uploadSpeedInMbps} Mbps
+*📍 Ping:* ${calculatePing(m.messageTimestamp, Date.now())} _second(s)_`);
       });
-     }
+   }
 };
