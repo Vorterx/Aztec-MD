@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 
 module.exports = {
   name: "gpt",
@@ -31,8 +31,9 @@ module.exports = {
             title: "GPT TURBO 3.5K",
             mediaType: 1,
             thumbnailUrl: "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png",
-            sourceUrl: "",
             renderLargerThumbnail: true,
+            mediaUrl: "",
+            sourceUrl: "",            
           },
         },
       }, { quoted: m });
