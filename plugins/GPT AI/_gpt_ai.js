@@ -29,6 +29,7 @@ module.exports = {
         contextInfo: {
           externalAdReply: {
             title: "GPT TURBO 3.5K",
+            body: "",
             mediaType: 1,
             thumbnailUrl: "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png",
             renderLargerThumbnail: true,
