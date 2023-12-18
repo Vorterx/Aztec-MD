@@ -24,7 +24,7 @@ module.exports = {
 
       const getSize = size > 907 ? 'This app is too large to download...' : '';
 
-      let gotApp = `*APPLICATION DOWNLOADER*\n\n`;
+      let gotApp = `*『 APPLICATION DOWNLOADER 』*\n\n`;
       gotApp += `*🛡️ App NaMe*: *${name}*\n`;
       gotApp += `*📤 Size*: *${size}\n*`;
       gotApp += `*📦 App Id*: *${appId}*\n`;
