@@ -1,6 +1,6 @@
 const { mediafiredl } = require('@bochilteam/scraper');
 const { tiny } = require('@viper-x/fancytext');
-const config = require('../config.js');
+const config = require('../../config.js');
 
 function isValidUrl(string) {
   const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
