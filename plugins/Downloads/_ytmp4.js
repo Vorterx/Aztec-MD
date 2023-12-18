@@ -1,4 +1,4 @@
-const config = require('../config.js');
+const config = require('../../config.js');
 const { tiny } = require('@viper-x/fancytext');
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 
