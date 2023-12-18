@@ -5,6 +5,7 @@ module.exports = {
   async client(vorterx, m, { connect, text, args }) {
    
     const axios = require("axios");
+    const config = require('../../config.js');
     if (!text) {
       await connect("❌");
       m.reply("*Missing XNXX link, please provide one.*");
