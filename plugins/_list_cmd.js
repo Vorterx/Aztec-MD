@@ -7,7 +7,7 @@ module.exports = {
   name: 'list',
   category: 'General',
   async client(vorterx, m, { args, text, connect }) {
-    
+   
     await connect('📝');
     const allLogos = [...(config.LOGOS || []), ...(process.env.LOGOS ? process.env.LOGOS.split(',') : [])];
     const doIndex = Math.floor(Math.random() * allLogos.length);
@@ -15,19 +15,29 @@ module.exports = {
 
     const isImage = /\.(jpg|jpeg|png|gif)$/i.test(getLogo);
     const mediaType = isImage ? 1 : 2;
-    
+
     const pluginsDir = path.join(__dirname);
-
-    const commandFiles = fs.readdirSync(pluginsDir);
-
     const commandNames = [];
 
-    commandFiles.forEach((file) => {
-      const commandModule = require(path.join(pluginsDir, file));
-      if (commandModule && commandModule.name) {
-        commandNames.push(commandModule.name);
+    function readCommandsFromDirectory(directory) {
+      const files = fs.readdirSync(directory);
+
+      for (const file of files) {
+        const filePath = path.join(directory, file);
+        const stat = fs.statSync(filePath);
+
+        if (stat.isDirectory()) {
+          readCommandsFromDirectory(filePath);
+        } else if (file.endsWith('.js') && file !== 'list.js') {
+          const commandModule = require(filePath);
+          if (commandModule && commandModule.name) {
+            commandNames.push(commandModule.name);
+          }
+        }
       }
-    });
+    }
+
+    readCommandsFromDirectory(pluginsDir);
 
     let list_md = `
 ┏━━━━━━━━━━━━━━━
@@ -43,7 +53,7 @@ module.exports = {
 
     const chatBot = {
       [isImage ? 'image' : 'video']: {
-        url: getLogo
+        url: getLogo,
       },
       caption: tiny(list_md),
       headerType: 2,
@@ -53,7 +63,7 @@ module.exports = {
           body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
           mediaType,
           thumbnail: {
-            url: getLogo
+            url: getLogo,
           },
           sourceUrl: `${process.env.MODS}`,
           mediaUrl: '',
@@ -62,5 +72,5 @@ module.exports = {
     };
 
     await vorterx.sendMessage(m.from, chatBot, { quoted: m });
-  }
+  },
 };
