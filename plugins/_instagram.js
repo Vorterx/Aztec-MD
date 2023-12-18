@@ -1,4 +1,5 @@
 const { igdl } = require('btch-downloader');
+const { tiny } = require('@viper-x/fancytext');
 const config = require('../config.js');
 
 module.exports = {
