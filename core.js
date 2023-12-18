@@ -5,6 +5,7 @@ const P = require('pino');
 const express = require('express');
 const { QuickDB } = require('quick.db');
 const fs = require("fs");
+const path = require('path');
 const { Collection } = require('discord.js');
 const config = require('./config.js');
 const botName = process.env.BOTNAME;
@@ -70,16 +71,38 @@ async function startAztec() {
     vorterx.contactDB = new QuickDB().table('contacts');
     vorterx.contact = contact;
 
-    async function readcommands() {
-      const cmdfile = fs.readdirSync("./plugins").filter((file) => file.endsWith(".js"));
-      for (const file of cmdfile) {
-        const command = require(`./plugins/${file}`);
-        vorterx.cmd.set(command.name, command);
-      }
+ async function readCommands() {
+  const pluginsDir = './plugins';
+  const cmdFiles = getCommandFiles(pluginsDir);
+
+  for (const file of cmdFiles) {
+    const command = require(path.join(pluginsDir, file));
+    vorterx.cmd.set(command.name, command);
+  }
+}
+
+function getCommandFiles(dir) {
+  const cmdFiles = [];
+  const files = fs.readdirSync(dir);
+
+  for (const file of files) {
+    const filePath = path.join(dir, file);
+    const isDirectory = fs.statSync(filePath).isDirectory();
+
+    if (isDirectory) {
+      const subDirFiles = fs.readdirSync(filePath).filter((subFile) => subFile.endsWith('.js'));
+      cmdFiles.push(...subDirFiles.map((subFile) => path.join(file, subFile)));
+    } else if (file.endsWith('.js')) {
+      
+      cmdFiles.push(file);
     }
+  }
 
-    await readcommands();
+  return cmdFiles;
+}
 
+await readCommands();
+      
     vorterx.ev.on('creds.update', async () => {
       await state.saveCreds();
       await state.saveMongoCreds();
