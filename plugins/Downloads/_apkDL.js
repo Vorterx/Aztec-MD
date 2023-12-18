@@ -1,4 +1,6 @@
 const { search, download } = require('aptoide-scraper');
+const { tiny } = require('@viper-x/fancytext');
+
 
 module.exports = {
   name: 'getpack',
