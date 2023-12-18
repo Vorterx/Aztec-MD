@@ -13,7 +13,7 @@ let config = {
   owner_number: process.env.OWNER_NUMBER || '27686881509',
   SESSION_ID: process.env.SESSION_ID || 'add something',
   ANTILINK: process.env.ANTILINK || 'true',
-  CAPTION: process.env.CAPTION || '𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝚅𝙾𝚁𝚃𝙴𝚁𝚇',
+  CAPTION: process.env.CAPTION || 'ᴾᴼᵂᴱᴿᴱᴰ ᴮʸ ⱽᴼᴿᵀᴱᴿˣ',
   menu: process.env.MENU || '',
   THUMB: process.env.THUMB || 'https://imageupload.io/69vJBZbn4iPqWTZ',
   auto_read_status: process.env.AUTO_READ_STATUS || 'true',
