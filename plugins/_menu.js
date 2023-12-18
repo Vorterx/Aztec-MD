@@ -5,30 +5,37 @@ const config = require("../config.js");
 const path = require("path");
 
 const pluginDir = path.join(__dirname);
-const pluginFiles = fs.readdirSync(pluginDir);
 const commandsByCategory = {};
 
-for (const file of pluginFiles) {
-  if (!file.endsWith('.js') || file === 'menu.js') {
-    continue;
-  }
-  
-  const plugin = require(path.join(pluginDir, file));
-  const category = plugin.category;
+function readCommandsFromDirectory(directory) {
+  const files = fs.readdirSync(directory);
 
-  if (!commandsByCategory[category]) {
-    commandsByCategory[category] = [];
+  for (const file of files) {
+    const filePath = path.join(directory, file);
+    const stat = fs.statSync(filePath);
+
+    if (stat.isDirectory()) {
+      readCommandsFromDirectory(filePath);
+    } else if (file.endsWith('.js') && file !== 'menu.js') {
+      const plugin = require(filePath);
+      const category = plugin.category || 'Uncategorized';
+
+      if (!commandsByCategory[category]) {
+        commandsByCategory[category] = [];
+      }
+
+      commandsByCategory[category].push(plugin);
+    }
   }
-  
-  commandsByCategory[category].push(plugin);
 }
+
+readCommandsFromDirectory(pluginDir);
 
 module.exports = {
   name: 'menu',
   alias: ['h', 'help'],
   description: 'Reveals menu categories commands',
   async client(vorterx, m, { args, connect }) {
-   
     await connect('Ⓜ️');
 
     const allLogos = [...(config.LOGOS || []), ...(process.env.LOGOS ? process.env.LOGOS.split(',') : [])];
@@ -40,9 +47,9 @@ module.exports = {
     let headerTop, midSection, bottomSection, categoryLeft, categoryRight, commandLine, categoryEnd;
     let randomMenu = 0;
 
-    if (!process.env.MENU) { randomMenu = Math.floor(Math.random() * 2) + 1; }        
+    if (!process.env.MENU) { randomMenu = Math.floor(Math.random() * 2) + 1; }
 
-    if (randomMenu == 1 || process.env.MENU.trim().startsWith("1") || process.env.MENU.toLowerCase().includes("aztec-md")) {  
+    if (randomMenu == 1 || process.env.MENU.trim().startsWith("1") || process.env.MENU.toLowerCase().includes("aztec-md")) {
       headerTop = `┏━━⟪ *${process.env.BOTNAME}* ⟫━━⦿`;
       midSection = `┃ ✗`;
       bottomSection = `┗━━━━━━━━━━━━━━⦿`;
