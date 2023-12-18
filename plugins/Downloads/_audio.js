@@ -1,4 +1,4 @@
-const YT = require("../lib/YTModule.js");
+const YT = require("../../lib/YTModule.js");
 const fs = require('fs');
 const yts = require('yt-search');
 
