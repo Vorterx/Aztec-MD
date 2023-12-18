@@ -18,15 +18,8 @@ module.exports = {
                 await connect("📤");
                 bocil.facebookdlv2(`${text}`).then(async (data) => {
 
-                    const { title, size, quality, likes } = data.result[0];
-
-                    let caption = `╭–– 『*FB Downloader*』      
-┆ *Title* : ${title || "N/A"}
-┆ *Size* : ${size || "N/A"}
-┆ *Quality* : ${quality || "N/A"}
-┆ *Likes* : ${likes || "N/A"}
-╰–––––––––––––––༓`;
-
+                    const { filesizeH, quality } = data.result[0];
+                    let caption = `*Size* : ${filesizeH}\n*Quality* : ${quality}\n\n*${config.CAPTION}*`;
                     vorterx.sendMessage(m.from, {
                         video: {
                             url: data.result[0].url
