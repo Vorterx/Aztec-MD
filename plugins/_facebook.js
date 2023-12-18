@@ -1,4 +1,6 @@
 const bocil = require('@bochilteam/scraper');
+const { tiny } = require('@viper-x/fancytext');
+const config = require('../config.js');
 
 module.exports = {
     name: "fb",
@@ -7,6 +9,7 @@ module.exports = {
     async client(vorterx, m, {
         connect, text, args
     }) {
+       
         try {
             if (!text) {
                 await connect("❌");
@@ -28,7 +31,7 @@ module.exports = {
                         video: {
                             url: data.result[0].url
                         },
-                        caption: caption
+                        caption: tiny(caption)
                     }, {
                         quoted: m
                     });
