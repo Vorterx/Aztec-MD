@@ -1,3 +1,5 @@
+const { tiny } = require('@viper-x/fancytext');
+
 module.exports = {
   name: 'mods',
   alias: ['sudo'],
