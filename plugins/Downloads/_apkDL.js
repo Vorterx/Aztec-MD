@@ -23,10 +23,10 @@ module.exports = {
       const getSize = size > 907 ? 'This app is too large to download...' : '';
 
       let gotApp = `*APPLICATION DOWNLOADER*\n\n`;
-      gotApp += `App NaMe: ${name}\n`;
-      gotApp += `Size: ${size}\n`;
-      gotApp += `App Id: ${appId}\n`;
-      gotApp += `Updated: ${updated}\n`;
+      gotApp += `*🛡️ App NaMe*: *${name}*\n`;
+      gotApp += `*📤 Size*: *${size}\n*`;
+      gotApp += `*📦 App Id*: *${appId}*\n`;
+      gotApp += `*⬆️ Updated*: *${updated}*\n`;
 
       if (getSize) {
         await connect('❌');
@@ -38,7 +38,7 @@ module.exports = {
       const { dllink } = getApp;
 
       vorterx.sendMessage(m.from, {
-        image: { url: icon }, caption: gotApp,
+        image: { url: icon }, caption: tiny(gotApp),
         document: { url: dllink, mimetype: 'application/vnd.android.package-archive', fileName: `${name}.apk` }
       });
     } catch (error) {
