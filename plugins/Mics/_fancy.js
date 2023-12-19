@@ -1,4 +1,5 @@
 const { vorterxFancy, fancyTextStyles } = require('../../lib/styles.js');
+const config = require('../../config.js');
 
 module.exports = {
   name: 'fancy',
@@ -9,24 +10,28 @@ module.exports = {
     if (args.length === 0) {
       const allFancy = fancyTextStyles.map((style, index) => `${vorterxFancy(index + 1)} ${text}`).join('\n');
       const start = `
-      | {allFancy}
-      └─────◉
+┌──『 *Fancy* 』
+| fancy 2[]
+└─────────◉
+┌──◉
+|${allFancy}
+└─────◉\n\n*${config.CAPTION}*`;
 
-      m.reply(`${start}\n${allFancy}`);
+      m.reply(`${start}\n`);
     } else {
       const styleNum = parseInt(args[0]);
 
       if (!isNaN(styleNum) && styleNum >= 1 && styleNum <= fancyTextStyles.length) {
-        const  getText = `*_ꜰᴀɴᴄʏ ᴛᴇxᴛ ɢᴇɴᴇʀᴀᴛᴏʀ_*
-★━━━━━━━━━━━━━━━━━━━━━★
-*Preview of Style ${styleNum}:*
-${vorterxFancy(styleNum)} ${text}
-★━━━━━━━━━━━━━━━━━━━━━★`;
-
-        m.reply(getText);
+        const getText = `
+┌──◉
+|*Styled ${styleNum}:*
+|${vorterxFancy(styleNum)} ${text}
+└─────◉\n\n*${config.CAPTION}*
+`;
+m.reply(getText);
       } else {
-        m.reply('Invalid input. Please provide a valid style number.');
+        m.reply('Invalid input. Please provide a valid style number...');
       }
     }
   },
-}; 
+};
