@@ -13,6 +13,7 @@ const Textpro = {
   restro: "https://textpro.me/80-s-retro-neon-text-effect-online-979.html",
   glitch: "https://textpro.me/create-a-glitch-text-effect-online-free-1026.html",
   futuristic: "https://textpro.me/create-a-futuristic-technology-neon-light-text-effect-1006.html",
+  burn: "https://textpro.me/online-real-burning-text-effect-generator-1151.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, text) => {
