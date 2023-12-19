@@ -38,6 +38,7 @@ const Textpro = {
   pencil: "https://textpro.me/create-a-sketch-text-effect-online-1044.html",
   joker: "https://textpro.me/create-logo-joker-online-934.html",
   1917: "https://textpro.me/1917-style-text-effect-online-980.html",
+  halloween: "https://textpro.me/halloween-fire-text-effect-940.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, text) => {
