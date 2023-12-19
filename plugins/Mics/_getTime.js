@@ -1,3 +1,9 @@
+/*
+* @Happy New year
+* @Author: DiegosonTech
+* @BotName: Aztec-MD 
+*/
+
 module.exports = {
   name: "runtime",
   category: "Mics",
@@ -19,8 +25,19 @@ module.exports = {
 
     const runtime = `${hours} hours, ${minutes % 60} minutes, ${seconds % 60} seconds`;
 
-    const cap = `Runtime: ${runtime}\nYears: ${years}\nMonths: ${months}\nSeasons: ${seasons}\nTime: ${new Date().toLocaleTimeString()}`;
-
-    vorterx.sendMessage(m.from, { caption: cap });
+    const cap = `
+╭–– 『 *GET TIME* 』      
+┆ *⏳Runtime:* ${runtime}
+┆ 
+┆ *🏺Years:* ${years}
+┆ 
+┆ *⌚Months:* ${months}
+┆  
+┆ *📇Seasons:* ${seasons}
+┆ 
+┆ *⏱️Time:* ${new Date().toLocaleTimeString()}
+╰–––––––––––––––༓\n\n*${config.CAPTION}*`;
+    
+    vorterx.sendMessage(m.from, { caption: tiny(cap) });
   }
 };
