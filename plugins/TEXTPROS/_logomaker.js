@@ -32,6 +32,7 @@ const Textpro = {
   demon: "https://textpro.me/create-green-horror-style-text-effect-online-1036.html",
   harrypotter: "https://textpro.me/create-harry-potter-text-effect-online-1025.html",
   logo3d: "https://textpro.me/text-logo-3d-metal-gold-944.html",
+  textpro: "https://textpro.me/create-text-effects-arcane-tv-series-online-1067.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, text) => {
