@@ -14,6 +14,7 @@ const Textpro = {
   glitch: "https://textpro.me/create-a-glitch-text-effect-online-free-1026.html",
   futuristic: "https://textpro.me/create-a-futuristic-technology-neon-light-text-effect-1006.html",
   burn: "https://textpro.me/online-real-burning-text-effect-generator-1151.html",
+  matrix: "https://textpro.me/matrix-style-text-effect-online-884.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, text) => {
