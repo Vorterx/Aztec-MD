@@ -23,6 +23,7 @@ const Textpro = {
   foggy: "https://textpro.me/write-text-on-foggy-window-online-free-1015.html",
   ninja: "https://textpro.me/create-ninja-logo-online-935.html",
   lion: "https://textpro.me/create-lion-logo-mascot-online-938.html",
+  paper: "https://textpro.me/create-art-paper-cut-text-effect-online-1022.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, text) => {
