@@ -1,7 +1,8 @@
 const { connect } = require('../../lib/client.js'); 
 
 const Textpro = {
-  neon: "https://textpro.me/create-neon-light-text-effect-online-1000.html",
+  neon: "https://textpro.me/neon-text-effect-online-879.html",
+  neonn: "https://textpro.me/create-neon-light-text-effect-online-1000.html",
   neonlight: "https://textpro.me/create-3d-neon-light-text-effect-online-1028.html",
   neonlighter: "https://textpro.me/create-glowing-neon-light-text-effect-online-free-1061.html",
   neongreen: "https://textpro.me/green-neon-text-effect-874.html",
