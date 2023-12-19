@@ -36,8 +36,12 @@ module.exports = {
       await connect('📤');
       m.reply(`\`\`\`Please wait a sec,...⏳\`\`\``);
       const { url, filename, size } = await fetchGit(user, repo);
-      const caption = `*Name*: ${filename}\n*Size*: ${size}\n\n*${config.CAPTION}*`;
-      
+      const caption =`
+╭──*『 GITCLONE DOWNLOAD 』*
+│ *Name:* ${filename}
+│ *Size:* ${size}
+╰───────────────────༓\n\n*${config.CAPTION}*`;
+  
       await vorterx.sendMessage(m.from, { document: { url }, fileName: filename, mimetype: 'application/zip' }, tiny(caption));
     } catch (error) {
       console.error(error);
