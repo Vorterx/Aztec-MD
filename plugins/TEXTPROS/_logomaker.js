@@ -11,6 +11,7 @@ const Textpro = {
   hell: "https://textpro.me/create-a-free-online-hellfire-text-effect-1152.html",
   bokeh: "https://textpro.me/bokeh-text-effect-876.html",
   restro: "https://textpro.me/80-s-retro-neon-text-effect-online-979.html",
+  glitch: "https://textpro.me/create-a-glitch-text-effect-online-free-1026.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, text) => {
