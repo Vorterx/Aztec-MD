@@ -1,3 +1,8 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD
+*/
+
 const { vorterxFancy, fancyTextStyles } = require('../../lib/styles.js');
 const config = require('../../config.js');
 
