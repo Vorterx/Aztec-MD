@@ -10,6 +10,7 @@ const Textpro = {
   cyber: "https://textpro.me/create-a-glowing-3d-neon-light-text-effect-1142.html",
   hell: "https://textpro.me/create-a-free-online-hellfire-text-effect-1152.html",
   bokeh: "https://textpro.me/bokeh-text-effect-876.html",
+  restro: "https://textpro.me/80-s-retro-neon-text-effect-online-979.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, text) => {
