@@ -6,6 +6,7 @@ const Textpro = {
   neonlight: "https://textpro.me/create-3d-neon-light-text-effect-online-1028.html",
   neonlighter: "https://textpro.me/create-glowing-neon-light-text-effect-online-free-1061.html",
   neongreen: "https://textpro.me/green-neon-text-effect-874.html",
+  neonl: "https://textpro.me/create-gradient-neon-light-text-effect-online-1085.html",
   dualtext: "https://textpro.me/create-3d-text-metal-logo-design-online-1042.html",
   summer: "https://textpro.me/create-sunset-light-text-effects-online-for-free-1124.html",
   sparkle: "https://textpro.me/firework-sparkle-text-effect-930.html",
