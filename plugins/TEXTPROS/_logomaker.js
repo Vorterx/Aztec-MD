@@ -24,6 +24,7 @@ const Textpro = {
   ninja: "https://textpro.me/create-ninja-logo-online-935.html",
   lion: "https://textpro.me/create-lion-logo-mascot-online-938.html",
   paper: "https://textpro.me/create-art-paper-cut-text-effect-online-1022.html",
+  christmas: "https://textpro.me/chrismast-gift-text-effect-869.html",
   newyear: "https://textpro.me/new-year-celebration-3d-gold-text-effect-1102.html",
   2024: "https://textpro.me/new-year-cards-3d-by-name-960.html",
   rip2023: "https://textpro.me/happ-new-year-card-firework-gif-959.html",
