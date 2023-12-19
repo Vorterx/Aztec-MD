@@ -1,5 +1,5 @@
-//
-const fetch = require('node-fetch');
+const { tiny } = require('@viper-x/fancytext');
+const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 const config = require('../../config.js');
 
 async function getRepo(args) {
