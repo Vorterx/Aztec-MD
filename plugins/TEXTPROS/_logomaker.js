@@ -29,6 +29,7 @@ const Textpro = {
   2024: "https://textpro.me/new-year-cards-3d-by-name-960.html",
   rip2023: "https://textpro.me/happ-new-year-card-firework-gif-959.html",
   wall: "https://textpro.me/break-wall-text-effect-871.html",
+  demon: "https://textpro.me/create-green-horror-style-text-effect-online-1036.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, text) => {
