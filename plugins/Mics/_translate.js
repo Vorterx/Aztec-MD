@@ -1,3 +1,8 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD 
+*/
+
 const { translate } = require('@vitalets/google-translate-api');
 const config = require('../../config.js');
 
