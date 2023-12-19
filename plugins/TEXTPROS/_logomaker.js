@@ -2,7 +2,7 @@ const { connect } = require('../../lib/client.js');
 
 const Textpro = {
   neon: "https://textpro.me/create-neon-light-text-effect-online-1000.html",
-  neonlight: "https://textpro.me/create-neon-light-text-effect-online-1000.html",
+  neonlight: "https://textpro.me/create-3d-neon-light-text-effect-online-1028.html",
   dualtext: "https://textpro.me/create-3d-text-metal-logo-design-online-1042.html",
 };
 
@@ -12,7 +12,7 @@ const fetchLogo = async (vorterx, m, logoName, text) => {
     return m.reply("*Invalid logo name. Provide a valid command bruh ex neon vorterx*");
   }
 
-  const getLogo = Textpro[logoName]; // Correct variable name
+  const getLogo = Textpro[logoName]; 
 
   await connect("🤡", "😍", "👺", "👥", "👄");
   const axios = require("axios");
