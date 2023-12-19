@@ -1,3 +1,8 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD 
+*/
+
 const { tiny } = require('@viper-x/fancytext');
 
 module.exports = {
