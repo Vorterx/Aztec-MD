@@ -83,7 +83,7 @@
     "aztec-md-ytdl": "^3.0.0",
     "sigma-md-ytdl": "latest",
     "ytdl-secktor": "latest"
-    "yts-secktor": "latest",
+    "secktor-pack": "latest",
     "yt-search": "^2.10.4",
     "ytdl-core": "latest",
     "youtube-yts": "^2.0.0", 
