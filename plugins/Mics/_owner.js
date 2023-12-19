@@ -25,7 +25,6 @@ module.exports = {
         externalAdReply: {
           title: `${config.CAPTION}`,
           body: "CHAT BOT MD",
-          renderLargerThumbnail: true,
           thumbnailUrl: logo,
           thumbnail: logo,
           mediaType: 1,
