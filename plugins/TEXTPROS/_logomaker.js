@@ -35,6 +35,7 @@ const Textpro = {
   textpro: "https://textpro.me/create-text-effects-arcane-tv-series-online-1067.html",
   thor: "https://textpro.me/create-thor-logo-style-text-effect-online-1064.html",
   captainamerica: "https://textpro.me/create-a-captain-america-text-effect-free-online-1039.html",
+  pencil: "https://textpro.me/create-a-sketch-text-effect-online-1044.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, text) => {
