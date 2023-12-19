@@ -8,6 +8,7 @@ const Textpro = {
   neongreen: "https://textpro.me/green-neon-text-effect-874.html",
   dualtext: "https://textpro.me/create-3d-text-metal-logo-design-online-1042.html",
   summer: "https://textpro.me/create-sunset-light-text-effects-online-for-free-1124.html",
+  sparkle: "https://textpro.me/firework-sparkle-text-effect-930.html",
   cyber: "https://textpro.me/create-a-glowing-3d-neon-light-text-effect-1142.html",
   hell: "https://textpro.me/create-a-free-online-hellfire-text-effect-1152.html",
   bokeh: "https://textpro.me/bokeh-text-effect-876.html",
