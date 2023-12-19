@@ -1,3 +1,8 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD 
+*/
+
 const speed = require('performance-now');
 const { tiny } = require('@viper-x/fancytext');
 const config = require('../../config.js');
