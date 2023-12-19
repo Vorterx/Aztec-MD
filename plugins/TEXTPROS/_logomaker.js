@@ -39,6 +39,7 @@ const Textpro = {
   joker: "https://textpro.me/create-logo-joker-online-934.html",
   1917: "https://textpro.me/1917-style-text-effect-online-980.html",
   halloween: "https://textpro.me/halloween-fire-text-effect-940.html",
+  pokemon: "https://textpro.me/create-pokemon-logo-style-text-effect-online-1134.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, text) => {
