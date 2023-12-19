@@ -1,5 +1,4 @@
 /*
-* @Happy New year
 * @Author: DiegosonTech
 * @BotName: Aztec-MD 
 */
