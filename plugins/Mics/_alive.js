@@ -1,3 +1,9 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD 
+*/
+
+
 const fs = require("fs");
 const { tiny } = require("@viper-x/fancytext");
 const config = require("../../config.js");
