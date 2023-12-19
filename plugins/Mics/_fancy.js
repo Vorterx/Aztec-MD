@@ -8,11 +8,9 @@ module.exports = {
     await connect('4️⃣');
     if (args.length === 0) {
       const allFancy = fancyTextStyles.map((style, index) => `${vorterxFancy(index + 1)} ${text}`).join('\n');
-      const start = `*_ꜰᴀɴᴄʏ ᴛᴇxᴛ ɢᴇɴᴇʀᴀᴛᴏʀ_*
-★━━━━━━━━━━━━━━━━━━━━━★
-*Example: Use fancy ur text
-*Example: Use fancy 2 Diego
-★━━━━━━━━━━━━━━━━━━━━━★`;
+      const start = `
+      | {allFancy}
+      └─────◉
 
       m.reply(`${start}\n${allFancy}`);
     } else {
