@@ -1,12 +1,12 @@
 const yts = require("secktor-pack");
+const ytdl = require('ytdl-secktor');
 const { tiny } = require('@viper-x/fancytext');
-const config = require('../../config.js');
 
 module.exports = {
   name: 'video',
   category: 'Downloads',
   async client(vorterx, m, { text, args, connect }) {
-    
+   
     if (!args[0]) {
       await connect('❌');
       return m.reply('Video name required');
@@ -20,9 +20,10 @@ module.exports = {
       return m.reply('Video not found 😂😂 search porn instead...');
     }
 
-    const vid = `${videoInfo.title}\n*Size*: ${videoInfo.size}\n\n*${config.CAPTION}*`;
+    const vid = `${videoInfo.title}\n*Size*: ${videoInfo.size}`;
+    const videoStream = ytdl(videoInfo.url);
 
-    vorterx.sendMessage(m.from, {  video: videoInfo.url,
+    vorterx.sendMessage(m.from, { video: videoStream,
       mimetype: 'video/mp4',
       fileName: `video.mp4`,
       caption: tiny(vid)
