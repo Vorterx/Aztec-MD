@@ -1,3 +1,8 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD 
+*/
+
 const config = require('../../config.js');
 
 module.exports = {
