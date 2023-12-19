@@ -1,3 +1,8 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD 
+*/
+
 const { getCpuSpeed, getUploadSpeed, calculatePing } = require("../../lib/assiets/_speedSystem.js");
 const os = require("os");
 const speed = require("performance-now");
