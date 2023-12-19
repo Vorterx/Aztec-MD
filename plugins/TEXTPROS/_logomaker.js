@@ -21,6 +21,7 @@ const Textpro = {
   lightglow: "https://textpro.me/create-light-glow-sliced-text-effect-online-1068.html",
   avenger3d: "https://textpro.me/create-3d-avengers-logo-online-974.html",
   foggy: "https://textpro.me/write-text-on-foggy-window-online-free-1015.html",
+  ninja: "https://textpro.me/create-ninja-logo-online-935.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, text) => {
