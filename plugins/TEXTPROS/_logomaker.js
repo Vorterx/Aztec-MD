@@ -30,6 +30,7 @@ const Textpro = {
   rip2023: "https://textpro.me/happ-new-year-card-firework-gif-959.html",
   wall: "https://textpro.me/break-wall-text-effect-871.html",
   demon: "https://textpro.me/create-green-horror-style-text-effect-online-1036.html",
+  harrypotter: "https://textpro.me/create-harry-potter-text-effect-online-1025.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, text) => {
