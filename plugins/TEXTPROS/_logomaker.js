@@ -7,6 +7,7 @@ const Textpro = {
   neongreen: "https://textpro.me/green-neon-text-effect-874.html",
   dualtext: "https://textpro.me/create-3d-text-metal-logo-design-online-1042.html",
   summer: "https://textpro.me/create-sunset-light-text-effects-online-for-free-1124.html",
+  cyber: "https://textpro.me/create-a-glowing-3d-neon-light-text-effect-1142.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, text) => {
