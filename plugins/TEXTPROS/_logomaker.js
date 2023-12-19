@@ -18,6 +18,7 @@ const Textpro = {
   burn: "https://textpro.me/online-real-burning-text-effect-generator-1151.html",
   matrix: "https://textpro.me/matrix-style-text-effect-online-884.html",
   thunder: "https://textpro.me/online-thunder-text-effect-generator-1031.html",
+  lightglow: "https://textpro.me/create-light-glow-sliced-text-effect-online-1068.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, text) => {
