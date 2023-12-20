@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-const { DisconnectReason, makeInMemoryStore, makeCacheableSignalKeyStore, useMultiFileAuthState, fetchLatestBaileysVersion, makeWASocket, makeMongoStore, useMongoDBAuthState, removeCreds } = require('@iamrony777/baileys');
+const { DisconnectReason, makeInMemoryStore, makeCacheableSignalKeyStore, useMultiFileAuthState, fetchLatestBaileysVersion, makeWASocket, makeMongoStore, useMongoDBAuthState } = require('@iamrony777/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const express = require('express');
@@ -27,60 +27,43 @@ if (!sessionId) {
   process.exit(1);
 }
 
-async function startAztec() {
+async function removeCreds() {
   try {
-    console.log("Initializing...");
+    fs.unlinkSync("./lib/remove.json");
+  } catch (error) {
+    console.error("Error removing creds:", error);
+  }
+}
 
-    const inMemoryStore = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
-    const { state, saveCreds } = await useMultiFileAuthState(sessionId);
-
-    console.log("Aztec state loaded successfully.");
-
-    const mongo = new MongoClient(process.env.MONGODB, {
-      socketTimeoutMS: 1_00_000,
-      connectTimeoutMS: 1_00_000,
-      waitQueueTimeoutMS: 1_00_000,
-    });
-
-    const authC = mongo.db(sessionId).collection("auth");
-    const { state: mongoState, saveCreds: saveMongoCreds } = await useMongoDBAuthState(authC);
-
-    const mongoStore = makeMongoStore({
-      filterChats: true,
-      db: mongo.db(sessionId),
-      autoDeleteStatusMessage: true
-    });
-
-    let vorterx = makeWASocket({
-      version: (await fetchLatestBaileysVersion()).version,
-      auth: {
-      creds: state.creds,   
-      keys: makeCacheableSignalKeyStore(state.keys),
-    },
-    logger: P({ level: "silent" }),  
-    printQRInTerminal: true,
+async function connectMongoDB() {
+  const mongo = new MongoClient(process.env.MONGODB, {
+    socketTimeoutMS: 100000,
+    connectTimeoutMS: 100000,
+    waitQueueTimeoutMS: 100000,
   });
 
-    if (mongoStore) {
-      mongoStore.bind(vorterx.ev);
-    } else {
-      console.error("Error: 'mongoStore' is undefined. Please fix.");
-    }
+  await mongo.connect();
+  return mongo;
+}
 
-    vorterx.cmd = new Collection();
-    vorterx.contactDB = new QuickDB().table('contacts');
-    vorterx.contact = contact;
-const removeCreds = () => {
-  fs.unlinkSync("./lib/remove.json")
-
-    async function readCommands() {
-  const pluginsDir = './plugins';
+async function loadCommands(pluginsDir) {
   const cmdFiles = getCommandFiles(pluginsDir);
 
   for (const file of cmdFiles) {
     const filePath = path.join(pluginsDir, file);
     console.log('Loading cmds:', filePath);
 
+    const command = require(`.${path.sep}${filePath}`);
+    vorterx.cmd.set(command.name, command);
+  }
+}
+
+async function readCommands() {
+  const pluginsDir = './plugins';
+  const cmdFiles = getCommandFiles(pluginsDir);
+
+  for (const file of cmdFiles) {
+    const filePath = path.join(pluginsDir, file);
     const command = require(`.${path.sep}${filePath}`);
     vorterx.cmd.set(command.name, command);
   }
@@ -105,8 +88,48 @@ function getCommandFiles(dir) {
   return cmdFiles;
 }
 
-await readCommands();
-    
+async function startAztec() {
+  try {
+    console.log("Initializing...");
+
+    const inMemoryStore = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
+    const { state, saveCreds } = await useMultiFileAuthState(sessionId);
+
+    console.log("Aztec state loaded successfully.");
+
+    const mongo = await connectMongoDB();
+
+    const authC = mongo.db(sessionId).collection("auth");
+    const { state: mongoState, saveCreds: saveMongoCreds } = await useMongoDBAuthState(authC);
+
+    const mongoStore = makeMongoStore({
+      filterChats: true,
+      db: mongo.db(sessionId),
+      autoDeleteStatusMessage: true
+    });
+
+    let vorterx = makeWASocket({
+      version: (await fetchLatestBaileysVersion()).version,
+      auth: {
+        creds: state.creds,
+        keys: makeCacheableSignalKeyStore(state.keys),
+      },
+      logger: P({ level: "silent" }),
+      printQRInTerminal: true,
+    });
+
+    if (mongoStore) {
+      mongoStore.bind(vorterx.ev);
+    } else {
+      console.error("Error: 'mongoStore' is undefined. Please fix.");
+    }
+
+    vorterx.cmd = new Collection();
+    vorterx.contactDB = new QuickDB().table('contacts');
+    vorterx.contact = contact;
+
+    await readCommands();
+
     vorterx.ev.on('creds.update', async () => {
       await state.saveCreds();
       await state.saveMongoCreds();
@@ -121,7 +144,7 @@ await readCommands();
         console.log('Connection is open!');
         console.log('Plugins loaded♻️');
         console.log('WhatsApp chatbot has connected✔️');
-    
+
         const toxic = `Hello, I am your WhatsApp chatbot *${botName}*. Ready to assist you!`;
         vorterx.sendMessage(vorterx.user.id, { text: toxic });
       } else if (connection === "close") {
@@ -132,21 +155,21 @@ await readCommands();
           case DisconnectReason.connectionLost:
             console.log("[🐏AZTEC] Connection closed or lost, reconnecting in 3000ms.");
             setTimeout(() => {
-    
+
             }, 3000);
             break;
           case DisconnectReason.loggedOut:
             console.log("[😭AZTEC] Device Logged Out, Cleaning up session.");
-            removeCreds();
+            await removeCreds();
             process.exit();
             break;
           case DisconnectReason.restartRequired:
             console.log("[♻️AZTEC] Server starting.");
-            
+
             break;
           case DisconnectReason.timedOut:
             console.log("[🎰AZTEC] Connection Timed Out, Trying to Reconnect.");
-            
+
             break;
           default:
             console.log("[🌬AZTEC] Server Disconnected: Maybe Your WhatsApp Account got banned");
@@ -165,14 +188,13 @@ await readCommands();
     vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx));
     vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
 
-    await mongo.connect();
     process.on('exit', async () => {
       await mongo.close();
     });
 
     process.on('SIGINT', async () => {
       await mongo.close();
-      removeCreds();
+      await removeCreds(); 
       process.exit();
     });
 
@@ -187,7 +209,6 @@ async function startServer() {
     console.log(`Server is running on port ${PORT}`);
   });
 }
-
 async function main() {
   await startAztec();
   await startServer();
