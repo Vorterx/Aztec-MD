@@ -64,7 +64,7 @@ async function readCommands() {
 
   for (const file of cmdFiles) {
     const filePath = path.join(pluginsDir, file);
-    const command = require(filePath);
+    const command = require(`.${path.sep}${filePath}`);
     vorterx.cmd.set(command.name, command);
   }
 }
@@ -122,6 +122,7 @@ async function startAztec() {
       mongoStore.bind(vorterx.ev);
     } else {
       console.error("Error: 'mongoStore' is undefined. Please fix.");
+      return; // Exit early to avoid further issues
     }
 
     vorterx.cmd = new Collection();
@@ -209,6 +210,7 @@ async function startServer() {
     console.log(`Server is running on port ${PORT}`);
   });
 }
+
 async function main() {
   await startAztec();
   await startServer();
