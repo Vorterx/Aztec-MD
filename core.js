@@ -108,7 +108,7 @@ async function startAztec() {
       autoDeleteStatusMessage: true
     });
 
-    let vorterx = makeWASocket({
+    const vorterx = makeWASocket({
       version: (await fetchLatestBaileysVersion()).version,
       auth: {
         creds: state.creds,
