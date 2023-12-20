@@ -82,7 +82,7 @@
     "google-translate-api": "^2.3.0",
     "aztec-md-ytdl": "^3.0.0",
     "sigma-md-ytdl": "latest",
-    "ytdl-secktor": "latest"
+    "ytdl-secktor": "latest",
     "secktor-pack": "latest",
     "yt-search": "^2.10.4",
     "ytdl-core": "latest",
