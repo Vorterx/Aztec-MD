@@ -71,12 +71,15 @@ async function startAztec() {
     vorterx.contactDB = new QuickDB().table('contacts');
     vorterx.contact = contact;
 
- async function readCommands() {
+async function readCommands() {
   const pluginsDir = './plugins';
   const cmdFiles = getCommandFiles(pluginsDir);
 
   for (const file of cmdFiles) {
-    const command = require(path.join(pluginsDir, file));
+    const filePath = path.join(pluginsDir, file);
+    console.log('Checking path:', filePath);
+
+    const command = require(`.${path.sep}${filePath}`);
     vorterx.cmd.set(command.name, command);
   }
 }
@@ -93,7 +96,6 @@ function getCommandFiles(dir) {
       const subDirFiles = fs.readdirSync(filePath).filter((subFile) => subFile.endsWith('.js'));
       cmdFiles.push(...subDirFiles.map((subFile) => path.join(file, subFile)));
     } else if (file.endsWith('.js')) {
-      
       cmdFiles.push(file);
     }
   }
@@ -102,7 +104,7 @@ function getCommandFiles(dir) {
 }
 
 await readCommands();
-      
+    
     vorterx.ev.on('creds.update', async () => {
       await state.saveCreds();
       await state.saveMongoCreds();
