@@ -14,7 +14,7 @@ const contact = require('./connects/contact.js');
 const { MessageHandler, vorterx } = require('./lib/client.js');
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 if (!process.env.MONGODB) {
   console.error("Mongodb URL has not been provided yet...");
@@ -107,30 +107,29 @@ async function startAztec() {
       db: mongo.db(sessionId),
       autoDeleteStatusMessage: true
     });
-const vorterx = makeWASocket({
-  version: (await fetchLatestBaileysVersion()).version,
-  auth: {
-    creds: state.creds,
-    keys: makeCacheableSignalKeyStore(state.keys),
-  },
-  logger: P({ level: "silent" }),
-  printQRInTerminal: true,
-});
 
-vorterx.cmd = new Collection();
+    let vorterx = makeWASocket({
+      version: (await fetchLatestBaileysVersion()).version,
+      auth: {
+        creds: state.creds,
+        keys: makeCacheableSignalKeyStore(state.keys),
+      },
+      logger: P({ level: "silent" }),
+      printQRInTerminal: true,
+    });
 
-if (mongoStore) {
-  mongoStore.bind(vorterx.ev);
-} else {
-  console.error("Error: 'mongoStore' is undefined. Please fix.");
-  return;
-}
-  
-  vorterx.contactDB = new QuickDB().table('contacts');
+    if (mongoStore) {
+      mongoStore.bind(vorterx.ev);
+    } else {
+      console.error("Error: 'mongoStore' is undefined. Please fix.");
+    }
+
+    vorterx.cmd = new Collection();
+    vorterx.contactDB = new QuickDB().table('contacts');
     vorterx.contact = contact;
 
     await readCommands();
-
+  
     vorterx.ev.on('creds.update', async () => {
       await state.saveCreds();
       await state.saveMongoCreds();
@@ -156,7 +155,7 @@ if (mongoStore) {
           case DisconnectReason.connectionLost:
             console.log("[🐏AZTEC] Connection closed or lost, reconnecting in 3000ms.");
             setTimeout(() => {
-
+              // []
             }, 3000);
             break;
           case DisconnectReason.loggedOut:
@@ -166,11 +165,11 @@ if (mongoStore) {
             break;
           case DisconnectReason.restartRequired:
             console.log("[♻️AZTEC] Server starting.");
-
+            // []
             break;
           case DisconnectReason.timedOut:
             console.log("[🎰AZTEC] Connection Timed Out, Trying to Reconnect.");
-
+            // []
             break;
           default:
             console.log("[🌬AZTEC] Server Disconnected: Maybe Your WhatsApp Account got banned");
@@ -195,7 +194,7 @@ if (mongoStore) {
 
     process.on('SIGINT', async () => {
       await mongo.close();
-      await removeCreds(); 
+      await removeCreds();
       process.exit();
     });
 
