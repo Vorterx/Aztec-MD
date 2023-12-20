@@ -1,4 +1,4 @@
-const config = require('../config');
+const config = require('../../config.js');
 
 module.exports = {
  name: 'delmod',
