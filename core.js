@@ -1,12 +1,3 @@
-fix this error
-rror occurred during initialization: TypeError: Cannot read properties of undefined (reading 'cmd')
-2023-12-20T14:24:41.254331+00:00 app[web.1]:     at readCommands (/app/core.js:68:13)
-2023-12-20T14:24:41.254331+00:00 app[web.1]:     at startAztec (/app/core.js:131:11)
-2023-12-20T14:24:41.254334+00:00 app[web.1]:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-2023-12-20T14:24:41.254334+00:00 app[web.1]:     at async main (/app/core.js:213:3)
-2023-12-20T14:24:41.353582+00:00 heroku[web.1]
-
-
 const { MongoClient } = require("mongodb");
 const { DisconnectReason, makeInMemoryStore, makeCacheableSignalKeyStore, useMultiFileAuthState, fetchLatestBaileysVersion, makeWASocket, makeMongoStore, useMongoDBAuthState } = require('@iamrony777/baileys');
 const { Boom } = require('@hapi/boom');
