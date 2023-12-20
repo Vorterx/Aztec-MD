@@ -122,7 +122,7 @@ async function startAztec() {
       mongoStore.bind(vorterx.ev);
     } else {
       console.error("Error: 'mongoStore' is undefined. Please fix.");
-      return; // Exit early to avoid further issues
+      return;
     }
 
     vorterx.cmd = new Collection();
