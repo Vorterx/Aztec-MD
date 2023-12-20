@@ -77,7 +77,7 @@ async function readCommands() {
 
   for (const file of cmdFiles) {
     const filePath = path.join(pluginsDir, file);
-    console.log('Checking path:', filePath);
+    console.log('Loading cmds:', filePath);
 
     const command = require(`.${path.sep}${filePath}`);
     vorterx.cmd.set(command.name, command);
