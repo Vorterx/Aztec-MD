@@ -70,8 +70,10 @@ async function startAztec() {
     vorterx.cmd = new Collection();
     vorterx.contactDB = new QuickDB().table('contacts');
     vorterx.contact = contact;
+const removeCreds = () => {
+  fs.unlinkSync("./lib/remove.json")
 
-async function readCommands() {
+    async function readCommands() {
   const pluginsDir = './plugins';
   const cmdFiles = getCommandFiles(pluginsDir);
 
@@ -135,7 +137,7 @@ await readCommands();
             break;
           case DisconnectReason.loggedOut:
             console.log("[😭AZTEC] Device Logged Out, Cleaning up session.");
-            await state.removeCreds();
+            removeCreds();
             process.exit();
             break;
           case DisconnectReason.restartRequired:
@@ -170,7 +172,7 @@ await readCommands();
 
     process.on('SIGINT', async () => {
       await mongo.close();
-      await state.removeCreds();
+      removeCreds();
       process.exit();
     });
 
