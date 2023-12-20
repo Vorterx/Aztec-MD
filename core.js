@@ -107,26 +107,26 @@ async function startAztec() {
       db: mongo.db(sessionId),
       autoDeleteStatusMessage: true
     });
+const vorterx = makeWASocket({
+  version: (await fetchLatestBaileysVersion()).version,
+  auth: {
+    creds: state.creds,
+    keys: makeCacheableSignalKeyStore(state.keys),
+  },
+  logger: P({ level: "silent" }),
+  printQRInTerminal: true,
+});
 
-    const vorterx = makeWASocket({
-      version: (await fetchLatestBaileysVersion()).version,
-      auth: {
-        creds: state.creds,
-        keys: makeCacheableSignalKeyStore(state.keys),
-      },
-      logger: P({ level: "silent" }),
-      printQRInTerminal: true,
-    });
+vorterx.cmd = new Collection();
 
-    if (mongoStore) {
-      mongoStore.bind(vorterx.ev);
-    } else {
-      console.error("Error: 'mongoStore' is undefined. Please fix.");
-      return;
-    }
-
-    vorterx.cmd = new Collection();
-    vorterx.contactDB = new QuickDB().table('contacts');
+if (mongoStore) {
+  mongoStore.bind(vorterx.ev);
+} else {
+  console.error("Error: 'mongoStore' is undefined. Please fix.");
+  return;
+}
+  
+  vorterx.contactDB = new QuickDB().table('contacts');
     vorterx.contact = contact;
 
     await readCommands();
