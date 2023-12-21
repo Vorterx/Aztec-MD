@@ -29,7 +29,7 @@ module.exports = {
     vorterx.sendMessage(m.from,
       { url: `${mime};base64,${imagi.toString('base64')}` },
       'image/png',
-      `*${comfig.CAPTION}*`
+      `*${config.CAPTION}*`
     );
   },
 };
