@@ -14,15 +14,17 @@ module.exports = {
     const ai_chactr = `https://api.caliph.biz.id/api/ai/c-ai?q=${text}&apikey=lykoUzNh`;
 
     const res = await fetch(ai_chactr);
-   if (!res.ok) {
+
+    if (!res.ok) {
       console.error(`Error: ${res.status}`);
       await connect('❌');
       return m.reply('An error occurred while processing...');
     }
 
-     await connect('🤡');
+    await connect('🤡');
     const data = await res.json();
-      console.log(data);
+    console.log(data);
+
     const gpt_mime = 'URL_TO_YOUR_THUMBNAIL_IMAGE';
     return m.reply({
       thumbnail: { url: gpt_mime },
