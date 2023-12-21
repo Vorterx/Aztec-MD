@@ -7,12 +7,13 @@ module.exports = {
   async client(vorterx, m, { text, getCMD, args, connect }) {
 
     switch (getCMD) {
-      case 'gfx1':
+       case 'gfx1':
         if (!text) {
           await connect('❌');
           return m.reply('Please provide a text e.g gfx1 DiegosonTech');
         }
-        await connect ('🛡️')!
+        await connect ('🛡️');
+        const caliphkey = 'lykoUzNh';
         let image1 = `https://api.caliph.biz.id/api/kaneki?nama=${encodeURIComponent(text)}&apikey=caliphkey`;
         vorterx.sendMessage(m.from, { image: { url: image1 } }, { quoted: m });
         break;
