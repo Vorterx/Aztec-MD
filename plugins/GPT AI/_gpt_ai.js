@@ -14,7 +14,7 @@ module.exports = {
 
     try {
       const res = await fetch(
-        `https://api.neoxr.eu/api/gpt?q=${encodeURIComponent(text)}`
+        `https://api.caliph.biz.id/api/ai/oai-gpt?q=${text}&apikey=lykoUzNh`
       );
 
       const data = await res.json();
