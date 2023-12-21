@@ -1,3 +1,11 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD
+*/
+
+const fetch = async (url) => import('node-fetch').then(module => module.default(url));
+const config = require('../../config.js');
+
 module.exports = {
   name: 'textimg',
   category: 'GPT AI',
