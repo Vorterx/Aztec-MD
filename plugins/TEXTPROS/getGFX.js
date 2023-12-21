@@ -44,7 +44,7 @@ module.exports = {
           return m.reply('Please provide a text e.g gfx4 YourTextHere');
         }
         await connect('🛡️');
-        let lolkeysapi = 'YOUR_LOL_KEYS_API'; // Replace with your LOL Keys API
+        let lolkeysapi = '5c250069e8936d6bf70295b8';
         let image4 = `https://api.lolhuman.xyz/api/textprome/jokerlogo?apikey=${lolkeysapi}&text=${encodeURIComponent(text)}`;
         vorterx.sendMessage(m.from, { image: { url: image4 } }, { quoted: m });
         break;
