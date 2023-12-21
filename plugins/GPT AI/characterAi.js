@@ -1,3 +1,8 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD
+*/
+
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 const config = require('../../config.js');
 
@@ -25,7 +30,7 @@ module.exports = {
     const data = await res.json();
     console.log(data);
 
-    const gpt_mime = 'URL_TO_YOUR_THUMBNAIL_IMAGE';
+    const gpt_mime = 'https://i.imgur.com/mCTg8vq.jpg';
     return m.reply({
       thumbnail: { url: gpt_mime },
       content: `*CHARACTER*: ${data.result}\n\n*${config.CAPTION}*`
