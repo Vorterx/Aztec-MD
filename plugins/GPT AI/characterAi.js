@@ -1,4 +1,5 @@
-const fetch = require('node-fetch');
+const fetch = async (url) => import('node-fetch').then(module => module.default(url));
+const config = require('../../config.js');
 
 module.exports = { 
   name: "character", 
@@ -24,8 +25,8 @@ module.exports = {
       console.log(data);
     const gpt_mime = 'URL_TO_YOUR_THUMBNAIL_IMAGE';
     return m.reply({
-      content: `*CHARACTER*: ${data.result}`,
-      thumbnail: { url: gpt_mime }
+      thumbnail: { url: gpt_mime },
+      content: `*CHARACTER*: ${data.result}\n\n*${config.CAPTION}*`
     });
   }
 };
