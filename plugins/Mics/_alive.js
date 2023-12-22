@@ -14,7 +14,7 @@ module.exports = {
   alias: ['bot'],
   description: 'To check the bot alive or off',
   category: 'Mics',
-  async client(vorterx, m, { text, connect}) {
+  async client(vorterx, m, { text, connect }) {
    
     await connect('🧘');
     const image = {
@@ -27,7 +27,7 @@ module.exports = {
 ┆ ${m.pushName}
 ╰–❖ __
 ╭–––––––––––––––༓ 
-┆✑  Alive now🌷
+┆✑  *Alive now🌷*
 ╰–––––––––––––––༓ 
 ╭–– 『 *Bot Status* 』      
 ┆ *Name* : ${process.env.BOTNAME}
@@ -43,11 +43,13 @@ module.exports = {
         externalAdReply: {
           title: `*${config.CAPTION}*`,
           body: "vorterx",
-          thumbnail: image,
+          thumbnail: { mediaType: 1, mediaUrl: 'https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg' },
           mediaType: 1,
           mediaUrl: "",
           sourceUrl: "",
           ShowAdAttribution: true,
+          forwardingScore: 999,
+          isForwarded: true,
         },
       },
     };
