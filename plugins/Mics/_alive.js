@@ -47,7 +47,7 @@ module.exports = {
           sourceUrl: "",
           ShowAdAttribution: true,
           forwardingScore: 999,
-          isForwarded: true,
+          isForwaded: true,
         },
       },
     };
