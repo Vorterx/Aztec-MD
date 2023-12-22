@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 
 module.exports = {
   name: 'igstalk',
