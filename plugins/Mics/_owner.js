@@ -30,7 +30,7 @@ module.exports = {
         externalAdReply: {
           title: `${config.CAPTION}`,
           body: `${m.pushName}`,
-          thumbnail: { mediaType: 1, mediaUrl: 'https://i.ibb.co/s3LzSFJ/931684-7660.jpg' },
+          thumbnail: { mediaType: 1, mediaUrl: 'https://i.ibb.co/9gsmdgL/2361610c-0e6d-489d-9e98-2a0542a65f77-056bcf8b4c36d517a85280e0259dd5a9.jpg' },
           sourceUrl: source,
           forwardingScore: 999,
           isForwaded: true,
