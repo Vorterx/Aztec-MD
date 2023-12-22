@@ -21,16 +21,9 @@
     "OWNER_NAME": {
       "description": "Add your name (e.g. diegosonTech or suhailTechInfo)"
     },
-    "SESSION_ID": {
-      "description": "Auto_Status_View use (e.g. true to activate, false to disable)",
-      "required": false
-    },
-    "WORKTYPE": {
-      "description": "To set private or public, use private/public/group_work."
-    },
     "MENU": {
       "description": "Choose a number between 0 and 2, where 2 is Aztec menu, 0 is suhail menu. If you want it to change randomly, leave it blank",
-      "value": "2",
+      "value": "0",
       "required": false
     },
     "MODS": {
