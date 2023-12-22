@@ -86,7 +86,7 @@ ${bottomSection}\n\n${getCommands}\n\n*${config.CAPTION}*`;
         externalAdReply: {
           title: `*${config.CAPTION}*`,
           body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
-          thumbnail: { mediaType:, mediaUrl: 'https://i.ibb.co/9gsmdgL/2361610c-0e6d-489d-9e98-2a0542a65f77-056bcf8b4c36d517a85280e0259dd5a9.jpg' },
+          thumbnail: { mediaType:, mediaUrl: 'https://i.ibb.co/vx1YRtp/original-356944951abd408e6ff5e1b4a988c4c9.png' },
           sourceUrl: `${process.env.MODS}`,
           forwardingScore: 999,
           isForwarded: true,
