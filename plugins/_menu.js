@@ -92,6 +92,8 @@ ${bottomSection}\n\n${getCommands}\n\n*${config.CAPTION}*`;
           },
           sourceUrl: `${process.env.MODS}`,
           mediaUrl: '',
+          forwardingScore: 999,
+          isForwarded: true,
         },
       },
     };
