@@ -3,7 +3,6 @@
 * @BotName: Aztec-MD 
 */
 
-
 const fs = require("fs");
 const { tiny } = require("@viper-x/fancytext");
 const config = require("../../config.js");
@@ -46,7 +45,7 @@ module.exports = {
           thumbnail: { mediaType: 1, mediaUrl: 'https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg' },
           sourceUrl: "",
           ShowAdAttribution: true,
-          forwadingScore: 999,
+          forwardingScore: 999,
           isForwaded: true,
         },
       },
