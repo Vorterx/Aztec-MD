@@ -11,7 +11,6 @@ let config = {
   prefix: process.env.PREFIX || '.',
   name: process.env.OWNER_NAME || '',
   owner_number: process.env.OWNER_NUMBER || '27686881509',
-  SESSION_ID: process.env.SESSION_ID || 'add something',
   ANTILINK: process.env.ANTILINK || 'true',
   CAPTION: process.env.CAPTION || 'ᴾᴼᵂᴱᴿᴱᴰ ᴮʸ ⱽᴼᴿᵀᴱᴿˣ⁶⁶⁵™',
   menu: process.env.MENU || '',
