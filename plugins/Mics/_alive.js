@@ -46,7 +46,7 @@ module.exports = {
           thumbnail: { mediaType: 1, mediaUrl: 'https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg' },
           sourceUrl: "",
           ShowAdAttribution: true,
-          forwardingScore: 999,
+          forwadingScore: 999,
           isForwaded: true,
         },
       },
