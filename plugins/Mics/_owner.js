@@ -14,7 +14,7 @@ module.exports = {
     await connect('👤');
     const userNumber = config.mods;
     const ownerName = process.env.OWNER_NAME;
-    const logo = "https://i.ibb.co/v47d4BL/IMG-20230429-WA0021.jpg";
+    const logo = "https://i.ibb.co/mCv3k97/original-e792fa6c963f76bc381b82ae539e68cc.png";
     const source = `https://wa.me/${userNumber}`;
 
     const buttonMessage = {
