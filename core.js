@@ -63,7 +63,7 @@ async function startAztec() {
         keys: makeCacheableSignalKeyStore(state.keys),
       },
       logger: P({ level: "silent" }),
-      printQRInTerminal: true,
+      printQRInTerminal: false,
     });
 
     store.bind(vorterxInstance.ev);
