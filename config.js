@@ -16,8 +16,6 @@ let config = {
   CAPTION: process.env.CAPTION || 'ᴾᴼᵂᴱᴿᴱᴰ ᴮʸ ⱽᴼᴿᵀᴱᴿˣ⁶⁶⁵™',
   menu: process.env.MENU || '',
   THUMB: process.env.THUMB || 'https://imageupload.io/69vJBZbn4iPqWTZ',
-  auto_read_status: process.env.AUTO_READ_STATUS || 'true',
-  worktype: process.env.WORKTYPE || '',
   mods: process.env.MODS ? process.env.MODS.split(',').map(mod => mod.replace('@net.whatsapp', '')) : [],  
   MONGODB: process.env.MONGODB || '', 
   LOGOS: [
