@@ -29,12 +29,11 @@ module.exports = {
       contextInfo: {
         externalAdReply: {
           title: `${config.CAPTION}`,
-          body: "CHAT BOT MD",
-          thumbnailUrl: logo,
-          thumbnail: logo,
-          mediaType: 1,
-          mediaUrl: "",
+          body: `${m.pushName}`,
+          thumbnail: { mediaType: 1, mediaUrl: 'https://i.ibb.co/s3LzSFJ/931684-7660.jpg' },
           sourceUrl: source,
+          forwardingScore: 999,
+          isForwaded: true,
         },
       },
     };
