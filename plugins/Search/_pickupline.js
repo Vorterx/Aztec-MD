@@ -1,4 +1,9 @@
-const fetch = require('node-fetch');
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD
+*/
+
+const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 const config = require('../../config.js');
 
 module.exports = {
