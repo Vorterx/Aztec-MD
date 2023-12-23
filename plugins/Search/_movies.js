@@ -8,13 +8,13 @@ module.exports = {
   async client(vorterx, m, { text, args, connect }) {
     
     try {
-      if (!text) {
+      if (!args) {
         await connect('❌');
         return m.reply(`Please provide a movie name, e.g., "Dragon Ball".`);
       }
 
       await connect('🔍');
-      const movieInfo = await axios.get(`http://www.omdbapi.com/?apikey=742b2d09&t=${text}&plot=full`);
+      const movieInfo = await axios.get(`http://www.omdbapi.com/?apikey=742b2d09&t=${args}&plot=full`);
 
       if (!movieInfo.data || movieInfo.data.Response === 'False') {
         await connect('❌');
