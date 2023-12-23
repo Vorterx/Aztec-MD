@@ -40,7 +40,7 @@ module.exports = {
       caption: tiny(aliveMsg),
       contextInfo: {
         externalAdReply: {
-          title: `*${config.CAPTION}*`,
+          title: `${config.CAPTION}`,
           body: "vorterx",
           thumbnail: { mediaType: 1, mediaUrl: 'https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg' },
           sourceUrl: "",
