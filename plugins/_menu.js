@@ -54,15 +54,15 @@ module.exports = {
       midSection = `┃ ✗`;
       bottomSection = `┗━━━━━━━━━━━━━━⦿`;
       categoryLeft = `┌──『`;
-      categoryRight = `』──❖\n\n`;
-      commandLine = ` | `;
+      categoryRight = `』──❖\n`;
+      commandLine = ` |\n `;
       categoryEnd = `\n\n└─────────◉\n\n`;
     }
 
     let getCommands = '';
 
     for (const category in commandsByCategory) {
-      getCommands += `${categoryLeft} *${category}* ${categoryRight}\n\n`;
+      getCommands += `${categoryLeft} *${category}* ${categoryRight}\n`;
       getCommands += commandsByCategory[category].map(plugin => ` ${commandLine} ${plugin.name}`).join('\n');
       getCommands += `\n\n${categoryEnd}\n\n`;
     }
