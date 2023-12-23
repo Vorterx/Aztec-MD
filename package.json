@@ -84,6 +84,7 @@
     "sigma-md-ytdl": "latest",
     "ytdl-secktor": "latest",
     "secktor-pack": "latest",
+    "git-rev-sync": "latest",
     "yt-search": "^2.10.4",
     "ytdl-core": "latest",
     "youtube-yts": "^2.0.0", 
