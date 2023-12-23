@@ -1,5 +1,5 @@
 const { ttdl } = require('btch-downloader');
-const config = requir('../../config.js');
+const config = require('../../config.js');
 
 module.exports = {
   name: 'tiktokdl',
