@@ -1,7 +1,7 @@
 const gFx = Array.from({ length: 13 }, (_, i) => `gfx${i + 1}`);
 
 module.exports = {
-  name: 'Graphics',
+  name: 'graphics',
   alias: [...gFx],
   description: 'Create logos using gfx',
   async client(vorterx, m, { text, getCMD, args, connect }) {
