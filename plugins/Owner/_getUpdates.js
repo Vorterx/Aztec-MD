@@ -1,3 +1,8 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD
+*/
+
 const { exec } = require('child_process');
 
 module.exports = { 
