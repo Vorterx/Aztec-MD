@@ -9,7 +9,7 @@ module.exports = {
   name: 'yts',
   description: 'To search anything',
   category: 'Downloads',
-  async client(vorterx, m,{  connect, text, args }) {
+  async client(vorterx, m,{  connect,  args }) {
    
     if (!args) {
       await connect('❌');
