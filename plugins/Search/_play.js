@@ -22,15 +22,15 @@ module.exports = {
       const thumbnails = await getBuffer(getVideo.thumbnail);
 
       const get_vid = `
-╭─🎵 *Music Search Results*
+╭─ *Music Search*
 │
-├ 🎧 *Title*: ${getVideo.title}
-├ 🆔 *ID*: ${getVideo.videoId}
-├ 👀 *Views*: ${getVideo.views}
-├ ⏰ *Uploaded At*: ${getVideo.ago}
-├ 👤 *Author*: ${getVideo.author.name}
+├ *Title*: ${getVideo.title}
+├ *ID*: ${getVideo.videoId}
+├ *Views*: ${getVideo.views}
+├ *Uploaded At*: ${getVideo.ago}
+├ *Author*: ${getVideo.author.name}
 │
-├─🔗 [Watch](${getVideo.url})
+├ [Watch](${getVideo.url})
 │ copy link[<ytmp3>]
 ╰─────────⭑\n\n*${config.CAPTION}*
       `;
