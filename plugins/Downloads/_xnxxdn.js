@@ -6,6 +6,7 @@ module.exports = {
    
     const axios = require("axios");
     const config = require('../../config.js');
+    const { tiny } = require('@viper-x/fancytext');
     if (!text) {
       await connect("❌");
       m.reply("*Missing XNXX link, please provide one.*");
@@ -25,7 +26,8 @@ module.exports = {
     const video = res.data;
 
     let ca_pe = `
-*XNXX VIDEO DOWNLOAD*
+*XNXX VIDEO DOWNLOAD*\n\n
+*PUSSY*
 
 *${config.CAPTION}*
 `;
@@ -34,7 +36,7 @@ module.exports = {
       video: video,
       mimetype: "video/mp4",
       fileName: `vorterx.mp4`,
-      caption: ca_pe,
+      caption: tiny(ca_pe),
       gifPlayback: false,
       height: 496,
       width: 640,
