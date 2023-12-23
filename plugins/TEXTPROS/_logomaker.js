@@ -68,7 +68,7 @@ const fetchLogo = async (vorterx, m, logoName, text) => {
 module.exports = {
   name: "logomaker",
   description: "TEXTPRO",
-  category: "TEXTPRO LA",
+  category: "TEXTPRO",
   async client(vorterx, m, { text, args }) {
     const logoName = text.toLowerCase();
     if (logoName === "logomaker") {
