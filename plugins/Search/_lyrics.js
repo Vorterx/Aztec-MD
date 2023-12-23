@@ -35,7 +35,7 @@ module.exports = {
         text: res,
         contextInfo: {
           externalAdReply: {
-            title: '',
+            title: title,
             body: res,
             mediaType: 2,
             mediaUrl: thumbnailBase64,
