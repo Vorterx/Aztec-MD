@@ -6,11 +6,11 @@ module.exports = {
   async client(vorterx, m, { args, text, connect }) {
     
     try {
-      if (!text) {
+      if (!args) {
         await connect('❌');
         return m.reply(`🚫 Please provide the name of an anime, e.g., "Dragon Ball"`);
      }
-      const animeInfo = await malScraper.getInfoFromName(text).catch(() => null);
+      const animeInfo = await malScraper.getInfoFromName(args).catch(() => null);
       if (!animeInfo) {
         await connect('❌');
         return m.reply(`❗ Sorry, couldn't retrieve data for the provided anime name.`);
