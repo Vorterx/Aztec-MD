@@ -3,7 +3,7 @@ const malScraper = require('mal-scraper');
 module.exports = {
   name: 'anime',
   category: 'Anime',
-  async client(vorterx, m, { args, text, connect }) {
+  async client(vorterx, m, { args, connect }) {
     
     try {
       if (!args) {
