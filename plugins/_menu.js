@@ -55,16 +55,16 @@ module.exports = {
       bottomSection = `┗━━━━━━━━━━━━━━⦿`;
       categoryLeft = `┌──『`;
       categoryRight = `』──❖\n\n`;
-      commandLine = ` |\n `;
-      categoryEnd = `\n\n└─────────◉\n\n`;
+      commandLine = `| `;
+      categoryEnd = `\n└─────────◉\n\n`;
     }
 
     let getCommands = '';
 
     for (const category in commandsByCategory) {
-      getCommands += `${categoryLeft} *${category}* ${categoryRight}\n`;
+      getCommands += `${categoryLeft} *${category}* ${categoryRight}\n\n`;
       getCommands += commandsByCategory[category].map(plugin => ` ${commandLine} ${plugin.name}`).join('\n');
-      getCommands += `\n\n${categoryEnd}\n\n`;
+      getCommands += `\n${categoryEnd}\n\n`;
     }
 
     const amarok = `${headerTop}
