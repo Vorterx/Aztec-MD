@@ -4,14 +4,14 @@ module.exports = {
   name: 'igstalk',
   category: 'Search',
   description: 'To get user information on Instagram',
-  async client(vorterx, m, { text, args, connect }) {
+  async client(vorterx, m, { args, connect }) {
     
-    if (!text) {
+    if (!args) {
       await connect('❌');
       return m.reply('Provide a valid Instagram username');
     }
 
-    const insta_stalk = `https://api.caliph.biz.id/api/igstalk?username=${text}&apikey=lykoUzNh`;
+    const insta_stalk = `https://api.caliph.biz.id/api/igstalk?username=${args}&apikey=lykoUzNh`;
     const anu = await fetch(insta_stalk);
     if (anu.ok) {
       const userData = await anu.json();
