@@ -54,7 +54,7 @@ module.exports = {
       midSection = `┃ ✗`;
       bottomSection = `┗━━━━━━━━━━━━━━⦿`;
       categoryLeft = `┌──『`;
-      categoryRight = `』──❖\n`;
+      categoryRight = `』──❖\n\n`;
       commandLine = ` |\n `;
       categoryEnd = `\n\n└─────────◉\n\n`;
     }
