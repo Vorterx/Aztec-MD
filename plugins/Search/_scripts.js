@@ -13,7 +13,7 @@ module.exports = {
   const chat_v = "https://i.ibb.co/p0RmTf2/comdlpng6934979.jpg";
   let { data } = await axios.get('https://api.github.com/repos/Vorterx/Aztec-MD')
   let cap = `
-  *乂 AZTEC-MD MD INFORMATION 乂*
+  *乂 AZTEC-MD MD INFO 乂*
           
   *〄 _Stars*: ${data?.stargazers_count || "120+"  }
   
@@ -35,7 +35,7 @@ module.exports = {
       headerType: 2,
       contextInfo: {
         externalAdReply: {
-          title: 'vorterx bot',
+          title: `${config.CAPTION}`,
           body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
           mediaType: 2,
           thumbnail: {
