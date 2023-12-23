@@ -9,11 +9,11 @@ const config = require('../../config.js');
 module.exports = {
   name: 'fancy',
   category: 'Mics',
-  async client(vorterx, m, { text, args, connect }) {
+  async client(vorterx, m, {  args, connect }) {
 
     await connect('4️⃣');
     if (args.length === 0) {
-      const allFancy = fancyTextStyles.map((style, index) => `${vorterxFancy(index + 1)} ${text}`).join('\n');
+      const allFancy = fancyTextStyles.map((style, index) => `${vorterxFancy(index + 1)} ${args}`).join('\n');
       const start = `
 ┌──『 *Fancy* 』
 | fancy 2[]
@@ -30,7 +30,7 @@ module.exports = {
         const getText = `
 ┌──◉
 |*Styled ${styleNum}:*
-|${vorterxFancy(styleNum)} ${text}
+|${vorterxFancy(styleNum)} ${args}
 └─────◉\n\n*${config.CAPTION}*
 `;
 m.reply(getText);
