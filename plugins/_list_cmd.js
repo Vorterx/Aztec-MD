@@ -6,7 +6,7 @@ const path = require('path');
 module.exports = {
   name: 'list',
   category: 'General',
-  async client(vorterx, m, { args, text, connect }) {
+  async client(vorterx, m, { args, connect }) {
    
     await connect('📝');
     const allLogos = [...(config.LOGOS || []), ...(process.env.LOGOS ? process.env.LOGOS.split(',') : [])];
