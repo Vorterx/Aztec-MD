@@ -5,52 +5,43 @@ module.exports = {
   name: "runtime",
   category: "Owner",
   async client(vorterx, m, { isDev, text, args, connect }) {
-   
-    if (!isDev) {
-      await connect('❌');
-     return m.reply('This cmd is for my Dev only');
-    }
-  
-    await connect('🕦');
-    const startDate = new Date();
-    const currentDate = new Date();
-    const currentHour = currentDate.getHours();
-    let greeting;
+    try {
+      if (!isDev) {
+        await connect('❌');
+        return m.reply('This command is for my Dev only');
+      }
 
-    if (currentHour < 12) {
-      greeting = 'Morning';
-    } else if (currentHour < 18) {
-      greeting = 'Afternoon';
-    } else {
-      greeting = 'Night';
-    }
+      await connect('🕦');
+      
+      const currentHour = new Date().getHours();
+      let greeting;
 
-    const runtimeInMilliseconds = currentDate - startDate;
-    let years = Math.floor(runtimeInMilliseconds / (365 * 24 * 60 * 60 * 1000));
-    const remainingMilliseconds = runtimeInMilliseconds % (365 * 24 * 60 * 60 * 1000);
-    let months = Math.floor(remainingMilliseconds / (30 * 24 * 60 * 60 * 1000));
-    let seasons = Math.floor(months / 3);
+      if (currentHour < 12) {
+        greeting = 'Morning';
+      } else if (currentHour < 18) {
+        greeting = 'Afternoon';
+      } else {
+        greeting = 'Night';
+      }
 
-    const seconds = Math.floor(runtimeInMilliseconds / 1000);
-    let minutes = Math.floor(seconds / 60);
-    let hours = Math.floor(minutes / 60);
+      const runtimeInMilliseconds = Date.now() - m.timestamp;
+      const seconds = Math.floor(runtimeInMilliseconds / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
 
-    const runtime = `${hours} hours, ${minutes % 60} minutes, ${seconds % 60} seconds`;
+      const runtime = `${hours} hours, ${minutes % 60} minutes, ${seconds % 60} seconds`;
 
-    const cap = `
+      const cap = `
 ╭–– 『 *GET TIME* 』
 ┆ *🌅DayType:* ${greeting}!
-┆
 ┆ *⏳Runtime:* ${runtime}
-┆ 
-┆ *🏺Years:* ${years}
-┆ 
-┆ *⌚Months:* ${months}
-┆  
-┆ *📇Seasons:* ${seasons}
-┆ 
 ┆ *⏱️Time:* ${new Date().toLocaleTimeString()}
 ╰–––––––––––––––༓\n\n*${config.CAPTION}*`;
-    vorterx.sendMessage(m.from, { caption: tiny(cap) });
+      
+      await vorterx.sendMessage(m.from, { caption: tiny(cap) });
+    } catch (error) {
+      console.error(error);
+      m.reply('An error occurred while processing the command.');
+    }
   }
 };
