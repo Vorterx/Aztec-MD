@@ -76,24 +76,25 @@ ${midSection} Time: ${new Date().toLocaleTimeString()}
 ${midSection} Date: ${new Date().toLocaleDateString()}
 ${bottomSection}\n\n${getCommands}\n\n*${config.CAPTION}*`;
 
-    const chatBot = {
-      [isImage ? 'image' : 'video']: {
-        url: getLogo
-      },
-      caption: tiny(amarok),
-      headerType: 2,
-      contextInfo: {
-        externalAdReply: {
-          title: `*${config.CAPTION}*`,
-          body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
-          thumbnail: { mediaType:, mediaUrl: 'https://i.ibb.co/vx1YRtp/original-356944951abd408e6ff5e1b4a988c4c9.png' },
-          sourceUrl: `${process.env.MODS}`,
-          forwardingScore: 999,
-          isForwarded: true,
-        },
-      },
-    };
-
-    await vorterx.sendMessage(m.from, chatBot, { quoted: m });
+const chatBot = {
+  [isImage ? 'image' : 'video']: {
+    url: getLogo
+  },
+  caption: tiny(amarok),
+  headerType: 2,
+  contextInfo: {
+    externalAdReply: {
+      title: `*${config.CAPTION}*`,
+      body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
+      thumbnail: { mediaType: 'image', mediaUrl: 'https://i.ibb.co/vx1YRtp/original-356944951abd408e6ff5e1b4a988c4c9.png' },
+      sourceUrl: `${process.env.MODS}`,
+      forwardingScore: 999,
+      isForwarded: true,
+      discountCode: 'CHATGPT20',
+    },
+  },
+};
+                      
+ await vorterx.sendMessage(m.from, chatBot, { quoted: m });
   }
 };
