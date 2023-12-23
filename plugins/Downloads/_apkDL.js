@@ -8,27 +8,27 @@ module.exports = {
   category: 'Downloads',
   async client(vorterx, m, { args, connect }) {
 
-    if (!args[0]) {
+    if (!args) {
       await connect('❌');
       return m.reply('Please provide an app name e.g apk Acode Editor...');
     }
 
     try {
-      const results = await search(args[0]);
+      const results = await search(args);
 
       if (!results.ok) {
         return m.reply('An error occurred, sorry');
       }
 
-      const { icon, name, size, package: appId, lastup: updated } = results;
+      const { icon, name, size, package, lastup} = results;
 
       const getSize = size > 907 ? 'This app is too large to download...' : '';
 
       let gotApp = `*『 APPLICATION DOWNLOADER 』*\n\n`;
       gotApp += `*🛡️ App NaMe*: *${name}*\n`;
       gotApp += `*📤 Size*: *${size}\n*`;
-      gotApp += `*📦 App Id*: *${appId}*\n`;
-      gotApp += `*⬆️ Updated*: *${updated}*\n`;
+      gotApp += `*📦 App Id*: *${package}*\n`;
+      gotApp += `*⬆️ Updated*: *${lastup}*\n`;
 
       if (getSize) {
         await connect('❌');
