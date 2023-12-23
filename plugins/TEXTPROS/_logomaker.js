@@ -44,7 +44,7 @@ const Textpro = {
   summer2: "https://textpro.me/create-a-summer-neon-light-text-effect-online-1076.html",
 };
 
-const fetchLogo = async (vorterx, m, logoName, text) => {
+const fetchLogo = async (vorterx, m, logoName, args) => {
   if (!Textpro[logoName]) {
     await connect("❌");
     return m.reply("*Invalid logo name. Provide a valid command bruh ex neon vorterx*");
@@ -57,7 +57,7 @@ const fetchLogo = async (vorterx, m, logoName, text) => {
   const { tiny } = require('@viper-x/fancytext');
   const maker = require('mumaker');
 
-  const [text1, text2] = text.split("|");
+  const [text1, text2] = args.split("|");
 
   let anu = await maker.textpro(getLogo, `${text1} ${text2}`); 
 
@@ -69,8 +69,8 @@ module.exports = {
   name: "logomaker",
   description: "TEXTPRO",
   category: "TEXTPRO",
-  async client(vorterx, m, { text, args }) {
-    const logoName = text.toLowerCase();
+  async client(vorterx, m, { args }) {
+    const logoName = args.toLowerCase();
     if (logoName === "logomaker") {
       const Commands = Object.keys(Textpro).map((command, index) => `${index + 1} ${command}`).join("\n  ");
       return m.reply(`*[ LOGO MAKERS MENU ]*\n${Commands}`);
