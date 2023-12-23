@@ -50,13 +50,13 @@ module.exports = {
     if (!process.env.MENU) { randomMenu = Math.floor(Math.random() * 2) + 1; }
 
     if (randomMenu == 1 || process.env.MENU.trim().startsWith("1") || process.env.MENU.toLowerCase().includes("aztec-md")) {
-      headerTop = `┏━━⟪ *${process.env.BOTNAME || 'YourBotName'}* ⟫━━⦿`;
+      headerTop = `┏━━⟪ *${process.env.BOTNAME || ''}* ⟫━━⦿`;
       midSection = `┃ ✗`;
       bottomSection = `┗━━━━━━━━━━━━━━⦿`;
-      categoryLeft = `\n┌──『`;
+      categoryLeft = `┌──『`;
       categoryRight = `』──❖\n\n`;
       commandLine = ` | `;
-      categoryEnd = `\n\n└─────────◉\n`;
+      categoryEnd = `\n\n└─────────◉\n\n`;
     }
 
     let getCommands = '';
@@ -64,7 +64,7 @@ module.exports = {
     for (const category in commandsByCategory) {
       getCommands += `${categoryLeft} *${category}* ${categoryRight}\n\n`;
       getCommands += commandsByCategory[category].map(plugin => ` ${commandLine} ${plugin.name}`).join('\n');
-      getCommands += `${categoryEnd}\n\n`;
+      getCommands += `\n\n${categoryEnd}\n\n`;
     }
 
     const amarok = `${headerTop}
