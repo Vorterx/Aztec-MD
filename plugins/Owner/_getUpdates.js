@@ -3,7 +3,7 @@ const { execSync } = require('child_process');
 module.exports = { 
   name: 'update', 
   category: 'Owner', 
-  async client(vorterx, m, { text, args, isDev, connect, quoted }) {
+  async client(vorterx, m, { args, isDev, connect, quoted }) {
    
     if (!isDev) {
       await connect('❌');
