@@ -1,18 +1,19 @@
 const axios = require('axios');
 const { Buffer } = require('buffer');
+const config = require('../../config.js');
 
 module.exports = {
   name: 'lyrics',
   category: 'Search',
-  async client(vorterx, m, { text, args, connect }) {
+  async client(vorterx, m, {  args, connect }) {
   
     try {
-      if (!text || typeof text !== 'string') {
+      if (!args || typeof args !== 'string') {
         await connect('❌');
         return m.reply(`Please provide a song name or artist. For example, "Dior by Pop Smoke"`);
       }
 
-      const search = encodeURIComponent(text.trim());
+      const search = encodeURIComponent(args.trim());
       const { data } = await axios.get(`https://weeb-api.vercel.app/genius?query=${search}`);
 
       if (!data || data.length === 0) {
@@ -29,13 +30,13 @@ module.exports = {
       const thumbnail = data[0].url;
       const thumbnailBase64 = thumbnail ? Buffer.from(thumbnail).toString('base64') : '';
 
-      const res = `*🌷TITLE*: ${title}\n\n*👤ARTIST*: ${artist}\n\n${lyrics}`;
+      const res = `*🌷TITLE*: ${title}\n\n*👤ARTIST*: ${artist}\n\n${lyrics}\n\n*${config.CAPTION}*`;
 
       const msgData = {
         text: res,
         contextInfo: {
           externalAdReply: {
-            title: title,
+            title: `${config.CAPTION}`,
             body: res,
             mediaType: 2,
             mediaUrl: thumbnailBase64,
