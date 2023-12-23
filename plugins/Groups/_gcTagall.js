@@ -2,12 +2,12 @@ module.exports = {
     name: "tagall",
     description: "tag members",
     category: "Group",
-    async client(vorterx, m, { text, connect, isBotAdmin, isAdmin, isMedia, participants }) {
+    async client(vorterx, m, { args, connect, isBotAdmin, isAdmin, isMedia, participants }) {
       
         if (!isMedia) {
             var message2 = m.quoted
                 ? m.quoted.msg
-                : text || "";
+                : args || "";
         } else {
             message2 = "";
         }
