@@ -1,4 +1,3 @@
-const { tiny } = require("@viper-x/fancytext");
 const config = require('../../config.js');
 
 module.exports = {
@@ -38,7 +37,7 @@ module.exports = {
 ┆ *⏱️Time:* ${new Date().toLocaleTimeString()}
 ╰–––––––––––––––༓\n\n*${config.CAPTION}*`;
       
-      await vorterx.sendMessage(m.from, { caption: tiny(cap) });
+      await vorterx.sendMessage(m.from, { caption: cap });
     } catch (error) {
       console.error(error);
       m.reply('An error occurred while processing the command.');
