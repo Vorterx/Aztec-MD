@@ -8,7 +8,7 @@ module.exports = {
    
     if (!isDev) {
       await connect('❌');
-      m.reply('This cmd is for my Dev only');
+     return m.reply('This cmd is for my Dev only');
     }
   
     await connect('🕦');
