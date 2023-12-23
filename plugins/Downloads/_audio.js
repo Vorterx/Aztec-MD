@@ -5,13 +5,13 @@ const yts = require('yt-search');
 module.exports = {
     name: 'song',
     category: 'Downloads',
-    async client(vorterx, m, { text, args, connect }) {
+    async client(vorterx, m, {  args, connect }) {
 
-        if (!text) { 
+        if (!args) { 
           await connect('❌');
          return m.reply("Provide a song name");
         }
-        const search = text.trim();
+        const search = args.trim();
         const { videos } = await yts(search);
         if (!videos || videos.length <= 0)
             return m.reply('Sorry, cannot be found');
