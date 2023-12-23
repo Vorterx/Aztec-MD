@@ -5,17 +5,17 @@ module.exports = {
   alias: ['pkg'],
   category: 'Search',
   description: 'Searches for an npm package',
-  async client(vorterx, m, { text, connect }) {
-    if (!text) {
+  async client(vorterx, m, { args, connect }) {
+    if (!args) {
       await connect('❌');
       return m.reply('_Please provide an npm package name, e.g., npm aztec-md-ytdl_');
     }
     try {
-      const decentX = await axios.get(`http://registry.npmjs.com/-/v1/search?text=${text}`);
+      const decentX = await axios.get(`http://registry.npmjs.com/-/v1/search?text=${args}`);
       const { objects: results } = decentX.data;
       if (!results.length) {
         await connect('❌');
-        return m.reply(`Your research for "${text}" not found :/`);
+        return m.reply(`Your research for "${args}" not found :/`);
       }
       await connect('🔍');
       const pkgInfo = results.map(async ({ package: pkg }) => {
