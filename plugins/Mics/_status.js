@@ -48,7 +48,7 @@ module.exports = {
       caption: tiny(AztecBot),
       contextInfo: {
         externalAdReply: {
-          title: `*${config.CAPTION}*`,
+          title: `${config.CAPTION}`,
           body: "vorterx",
           thumbnail: { mediaType: 1, mediaUrl: 'https://i.ibb.co/s3LzSFJ/931684-7660.jpg' },
           sourceUrl: '',
