@@ -3,7 +3,7 @@ const config = require('../../config.js');
 
 module.exports = {
   name: "runtime",
-  category: "Mics",
+  category: "owner",
   async client(vorterx, m, { isDev, text, args, connect }) {
    
     if (!isDev) {
