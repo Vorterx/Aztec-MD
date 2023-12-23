@@ -8,7 +8,7 @@ module.exports = {
   category: "Downloads",
   async client(vorterx, m, { connect, text, args }) {
  
-    let me = fs.readFileSync("./lib/imogs.jpg");
+    let me = fs.readFileSync("../lib/imogs.jpg");
     if (!text) {
       await connect("❌");
       return m.reply("Please provide a search term.");
