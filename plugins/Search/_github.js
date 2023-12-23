@@ -5,15 +5,15 @@ module.exports = {
   name: 'github',
   alias: ['git'],
   category: 'Search',
-  async client(vorterx, m, { text, args, connect }) {
-    if (!text) {
+  async client(vorterx, m, { args, connect }) {
+    if (!args) {
       await connect('❌');
       return m.reply(`*Please provide a git user name e.g github DiegosonTech*`);
     }
 
     await connect('📊');
     try {
-      const response = await axios.get(`https://api.github.com/users/${text}`);
+      const response = await axios.get(`https://api.github.com/users/${args}`);
       const { login, name, bio, followers, public_repos, following, blog, avatar_url } = response.data;
 
       const rezText8 = `
@@ -27,7 +27,7 @@ _👥 Following:_ *${following}*
 _📌 Website:_ ${blog || 'N/A'}\n\n*${config.CAPTION}*
 `;
 
-      const userRepos = await axios.get(`https://api.github.com/users/${text}/repos?per_page=2`);
+      const userRepos = await axios.get(`https://api.github.com/users/${args}/repos?per_page=2`);
       const repoNames = userRepos.data.map(repo => repo.name);
       const repoList = repoNames.join('\n');
 
