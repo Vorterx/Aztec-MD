@@ -5,16 +5,16 @@ module.exports = {
   alias: ["ai", "openai", "chatgpt"],
   category: "GPT AI",
   description: "Randomly search",
-  async client(vorterx, m, { text, connect, args }) {
+  async client(vorterx, m, { connect, args }) {
   
-    if (!text) {
+    if (!args) {
       await connect("❌");
       return m.reply(`*Provide me a query, e.g., "Who made Aztec?"`);
     }
 
     try {
       const res = await fetch(
-        `https://api.caliph.biz.id/api/ai/oai-gpt?q=${text}&apikey=lykoUzNh`
+        `https://api.caliph.biz.id/api/ai/oai-gpt?q=${args}&apikey=lykoUzNh`
       );
 
       const data = await res.json();
