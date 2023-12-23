@@ -50,7 +50,7 @@ module.exports = {
     if (!process.env.MENU) { randomMenu = Math.floor(Math.random() * 2) + 1; }
 
     if (randomMenu == 1 || process.env.MENU.trim().startsWith("1") || process.env.MENU.toLowerCase().includes("aztec-md")) {
-      headerTop = `┏━━⟪ *${process.env.BOTNAME || 'BotName'}* ⟫━━⦿`;
+      headerTop = `┏━━⟪ *${process.env.BOTNAME || 'YourBotName'}* ⟫━━⦿`;
       midSection = `┃ ✗`;
       bottomSection = `┗━━━━━━━━━━━━━━⦿`;
       categoryLeft = `\n┌──『`;
@@ -67,14 +67,14 @@ module.exports = {
       getCommands += `${categoryEnd}\n\n`;
     }
 
-    const amarok = `${headerTop || ''}
-${midSection || ''} User: ${m.pushName || 'Undefined User'}
-${midSection || ''} Botname: ${process.env.BOTNAME || 'Undefined Botname'}
-${midSection || ''} Prefix: ${process.env.PREFIX || '.'}
-${midSection || ''} Runtime: ${process.uptime()} seconds
-${midSection || ''} Time: ${new Date().toLocaleTimeString()}
-${midSection || ''} Date: ${new Date().toLocaleDateString()}
-${bottomSection || ''}\n\n${getCommands}\n\n*${config.CAPTION || ''}*`;
+    const amarok = `${headerTop}
+${midSection} User: ${m.pushName || ''}
+${midSection} Botname: ${process.env.BOTNAME || ''}
+${midSection} Prefix: ${process.env.PREFIX || ''}
+${midSection} Runtime: ${process.uptime()} seconds
+${midSection} Time: ${new Date().toLocaleTimeString()}
+${midSection} Date: ${new Date().toLocaleDateString()}
+${bottomSection}\n\n${getCommands}\n\n*${config.CAPTION || ''}*`;
 
     const chatBot = {
       [isImage ? 'image' : 'video']: {
