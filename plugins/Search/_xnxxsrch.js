@@ -6,17 +6,17 @@ module.exports = {
   name: "xnxxsh",
   description: "18 videos only",
   category: "Downloads",
-  async client(vorterx, m, { connect, text, args }) {
+  async client(vorterx, m, { connect, args }) {
  
     let me = fs.readFileSync("../lib/imogs.jpg");
-    if (!text) {
+    if (!args) {
       await connect("❌");
       return m.reply("Please provide a search term.");
     }
     await connect("🍑");
 
     const res = (await axios(
-      `https://raganork-network.vercel.app/api/xvideos/search?query=${text}`
+      `https://raganork-network.vercel.app/api/xvideos/search?query=${args}`
     )).data;
 
     let textt = `🔎 *XNXXV SEARCH RESULTS* 🔎\n\n🔍 Search Term: ${text}\n\n`;
