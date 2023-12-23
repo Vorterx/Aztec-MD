@@ -9,7 +9,7 @@ const { Collection } = require('discord.js');
 const config = require('./config.js');
 const qr = require("qr-image");
 const contact = require('./connects/contact.js');
-const { MessageHandler, vorterx } = require('./lib/client.js');
+const { MessageHandler } = require('./lib/client.js');
 const path = require('path');
 
 const app = express();
