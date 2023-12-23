@@ -9,16 +9,16 @@ module.exports = {
   name: 'yts',
   description: 'To search anything',
   category: 'Downloads',
-  async client(vorterx, m,{  connect, arg, text, args }) {
+  async client(vorterx, m,{  connect, text, args }) {
    
-    if (!arg) {
+    if (!args) {
       await connect('⛔');
       return m.reply('*Provide a query example how to create Aztec*');
     }
 
     await connect('🔍');
     try {
-      const results = await yts(arg);
+      const results = await yts(args);
       const videos = results.videos.slice(0, 15);
       if (videos.length === 0) {
         await connect('❌');
