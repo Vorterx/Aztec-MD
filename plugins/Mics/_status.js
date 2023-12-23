@@ -12,7 +12,7 @@ module.exports = {
   name: 'status',
   alias: ['sx'],
   category: 'Mics',
-  async client(vorterx, m, { text, args, connect }) {
+  async client(vorterx, m, { args, connect }) {
     
     const getUptimeText = (uptime) => {
       const hours = Math.floor(uptime / 3600);
