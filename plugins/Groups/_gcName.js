@@ -2,7 +2,7 @@ module.exports = {
   name: "gcname",
   description: "Change the group name",
   category: "Group",
-  async client(vorterx, m, { text, isBotAdmin, isGroup, connect }) {
+  async client(vorterx, m, { args, isBotAdmin, isGroup, connect }) {
     
     if (!isGroup) {
       await connect("❌");
@@ -14,7 +14,7 @@ module.exports = {
       return m.reply("⛔️ *I need to be an admin to use this command.*");
     }
 
-      if (!text) {
+      if (!args) {
       await connect("❌");
       return m.reply("⛔️ *Please provide the new group name you want to update to.*");
     }
@@ -30,7 +30,7 @@ module.exports = {
     ];
 
     const random_D3centX = D3centX[Math.floor(Math.random() * D3centX.length)];
-    const caption = `*${random_D3centX}*\n\n🏷️ New group name: ${text}`;
+    const caption = `*${random_D3centX}*\n\n🏷️ New group name: ${args}`;
 
     await vorterx.groupUpdateSubject(m.from, text);
     await m.reply(caption);
