@@ -8,7 +8,7 @@ module.exports = {
   category: "Downloads",
   async client(vorterx, m, { text, connect }) {
     
-    if (!text) {
+    if (!args) {
       await connect("❌");
       return m.reply("Please provide a search term. Example: play Dubula by Emoh");
     }
@@ -16,7 +16,7 @@ module.exports = {
     await connect("🎵");
 
     try {
-      const search = await yts(text);
+      const search = await yts(args);
       const getVideo = search.videos[Math.floor(Math.random() * search.videos.length)];
       
       const thumbnails = await getBuffer(getVideo.thumbnail);
