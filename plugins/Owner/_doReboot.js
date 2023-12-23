@@ -2,7 +2,7 @@ module.exports = {
   name: 'reboot',
   category: 'Owner',
   description: 'Reboot the bot like a boss',
-  async client(vorterx, m, { isDev, text, args, connect }) {
+  async client(vorterx, m, { isDev, args, connect }) {
   
     if (!isDev) {
       await connect('❌');
