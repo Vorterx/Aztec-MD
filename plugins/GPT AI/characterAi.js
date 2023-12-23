@@ -9,14 +9,14 @@ const config = require('../../config.js');
 module.exports = { 
   name: "character", 
   category: "GPT AI", 
-  async client(vorterx, m, { text, args, connect, mime }) {
+  async client(vorterx, m, {  args, connect, mime }) {
    
-    if (!text) {
+    if (!args) {
       await connect('❌');
       return m.reply(`\`\`\`Please provide a query, e.g., character how are you...\`\`\``);
     }
 
-    const ai_chactr = `https://api.caliph.biz.id/api/ai/c-ai?q=${text}&apikey=lykoUzNh`;
+    const ai_chactr = `https://api.caliph.biz.id/api/ai/c-ai?q=${args}&apikey=lykoUzNh`;
 
     const res = await fetch(ai_chactr);
 
