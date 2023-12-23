@@ -9,7 +9,7 @@ const { Collection } = require('discord.js');
 const config = require('./config.js');
 const qr = require("qr-image");
 const contact = require('./connects/contact.js');
-const { MessageHandler } = require('./lib/client.js');
+const { MessageHandler, vorterx } = require('./lib/client.js');
 const path = require('path');
 
 const app = express();
@@ -56,7 +56,7 @@ async function startAztec() {
     const store = makeInMemoryStore({ logger: P().child({ level: 'silent' }) });
     const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/connects/session/');
 
-    const vorterxInstance = makeWASocket({
+    const vorterx = makeWASocket({
       version: (await fetchLatestBaileysVersion()).version,
       auth: {
         creds: state.creds,
@@ -66,10 +66,10 @@ async function startAztec() {
       printQRInTerminal: false,
     });
 
-    store.bind(vorterxInstance.ev);
-    vorterxInstance.cmd = new Collection();
-    vorterxInstance.contactDB = new QuickDB().table('contacts');
-    vorterxInstance.contact = contact;
+    store.bind(vorterx.ev);
+    vorterx.cmd = new Collection();
+    vorterx.contactDB = new QuickDB().table('contacts');
+    vorterx.contact = contact;
 
     async function loadCommands(pluginsDir) {
       const cmdFiles = getCommandFiles(pluginsDir);
@@ -77,7 +77,7 @@ async function startAztec() {
       for (const file of cmdFiles) {
         const filePath = path.join(pluginsDir, file);
         const command = require(`.${path.sep}${filePath}`);
-        vorterxInstance.cmd.set(command.name, command);
+        vorterx.cmd.set(command.name, command);
       }
     }
 
@@ -88,7 +88,7 @@ async function startAztec() {
       for (const file of cmdFiles) {
         const filePath = path.join(pluginsDir, file);
         const command = require(`.${path.sep}${filePath}`);
-        vorterxInstance.cmd.set(command.name, command);
+        vorterx.cmd.set(command.name, command);
       }
     }
 
@@ -113,11 +113,11 @@ async function startAztec() {
 
     await readCommands();
 
-    vorterxInstance.ev.on('creds.update', async () => {
+    vorterx.ev.on('creds.update', async () => {
       await saveCreds();
     });
 
-    vorterxInstance.ev.on('connection.update', async (update) => {
+    vorterx.ev.on('connection.update', async (update) => {
       const { connection, lastDisconnect } = update;
 
       if (connection === "close") {
@@ -157,7 +157,7 @@ async function startAztec() {
         console.log('Plugins loaded♻️');
         console.log('WhatsApp chatbot has connected✔️');
         const toxic = `🎉Vorterx is now online and buzzing with energy! 🚀`;
-        vorterxInstance.sendMessage(vorterxInstance.user.id, { text: toxic });
+        vorterx.sendMessage(vorterx.user.id, { text: toxic });
 
         await saveCreds();
       }
@@ -167,8 +167,8 @@ async function startAztec() {
       console.log(`Server is running on port ${PORT}`);
     });
 
-    vorterxInstance.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterxInstance));
-    vorterxInstance.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterxInstance));
+    vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx));
+    vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
   } catch (error) {
     console.error("Error in startAztec:", error);
     process.exit(1);
