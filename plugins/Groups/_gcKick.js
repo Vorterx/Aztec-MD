@@ -3,7 +3,7 @@ module.exports = {
 	alias: ["remove", "sick"],
 	description: "remove Member from group",
 	category: "Group",
-  async client(vorterx, m, { text, connect, isBotAdmin, isAdmin, mentionByTag}) {
+  async client(vorterx, m, {  connect, isBotAdmin, isAdmin, mentionByTag}) {
 		
     if(!isAdmin) { await connect("❌"); return m.reply(`*🔌This is admin command*`);
         }
