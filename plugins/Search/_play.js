@@ -6,7 +6,7 @@ module.exports = {
   name: "play",
   description: "Search for music link",
   category: "Downloads",
-  async client(vorterx, m, { text, connect }) {
+  async client(vorterx, m, { args, connect }) {
     
     if (!args) {
       await connect("❌");
