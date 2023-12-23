@@ -30,15 +30,18 @@ module.exports = {
     }
 
     const { data } = await res.json();
-    const anu = getResults(data);
 
-    await connect('✅');
-    return m.reply(`\n*BLACKBOX AI*: ${anu}\n\n*${config.CAPTION}*`);
+    if (data) {
+      const anu = getResults(data);
+      await connect('✅');
+      return m.reply(`\n*BLACKBOX AI*: ${anu}\n\n*${config.CAPTION}*`);
+    } else {
+      await connect('❌');
+      return m.reply("```\nError: Unable to retrieve data from the API.\n```");
+    }
   },
 };
 
 function getResults(data) {
-  return data.toUpperCase();
+  return data;
 }
-
-  
