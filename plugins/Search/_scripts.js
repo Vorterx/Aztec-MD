@@ -6,7 +6,7 @@ module.exports = {
   name: 'script',
   alias: ['sc'],
   category: 'Search',
-  async client(vorterx, m, { text, args, connect }) {
+  async client(vorterx, m, {  args, connect }) {
    
   await connect('🌲');
   const v_chat = "https://i.ibb.co/k3tGtpf/360-F-426466645-EAg-Vxq-HG2-XK22-Ys2-Pm-LLPgml-EDC3-Sn3-X.jpg";
