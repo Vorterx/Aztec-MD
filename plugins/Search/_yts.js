@@ -12,7 +12,7 @@ module.exports = {
   async client(vorterx, m,{  connect, text, args }) {
    
     if (!args) {
-      await connect('⛔');
+      await connect('❌');
       return m.reply('*Provide a query example how to create Aztec*');
     }
 
@@ -25,9 +25,9 @@ module.exports = {
         return m.reply('No YouTube videos found for the given query.');
       }
 
-      let response = '';
+      let res = '';
       if (videos.length > 0) {
-        response = videos.map((video, index) => {
+        res = videos.map((video, index) => {
           const searchIndex = index + 1;
           return `🔎 Search: ${searchIndex}\n\n` +
             `📽️ TITLE: ${video.title}\n` +
@@ -38,8 +38,8 @@ module.exports = {
         }).join('');
       }
 
-      const thumbnailUrl = videos[0].thumbnail;
-      vorterx.sendMessage(m.from, { image: { url: thumbnailUrl }, caption: response }, { quoted: m });
+      const img = videos[0].thumbnail;
+      vorterx.sendMessage(m.from, { image: { url: img }, caption: res }, { quoted: m });
     } catch (error) {
       console.error(error);
       await connect('❌');
