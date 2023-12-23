@@ -4,6 +4,8 @@
 */
 
 const { exec } = require('child_process');
+const git = require('git-rev-sync');
+const path = require('path');
 
 module.exports = { 
   name: 'update now', 
@@ -15,14 +17,16 @@ module.exports = {
       return m.reply('You do not have permission to use this command...');
     }
 
-     await connect('✔️');
-    exec('git fetch https://github.com/Vorterx/Aztec-MD master && git reset --hard FETCH_HEAD', { cwd: '.' }, (err, stdout, stderr) => {
+    await connect('⏳');
+    const repoRoot = git.dir();
+
+    exec('git fetch https://github.com/Vorterx/Aztec-MD master && git reset --hard origin/master', { cwd: repoRoot }, (err, stdout, stderr) => {
       if (err) {
         console.error(err);
         return m.reply('An error occurred while updating the bot...');
       }
 
-      m.reply('✔️Bot successfully updated with the latest commits...');
+      m.reply('✔️ Bot successfully updated with the latest commits...');
     });
   }
 };
