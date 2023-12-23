@@ -10,7 +10,7 @@ const path = require('path');
 module.exports = { 
   name: 'update now', 
   category: 'Owner', 
-  async client(vorterx, m, { text, args, isDev, connect, quoted }) {
+  async client(vorterx, m, { args, isDev, connect, quoted }) {
 
     if (!isDev) {
       await connect('❌');
