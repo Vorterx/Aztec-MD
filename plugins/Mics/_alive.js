@@ -13,7 +13,7 @@ module.exports = {
   alias: ['bot'],
   description: 'To check the bot alive or off',
   category: 'Mics',
-  async client(vorterx, m, { text, connect }) {
+  async client(vorterx, m, {  connect }) {
    
     await connect('🧘');
     const image = {
