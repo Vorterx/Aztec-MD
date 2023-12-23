@@ -4,22 +4,22 @@ module.exports = {
   name: 'graphics',
   alias: [...gFx],
   description: 'Create logos using gfx',
-  async client(vorterx, m, { text, getCMD, args, connect }) {
+  async client(vorterx, m, { getCMD, args, connect }) {
 
     switch (getCMD) {
        case 'gfx1':
-        if (!text) {
+        if (!args) {
           await connect('❌');
           return m.reply('Please provide a text e.g gfx1 DiegosonTech');
         }
         await connect ('🛡️');
         const caliphkey = 'lykoUzNh';
-        let image1 = `https://api.caliph.biz.id/api/kaneki?nama=${encodeURIComponent(text)}&apikey=caliphkey`;
+        let image1 = `https://api.caliph.biz.id/api/kaneki?nama=${encodeURIComponent(args)}&apikey=caliphkey`;
         vorterx.sendMessage(m.from, { image: { url: image1 } }, { quoted: m });
         break;
 
       case 'gfx2':
-        if (!text || !args[0]) {
+        if (!args || !args[0]) {
           await connect('❌');
           return m.reply('Please provide two texts separated by "|" e.g gfx2 DiegosonTech|Aztec');
         }
@@ -30,38 +30,38 @@ module.exports = {
         break;
 
       case 'gfx3':
-        if (!text) {
+        if (!args) {
           await connect('❌');
           return m.reply('Please provide a text e.g gfx3 YourTextHere');
         }
         await connect('🛡️');
-        let image3 = `https://api.caliph.biz.id/api/textpro/matrix?text=${encodeURIComponent(text)}&apikey=caliphkey`;
+        let image3 = `https://api.caliph.biz.id/api/textpro/matrix?text=${encodeURIComponent(args)}&apikey=caliphkey`;
         vorterx.sendMessage(m.from, { image: { url: image3 } }, { quoted: m });
         break;
 
       case 'gfx4':
-        if (!text) {
+        if (!args) {
           await connect('❌');
           return m.reply('Please provide a text e.g gfx4 YourTextHere');
         }
         await connect('🛡️');
         let lolkeysapi = '5c250069e8936d6bf70295b8';
-        let image4 = `https://api.lolhuman.xyz/api/textprome/jokerlogo?apikey=${lolkeysapi}&text=${encodeURIComponent(text)}`;
+        let image4 = `https://api.lolhuman.xyz/api/textprome/jokerlogo?apikey=${lolkeysapi}&text=${encodeURIComponent(args)}`;
         vorterx.sendMessage(m.from, { image: { url: image4 } }, { quoted: m });
         break;
 
       case 'gfx5':
-        if (!text) {
+        if (!args) {
           await connect('❌');
           return m.reply('Please provide a text e.g gfx5 YourTextHere');
         }
          await connect('🛡️');
-        let image5 = `https://api.caliph.biz.id/api/textpro/matrix?text=${encodeURIComponent(text)}&apikey=caliphkey`;
+        let image5 = `https://api.caliph.biz.id/api/textpro/matrix?text=${encodeURIComponent(args)}&apikey=caliphkey`;
         vorterx.sendMessage(m.from, { image: { url: image5 } }, { quoted: m });
         break;
 
       case 'gfx6':
-        if (!text || !args[0]) {
+        if (!args || !args[0]) {
           await connect('❌');
           return m.reply('Please provide two texts separated by "|" e.g gfx6 Text1|Text2');
         }
@@ -72,7 +72,7 @@ module.exports = {
         break;
 
       case 'gfx7':
-        if (!text || !args[0] || !args[1]) {
+        if (!args || !args[0] || !args[1]) {
           await connect('❌');
           return m.reply('Please provide two texts separated by "|" e.g gfx7 Text1|Text2');
         }
@@ -83,7 +83,7 @@ module.exports = {
         break;
 
       case 'gfx8':
-        if (!text || !args[0] || !args[1]) {
+        if (!args || !args[0] || !args[1]) {
           await connect('❌');
           return m.reply('Please provide two texts separated by "|" e.g gfx8 Text1|Text2');
         }
@@ -94,37 +94,37 @@ module.exports = {
         break;
 
       case 'gfx9':
-        if (!text) {
+        if (!args) {
           await connect('❌');
           return m.reply('Please provide a text e.g gfx9 YourTextHere');
         }
          await connect('🛡️');
-        let image9 = `https://api.lolhuman.xyz/api/ephoto1/anonymhacker?apikey=${lolkeysapi}&text=${encodeURIComponent(text)}`;
+        let image9 = `https://api.lolhuman.xyz/api/ephoto1/anonymhacker?apikey=${lolkeysapi}&text=${encodeURIComponent(args)}`;
         vorterx.sendMessage(m.from, { image: { url: image9 } }, { quoted: m });
         break;
 
       case 'gfx10':
-        if (!text) {
+        if (!args) {
           await connect('❌');
           return m.reply('Please provide a text e.g gfx10 YourTextHere');
         }
         await connect('🛡️');
-        let image10 = `https://api.lolhuman.xyz/api/ephoto1/avatarlolnew?apikey=${lolkeysapi}&text=${encodeURIComponent(text)}`;
+        let image10 = `https://api.lolhuman.xyz/api/ephoto1/avatarlolnew?apikey=${lolkeysapi}&text=${encodeURIComponent(args)}`;
         vorterx.sendMessage(m.from, { image: { url: image10 } }, { quoted: m });
         break;
 
       case 'gfx11':
-        if (!text) {
+        if (!args) {
           await connect('❌');
           return m.reply('Please provide a text e.g gfx11 YourTextHere');
         }
         await connect('🛡️');
-        let image11 = `https://api.lolhuman.xyz/api/ephoto1/avatardota?apikey=${lolkeysapi}&text=${encodeURIComponent(text)}`;
+        let image11 = `https://api.lolhuman.xyz/api/ephoto1/avatardota?apikey=${lolkeysapi}&text=${encodeURIComponent(args)}`;
         vorterx.sendMessage(m.from, { image: { url: image11 } }, { quoted: m });
         break;
 
       case 'gfx12':
-        if (!text || !args[0]) {
+        if (!args || !args[0]) {
           await connect('❌');
           return m.reply('Please provide two texts separated by "|" e.g gfx12 Text1|Text2');
         }
@@ -135,12 +135,12 @@ module.exports = {
         break;
 
       case 'gfx13':
-        if (!text) {
+        if (!args) {
           await connect('❌');
           return m.reply('Please provide a text e.g gfx13 YourTextHere');
         }
         await connect('🛡️');
-        let image13 = `https://api.lolhuman.xyz/api/ephoto1/freefire?apikey=${lolkeysapi}&text=${encodeURIComponent(text)}`;
+        let image13 = `https://api.lolhuman.xyz/api/ephoto1/freefire?apikey=${lolkeysapi}&text=${encodeURIComponent(args)}`;
         vorterx.sendMessage(m.from, { image: { url: image13 } }, { quoted: m });
         break;
 
