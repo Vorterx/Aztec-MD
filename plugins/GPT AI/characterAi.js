@@ -15,8 +15,8 @@ module.exports = {
       await connect('❌');
       return m.reply(`\`\`\`Please provide a query, e.g., character how are you...\`\`\``);
     }
-   const chara= `https://api.caliph.biz.id/api/ai/c-ai?q=${encodeURIComponent(args)}&apikey=lykoUzNh`;
-
+   const chara = `https://api.caliph.biz.id/api/ai/c-ai?char=${encodeURIComponent(args)}&apikey=lykoUzNh`;
+    
     const anu = await fetch(chara);
     const final = await anu.json();
 
