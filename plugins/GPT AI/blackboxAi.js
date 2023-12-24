@@ -18,14 +18,17 @@ module.exports = {
       );
     }
 
-    const app = `https://mzn-api.onrender.com/ai/blackbox?prompt=${encodeURIComponent(args)}`;
+    const apiUrl = `https://mzn-api.onrender.com/ai/blackbox?prompt=${encodeURIComponent(args)}`;
     
-    const res = await fetch(app);
-    const result = await res.json();
-    const formattedResult = `*BLACKBOX AI*\n${result.res}`;
+    const response = await fetch(apiUrl);
+    const result = await response.json();
+
+    const responseContent = result.response || 'No response content available';
+
+    const formattedResult = `*BLACKBOX AI*\n${responseContent}`;
 
     await connect('🤖');
     return m.reply(formattedResult);
   },
 };
-                                              
+      
