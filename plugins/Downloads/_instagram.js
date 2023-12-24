@@ -8,13 +8,13 @@ module.exports = {
   category: 'Downloads',
   async client(vorterx, m, { args, connect }) {
    
-    if (!args[0]) {
+    if (!args) {
       await connect('❌');
       return m.reply('Please provide a valid Instagram URL.');
     }
 
     try {
-      const url = args[0];
+      const url = args;
       const data = await igdl(url);
 
       if (!data || data.length === 0) {
