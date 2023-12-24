@@ -2,7 +2,7 @@ const yts = require('yt-search');
 const axios = require('axios');
 const fs = require('fs').promises;
 const path = require('path');
-const { MessageType } = require('@adiwajshing/baileys');
+const { MessageType } = require('@iamrony777/baileys');
 
 module.exports = {
     name: 'song',
