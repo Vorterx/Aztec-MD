@@ -18,30 +18,14 @@ module.exports = {
       );
     }
 
-    const black_gpt = `https://api.caliph.biz.id/api/ai/blackbox?q=${args}&apikey=lykoUzNh`;
-    const res = await fetch(black_gpt);
+    const app = `https://mzn-api.onrender.com/ai/blackbox?prompt=${encodeURIComponent(args)}`;
+    
+    const res = await fetch(app);
+    const result = await res.json();
 
-    if (!res.ok) {
-      console.error('Sorry:', res.statusText);
-      await connect('❌');
-      return m.reply(
-        "```\nSomething went wrong. The dark forces are at play. Try again later.\n```"
-      );
-    }
+    const formattedResult = JSON.stringify(result, null, 2);
 
-    const { data } = await res.json();
-
-    if (data) {
-      const anu = getResults(data);
-      await connect('✅');
-      return m.reply(`\n*BLACKBOX AI*: ${anu}\n\n*${config.CAPTION}*`);
-    } else {
-      await connect('❌');
-      return m.reply("```\nError: Unable to retrieve data from the API.\n```");
-    }
+    await connect('🤖');
+    return m.reply(formattedResult);
   },
 };
-
-function getResults(data) {
-  return data;
-}
