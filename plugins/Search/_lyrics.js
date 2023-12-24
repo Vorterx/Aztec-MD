@@ -1,12 +1,10 @@
 const axios = require('axios');
-const { Buffer } = require('buffer');
 const config = require('../../config.js');
 
 module.exports = {
   name: 'lyrics',
   category: 'Search',
-  async client(vorterx, m, {  args, connect }) {
-  
+  async client(vorterx, m, { args, connect }) {
     try {
       if (!args || typeof args !== 'string') {
         await connect('❌');
@@ -25,12 +23,11 @@ module.exports = {
 
       const title = data[0].title;
       const artist = data[0].artist;
+      const thumbnail = data[0].genius;
       const lyricsRes = await axios.get(`https://weeb-api.vercel.app/lyrics?url=${data[0].url}`);
       const lyrics = lyricsRes.data || 'Lyrics not found.';
-      const thumbnail = data[0].genius;
-      const thumbnailBase64 = thumbnail ? Buffer.from(thumbnail).toString('base64') : '';
 
-      const res = `*🌷TITLE*: ${title}\n\n*👤ARTIST*: ${artist}\n\n${lyrics}\n\n*${config.CAPTION}*`;
+      const res = `*🌷TITLE*: ${title}\n*👤ARTIST*: ${artist}\n\n${lyrics}\n\n*${config.CAPTION}*`;
 
       const msgData = {
         text: res,
@@ -39,17 +36,20 @@ module.exports = {
             title: `${config.CAPTION}`,
             body: res,
             mediaType: 2,
-            mediaUrl: thumbnailBase64,
-            thumbnail: thumbnailBase64
+            mediaUrl: thumbnail,
+            thumbnail: thumbnail
           }
         },
         data: [0, ...(data[0].data || [])].map(JSON.stringify)
       };
 
-      return vorterx.sendMessage(m.from, msgData);
+      await vorterx.sendMessage(m.from, msgData);
+      await connect('🤖');
     } catch (error) {
       console.error(error);
+      await connect('❌');
       return m.reply('An error occurred while fetching the lyrics.');
     }
   }
 };
+          
