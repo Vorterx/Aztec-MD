@@ -19,7 +19,7 @@ module.exports = {
       `https://raganork-network.vercel.app/api/xvideos/search?query=${args}`
     )).data;
 
-    let textt = `🔎 *XNXXV SEARCH RESULTS* 🔎\n\n🔍 Search Term: ${text}\n\n`;
+    let textt = `🔎 *XNXXV SEARCH RESULTS* 🔎\n\n🔍 Search Term: ${args}\n\n`;
 
     for (const [index, video] of res.result.entries()) {
       const videoInfo = `
@@ -48,6 +48,6 @@ module.exports = {
         },
       },
       { quoted: m }
-    );
+    ); 
   },
 };              
