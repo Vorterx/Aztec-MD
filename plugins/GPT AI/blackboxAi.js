@@ -1,9 +1,10 @@
+
 /*
 * @Author: DiegosonTech
 * @BotName: Aztec-MD
 */
 
-const fetch = async (url) => import('node-fetch').then(module => module.default(url));
+const fetch = require('node-fetch');
 const config = require('../../config.js');
 
 module.exports = {
@@ -27,13 +28,13 @@ module.exports = {
       }
 
       const result = await res.json();
-      console.log('result);
+      console.log(result);
 
       const getRes = result.res;
       const getFinal = `*BLACKBOX AI*\n\n${getRes}\n\n*${config.CAPTION}*`;
 
      await vorterx.sendMessage(m.from, {
-        image: { url: 'URL_TO_YOUR_IMAGE' },
+        image: { url: 'https://i.ibb.co/DLyfLjq/BLACKBOX-AI-BY-DIEGOSON-TECH.png' },
         caption: getFinal,
       });
 
