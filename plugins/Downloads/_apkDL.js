@@ -18,28 +18,36 @@ module.exports = {
         return m.reply('No results found for the given app name.');
       }
 
-      const { icon, name, size, package, lastup } = results[0];
+      const appDetails = results[0];
 
-      if (size > 907) {
-        await connect('❌');
-        return m.reply('This app is too large to download...');
+      const { icon, name } = appDetails;
+
+      const size = appDetails.size || 'N/A';
+      const packageId = appDetails.package || 'N/A';
+      const lastUpdated = appDetails.lastup || 'N/A';
+
+      const getSize = size === 'N/A' || size > 907 ? 'This app is too large to download...' : '';
+
+      let gotApp = `*『 APPLICATION DOWNLOADER 』*\n\n`;
+      gotApp += `*🛡️ App Name*: *${name}*\n`;
+      gotApp += `*📤 Size*: *${size}\n*`;
+      gotApp += `*📦 App Id*: *${packageId}*\n`;
+      gotApp += `*⬆️ Updated*: *${lastUpdated}*\n`;
+
+      const isCon = icon && icon.startsWith('http');
+
+      if (isCon) {
+        vorterx.sendMessage(m.from, {
+          image: { url: icon },
+          caption: tiny(gotApp),
+          document: { url: appDetails.dllink, mimetype: 'application/vnd.android.package-archive', fileName: `${name}.apk` }
+        });
+      } else {
+        vorterx.sendMessage(m.from, {
+          caption: tiny(gotApp),
+          document: { url: appDetails.dllink, mimetype: 'application/vnd.android.package-archive', fileName: `${name}.apk` }
+        });
       }
-
-      await connect('📤');
-      const getApp = await download(results[0]);
-      const { dllink } = getApp;
-
-      const gotApp = `*『 APPLICATION DOWNLOADER 』*\n\n` +
-        `*🛡️ App Name*: *${name}*\n` +
-        `*📤 Size*: *${size}\n*` +
-        `*📦 App Id*: *${package}*\n` +
-        `*⬆️ Updated*: *${lastup}*\n`;
-
-      vorterx.sendMessage(m.from, {
-        image: { url: icon },
-        caption: tiny(gotApp),
-        document: { url: dllink, mimetype: 'application/vnd.android.package-archive', fileName: `${name}.apk` }
-      });
     } catch (error) {
       console.error('Error:', error);
       await connect('❌');
@@ -47,3 +55,4 @@ module.exports = {
     }
   },
 };
+          
