@@ -15,17 +15,17 @@ module.exports = {
       await connect('❌');
       return m.reply(`\`\`\`Please provide a query, e.g., character how are you...\`\`\``);
     }
-   const charApi = `https://api.caliph.biz.id/api/ai/c-ai?q=${encodeURIComponent(args)}&apikey=lykoUzNh`;
+   const chara= `https://api.caliph.biz.id/api/ai/c-ai?q=${encodeURIComponent(args)}&apikey=lykoUzNh`;
 
-    const anu = await fetch(charApi);
+    const anu = await fetch(chara);
     const final = await anu.json();
 
     if (final.status === 'success' && final.data) {
        const get_success = JSON.stringify(final.data, null, 2);
-      const char_img = 'https://i.imgur.com/mCTg8vq.jpg';
+      const img = 'https://i.imgur.com/mCTg8vq.jpg';
 
         await connect('🤖');
-     return vorterx.sendMessage(m.from, { image: { url: char_img }, caption: `*CHARACTER AI*\n${get_success}` }, 'image');
+     return vorterx.sendMessage(m.from, { image: { url: img }, caption: `*CHARACTER AI*\n${get_success}` }, 'image');
     } else {
       await connect('❌');
       return m.reply(`\`\`\`Error: ${final.message || 'Unexpected error'}\`\`\``);
