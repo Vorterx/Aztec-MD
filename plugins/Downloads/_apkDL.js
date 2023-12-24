@@ -34,7 +34,7 @@ module.exports = {
 
       await connect('📤');
 
-      const messageOptions = {
+      const apps = {
         caption: tiny(gotApp),
         document: {
           url: dllink,
@@ -43,7 +43,7 @@ module.exports = {
         }
       };
 
-      await vorterx.sendMessage(m.from, messageOptions, 'document');
+      await vorterx.sendMessage(m.from, apps, 'document');
     } catch (error) {
       console.error('Error:', error);
       await connect('❌');
