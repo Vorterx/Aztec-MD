@@ -18,9 +18,9 @@ module.exports = {
         return m.reply('No results found for the given app name.');
       }
 
-      const appu = results[0];
+      const appDetails = await download(results[0]);
 
-      const { name, size, package: packageId, lastup } = appu;
+      const { name, size, package: packageId, lastup, dllink } = appDetails;
 
       const getSize = size > 907 ? 'This app is too large to download...' : '';
 
@@ -36,19 +36,17 @@ module.exports = {
       }
 
       await connect('📤');
-      const getApp = await download(results[0]);
-      const { dllink } = getApp;
 
-      const msg = {
+      const messageOptions = {
         caption: tiny(gotApp),
         document: {
-          url: getApp.dllink,
+          url: dllink,
           mimetype: 'application/vnd.android.package-archive',
-          fileName: getApp.name + '.apk'
+          fileName: `${name}.apk`
         }
       };
 
-      await vorterx.sendMessage(m.from, msg, 'document');
+      await vorterx.sendMessage(m.from, messageOptions, 'document');
     } catch (error) {
       console.error('Error:', error);
       await connect('❌');
@@ -56,4 +54,4 @@ module.exports = {
     }
   },
 };
-      
+        
