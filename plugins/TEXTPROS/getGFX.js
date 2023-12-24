@@ -1,3 +1,4 @@
+const config = require('../../config.js');
 const gFx = Array.from({ length: 13 }, (_, i) => `gfx${i + 1}`);
 
 module.exports = {
@@ -15,7 +16,7 @@ module.exports = {
         await connect ('🛡️');
         const caliphkey = 'lykoUzNh';
         let image1 = `https://api.caliph.biz.id/api/kaneki?nama=${encodeURIComponent(args)}&apikey=caliphkey`;
-        vorterx.sendMessage(m.from, { image: { url: image1 } }, { quoted: m });
+        vorterx.sendMessage(m.from, { image: { url: image1 }, caption: `*${config.CAPTION}*`}, { quoted: m });
         break;
 
       case 'gfx2':
