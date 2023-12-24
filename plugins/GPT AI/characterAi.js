@@ -9,31 +9,27 @@ const config = require('../../config.js');
 module.exports = { 
   name: "character", 
   category: "GPT AI", 
-  async client(vorterx, m, {  args, connect, mime }) {
+  async client(vorterx, m, { args, connect, mime }) {
    
     if (!args) {
       await connect('❌');
       return m.reply(`\`\`\`Please provide a query, e.g., character how are you...\`\`\``);
     }
+   const charApi = `https://api.caliph.biz.id/api/ai/c-ai?q=${encodeURIComponent(args)}&apikey=lykoUzNh`;
 
-    const ai_chactr = `https://api.caliph.biz.id/api/ai/c-ai?q=${args}&apikey=lykoUzNh`;
+    const anu = await fetch(charApi);
+    const final = await anu.json();
 
-    const res = await fetch(ai_chactr);
+    if (final.status === 'success' && final.data) {
+       const get_success = JSON.stringify(final.data, null, 2);
+      const char_img = 'https://i.imgur.com/mCTg8vq.jpg';
 
-    if (!res.ok) {
-      console.error(`Error: ${res.status}`);
+        await connect('🤖');
+     return vorterx.sendMessage(m.from, { image: { url: char_img }, caption: `*CHARACTER AI*\n${get_success}` }, 'image');
+    } else {
       await connect('❌');
-      return m.reply('An error occurred while processing...');
+      return m.reply(`\`\`\`Error: ${final.message || 'Unexpected error'}\`\`\``);
     }
-
-    await connect('🤡');
-    const data = await res.json();
-    console.log(data);
-
-    const gpt_mime = 'https://i.imgur.com/mCTg8vq.jpg';
-    return m.reply({
-      thumbnail: { url: gpt_mime },
-      content: `*CHARACTER*: ${data.result}\n\n*${config.CAPTION}*`
-    });
-  }
+  },
 };
+    
