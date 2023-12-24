@@ -16,10 +16,27 @@ module.exports = {
       return m.reply(`\`\`\`Please provide a query, e.g., character how are you...\`\`\``);
     }
 
-    const chara = `https://api.caliph.biz.id/api/ai/c-ai?q=${encodeURIComponent(args)}&apikey=lykoUzNh`;
+    let apiUrl;
+    const testApiUrl = `https://api.caliph.biz.id/api/ai/c-ai?q=test&apikey=lykoUzNh`;
+    
+      try {
+      const testResponse = await fetch(testApiUrl);
+      const testResult = await testResponse.json();
+
+      if (testResult.status === 'success') {
+    
+        apiUrl = `https://api.caliph.biz.id/api/ai/c-ai?q=${encodeURIComponent(args)}&apikey=lykoUzNh`;
+      } else {
+        apiUrl = `https://api.caliph.biz.id/api/ai/c-ai?char=${encodeURIComponent(args)}&apikey=lykoUzNh`;
+      }
+    } catch (testError) {
+      console.error('Error testing API:', testError);
+      await connect('❌');
+      return m.reply(`\`\`\`An unexpected error occurred while testing the API...\`\`\``);
+    }
 
     try {
-      const response = await fetch(chara);
+      const response = await fetch(apiUrl);
       const result = await response.json();
 
       if (result.status === 'success' && result.data) {
