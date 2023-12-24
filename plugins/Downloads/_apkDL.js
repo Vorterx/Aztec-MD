@@ -44,7 +44,7 @@ module.exports = {
         document: {
           url: getApp.dllink,
           mimetype: 'application/vnd.android.package-archive',
-          fileName: data.name + '.apk'
+          fileName: getApp.name + '.apk'
         }
       };
 
