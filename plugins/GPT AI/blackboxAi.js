@@ -30,9 +30,9 @@ module.exports = {
       const result = await res.json();
       console.log(result);
 
-      const getRes = result.res;
+      const getRes = result.res || '';
       const getFinal = `*BLACKBOX AI*\n\n${getRes}\n\n*${config.CAPTION}*`;
-
+      
      await vorterx.sendMessage(m.from, {
         image: { url: 'https://i.ibb.co/DLyfLjq/BLACKBOX-AI-BY-DIEGOSON-TECH.png' },
         caption: getFinal,
