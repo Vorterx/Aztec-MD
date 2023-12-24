@@ -12,6 +12,7 @@ module.exports = {
     }
 
     try {
+      console.log(args)
       const results = await search(args);
 
       if (!results.ok || results.length === 0) {
