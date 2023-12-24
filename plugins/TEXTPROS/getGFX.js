@@ -9,12 +9,12 @@ module.exports = {
   async client(vorterx, m, { getCMD, args, connect }) {
 
     switch (getCMD) {
-       case 'gfx1':
+      case 'gfx1':
         if (!args) {
           await connect('❌');
           return m.reply('Please provide a text e.g gfx1 DiegosonTech');
         }
-        await connect ('🛡️');
+        await connect('🛡️');
         const caliphkey = 'lykoUzNh';
         let image1 = `https://api.caliph.biz.id/api/kaneki?nama=${encodeURIComponent(args)}&apikey=caliphkey`;
         vorterx.sendMessage(m.from, { image: { url: image1 }, caption: `\n\n*${config.CAPTION}*`}, { quoted: m });
@@ -56,7 +56,7 @@ module.exports = {
           await connect('❌');
           return m.reply('Please provide a text e.g gfx5 YourTextHere');
         }
-         await connect('🛡️');
+        await connect('🛡️');
         let image5 = `https://api.caliph.biz.id/api/textpro/matrix?text=${encodeURIComponent(args)}&apikey=caliphkey`;
         vorterx.sendMessage(m.from, { image: { url: image5 }, caption: `\n\n*${config.CAPTION}*`}, { quoted: m });
         break;
@@ -66,7 +66,7 @@ module.exports = {
           await connect('❌');
           return m.reply('Please provide two texts separated by "|" e.g gfx6 Text1|Text2');
         }
-         await connect('🛡️');
+        await connect('🛡️');
         let [text1_gfx6, text2_gfx6] = args[0].split('|');
         let image6 = `https://api.lolhuman.xyz/api/textprome2/lionlogo?apikey=${lolkeysapi}&text1=${encodeURIComponent(text1_gfx6)}&text2=${encodeURIComponent(text2_gfx6)}`;
         vorterx.sendMessage(m.from, { image: { url: image6 }, caption: `\n\n*${config.CAPTION}*`}, { quoted: m });
@@ -78,8 +78,9 @@ module.exports = {
           return m.reply('Please provide two texts separated by "|" e.g gfx7 Text1|Text2');
         }
         await connect('🛡️');
-        let [text1_gfx7, text2_gfx7] = args[0].split('|');
-        let image7 = `https://api.lolhuman.xyz/api/photooxy2/battlefield4?apikey=${lolkeysapi}&text1=${encodeURIComponent(text1_gfx7.trim())}&text2=${encodeURIComponent(text2_gfx7.trim())}`;
+        let text1_gfx7 = args[0] ? args[0].trim() : '';
+        let text2_gfx7 = args[1] ? args[1].trim() : '';
+        let image7 = `https://api.lolhuman.xyz/api/photooxy2/battlefield4?apikey=${lolkeysapi}&text1=${encodeURIComponent(text1_gfx7)}&text2=${encodeURIComponent(text2_gfx7)}`;
         vorterx.sendMessage(m.from, { image: { url: image7 }, caption: `\n\n*${config.CAPTION}*`}, { quoted: m });
         break;
 
@@ -89,8 +90,9 @@ module.exports = {
           return m.reply('Please provide two texts separated by "|" e.g gfx8 Text1|Text2');
         }
         await connect('🛡️');
-        let [text1_gfx8, text2_gfx8] = args[0].split('|');
-        let image8 = `https://api.lolhuman.xyz/api/photooxy2/battlefield4?apikey=${lolkeysapi}&text1=${encodeURIComponent(text1_gfx8.trim())}&text2=${encodeURIComponent(text2_gfx8.trim())}`;
+        let text1_gfx8 = args[0] ? args[0].trim() : '';
+        let text2_gfx8 = args[1] ? args[1].trim() : '';
+        let image8 = `https://api.lolhuman.xyz/api/photooxy2/battlefield4?apikey=${lolkeysapi}&text1=${encodeURIComponent(text1_gfx8)}&text2=${encodeURIComponent(text2_gfx8)}`;
         vorterx.sendMessage(m.from, { image: { url: image8 }, caption: `\n\n*${config.CAPTION}*`}, { quoted: m });
         break;
 
@@ -99,7 +101,7 @@ module.exports = {
           await connect('❌');
           return m.reply('Please provide a text e.g gfx9 YourTextHere');
         }
-         await connect('🛡️');
+        await connect('🛡️');
         let image9 = `https://api.lolhuman.xyz/api/ephoto1/anonymhacker?apikey=${lolkeysapi}&text=${encodeURIComponent(args)}`;
         vorterx.sendMessage(m.from, { image: { url: image9 }, caption: `\n\n*${config.CAPTION}*`}, { quoted: m });
         break;
