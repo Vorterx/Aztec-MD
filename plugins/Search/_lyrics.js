@@ -39,8 +39,7 @@ module.exports = {
             mediaUrl: thumbnail,
             thumbnail: thumbnail
           }
-        },
-        data: [0, ...(data[0].data || [])].map(JSON.stringify)
+        }
       };
 
       await vorterx.sendMessage(m.from, msgData);
@@ -52,4 +51,4 @@ module.exports = {
     }
   }
 };
-          
+      
