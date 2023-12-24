@@ -1,4 +1,6 @@
-const { connect } = require('../../lib/client.js'); 
+const axios = require("axios");
+const { tiny } = require('@viper-x/fancytext');
+const maker = require('mumaker');
 
 const Textpro = {
   neon: "https://textpro.me/neon-text-effect-online-879.html",
@@ -38,31 +40,29 @@ const Textpro = {
   captainamerica: "https://textpro.me/create-a-captain-america-text-effect-free-online-1039.html",
   pencil: "https://textpro.me/create-a-sketch-text-effect-online-1044.html",
   joker: "https://textpro.me/create-logo-joker-online-934.html",
-  1917: "https://textpro.me/1917-style-text-effect-online-980.html",
+  "1917": "https://textpro.me/1917-style-text-effect-online-980.html",
   halloween: "https://textpro.me/halloween-fire-text-effect-940.html",
   pokemon: "https://textpro.me/create-pokemon-logo-style-text-effect-online-1134.html",
   summer2: "https://textpro.me/create-a-summer-neon-light-text-effect-online-1076.html",
 };
 
 const fetchLogo = async (vorterx, m, logoName, args) => {
-  if (!Textpro[logoName]) {
-    await connect("❌");
-    return m.reply("*Invalid logo name. Provide a valid command bruh ex neon vorterx*");
+  try {
+    const logoURL = Textpro[logoName];
+
+    if (!logoURL) {
+      return m.reply("*Invalid logo name. Provide a valid command, e.g., neon vorterx*");
+    }
+
+    const [text1, text2] = args.split("|");
+    const logoImage = await maker.textpro(logoURL, `${text1} ${text2}`);
+    
+    const caption = `*Name*: ${logoName}\n\n*${config.CAPTION}*`;
+    
+    vorterx.sendMessage(m.from, { image: { url: logoImage.image }, caption: tiny(caption) }, { quoted: m });
+  } catch (error) {
+    console.error("Error fetching or processing logo:", error);
   }
-
-  const getLogo = Textpro[logoName]; 
-
-  await connect("🤡", "😍", "👺", "👥", "👄");
-  const axios = require("axios");
-  const { tiny } = require('@viper-x/fancytext');
-  const maker = require('mumaker');
-
-  const [text1, text2] = args.split("|");
-
-  let anu = await maker.textpro(getLogo, `${text1} ${text2}`); 
-
-  const aztec = `*Name*: ${logoName}\n\n*${config.CAPTION}*`;
-  vorterx.sendMessage(m.from, { image: { url: anu.image }, caption: tiny(aztec) }, { quoted: m });
 };
 
 module.exports = {
@@ -70,10 +70,11 @@ module.exports = {
   description: "TEXTPRO",
   category: "TEXTPRO",
   async client(vorterx, m, { args }) {
-    const logoName = args.toLowerCase();
+    const logoName = args;
+
     if (logoName === "logomaker") {
-      const Commands = Object.keys(Textpro).map((command, index) => `${index + 1} ${command}`).join("\n  ");
-      return m.reply(`*[ LOGO MAKERS MENU ]*\n${Commands}`);
+      const commandsList = Object.keys(Textpro).map((command, index) => `${index + 1} ${command}`).join("\n  ");
+      return m.reply(`*[ LOGO MAKERS MENU ]*\n${commandsList}`);
     }
 
     const [command, inputText] = logoName.split(" ", 2);
