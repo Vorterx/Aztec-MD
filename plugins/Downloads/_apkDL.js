@@ -13,22 +13,19 @@ module.exports = {
 
     try {
       const results = await search(args);
-
       if (!results.length) {
         return m.reply('No results found for the given app name.');
       }
 
-      const appDetails = await download(results[0]);
+      const appu = await download(results[0]);
 
-      const { name, size, package: packageId, lastup, dllink } = appDetails;
-
+      const { name, size, package: packageId, lastup, dllink } = appu;
       const getSize = size > 907 ? 'This app is too large to download...' : '';
-
       let gotApp = `*『 APPLICATION DOWNLOADER 』*\n\n`;
-      gotApp += `*🛡️ App Name*: *${name}*\n`;
-      gotApp += `*📤 Size*: *${size}\n*`;
-      gotApp += `*📦 App Id*: *${packageId}*\n`;
-      gotApp += `*⬆️ Updated*: *${lastup}*\n`;
+      gotApp += `*App Name*: ${name}\n`;
+      gotApp += `*Size*: ${size}\n`;
+      gotApp += `*App Id*: ${packageId}\n`;
+      gotApp += `*Updated*: ${lastup}\n`;
 
       if (getSize) {
         await connect('❌');
