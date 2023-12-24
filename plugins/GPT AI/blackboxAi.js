@@ -17,18 +17,15 @@ module.exports = {
         "```\nError 404: Text not found. Please provide a text to get results...\n```"
       );
     }
-
-    const apiUrl = `https://mzn-api.onrender.com/ai/blackbox?prompt=${encodeURIComponent(args)}`;
+    const getBlack = `https://mzn-api.onrender.com/ai/blackbox?prompt=${encodeURIComponent(args)}`;
     
-    const response = await fetch(apiUrl);
-    const result = await response.json();
+    const response = await fetch(getBlack);
+    const result = await res.json();
 
-    const responseContent = result.response || 'No response content available';
-
-    const formattedResult = `*BLACKBOX AI*\n${responseContent}`;
-
+    const getRes = result.res || '';
+    const getFinal = `*BLACKBOX AI*\n\n${getRes}\n\n*${config.CAPTION}*`;
     await connect('🤖');
-    return m.reply(formattedResult);
+    return m.reply(getFinal);
   },
 };
       
