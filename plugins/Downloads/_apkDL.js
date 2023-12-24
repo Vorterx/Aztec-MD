@@ -43,8 +43,7 @@ vorterx.sendMessage(m.from, {
   document: {
     url: dllink,
     mimetype: 'application/vnd.android.package-archive',
-    fileName: `${name}.apk`,
-    title: `${name}.apk`
+    filename: `${name}.apk`
   }
 });
     } catch (error) {
