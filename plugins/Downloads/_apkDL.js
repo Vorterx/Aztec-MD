@@ -19,12 +19,12 @@ module.exports = {
 
       const appu = await download(results[0]);
 
-      const { name, size, package: packageId, lastup, dllink } = appu;
+      const { name, lastup, package, size, dllink } = appu;
       const getSize = size > 907 ? 'This app is too large to download...' : '';
       let gotApp = `*『 APPLICATION DOWNLOADER 』*\n\n`;
       gotApp += `*App Name*: ${name}\n`;
       gotApp += `*Size*: ${size}\n`;
-      gotApp += `*App Id*: ${packageId}\n`;
+      gotApp += `*App Id*: ${package}\n`;
       gotApp += `*Updated*: ${lastup}\n`;
 
       if (getSize) {
