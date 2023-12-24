@@ -2,6 +2,7 @@ const yts = require('yt-search');
 const axios = require('axios');
 const fs = require('fs').promises;
 const path = require('path');
+const { MessageType } = require('@adiwajshing/baileys');
 
 module.exports = {
     name: 'song',
@@ -31,13 +32,14 @@ module.exports = {
                 // Download audio to tmp folder
                 const tmpFolderPath = path.join(__dirname, 'tmp');
                 const tmpFilePath = path.join(tmpFolderPath, `audio_${Date.now()}.webm`);
-                
+
                 await fs.mkdir(tmpFolderPath, { recursive: true });
                 const audioBuffer = await axios.get(mediaUrl, { responseType: 'arraybuffer' }).then(res => res.data);
                 await fs.writeFile(tmpFilePath, audioBuffer);
 
                 // Send the audio file
-                vorterx.sendMessage(m.from, { audio: tmpFilePath, mimetype: 'audio/webm' }, 2, { quoted: m });
+                const audioStream = fs.createReadStream(tmpFilePath);
+                vorterx.sendMessage(m.from, audioStream, MessageType.audio, { quoted: m, mimetype: 'audio/webm', ptt: false });
             } else {
                 m.reply('Failed to fetch audio data.');
             }
