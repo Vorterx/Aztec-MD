@@ -22,12 +22,12 @@ module.exports = {
 
         try {
             const response = await axios.get(ytaNewAPIURL);
-            const audioData = response.data.data;
+            const audioData = response.data.result;
 
-            console.log('Audio Data:', audioData);
+            console.log('Audio Data:', audioData); // Log audio data for debugging
 
             if (audioData) {
-                const mediaUrl = audioData.audio;
+                const mediaUrl = audioData.link.link;
 
                 console.log('Media URL:', mediaUrl); // Log media URL for debugging
 
@@ -35,9 +35,9 @@ module.exports = {
                     quoted: m,
                     contextInfo: {
                         externalAdReply: {
-                            title: videos[0].title.substr(0, 30),
+                            title: audioData.title.substr(0, 30),
                             mediaType: 2,
-                            thumbnail: await fs.promises.readFile(`https://i.ytimg.com/vi/${audioData.id}/hqdefault.jpg`),
+                            thumbnail: await fs.promises.readFile(audioData.thumbnail),
                             mediaUrl: mediaUrl,
                         },
                     },
