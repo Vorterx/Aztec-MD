@@ -20,12 +20,12 @@ module.exports = {
 
     const app = `https://mzn-api.onrender.com/ai/blackbox?prompt=${encodeURIComponent(args)}`;
     
-    const res = await fetch(app);
+    const resp = await fetch(app);
     const result = await res.json();
-
-    const formattedResult = JSON.stringify(result, null, 2);
+    const formattedResult = `*BLACKBOX AI*\n${result.res}`;
 
     await connect('🤖');
     return m.reply(formattedResult);
   },
 };
+                                              
