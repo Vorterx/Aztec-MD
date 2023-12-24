@@ -24,8 +24,12 @@ module.exports = {
             const response = await axios.get(ytaNewAPIURL);
             const audioData = response.data.data;
 
+            console.log('Audio Data:', audioData);
+
             if (audioData) {
                 const mediaUrl = audioData.audio;
+
+                console.log('Media URL:', mediaUrl); // Log media URL for debugging
 
                 vorterx.sendMessage(m.from, await axios.get(mediaUrl, { responseType: 'arraybuffer' }).then(res => res.data), 2, {
                     quoted: m,
