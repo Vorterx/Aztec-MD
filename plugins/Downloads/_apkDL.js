@@ -38,14 +38,18 @@ module.exports = {
       await connect('📤');
       const getApp = await download(results[0]);
       const { dllink } = getApp;
-vorterx.sendMessage(m.from, {
-  caption: tiny(gotApp),
-  document: {
-    url: dllink,
-    mimetype: 'application/vnd.android.package-archive',
-    filename: `${name}.apk`
-  }
-});
+await vorterx.sendMessage(
+  m.from,
+  {
+    caption: tiny(gotApp),
+    document: {
+      url: dllink,
+      mimetype: 'application/vnd.android.package-archive',
+      filename: `${name}.apk`
+    }
+  },
+  'document'
+);
     } catch (error) {
       console.error('Error:', error);
       await connect('❌');
@@ -53,4 +57,3 @@ vorterx.sendMessage(m.from, {
     }
   },
 };
-        
