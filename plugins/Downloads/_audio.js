@@ -28,19 +28,16 @@ module.exports = {
       const videoURL = firstResult.url;
       const videoInfo = await ytdl.getInfo(videoURL);
 
-      const audioStream = ytdl(videoURL, { quality: 'highestaudio' });
-
       const fileName = `${videoInfo.videoDetails.title}.mp3`;
       const filePath = path.join(__dirname, 'downloads', fileName);
 
-      let fileExists;
+      let fileExists = false;
+
       try {
-        await fs.promises.access(filePath);
+        await fs.promises.access(filePath, fs.constants.F_OK);
         fileExists = true;
       } catch (error) {
-        if (error.code === 'ENOENT') {
-          fileExists = false;
-        } else {
+        if (error.code !== 'ENOENT') {
           console.error('Error checking file existence:', error);
           await connect('❌');
           return m.reply('An error occurred while checking file existence.');
@@ -50,16 +47,17 @@ module.exports = {
       if (fileExists) {
         await vorterx.sendMessage(m.from, { audio: filePath }, { quoted: m });
       } else {
+        const audioStream = ytdl(videoURL, { quality: 'highestaudio' });
+
         audioStream.pipe(fs.createWriteStream(filePath));
 
         audioStream.on('end', async () => {
           try {
-            const item = { url: filePath }; // Replace this with your actual item structure
-            if (item && item.url && (item.url.toString().startsWith('http://') || item.url.toString().startsWith('https://'))) {
-              await vorterx.sendMessage(m.from, { audio: item.url }, { quoted: m });
-              fs.unlink(filePath);
+            if (fs.existsSync(filePath)) {
+              await vorterx.sendMessage(m.from, { audio: filePath }, { quoted: m });
+              fs.unlinkSync(filePath);
             } else {
-              console.error('Invalid item or URL:', item);
+              console.error('File not found after download:', filePath);
             }
           } catch (error) {
             console.error('Error processing audio:', error);
@@ -75,4 +73,4 @@ module.exports = {
     }
   }
 };
-      
+  
