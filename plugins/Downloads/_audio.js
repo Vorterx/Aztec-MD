@@ -33,8 +33,20 @@ module.exports = {
        const fileName = `${videoInfo.videoDetails.title}.mp3`;
        const filePath = path.join(__dirname, 'downloads', fileName);
 
-      const fileExists = await fs.access(filePath).then(() => true).catch(() => false);
-
+      let fileExists;
+try {
+  await fs.promises.access(filePath);
+  fileExists = true;
+} catch (error) {
+  if (error.code === 'ENOENT') {
+    fileExists = false;
+  } else {
+    console.error('Error checking file existence:', error);
+    await connect('❌');
+    return m.reply('An error occurred while checking file existence.');
+  }
+          }
+        
       if (fileExists) {
         vorterx.sendMessage(m.from, { audio: audioStream }, { quoted: m });
       } else {
