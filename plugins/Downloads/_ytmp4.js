@@ -2,6 +2,7 @@ const fs = require('fs');
 const config = require('../../config.js');
 const { tiny } = require('@viper-x/fancytext');
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
+const path = require('path');
 
 module.exports = {
   name: 'ytmp4',
@@ -31,16 +32,19 @@ module.exports = {
 
     const caption = tiny(`*Title*: ${title}\n*Upload Date*: ${uploadDate}\n*Channel*: ${uploadChannel}\n*Duration*: ${duration}\n*Likes*: ${likes}\n*Dislikes*: ${dislikes}\n*${config.CAPTION}*`);
 
+    // Generate a random name for the video file
+    const randomFileName = `temp_video_${Math.floor(Math.random() * 1000000)}.mp4`;
+    const tempFilePath = path.join(__dirname, 'tmp', randomFileName);
+
     // Save the video directly in the 'tmp' folder without explicitly creating it
-    const tempFileName = `./tmp/temp_video_${Date.now()}.mp4`;
     const videoStream = await fetch(downloadUrl);
     const videoBuffer = await videoStream.buffer();
-    fs.writeFileSync(tempFileName, videoBuffer);
+    fs.writeFileSync(tempFilePath, videoBuffer);
 
     // Send the video
-    await vorterx.sendMessage(m.from, { video: tempFileName, caption });
+    await vorterx.sendMessage(m.from, { video: tempFilePath, caption });
 
     // Delete the temporary video file after sending
-    fs.unlinkSync(tempFileName);
+    fs.unlinkSync(tempFilePath);
   }
 };
