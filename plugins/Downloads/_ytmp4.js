@@ -18,7 +18,7 @@ module.exports = {
 
       console.log(data);
 
-      if (data.data && data.data.vid_720p) {
+      if (data && data.status && data.data && data.data.vid_720p) {
         await connect('✅');
    await vorterx.sendMessage(m.from, { video: data.data.vid_720p }, { caption: '*Downloaded video*' });
       } else {
