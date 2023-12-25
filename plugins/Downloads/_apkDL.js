@@ -6,13 +6,13 @@ module.exports = {
   alias: ['apk', 'app'],
   category: 'Downloads',
   async client(vorterx, m, { args, connect }) {
-    if (!args[0]) {
+    if (!args || args.length === 0) {
       await connect('❌');
       return m.reply('Please provide an app name e.g apk Acode Editor...');
     }
 
     try {
-      const results = await search(args[0]);
+      const results = await search(args);
 
       if (!results || !results.list || results.list.length === 0) {
         await connect('❌');
@@ -50,4 +50,4 @@ module.exports = {
     }
   },
 };
-          
+        
