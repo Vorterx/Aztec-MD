@@ -1,33 +1,35 @@
+const config = require('../../config.js');
+const { tiny } = require('@viper-x/fancytext');
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 
 module.exports = {
   name: 'ytmp4',
   alias: ['vid', 'mp4'],
   category: 'Downloads',
-  async client(vorterx, m, { args, connect }) {
-    if (!args) {
+  async client(vorterx, m, { text, args, connect }) {
+
+    if (!args[0]) {
       await connect('❌');
       return m.reply('Please provide a YouTube link for me to download');
     }
 
-    const mp4 = `https://vihangayt.me/download/ytmp4?url=${encodeURIComponent(args)}`;
-    const response = await fetch(mp4);
+    const v_api = 'https://videodl.onrender.com/downloadurl?link=' + encodeURIComponent(args[0]);
+    const res = await fetch(v_api);
 
-    if (response.ok) {
-      const data = await response.json();
-
-      console.log(data);
-
-      if (data && data.status && data.data && data.data.vid_720p) {
-        await connect('✅');
-   await vorterx.sendMessage(m.from, { video: data.data.vid_720p }, { caption: '*Downloaded video*' });
-      } else {
-        await connect('❌');
-        return m.reply('720p video data not found in the API response.');
-      }
-    } else {
+    if (!res.ok) {
       await connect('❌');
-      return m.reply('Failed to download the video. Please check the URL and try again.');
+      return m.reply(`\`\`\`Error while downloading the video...\`\`\``);
     }
-  },
+
+    const videoInfo = await res.json();
+
+    await connect('📤');
+    m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
+
+    const { title, downloadUrl, uploadDate, uploadChannel, duration, thumbnail, likes, dislikes } = videoInfo;
+
+    const caption = tiny(`*Title*: ${title}\n*Upload Date*: ${uploadDate}\n*Channel*: ${uploadChannel}\n*Duration*: ${duration}\n*Likes*: ${likes}\n*Dislikes*: ${dislikes}\n*${config.CAPTION}*`);
+
+    await vorterx.sendMessage(m.from, { video: downloadUrl, caption });
+  }
 };
