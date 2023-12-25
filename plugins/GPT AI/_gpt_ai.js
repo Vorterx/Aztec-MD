@@ -15,38 +15,32 @@ module.exports = {
 
     const gpt_api = `https://api.caliph.biz.id/api/ai/oai-gpt?q=${encodeURIComponent(args)}&apikey=lykoUzNh`;
 
-    try {
-      const res = await fetch(gpt_api);
-      const result = await res.json();
+    const res = await fetch(gpt_api);
+    const result = await res.json();
 
-      console.log(result);
+    console.log(result);
 
-      if (result.status === "success") {
-        await connect("💡");
-        m.reply(result.data);
+    if (result.status === 200) {
+      await connect("💡");
+      m.reply(result.result);
 
-        await vorterx.sendMessage(m.from, {
-          text: result.data,
-          image: { url: "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png" },
-          contextInfo: {
-            externalAdReply: {
-              title: "GPT TURBO 3.5K",
-              body: "",
-              mediaType: 1,
-              thumbnail: await getBuffer("https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png"),
-              mediaUrl: "",
-              sourceUrl: "",            
-            },
+      await vorterx.sendMessage(m.from, {
+        text: result.result,
+        image: { url: "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png" },
+        contextInfo: {
+          externalAdReply: {
+            title: "GPT TURBO 3.5K",
+            body: "",
+            mediaType: 1,
+            thumbnail: await getBuffer("https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png"),
+            mediaUrl: "",
+            sourceUrl: "",            
           },
-        });
-      } else {
-        await connect("❌");
-        m.reply(`Error: ${result.message}`);
-      }
-    } catch (error) {
-      console.error('API Error:', error);
+        },
+      });
+    } else {
       await connect("❌");
-      m.reply("An error occurred while processing your request.");
+      m.reply(`Error: ${result.result}`);
     }
   }
 };
