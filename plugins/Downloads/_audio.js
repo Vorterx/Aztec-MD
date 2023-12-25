@@ -41,7 +41,7 @@ module.exports = {
       });
     } catch (error) {
       console.error('Error in song download:', error);
-      await connect('❌');
+      
       return m.reply('An error occurred while fetching the song.');
     }
   }
