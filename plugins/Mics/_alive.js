@@ -6,6 +6,7 @@
 const fs = require("fs");
 const { tiny } = require("@viper-x/fancytext");
 const config = require("../../config.js");
+const { getBuffer } = require('../../lib/_getBuffer.js');
 const prefix = config.prefix;
 
 module.exports = {
@@ -42,7 +43,9 @@ module.exports = {
         externalAdReply: {
           title: `${config.CAPTION}`,
           body: "vorterx",
-          thumbnail: { mediaType: 1, mediaUrl: 'https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg' },
+          thumbnail: await getBuffer("https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg"),
+          mediaType: 1,
+          mediaUrl: "",
           sourceUrl: "",
           ShowAdAttribution: true,
           forwardingScore: 999,
