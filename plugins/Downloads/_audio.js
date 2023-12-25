@@ -30,37 +30,49 @@ module.exports = {
 
       const audioStream = ytdl(videoURL, { quality: 'highestaudio' });
 
-       const fileName = `${videoInfo.videoDetails.title}.mp3`;
-       const filePath = path.join(__dirname, 'downloads', fileName);
+      const fileName = `${videoInfo.videoDetails.title}.mp3`;
+      const filePath = path.join(__dirname, 'downloads', fileName);
 
       let fileExists;
-try {
-  await fs.promises.access(filePath);
-  fileExists = true;
-} catch (error) {
-  if (error.code === 'ENOENT') {
-    fileExists = false;
-  } else {
-    console.error('Error checking file existence:', error);
-    await connect('❌');
-    return m.reply('An error occurred while checking file existence.');
-  }
-          }
-        
+      try {
+        await fs.promises.access(filePath);
+        fileExists = true;
+      } catch (error) {
+        if (error.code === 'ENOENT') {
+          fileExists = false;
+        } else {
+          console.error('Error checking file existence:', error);
+          await connect('❌');
+          return m.reply('An error occurred while checking file existence.');
+        }
+      }
+
       if (fileExists) {
-        vorterx.sendMessage(m.from, { audio: audioStream }, { quoted: m });
+        await vorterx.sendMessage(m.from, { audio: filePath }, { quoted: m });
       } else {
         audioStream.pipe(fs.createWriteStream(filePath));
 
         audioStream.on('end', async () => {
-          await vorterx.sendMessage(m.from, { audio: filePath }, { quoted: m });
-          fs.unlink(filePath);
+          try {
+            const item = { url: filePath }; // Replace this with your actual item structure
+            if (item && item.url && (item.url.toString().startsWith('http://') || item.url.toString().startsWith('https://'))) {
+              await vorterx.sendMessage(m.from, { audio: item.url }, { quoted: m });
+              fs.unlink(filePath);
+            } else {
+              console.error('Invalid item or URL:', item);
+            }
+          } catch (error) {
+            console.error('Error processing audio:', error);
+            await connect('❌');
+            return m.reply('An error occurred while processing the audio.');
+          }
         });
       }
     } catch (error) {
       console.error('Error in song download:', error);
+      await connect('❌');
       return m.reply('An error occurred while fetching the song.');
     }
   }
 };
-        
+      
