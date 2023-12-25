@@ -10,11 +10,12 @@ module.exports = {
       return m.reply('Please provide a YouTube link for me to download');
     }
 
-    const getMP4 = `https://vihangayt.me/download/ytmp4?url=${encodeURIComponent(args)}`;
-    const response = await fetch(getMP4);
+    const apiUrl = `https://vihangayt.me/download/ytmp4?url=${encodeURIComponent(args)}`;
+    const response = await fetch(apiUrl);
 
     if (response.ok) {
-      const videoBuffer = await response.buffer();
+      const videoBase64 = await response.text();
+      const videoBuffer = Buffer.from(videoBase64, 'base64');
       await connect('✅');
      await vorterx.sendMessage(m.from, videoBuffer, 'video', { caption: 'Downloaded video' });
     } else {
@@ -23,4 +24,3 @@ module.exports = {
     }
   },
 };
-      
