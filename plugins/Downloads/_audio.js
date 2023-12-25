@@ -1,6 +1,6 @@
 const yts = require('yt-search');
 const ytdl = require('ytdl-core');
-const fs = require('fs').promises;
+const fs = require('fs');
 const path = require('path');
 
 module.exports = {
