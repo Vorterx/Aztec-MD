@@ -38,8 +38,21 @@ module.exports = {
         i++;
       }
 
-      const selectedQuality = videoURL ? v_qualty[i - 1] : 'Unknown Quality';
+      if (!videoURL) {
+        await connect('❌');
+        return m.reply('Failed to obtain a valid video URL.');
+      }
+
+      const selectedQuality = v_qualty[i - 1] || 'Unknown Quality';
       const videoTitle = vid.data && vid.data.title ? vid.data.title : 'Unknown Title';
+
+    try {
+        new URL(videoURL);
+      } catch (urlError) {
+        console.error('Invalid URL:', urlError);
+        await connect('❌');
+        return m.reply('Failed to obtain a valid video URL.');
+      }
 
       await vorterx.sendMessage(m.from, { video: videoURL, caption: tiny(`*Title*: ${videoTitle}\n*Quality*: ${selectedQuality}\n\n*${config.CAPTION}*`) });
     } catch (error) {
