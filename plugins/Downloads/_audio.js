@@ -30,7 +30,7 @@ module.exports = {
       const audioStream = ytdl(videoURL, { quality: 'highestaudio' });
 
       const fileName = `${videoInfo.videoDetails.title}.mp3`;
-      const filePath = `./download/${fileName}`;
+      const filePath = `./downloads/${fileName}`;
 
       audioStream.pipe(fs.createWriteStream(filePath));
 
