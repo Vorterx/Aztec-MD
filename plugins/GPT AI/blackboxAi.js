@@ -1,10 +1,17 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD
+*/
+
 const fetch = async (url) => (await import('node-fetch')).default(url);
 const config = require('../../config.js');
 
 module.exports = {
   name: 'blackbox',
+  alias: ['black'],
   category: 'GPT AI',
   async client(vorterx, m, { args, connect }) {
+    
     try {
       if (!args) {
         await connect('❌');
@@ -27,7 +34,9 @@ module.exports = {
 
     if (!result || !result.response) {
         await connect('❌');
-        return m.reply("No results found for the provided text.");
+        return m.reply(
+          "```\nError 404: Search not found.for the provided text...\n```"
+        );
       }
 
       const getRes = result.response;
