@@ -1,8 +1,3 @@
-/*
-* @Author: DiegosonTech
-* @BotName: Aztec-MD
-*/
-
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 const { getBuffer } = require('../../lib/_getBuffer.js');
 
@@ -30,7 +25,10 @@ async function Bing(prompt) {
             })
         });
         
-        const result = await response.json();
+        const rawResult = await response.text(); // Log the raw response
+        console.log('Raw Response:', rawResult);
+
+        const result = JSON.parse(rawResult); // Try parsing as JSON
         return result.choices[0].message.content;
     } catch (error) {
         console.error(error);
@@ -70,3 +68,4 @@ module.exports = {
         }
     }
 };
+                        
