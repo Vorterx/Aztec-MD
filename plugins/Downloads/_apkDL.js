@@ -1,4 +1,3 @@
-//
 const { search, download } = require('aptoide-scraper');
 const { tiny } = require('@viper-x/fancytext');
 
@@ -7,7 +6,6 @@ module.exports = {
   alias: ['apk', 'app'],
   category: 'Downloads',
   async client(vorterx, m, { args, connect }) {
-
     if (!args[0]) {
       await connect('❌');
       return m.reply('Please provide an app name e.g apk Acode Editor...');
@@ -16,11 +14,12 @@ module.exports = {
     try {
       const results = await search(args[0]);
 
-      if (!results.ok) {
-        return m.reply('An error occurred, sorry');
+      if (!results || !results.list || results.list.length === 0) {
+        await connect('❌');
+        return m.reply('No results found for the provided app name.');
       }
 
-      const { icon, name, size, package: appId, lastup: updated } = results;
+      const { icon, name, size, package: appId, lastup: updated } = results.list[0];
 
       const getSize = size > 907 ? 'This app is too large to download...' : '';
 
@@ -30,7 +29,7 @@ module.exports = {
       }
 
       await connect('📤');
-      const getApp = await download(results);
+      const getApp = await download(results.list[0]);
       const { dllink } = getApp;
 
       const formattedInfo = `*『 APPLICATION DOWNLOADER 』*\n\n`
@@ -51,3 +50,4 @@ module.exports = {
     }
   },
 };
+          
