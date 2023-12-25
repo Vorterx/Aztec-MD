@@ -6,7 +6,7 @@ module.exports = {
   name: 'ytmp4',
   alias: ['vid', 'mp4'],
   category: 'Downloads',
-  async client(vorterx, m, { text, args, connect }) {
+  async client(vorterx, m, { args, connect }) {
 
     if (!args[0]) {
       await connect('❌');
@@ -37,6 +37,8 @@ module.exports = {
       i++;
     }
 
-    await vorterx.sendMessage(m.from, { video: videoURL, caption: tiny(`*Title*: ${vid.data.title}\n*Quality*: ${v_qualty[i - 1]}\n\n*${config.CAPTION}*`) });
+    const selectedQuality = videoURL ? v_qualty[i - 1] : 'Unknown Quality';
+    await vorterx.sendMessage(m.from, { video: videoURL, caption: tiny(`*Title*: ${vid.data.title}\n*Quality*: ${selectedQuality}\n\n*${config.CAPTION}*`) });
   }
-};                                       
+};
+      
