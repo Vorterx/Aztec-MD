@@ -26,6 +26,12 @@ module.exports = {
 
       console.log('API Response:', vid);
 
+      // Check if the YouTube URL is incorrect
+      if (!vid.status) {
+        await connect('❌');
+        return m.reply(`\`\`\`Error: ${vid.err}\`\`\``);
+      }
+
       await connect('📤');
       m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
       const v_qualty = ['vid_360p', 'vid_720p'];
@@ -67,4 +73,4 @@ module.exports = {
     }
   }
 };
-    
+        
