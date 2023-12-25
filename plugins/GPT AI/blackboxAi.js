@@ -24,7 +24,7 @@ module.exports = {
       const res = await fetch(getBlack);
 
       if (!res.ok) {
-        m.reply(`Request failed with status ${res.status}`);
+        m.reply(`${res.status}`);
       }
 
       const result = await res.json();
@@ -40,9 +40,9 @@ module.exports = {
 
       await connect('🤖');
     } catch (error) {
-      console.error('Error in blackbox AI:', error);
+      console.error(error);
       await connect('❌');
-      return m.reply("```\nError in blackbox AI. Please try again later.\n```");
+      return m.reply("```\nPlease youre Gay try again...\n```");
     }
   },
 };
