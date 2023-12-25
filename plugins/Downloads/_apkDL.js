@@ -1,3 +1,4 @@
+//
 const { search, download } = require('aptoide-scraper');
 const { tiny } = require('@viper-x/fancytext');
 
@@ -6,26 +7,22 @@ module.exports = {
   alias: ['apk', 'app'],
   category: 'Downloads',
   async client(vorterx, m, { args, connect }) {
-    if (!args) {
+
+    if (!args[0]) {
       await connect('❌');
-      return m.reply('Please provide an app name, e.g., apk Acode Editor...');
+      return m.reply('Please provide an app name e.g apk Acode Editor...');
     }
 
     try {
-      const results = await search(args);
-      if (!results.length) {
-        return m.reply('No results found for the given app name.');
+      const results = await search(args[0]);
+
+      if (!results.ok) {
+        return m.reply('An error occurred, sorry');
       }
 
-      const appu = await download(results[0]);
+      const { icon, name, size, package: appId, lastup: updated } = results;
 
-      const { name, lastup, package, size, dllink } = appu;
       const getSize = size > 907 ? 'This app is too large to download...' : '';
-      let gotApp = `*『 APPLICATION DOWNLOADER 』*\n\n`;
-      gotApp += `*App Name*: ${name}\n`;
-      gotApp += `*Size*: ${size}\n`;
-      gotApp += `*App Id*: ${package}\n`;
-      gotApp += `*Updated*: ${lastup}\n`;
 
       if (getSize) {
         await connect('❌');
@@ -33,17 +30,20 @@ module.exports = {
       }
 
       await connect('📤');
+      const getApp = await download(results);
+      const { dllink } = getApp;
 
-      const apps = {
-        caption: tiny(gotApp),
-        document: {
-          url: dllink,
-          mimetype: 'application/vnd.android.package-archive',
-          fileName: `${name}.apk`
-        }
-      };
+      const formattedInfo = `*『 APPLICATION DOWNLOADER 』*\n\n`
+        + `*🛡️ App NaMe*: *${name}*\n`
+        + `*📤 Size*: *${size}\n*`
+        + `*📦 App Id*: *${appId}*\n`
+        + `*⬆️ Updated*: *${updated}*\n`;
 
-      await vorterx.sendMessage(m.from, apps, 'document');
+      vorterx.sendMessage(m.from, {
+        document: { url: dllink, fileName: `${name}.apk`, mimetype: 'application/vnd.android.package-archive' },
+        text: tiny(formattedInfo),
+      });
+
     } catch (error) {
       console.error('Error:', error);
       await connect('❌');
