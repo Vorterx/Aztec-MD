@@ -7,7 +7,7 @@ const os = require('os');
 const speed = require('performance-now');
 const { tiny } = require('@viper-x/fancytext');
 const config = require('../../config.js');
-
+const { getBuffer } = require('../../lib/_getBuffer.js');
 module.exports = {
   name: 'status',
   alias: ['sx'],
@@ -50,7 +50,9 @@ module.exports = {
         externalAdReply: {
           title: `${config.CAPTION}`,
           body: "vorterx",
-          thumbnail: { mediaType: 1, mediaUrl: 'https://i.ibb.co/s3LzSFJ/931684-7660.jpg' },
+          thumbnail: await getBuffer("https://i.ibb.co/s3LzSFJ/931684-7660.jpg"),
+          mediaType: 1, 
+          mediaUrl: '',
           sourceUrl: '',
           ShowAdAttribution: true,
           forwardingScore: 999,
