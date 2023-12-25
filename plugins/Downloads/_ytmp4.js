@@ -39,7 +39,9 @@ module.exports = {
       }
 
       const selectedQuality = videoURL ? v_qualty[i - 1] : 'Unknown Quality';
-      await vorterx.sendMessage(m.from, { video: videoURL, caption: tiny(`*Title*: ${vid.data.title}\n*Quality*: ${selectedQuality}\n\n*${config.CAPTION}*`) });
+      const videoTitle = vid.data && vid.data.title ? vid.data.title : 'Unknown Title';
+
+      await vorterx.sendMessage(m.from, { video: videoURL, caption: tiny(`*Title*: ${videoTitle}\n*Quality*: ${selectedQuality}\n\n*${config.CAPTION}*`) });
     } catch (error) {
       console.error('Error:', error);
       await connect('❌');
@@ -47,4 +49,4 @@ module.exports = {
     }
   }
 };
-                                                                                  
+    
