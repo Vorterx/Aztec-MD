@@ -13,32 +13,38 @@ module.exports = {
       return m.reply('Please provide a YouTube link for me to download');
     }
 
-    const v_api = `https://vihangayt.me/download/ytmp4?url=${encodeURIComponent(args[0])}`;
-    const res = await fetch(v_api);
+    try {
+      const v_api = `https://vihangayt.me/download/ytmp4?url=${encodeURIComponent(args[0])}`;
+      const res = await fetch(v_api);
 
-    if (!res.ok) {
-      await connect('❌');
-      return m.reply(`\`\`\`Error while downloading the video...\`\`\``);
-    }
-
-    const vid = await res.json();
-
-    await connect('📤');
-    m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
-    const v_qualty = ['vid_360p', 'vid_720p'];
-    let videoURL = '';
-    let i = 0;
-
-    while (i < v_qualty.length && !videoURL) {
-      const quality = v_qualty[i];
-      if (vid.data[quality]) {
-        videoURL = vid.data[quality];
+      if (!res.ok) {
+        await connect('❌');
+        return m.reply(`\`\`\`Error while downloading the video...\`\`\``);
       }
-      i++;
-    }
 
-    const selectedQuality = videoURL ? v_qualty[i - 1] : 'Unknown Quality';
-    await vorterx.sendMessage(m.from, { video: videoURL, caption: tiny(`*Title*: ${vid.data.title}\n*Quality*: ${selectedQuality}\n\n*${config.CAPTION}*`) });
+      const vid = await res.json();
+
+      await connect('📤');
+      m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
+      const v_qualty = ['vid_360p', 'vid_720p'];
+      let videoURL = '';
+      let i = 0;
+
+      while (i < v_qualty.length && !videoURL) {
+        const quality = v_qualty[i];
+        if (vid.data && vid.data[quality]) {
+          videoURL = vid.data[quality];
+        }
+        i++;
+      }
+
+      const selectedQuality = videoURL ? v_qualty[i - 1] : 'Unknown Quality';
+      await vorterx.sendMessage(m.from, { video: videoURL, caption: tiny(`*Title*: ${vid.data.title}\n*Quality*: ${selectedQuality}\n\n*${config.CAPTION}*`) });
+    } catch (error) {
+      console.error('Error:', error);
+      await connect('❌');
+      return m.reply('An unexpected error occurred, sorry...');
+    }
   }
 };
-      
+                                                                                  
