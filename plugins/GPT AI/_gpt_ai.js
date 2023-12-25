@@ -1,3 +1,8 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD
+*/
+
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 const { getBuffer } = require('../../lib/_getBuffer.js');
 
@@ -22,7 +27,6 @@ module.exports = {
 
     if (result.status === 200) {
       await connect("💡");
-      m.reply(result.result);
 
       await vorterx.sendMessage(m.from, {
         text: result.result,
