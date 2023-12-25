@@ -1,5 +1,5 @@
-//
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
+
 
 module.exports = {
   name: 'ytmp4',
@@ -17,14 +17,14 @@ module.exports = {
     if (response.ok) {
       const data = await response.json();
 
-      console.log('API Response Data:', data); // Log the API response data
+      console.log('API Response Data:', data);
 
-      if (data.video) {
+      if (data.data && data.data.vid_720p) {
         await connect('✅');
-        await vorterx.sendMessage(m.from, { video: data.video }, { caption: '*Downloaded video*' });
+        await vorterx.sendMessage(m.from, { video: data.data.vid_720p }, { caption: '*Downloaded video*' });
       } else {
         await connect('❌');
-        return m.reply('Video data not found in the API response.');
+        return m.reply('720p video data not found in the API response.');
       }
     } else {
       await connect('❌');
@@ -32,3 +32,4 @@ module.exports = {
     }
   },
 };
+        
