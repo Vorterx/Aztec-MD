@@ -34,7 +34,14 @@ module.exports = {
 
     // Generate a random name for the video file
     const randomFileName = `temp_video_${Math.floor(Math.random() * 1000000)}.mp4`;
-    const tempFilePath = path.join(__dirname, 'tmp', randomFileName);
+
+    // Ensure the 'tmp' directory exists
+    const tmpDirectory = path.join(__dirname, 'tmp');
+    if (!fs.existsSync(tmpDirectory)) {
+      fs.mkdirSync(tmpDirectory, { recursive: true });
+    }
+
+    const tempFilePath = path.join(tmpDirectory, randomFileName);
 
     // Save the video directly in the 'tmp' folder without explicitly creating it
     const videoStream = await fetch(downloadUrl);
@@ -48,3 +55,4 @@ module.exports = {
     fs.unlinkSync(tempFilePath);
   }
 };
+    
