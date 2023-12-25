@@ -37,7 +37,7 @@ module.exports = {
       audioStream.on('end', () => {
           vorterx.sendMessage(m.from, { audio: filePath }, { quoted: m });
         fs.unlinkSync(filePath); 
-        await connect('✔️');
+        
       });
     } catch (error) {
       console.error('Error in song download:', error);
