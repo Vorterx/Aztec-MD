@@ -25,13 +25,12 @@ module.exports = {
       const result = await res.json();
       console.log(result);
 
-      // Check if the 'res' property exists in the result
-      if (!result || !result.res) {
+    if (!result || !result.response) {
         await connect('❌');
         return m.reply("No results found for the provided text.");
       }
 
-      const getRes = result.res;
+      const getRes = result.response;
       const getFinal = `*BLACKBOX AI*\n\n${getRes}\n\n*${config.CAPTION}*`;
 
       await vorterx.sendMessage(m.from, {
@@ -47,4 +46,4 @@ module.exports = {
     }
   },
 };
-        
+          
