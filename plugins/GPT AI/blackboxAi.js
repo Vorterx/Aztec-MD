@@ -1,10 +1,4 @@
-
-/*
-* @Author: DiegosonTech
-* @BotName: Aztec-MD
-*/
-
-const fetch = async (url) => import('node-fetch').then(module => module.default(url));
+const fetch = async (url) => (await import('node-fetch')).default(url);
 const config = require('../../config.js');
 
 module.exports = {
@@ -15,7 +9,7 @@ module.exports = {
       if (!args) {
         await connect('❌');
         return m.reply(
-          "```\nError 404: Text not found. Please provide a text to get results...\n```"
+          "```\nError 404: Text not found. Please provide text to get results...\n```"
         );
       }
 
@@ -32,8 +26,8 @@ module.exports = {
 
       const getRes = result.res || '';
       const getFinal = `*BLACKBOX AI*\n\n${getRes}\n\n*${config.CAPTION}*`;
-      
-     await vorterx.sendMessage(m.from, {
+
+      await vorterx.sendMessage(m.from, {
         image: { url: 'https://i.ibb.co/DLyfLjq/BLACKBOX-AI-BY-DIEGOSON-TECH.png' },
         caption: getFinal,
       });
@@ -42,8 +36,8 @@ module.exports = {
     } catch (error) {
       console.error(error);
       await connect('❌');
-      return m.reply("```\nPlease youre Gay try again...\n```");
+      return m.reply("```\nAn error occurred. Please try again...\n```");
     }
   },
 };
-        
+                                                                                             
