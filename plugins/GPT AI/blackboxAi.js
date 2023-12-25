@@ -18,13 +18,20 @@ module.exports = {
       const res = await fetch(getBlack);
 
       if (!res.ok) {
-        m.reply(`${res.status}`);
+        m.reply(`Error: ${res.status}`);
+        return;
       }
 
       const result = await res.json();
       console.log(result);
 
-      const getRes = result.res || '';
+      // Check if the 'res' property exists in the result
+      if (!result || !result.res) {
+        await connect('❌');
+        return m.reply("No results found for the provided text.");
+      }
+
+      const getRes = result.res;
       const getFinal = `*BLACKBOX AI*\n\n${getRes}\n\n*${config.CAPTION}*`;
 
       await vorterx.sendMessage(m.from, {
@@ -40,4 +47,4 @@ module.exports = {
     }
   },
 };
-                                                                                             
+        
