@@ -1,4 +1,5 @@
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
+const { getBuffer } = require('../../lib/_getBuffer.js');
 
 module.exports = {
   name: "gpt",
@@ -12,38 +13,32 @@ module.exports = {
       return m.reply(`*Provide me a query, e.g., "Who made Aztec?"`);
     }
 
-    try {
-      const res = await fetch(
-        `https://api.caliph.biz.id/api/ai/oai-gpt?q=${args}&apikey=lykoUzNh`
-      );
+    const gpt_api = `https://api.caliph.biz.id/api/ai/oai-gpt?q=${encodeURIComponent(args)}&apikey=lykoUzNh`;
 
-      const data = await res.json();
+    const res = await fetch(gpt_api);
+    const result = await res.json();
 
-      if (!data || !data.results) {
-        await connect("❌");
-        return m.reply("Invalid response from the API");
-      }
+    if (result.status === "success") {
+      await connect("💡");
+      m.reply(result.data);
 
-      await vorterx.sendMessage(m.from, {
-        text: data.results,
+       await vorterx.sendMessage(m.from, {
+        text: result.data,
+        image: { url: "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png" },
         contextInfo: {
           externalAdReply: {
             title: "GPT TURBO 3.5K",
             body: "",
             mediaType: 1,
-            thumbnailUrl: "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png",
-            renderLargerThumbnail: false,
+            thumbnail: await getBuffer("https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png"),
             mediaUrl: "",
             sourceUrl: "",            
           },
         },
-      }, { quoted: m });
-
-      await connect("✅");
-    } catch (error) {
-      console.error(error);
+      });
+    } else {
       await connect("❌");
-      return m.reply("An error occurred while processing the request.");
+      m.reply(`Error: ${result.message}`);
     }
-  },
+  }
 };
