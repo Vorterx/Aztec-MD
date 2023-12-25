@@ -24,19 +24,24 @@ async function Bing(prompt) {
                 ]
             })
         });
-        
+
         const rawResult = await response.text();
         console.log('Raw Response:', rawResult);
 
-        if (rawResult.trim().toLowerCase() === 'ok') {            
-            return 'API responded with "ok"';
+        if (rawResult.trim().toLowerCase() === 'ok') {
+             return 'Sorry, I could not retrieve meaningful information for your query.';
         }
 
-        const result = JSON.parse(rawResult);
-        return result.choices[0].message.content;
+        try {
+            const result = JSON.parse(rawResult);
+            return result.choices[0].message.content;
+        } catch (error) {
+            console.error('JSON Parsing Error:', error);
+            throw new Error('_An error occurred while processing the response_');
+        }
     } catch (error) {
-        console.error(error);
-        throw new Error('_An error occurred while processing your request_');
+        console.error('API Request Error:', error);
+        throw new Error('_An error occurred while making the API request_');
     }
 }
 
@@ -44,13 +49,14 @@ module.exports = {
     name: 'bing',
     alias: ['bang'],
     async client(vorterx, m, { args, connect }) {
-        if (!args) {
+        const query = args.join(' '); // Join the arguments into a single string
+        if (!query) {
             await connect('❌');
-            return m.reply('Please provide a text, e.g., `bing hello how are you`');
+            return m.reply('Please provide a query, e.g., `bing hello how are you`');
         }
 
         try {
-            const result = await Bing(args);
+            const result = await Bing(query);
             await connect('💡');
             vorterx.sendMessage(m.from, {
                 text: result,
@@ -72,4 +78,4 @@ module.exports = {
         }
     }
 };
-                        
+                            
