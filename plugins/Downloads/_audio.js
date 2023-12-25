@@ -1,7 +1,5 @@
-//
 const yts = require('yt-search');
 const ytdl = require('ytdl-core');
-const fs = require('fs');
 
 module.exports = {
   name: 'song',
@@ -25,20 +23,10 @@ module.exports = {
       }
 
       const videoURL = firstResult.url;
-      const videoInfo = await ytdl.getInfo(videoURL);
-
       const audioStream = ytdl(videoURL, { quality: 'highestaudio' });
 
-      const fileName = `${videoInfo.videoDetails.title}.mp3`;
-      const filePath = `./downloads/${fileName}`;
+       vorterx.sendMessage(m.from, { audio: audioStream }, { quoted: m });
 
-      audioStream.pipe(fs.createWriteStream(filePath));
-
-      audioStream.on('end', () => {
-          vorterx.sendMessage(m.from, { audio: filePath }, { quoted: m });
-        fs.unlinkSync(filePath); 
-        
-      });
     } catch (error) {
       console.error('Error in song download:', error);
       
