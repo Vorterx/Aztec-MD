@@ -15,7 +15,7 @@ module.exports = {
     await connect('✔️');
     const search = await gis(args);
 
-    if (search.length === 0) {
+    if (!search || search.length === 0) {
       await connect('❌');
       return m.reply('_No images found for the given term...');
     }
@@ -26,8 +26,7 @@ module.exports = {
       caption: `*GIMAGE DOWNLD*\n\n*TERM*: ${args}\n\n*${config.CAPTION}*`
     };
 
-    vorterx.sendMessage(m.from, res, 
-  { quoted: m });
+    vorterx.sendMessage(m.from, res, { quoted: m });
   }
 };
-        
+  
