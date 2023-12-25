@@ -1,6 +1,18 @@
 const config = require('../../config.js');
 const gis = require('g-i-s');
 
+function gisPromise(args) {
+  return new Promise((resolve, reject) => {
+    gis(args, (error, result) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
 module.exports = {
   name: 'gimage',
   alias: ['googleimg'],
@@ -13,9 +25,9 @@ module.exports = {
     }
 
     await connect('✔️');
-    
+
     try {
-      const search = await gis(args);
+      const search = await gisPromise(args);
 
       if (!search || search.length === 0) {
         await connect('❌');
@@ -30,10 +42,10 @@ module.exports = {
 
       vorterx.sendMessage(m.from, res, { quoted: m });
     } catch (error) {
-      console.error('Error in gis:', error);
+      console.error('Error in gisPromise:', error);
       await connect('❌');
       return m.reply('An error occurred while fetching images.');
     }
   }
 };
-        
+    
