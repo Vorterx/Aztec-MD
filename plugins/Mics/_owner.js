@@ -4,6 +4,7 @@
 */
 
 const config = require('../../config.js');
+const { getBuffer } = require('../../lib/_getBuffer.js');
 
 module.exports = {
   name: "owner",
@@ -30,7 +31,9 @@ module.exports = {
         externalAdReply: {
           title: `${config.CAPTION}`,
           body: `${m.pushName}`,
-          thumbnail: { mediaType: 1, mediaUrl: 'https://i.ibb.co/9gsmdgL/2361610c-0e6d-489d-9e98-2a0542a65f77-056bcf8b4c36d517a85280e0259dd5a9.jpg' },
+          thumbnail: await getBuffer("https://i.ibb.co/mCv3k97/original-e792fa6c963f76bc381b82ae539e68cc.png"),
+          mediaType: 1, 
+          mediaUrl: '',
           sourceUrl: source,
           forwardingScore: 999,
           isForwaded: true,
