@@ -31,20 +31,7 @@ module.exports = {
       const fileName = `${videoInfo.videoDetails.title}.mp3`;
       const filePath = path.join(__dirname, 'downloads', fileName);
 
-      let fileExists = false;
-
-      try {
-        await fs.promises.access(filePath, fs.constants.F_OK);
-        fileExists = true;
-      } catch (error) {
-        if (error.code !== 'ENOENT') {
-          console.error('Error checking file existence:', error);
-          await connect('❌');
-          return m.reply('An error occurred while checking file existence.');
-        }
-      }
-
-      if (fileExists) {
+      if (fs.existsSync(filePath)) {
         await vorterx.sendMessage(m.from, { audio: filePath }, { quoted: m });
       } else {
         const audioStream = ytdl(videoURL, { quality: 'highestaudio' });
@@ -52,18 +39,7 @@ module.exports = {
         audioStream.pipe(fs.createWriteStream(filePath));
 
         audioStream.on('end', async () => {
-          try {
-            if (fs.existsSync(filePath)) {
-              await vorterx.sendMessage(m.from, { audio: filePath }, { quoted: m });
-              fs.unlinkSync(filePath);
-            } else {
-              console.error('File not found after download:', filePath);
-            }
-          } catch (error) {
-            console.error('Error processing audio:', error);
-            await connect('❌');
-            return m.reply('An error occurred while processing the audio.');
-          }
+          await vorterx.sendMessage(m.from, { audio: filePath }, { quoted: m });
         });
       }
     } catch (error) {
@@ -73,4 +49,4 @@ module.exports = {
     }
   }
 };
-  
+      
