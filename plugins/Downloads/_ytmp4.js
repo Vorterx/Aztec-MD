@@ -1,3 +1,4 @@
+const fs = require('fs');
 const config = require('../../config.js');
 const { tiny } = require('@viper-x/fancytext');
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
@@ -30,6 +31,16 @@ module.exports = {
 
     const caption = tiny(`*Title*: ${title}\n*Upload Date*: ${uploadDate}\n*Channel*: ${uploadChannel}\n*Duration*: ${duration}\n*Likes*: ${likes}\n*Dislikes*: ${dislikes}\n*${config.CAPTION}*`);
 
-    await vorterx.sendMessage(m.from, { video: downloadUrl, caption });
+    // Save the video directly in the 'tmp' folder without explicitly creating it
+    const tempFileName = `./tmp/temp_video_${Date.now()}.mp4`;
+    const videoStream = await fetch(downloadUrl);
+    const videoBuffer = await videoStream.buffer();
+    fs.writeFileSync(tempFileName, videoBuffer);
+
+    // Send the video
+    await vorterx.sendMessage(m.from, { video: tempFileName, caption });
+
+    // Delete the temporary video file after sending
+    fs.unlinkSync(tempFileName);
   }
 };
