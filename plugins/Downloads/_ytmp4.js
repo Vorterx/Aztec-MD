@@ -1,6 +1,5 @@
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 
-
 module.exports = {
   name: 'ytmp4',
   alias: ['vid', 'mp4'],
@@ -17,11 +16,11 @@ module.exports = {
     if (response.ok) {
       const data = await response.json();
 
-      console.log('API Response Data:', data);
+      console.log(data);
 
       if (data.data && data.data.vid_720p) {
         await connect('✅');
-        await vorterx.sendMessage(m.from, { video: data.data.vid_720p }, { caption: '*Downloaded video*' });
+   await vorterx.sendMessage(m.from, { video: data.data.vid_720p }, { caption: '*Downloaded video*' });
       } else {
         await connect('❌');
         return m.reply('720p video data not found in the API response.');
@@ -32,4 +31,3 @@ module.exports = {
     }
   },
 };
-        
