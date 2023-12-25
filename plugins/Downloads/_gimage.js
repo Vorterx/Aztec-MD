@@ -13,20 +13,27 @@ module.exports = {
     }
 
     await connect('✔️');
-    const search = await gis(args);
+    
+    try {
+      const search = await gis(args);
 
-    if (!search || search.length === 0) {
+      if (!search || search.length === 0) {
+        await connect('❌');
+        return m.reply('_No images found for the given term...');
+      }
+
+      const random_img = search[Math.floor(Math.random() * search.length)].url;
+      const res = {
+        image: { url: random_img },
+        caption: `*GIMAGE DOWNLD*\n\n*TERM*: ${args}\n\n*${config.CAPTION}*`
+      };
+
+      vorterx.sendMessage(m.from, res, { quoted: m });
+    } catch (error) {
+      console.error('Error in gis:', error);
       await connect('❌');
-      return m.reply('_No images found for the given term...');
+      return m.reply('An error occurred while fetching images.');
     }
-
-    const random_img = search[Math.floor(Math.random() * search.length)].url;
-    const res = {
-      image: { url: random_img },
-      caption: `*GIMAGE DOWNLD*\n\n*TERM*: ${args}\n\n*${config.CAPTION}*`
-    };
-
-    vorterx.sendMessage(m.from, res, { quoted: m });
   }
 };
-  
+        
