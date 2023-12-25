@@ -47,12 +47,13 @@ module.exports = {
             await connect('💡');
             vorterx.sendMessage(m.from, {
                 text: result,
+                image: {url: 'https://i.ibb.co/4R5Ftk2/download.jpg'},
                 contextInfo: {
                     externalAdReply: {
                         title: "BING GPT",
                         body: "",
                         mediaType: 1,
-                        thumbnail: await getBuffer("https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png"),
+                        thumbnail: await getBuffer("https://i.ibb.co/4R5Ftk2/download.jpg"),
                         mediaUrl: "",
                         sourceUrl: "",            
                     },
