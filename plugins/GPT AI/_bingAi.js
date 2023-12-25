@@ -25,10 +25,14 @@ async function Bing(prompt) {
             })
         });
         
-        const rawResult = await response.text(); // Log the raw response
+        const rawResult = await response.text();
         console.log('Raw Response:', rawResult);
 
-        const result = JSON.parse(rawResult); // Try parsing as JSON
+        if (rawResult.trim().toLowerCase() === 'ok') {            
+            return 'API responded with "ok"';
+        }
+
+        const result = JSON.parse(rawResult);
         return result.choices[0].message.content;
     } catch (error) {
         console.error(error);
