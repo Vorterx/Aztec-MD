@@ -1,8 +1,4 @@
-/*
-* @Author: DiegosonTech
-* @BotName: Aztec-MD
-*/
-
+//
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 
 module.exports = {
@@ -21,9 +17,11 @@ module.exports = {
     if (response.ok) {
       const data = await response.json();
 
+      console.log('API Response Data:', data); // Log the API response data
+
       if (data.video) {
         await connect('✅');
-    await vorterx.sendMessage(m.from, { video: data.video }, { caption: '*Downloaded video*' });
+        await vorterx.sendMessage(m.from, { video: data.video }, { caption: '*Downloaded video*' });
       } else {
         await connect('❌');
         return m.reply('Video data not found in the API response.');
@@ -34,4 +32,3 @@ module.exports = {
     }
   },
 };
-                                                                              
