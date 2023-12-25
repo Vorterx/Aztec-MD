@@ -24,6 +24,8 @@ module.exports = {
 
       const vid = await res.json();
 
+      console.log('API Response:', vid);
+
       await connect('📤');
       m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
       const v_qualty = ['vid_360p', 'vid_720p'];
@@ -38,6 +40,8 @@ module.exports = {
         i++;
       }
 
+      console.log('Selected Video URL:', videoURL);
+
       if (!videoURL) {
         await connect('❌');
         return m.reply('Failed to obtain a valid video URL.');
@@ -46,7 +50,8 @@ module.exports = {
       const selectedQuality = v_qualty[i - 1] || 'Unknown Quality';
       const videoTitle = vid.data && vid.data.title ? vid.data.title : 'Unknown Title';
 
-    try {
+      // Check if videoURL is a valid URL before sending
+      try {
         new URL(videoURL);
       } catch (urlError) {
         console.error('Invalid URL:', urlError);
