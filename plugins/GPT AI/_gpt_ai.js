@@ -15,30 +15,39 @@ module.exports = {
 
     const gpt_api = `https://api.caliph.biz.id/api/ai/oai-gpt?q=${encodeURIComponent(args)}&apikey=lykoUzNh`;
 
-    const res = await fetch(gpt_api);
-    const result = await res.json();
+    try {
+      const res = await fetch(gpt_api);
+      const result = await res.json();
 
-    if (result.status === "success") {
-      await connect("💡");
-      m.reply(result.data);
+      console.log(result);
 
-       await vorterx.sendMessage(m.from, {
-        text: result.data,
-        image: { url: "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png" },
-        contextInfo: {
-          externalAdReply: {
-            title: "GPT TURBO 3.5K",
-            body: "",
-            mediaType: 1,
-            thumbnail: await getBuffer("https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png"),
-            mediaUrl: "",
-            sourceUrl: "",            
+      if (result.status === "success") {
+        await connect("💡");
+        m.reply(result.data);
+
+        await vorterx.sendMessage(m.from, {
+          text: result.data,
+          image: { url: "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png" },
+          contextInfo: {
+            externalAdReply: {
+              title: "GPT TURBO 3.5K",
+              body: "",
+              mediaType: 1,
+              thumbnail: await getBuffer("https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png"),
+              mediaUrl: "",
+              sourceUrl: "",            
+            },
           },
-        },
-      });
-    } else {
+        });
+      } else {
+        await connect("❌");
+        m.reply(`Error: ${result.message}`);
+      }
+    } catch (error) {
+      console.error('API Error:', error);
       await connect("❌");
-      m.reply(`Error: ${result.message}`);
+      m.reply("An error occurred while processing your request.");
     }
   }
 };
+      
