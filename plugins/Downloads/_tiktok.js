@@ -14,11 +14,11 @@ module.exports = {
       await connect('📥');
       m.reply(`\`\`\`Downloading TikTok video, please wait...⏳\`\`\``);
 
-      const result = await ttdl(args);
-      console.log(results);
+        const result = await ttdl(args);
+      console.log(result)
 
       if (result && result.url) {
-            const caption = `
+         const caption = `
 ╭──*『 TIKTOK DOWNLOAD 』*
 │ *Video Link:* ${result.url}
 ╰───────────────────༓`;
