@@ -4,7 +4,7 @@
 */
 
 const { tiny } = require('@viper-x/fancytext');
-const fetch = require('node-fetch');
+const fetch = async (url) => (await import('node-fetch')).default(url);
 const config = require('../../config.js');
 
 async function getRepo(args) {
