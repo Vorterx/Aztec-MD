@@ -1,5 +1,10 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD
+*/
+
 const { tiny } = require('@viper-x/fancytext');
-const fetch = async (url) => import('node-fetch').then(module => module.default(url));
+const fetch = require('node-fetch');
 const config = require('../../config.js');
 
 async function getRepo(args) {
@@ -18,7 +23,6 @@ module.exports = {
   name: "gitclone",
   category: "Downloads",
   async client(vorterx, m, { text, args, connect }) {
-   
     if (!args) {
       await connect('❌');
       return m.reply('Please provide a git repo link...');
@@ -31,18 +35,22 @@ module.exports = {
     }
 
     const [_, user, repo] = userGit;
-    
+
     try {
       await connect('📤');
       m.reply(`\`\`\`Please wait a sec,...⏳\`\`\``);
       const { url, filename, size } = await fetchGit(user, repo);
-      const caption =`
+
+      const caption = `
 ╭──*『 GITCLONE DOWNLOAD 』*
 │ *Name:* ${filename}
 │ *Size:* ${size}
 ╰───────────────────༓\n\n*${config.CAPTION}*`;
-  
-      await vorterx.sendMessage(m.from, { document: { url }, fileName: filename, mimetype: 'application/zip' }, tiny(caption));
+
+      await vorterx.sendMessage(m.from, {
+        document: { url, filename, mimetype: 'application/zip' },
+        caption: tiny(caption),
+      });
     } catch (error) {
       console.error(error);
       await connect('❌');
@@ -50,3 +58,4 @@ module.exports = {
     }
   }
 };
+                                   
