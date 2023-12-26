@@ -15,6 +15,7 @@ module.exports = {
       m.reply(`\`\`\`Downloading TikTok video, please wait...⏳\`\`\``);
 
       const result = await ttdl(args);
+      console.log(results);
 
       if (result && result.url) {
             const caption = `
