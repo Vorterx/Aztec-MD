@@ -1,4 +1,10 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD
+*/
+
 const axios = require('axios');
+const config = require('../../config.js');
 
 module.exports = {
   name: 'dalli',
@@ -11,7 +17,7 @@ module.exports = {
         return m.reply('__Provide a name___...');
       }
 
-      const search = args;
+      const search = encodeURIComponent(args);
       const get = await axios.get(`https://v2-guru-indratensei.cloud.okteto.net/scrape?query=${search}`);
       const data = get.data;
       const dalle_img = data.image_links;
