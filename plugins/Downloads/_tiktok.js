@@ -28,10 +28,7 @@ module.exports = {
 │ *Audio:* ${result.title_audio}
 ╰───────────────────༓\n\n`;
 
-        await vorterx.sendMessage(m.from, {
-          document: { url: videoUrl, mimetype: 'video/mp4' },
-          caption,
-        });
+        await vorterx.sendMessage(m.from, { video: { url: videoUrl }, caption });
       } else {
         await connect('❌');
         return m.reply('Failed to download the TikTok video. Please check the URL.');
@@ -43,4 +40,4 @@ module.exports = {
     }
   }
 };
-        
+          
