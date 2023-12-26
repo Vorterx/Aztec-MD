@@ -14,17 +14,22 @@ module.exports = {
       await connect('📥');
       m.reply(`\`\`\`Downloading TikTok video, please wait...⏳\`\`\``);
 
-        const result = await ttdl(args);
-      console.log(result)
+      // Use the TikTok downloader library
+      const result = await ttdl(args);
 
-      if (result && result.url) {
-         const caption = `
+      if (result && result.video && result.video.length > 0) {
+        const videoUrl = result.video[0];
+
+        // You can customize the caption using the retrieved information
+        const caption = `
 ╭──*『 TIKTOK DOWNLOAD 』*
-│ *Video Link:* ${result.url}
-╰───────────────────༓`;
+│ *Title:* ${result.title}
+│ *Creator:* ${result.creator}
+│ *Audio:* ${result.title_audio}
+╰───────────────────༓\n\n`;
 
         await vorterx.sendMessage(m.from, {
-          document: { url: result.url, mimetype: 'video/mp4' },
+          document: { url: videoUrl, mimetype: 'video/mp4' },
           caption,
         });
       } else {
@@ -38,4 +43,4 @@ module.exports = {
     }
   }
 };
-    
+        
