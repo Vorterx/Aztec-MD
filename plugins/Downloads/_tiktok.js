@@ -1,9 +1,5 @@
-/*
-* @Author: DiegosonTech
-* @BotName: Aztec-MD
-*/
 
-const fetch = async (url) => (await import('node-fetch')).default(url);
+const axios = require('axios');
 
 module.exports = {
   name: 'tiktok',
@@ -17,15 +13,15 @@ module.exports = {
     const tikLink = `https://api.caliph.biz.id/api/tiktok?url=${args}&apikey=lykoUzNh`;
 
     try {
-      const response = await fetch(tikLink);
-      const data = await response.json();
+      const response = await axios.get(tikLink);
+      const data = response.data;
 
       const getVid = data.download_link;
 
       if (getVid) {
-   await vorterx.sendMessage(m.from, { video: { url: getVid } });
-
-   } else {
+        await vorterx.sendMessage(m.from, { video: { url: getVid } });
+        return m.reply('Video sent!');
+      } else {
         await connect('❌');
         return m.reply('Unable to fetch download link. Please check the TikTok URL.');
       }
@@ -36,4 +32,4 @@ module.exports = {
     }
   }
 };
-      
+    
