@@ -48,7 +48,9 @@ module.exports = {
 ╰───────────────────༓\n\n*${config.CAPTION}*`;
 
       await vorterx.sendMessage(m.from, {
-        document: { url, filename, mimetype: 'application/zip' },
+        url, 
+        filename,
+        mimetype: 'application/zip',
         caption: tiny(caption),
       });
     } catch (error) {
@@ -58,4 +60,4 @@ module.exports = {
     }
   }
 };
-                                   
+                          
