@@ -1,4 +1,9 @@
-const fetch = require('node-fetch');
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD
+*/
+
+const fetch = async (url) => (await import('node-fetch')).default(url);
 
 module.exports = {
   name: 'tiktok',
