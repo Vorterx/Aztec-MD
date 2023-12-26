@@ -17,6 +17,7 @@ module.exports = {
         return m.reply('__Provide a name___...');
       }
 
+      await connect('✔️');
       const search = encodeURIComponent(args);
       const get = await axios.get(`https://v2-guru-indratensei.cloud.okteto.net/scrape?query=${search}`);
       const data = get.data;
