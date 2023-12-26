@@ -19,7 +19,7 @@ module.exports = {
 
     if (result && result.video && result.video.length > 0) {
       const get_vid = result.video[0];
-      const caption = `*Title:* ${result.title}\n*Size:* ${result.size}\n*Audio:* ${result.title_audio}\n\n*${config.CAPTION}*`;
+      const caption = `*Title:* ${result.title}\n*Size:* ${result.title_size}\n*Audio:* ${result.title_audio}\n\n*${config.CAPTION}*`;
 
       await vorterx.sendMessage(m.from, { video: { url: get_vid }, caption: tiny(caption) });
     } else {
