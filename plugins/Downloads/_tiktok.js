@@ -1,3 +1,8 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD
+*/
+
 const { ttdl } = require('btch-downloader');
 const { tiny } = require('@viper-x/fancytext');
 const config = require('../../config.js');
