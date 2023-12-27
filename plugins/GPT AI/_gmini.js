@@ -10,7 +10,7 @@ module.exports = {
       await connect('❌');
       return m.reply('Please Reply to an image or video...');
     }
-    if (!/image/.test(mime)) {
+    if (!mime.includes('image')) {
       await connect('❌');
       return m.reply('Reply to the video or an image...');
     }
@@ -27,3 +27,4 @@ module.exports = {
     }
   },
 };
+                                                                            
