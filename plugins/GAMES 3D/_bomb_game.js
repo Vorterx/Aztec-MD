@@ -6,6 +6,8 @@ module.exports = {
     const id = m.sender;
     const timeout = 180000;
 
+    vorterx.bomb = vorterx.bomb || {};
+
     if (id in vorterx.bomb) {
       return vorterx.sendMessage(m.from, { text: '*This session is not yet finished!*' }, vorterx.bomb[id][0]);
     }
@@ -68,12 +70,11 @@ module.exports = {
           vorterx.sendMessage(m.from, { text: `You chose box number ${chosenNumber}. It's ${chosenBox.emot}` });
 
           if (chosenBox.emot === '💥') {
-            
+
           } else {
-      
+            
           }
         } else {
-        
           vorterx.sendMessage(m.from, { text: `Box number ${chosenNumber} is already opened. Please choose another box.` });
         }
       }
