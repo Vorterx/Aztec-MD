@@ -35,9 +35,9 @@ module.exports = {
           externalAdReply: {
             title: `${config.CAPTION}`,
             body: res,
-            mediaType: 2,
-            mediaUrl: thumbnail,
-            thumbnail: thumbnail
+            mediaType: 1,
+            thumbnail: thumbnail,
+            url: thumbnail 
           }
         }
       };
@@ -51,4 +51,4 @@ module.exports = {
     }
   }
 };
-      
+    
