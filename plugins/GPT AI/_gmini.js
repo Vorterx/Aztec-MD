@@ -6,7 +6,7 @@ const genAI = new GoogleGenerativeAI(apiKey);
 module.exports = {
   name: 'gemini',
   category: 'GPT AI',
-  async client(vorterx, m, { args, quoted, connect }) {
+  async client(vorterx, m, { args, quoted, mime,connect }) {
     if (!quoted) {
       return m.reply(`Where is the picture?`);
     }
