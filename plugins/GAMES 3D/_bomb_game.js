@@ -1,3 +1,5 @@
+const { onMessage } = require('../../lib/onMessage.js');
+
 module.exports = {
   name: 'bomb',
   alias: ['game'],
@@ -59,7 +61,7 @@ module.exports = {
       key
     ];
 
-    vorterx.onMessage((msg) => {
+  onMessage(vorterx, async (msg) => {
       if (msg.from === id && !isNaN(msg.text)) {
         const chosenNumber = parseInt(msg.text);
         const chosenBox = array.find(v => v.position === chosenNumber);
@@ -72,7 +74,7 @@ module.exports = {
           if (chosenBox.emot === '💥') {
 
           } else {
-            
+
           }
         } else {
           vorterx.sendMessage(m.from, { text: `Box number ${chosenNumber} is already opened. Please choose another box.` });
