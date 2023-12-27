@@ -27,22 +27,11 @@ module.exports = {
       const lyricsRes = await axios.get(`https://weeb-api.vercel.app/lyrics?url=${data[0].url}`);
       const lyrics = lyricsRes.data || 'Lyrics not found.';
 
-      const res = `*🌷TITLE*: ${title}\n*👤ARTIST*: ${artist}\n\n${lyrics}\n\n*${config.CAPTION}*`;
+      // Send the thumbnail as an image
+      await vorterx.sendMessage(m.from, { url: thumbnail }, 'image/jpeg', {
+        caption: `*🌷TITLE*: ${title}\n*👤ARTIST*: ${artist}\n\n${lyrics}\n\n*${config.CAPTION}*`
+      });
 
-      const msgData = {
-        text: res,
-        contextInfo: {
-          externalAdReply: {
-            title: `${config.CAPTION}`,
-            body: res,
-            mediaType: 1,
-            thumbnail: thumbnail,
-            url: thumbnail 
-          }
-        }
-      };
-
-      await vorterx.sendMessage(m.from, msgData);
       await connect('🤖');
     } catch (error) {
       console.error(error);
@@ -51,4 +40,4 @@ module.exports = {
     }
   }
 };
-    
+        
