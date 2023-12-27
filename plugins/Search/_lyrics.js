@@ -13,7 +13,7 @@ module.exports = {
         return m.reply(`Please provide a song name or artist. For example, "Dior by Pop Smoke"`);
       }
 
-      const search = encodeURIComponent(text.trim());
+      const search = encodeURIComponent(args.trim());
       const { data } = await axios.get(`https://weeb-api.vercel.app/genius?query=${search}`);
 
       if (!data || data.length === 0) {
