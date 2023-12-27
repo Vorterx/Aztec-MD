@@ -5,12 +5,16 @@ const genAI = new GoogleGenerativeAI(apiKey);
 module.exports = {
   name: 'gemini',
   category: 'GPT AI',
-  async client(vorterx, m, { args, quoted, mime, connect }) {
+  async client(vorterx, m, { args, quoted, connect }) {
     if (!quoted) {
       await connect('❌');
       return m.reply('Please Reply to an image or video...');
     }
-    if (!mime.includes('image')) {
+
+    const isImage = quoted.mimetype.includes('image');
+    const isVideo = quoted.mimetype.includes('video');
+
+    if (!isImage && !isVideo) {
       await connect('❌');
       return m.reply('Reply to the video or an image...');
     }
@@ -18,7 +22,7 @@ module.exports = {
     const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
 
     try {
-      const result = await model.generateContent([`${args}`, { inlineData: { data: await quoted.download(), mimeType: mime } }]);
+      const result = await model.generateContent([`${args}`, { inlineData: { data: await quoted.download(), mimeType: quoted.mimetype } }]);
       const getGeni = (await result.response).args();
       m.reply(`${getGeni}`);
     } catch (error) {
@@ -27,4 +31,4 @@ module.exports = {
     }
   },
 };
-                                                                            
+                     
