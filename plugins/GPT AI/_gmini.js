@@ -11,8 +11,8 @@ module.exports = {
       return m.reply('Please Reply to an image or video...');
     }
 
-    const isImage = quoted.mimetype.includes('image');
-    const isVideo = quoted.mimetype.includes('video');
+    const isImage = quoted.mimetype && quoted.mimetype.includes('image');
+    const isVideo = quoted.mimetype && quoted.mimetype.includes('video');
 
     if (!isImage && !isVideo) {
       await connect('❌');
@@ -31,4 +31,3 @@ module.exports = {
     }
   },
 };
-                     
