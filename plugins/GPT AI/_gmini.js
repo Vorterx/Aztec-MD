@@ -11,23 +11,25 @@ module.exports = {
       return m.reply('Please Reply to an image or video...');
     }
 
-    const isImage = quoted.mimetype && quoted.mimetype.includes('image');
-    const isVideo = quoted.mimetype && quoted.mimetype.includes('video');
-
-    if (!isImage && !isVideo) {
-      await connect('❌');
-      return m.reply('Reply to the video or an image...');
-    }
-
-    const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
-
     try {
-      const result = await model.generateContent([`${args}`, { inlineData: { data: await quoted.download(), mimeType: quoted.mimetype } }]);
-      const getGeni = (await result.response).args();
-      m.reply(`${getGeni}`);
+      const media = await quoted.download();
+      const mediaType = quoted.mimetype;
+
+      if (mediaType.includes('image') || mediaType.includes('video')) {
+        const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+        const result = await model.generateContent([`${args}`, { inlineData: { data: Buffer.from(media).toString("base64"), mimeType: mediaType } }]);
+        const getGeni = (await result.response).args();
+
+   await vorterx.sendMessage(m.from, getGeni, { quoted: m });
+      } else {
+        await connect('❌');
+        m.reply('Reply to the video or an image...');
+      }
     } catch (error) {
       console.error(error);
-      m.reply(`${error.message}`);
+      await connect('❌');
+      m.reply(${error.message}`);
     }
   },
 };
+      
