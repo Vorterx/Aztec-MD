@@ -13,14 +13,14 @@ module.exports = {
 
     try {
       const media = await quoted.download();
-      const mediaType = quoted.mimetype;
+      const mediaType = quoted.mimetype || '';
 
       if (mediaType.includes('image') || mediaType.includes('video')) {
         const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
         const result = await model.generateContent([`${args}`, { inlineData: { data: Buffer.from(media).toString("base64"), mimeType: mediaType } }]);
         const getGeni = (await result.response).args();
 
-   await vorterx.sendMessage(m.from, getGeni, { quoted: m });
+        await vorterx.sendMessage(m.from, getGeni, { quoted: m });
       } else {
         await connect('❌');
         m.reply('Reply to the video or an image...');
@@ -32,4 +32,4 @@ module.exports = {
     }
   },
 };
-      
+        
