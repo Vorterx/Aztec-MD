@@ -2,14 +2,13 @@ module.exports = {
   name: 'bomb',
   alias: ['game'],
   category: 'GAMES 3D',
-  async client(vorterx, m, { text, args, connect }) {
-   
+  async client(vorterx, m, {  args, connect }) {
     vorterx.bomb = vorterx.bomb || {};
     const id = m.sender;
     const timeout = 180000;
 
     if (id in vorterx.bomb) {
-      return vorterx.sendMessage(m.from, {text: '*This session is not yet finished!*'}, vorterx.bomb[id][0]);
+      return vorterx.sendMessage(m.from, { text: '*This session is not yet finished!*' }, vorterx.bomb[id][0]);
     }
 
     const bom = ['💥', '✅', '✅', '✅', '✅', '✅', '✅', '✅', '✅'].sort(() => Math.random() - 0.5);
@@ -52,7 +51,7 @@ module.exports = {
       setTimeout(() => {
         v = array.find(v => v.emot === '💥');
         if (vorterx.bomb[id]) {
-          vorterx.sendMessage(m.from, {text: `*Time's up!*, Bomb is in box number ${v.number}.`}, vorterx.bomb[id][0].key);
+          vorterx.sendMessage(m.from, { text: `*Time's up!*, Bomb is in box number ${v.number}.` }, vorterx.bomb[id][0].key);
         }
         delete vorterx.bomb[id];
       }, timeout),
@@ -60,3 +59,4 @@ module.exports = {
     ];
   }
 };
+    
