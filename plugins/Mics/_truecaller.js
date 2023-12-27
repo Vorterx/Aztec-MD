@@ -17,7 +17,7 @@ module.exports = {
       }
 
       const userNum= args[0];
-      const get_Num = `https://matrix-nextjs-api.vercel.app/api/truecaller?phone=${encodeURIComponent(userPhoneNumber)}&id=a1i0Q--j6pQD-V1-BJnOIongGhfL3HZuNr-yb1WJChcUdQn7GEc9yAScT71cs8_F`;
+      const get_Num = `https://matrix-nextjs-api.vercel.app/api/truecaller?phone=${encodeURIComponent(userNum)}&id=a1i0Q--j6pQD-V1-BJnOIongGhfL3HZuNr-yb1WJChcUdQn7GEc9yAScT71cs8_F`;
 
       const res = await fetch(get_Num);
       const mobile = await res.json();
