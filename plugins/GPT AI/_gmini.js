@@ -28,7 +28,7 @@ module.exports = {
     } catch (error) {
       console.error(error);
       await connect('❌');
-      m.reply(${error.message}`);
+      m.reply(`${error.message}`);
     }
   },
 };
