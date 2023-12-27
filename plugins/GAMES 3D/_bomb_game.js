@@ -2,8 +2,7 @@ module.exports = {
   name: 'bomb',
   alias: ['game'],
   category: 'GAMES 3D',
-  async client(vorterx, m, {  args, connect }) {
-    vorterx.bomb = vorterx.bomb || {};
+  async client(vorterx, m, { args, connect }) {
     const id = m.sender;
     const timeout = 180000;
 
@@ -57,6 +56,27 @@ module.exports = {
       }, timeout),
       key
     ];
+
+    vorterx.onMessage((msg) => {
+      if (msg.from === id && !isNaN(msg.text)) {
+        const chosenNumber = parseInt(msg.text);
+        const chosenBox = array.find(v => v.position === chosenNumber);
+
+        if (chosenBox && !chosenBox.state) {
+          chosenBox.state = true;
+
+          vorterx.sendMessage(m.from, { text: `You chose box number ${chosenNumber}. It's ${chosenBox.emot}` });
+
+          if (chosenBox.emot === '💥') {
+            
+          } else {
+      
+          }
+        } else {
+        
+          vorterx.sendMessage(m.from, { text: `Box number ${chosenNumber} is already opened. Please choose another box.` });
+        }
+      }
+    });
   }
 };
-    
