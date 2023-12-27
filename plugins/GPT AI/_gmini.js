@@ -7,12 +7,12 @@ module.exports = {
   category: 'GPT AI',
   async client(vorterx, m, { args, quoted, mime, connect }) {
     if (!quoted) {
-      await connect('❌') 
-        return m.reply('Please Reply to an image or video...');
+      await connect('❌');
+      return m.reply('Please Reply to an image or video...');
     }
     if (!/image/.test(mime)) {
-      await connect('❌') 
-        return m.reply('Reply to the video or an image...');
+      await connect('❌');
+      return m.reply('Reply to the video or an image...');
     }
 
     const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
@@ -27,4 +27,3 @@ module.exports = {
     }
   },
 };
-    
