@@ -32,7 +32,7 @@ module.exports = {
         m.reply(`${res.status}`);
       }
 
-      const data = await response.json();
+      const data = await res.json();
       console.log(data); 
      if (data && data.status && data.result) {
           const get_img = data.result;
