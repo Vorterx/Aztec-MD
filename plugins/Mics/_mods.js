@@ -31,11 +31,12 @@ module.exports = {
     
     const img = 'https://i.ibb.co/2dvDgBd/464318-5149318-823730-thumbnail.png';
 
-    const mentions = sudo.map((x) => ({
+    const mentions = sudo.map((x, index) => ({
       tag: x.split('@')[0],
       id: {
         _serialized: x
-      }
+      },
+      num: index + 1
     }));
 
     await vorterx.sendMessage(
@@ -45,9 +46,13 @@ module.exports = {
           url: img
         },
         caption: tiny(azteci),
-        mentionedJidList: mentions.map((mention) => mention.id)
+        mentionedJidList: mentions.map((mention) => ({
+          ...mention.id,
+          num: mention.num
+        }))
       },
       m
     );
   }
 };
+    
