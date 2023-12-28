@@ -4,7 +4,7 @@
 */
 
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
-const aztec = '('_')';
+const aztec = '29y8XIYL';
 const { tiny } = require('@viper-x/fancytext');
 
 module.exports = {
