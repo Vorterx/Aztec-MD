@@ -17,14 +17,14 @@ module.exports = {
       const { login, name, bio, followers, public_repos, following, blog, avatar_url } = response.data;
 
       const rezText8 = `
-*乂 USER GITHUB INFORMATION 乂*
-_👤 Username:_ *${login}*
-_👤 Name:_ *${name || 'N/A'}*
-_👩‍💻 Bio:_ *${bio || 'N/A'}*
-_🐌 Followers:_ *${followers}*
-_🌷 Public Repos:_ *${public_repos}*
-_👥 Following:_ *${following}*
-_📌 Website:_ ${blog || 'N/A'}\n\n*${config.CAPTION}*
+*乂 USER GITHUB INFO 乂*
+👤Username:_ *${login}*
+👤Name:_ *${name || 'N/A'}*
+👩‍💻Bio:_ *${bio || 'N/A'}*
+🐌Followers:_ *${followers}*
+🌷Public Repos:_ *${public_repos}*
+👥Following:_ *${following}*
+📌Website:_ ${blog || 'N/A'}\n\n*${config.CAPTION}*
 `;
 
       const userRepos = await axios.get(`https://api.github.com/users/${args}/repos?per_page=2`);
