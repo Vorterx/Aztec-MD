@@ -88,8 +88,8 @@ ${bottomSection}\n\n${getCommands}\n\n*${config.CAPTION || ''}*`;
         externalAdReply: {
           title: `${config.CAPTION || ''}`,
           body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
-          thumbnail: await getBuffer(config.LOGOS),
-          mediaType: 1,
+          mediaType,
+          thumbnail: await getBuffer(getLogo), 
           mediaUrl: '',
           sourceUrl: `${process.env.MODS || ''}`,
           forwardingScore: 999,
