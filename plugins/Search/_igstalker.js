@@ -28,8 +28,8 @@ ${tiny('*Followers*:')} ${data.result.followers}
 ${tiny('*Followings*:')} ${data.result.followings}
 ${tiny('*Biog*:')} ${data.result.biography}
 ${tiny('*Business Account*:')} ${data.result.is_business_account ? 'Yes' : 'No'}
-${tiny('*Private Account*:')} ${data.result.is_private ? 'Yes' or 'No'}
-${tiny('*Verified Account*:')} ${data.result.is_verified ? 'Yes' or 'No'}
+${tiny('*Private Account*:')} ${data.result.is_private ? 'Yes' : 'No'}
+${tiny('*Verified Account*:')} ${data.result.is_verified ? 'Yes' : 'No'}
 ${tiny('*Pronouns*:')} ${data.result.pronouns.join(', ')}
 ${tiny('*Post Count*:')} ${data.result.post_count}
 `;
