@@ -3,7 +3,7 @@
 * @BotName: Aztec-MD 
 */
 
-const { fancytext } = require('@viper-x/fancytext');
+const { tiny } = require('@viper-x/fancytext');
 const config = require('../../config.js');
 
 module.exports = {
