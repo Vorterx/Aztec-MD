@@ -39,7 +39,7 @@ module.exports = {
        await vorterx.sendMessage(m.from, {
           image: {
             url: get_img,
-            mimetype: mime.getType(get_img.split('.').pop()),
+            mimetype: mimetype: mime.lookup(get_img),
           },
           caption: `*Name*: ${args}\n\n*${config.CAPTION}*`,
            });
