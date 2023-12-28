@@ -2,7 +2,7 @@ const axios = require('axios');
 const { tiny } = require("@viper-x/fancytext");
 const fs = require("fs");
 const config = require("../config.js");
-const { getBuffer } = require('../../lib/_getBuffer.js');
+const { getBuffer } = require('../lib/_getBuffer.js');
 const path = require("path");
 
 const pluginDir = path.join(__dirname);
