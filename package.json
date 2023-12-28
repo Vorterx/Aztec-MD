@@ -28,6 +28,7 @@
     "node-fetch": "^3.3.2",
     "node-id3": "^0.2.3",
     "util": "^0.12.4",
+    "imgur": "2.3.0",
     "node-myanimelist": "^4.1.2",
     "chalk": "^4.1.2",
     "cfonts": "^3.2.0",
