@@ -12,16 +12,17 @@ module.exports = {
   category: 'Search',
   description: 'To get user information on Instagram',
   async client(vorterx, m, { args, connect }) {
-    
-    if (!args) {
-      await connect('❌');
-      return m.reply('Provide a valid Instagram username');
-    }
-    await connect('✔️');
-    const get_user = await fetch(`https://api.botcahx.eu.org/api/stalk/ig?username=${args}&apikey=${aztec}`);
-    const data = await get_user.json();
-    
-    let caption = `${tiny('*INSTAGRAM STALKER*')}\n\n
+    try {
+      if (!args) {
+        await connect('❌');
+        return m.reply('Provide a valid Instagram username');
+      }
+
+      await connect('✔️');
+      const get_user = await fetch(`https://api.botcahx.eu.org/api/stalk/ig?username=${args}&apikey=${aztec}`);
+      const data = await get_user.json();
+
+      let caption = `${tiny('*INSTAGRAM STALKER*')}\n\n
 ${tiny('*Username*:')} ${data.result.username}
 ${tiny('*Full Name*:')} ${data.result.full_name}
 ${tiny('*Followers*:')} ${data.result.followers}
@@ -33,10 +34,21 @@ ${tiny('*Verified Account*:')} ${data.result.is_verified ? 'Yes' : 'No'}
 ${tiny('*Post Count*:')} ${data.result.post_count}
 `;
 
-    await vorterx.sendMessage(m.from, {
-      image: { url: data.result.profile_pic_url_hd },
-      caption,
-      quoted: m
-    });
+    if (data.result && data.result.profile_pic_url_hd) {
+        await vorterx.sendMessage(m.from, {
+          image: { url: data.result.profile_pic_url_hd },
+          caption,
+          quoted: m
+        });
+      } else {
+        await connect('❌');
+        m.reply('An error occurred. Profile picture URL not found.');
+      }
+    } catch (error) {
+      console.error(error);
+      await connect('❌');
+      m.reply('An error occurred while fetching Instagram data.');
+    }
   }
 };
+      
