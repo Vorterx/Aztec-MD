@@ -32,6 +32,7 @@ module.exports = {
       }
 
       const data = await res.json();
+      console.log(data);
 
       if (data && Array.isArray(data) && data.length > 0) {
         const get_img = data[0];
