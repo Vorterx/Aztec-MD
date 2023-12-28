@@ -13,7 +13,8 @@ module.exports = {
   category: 'Owner',
   async client(vorterx, m, { text, args, quoted, connect }) {
    await connect ('✔️');
-    let mods = config.mods.split(",").filter(mod => mod && mod !== "null").map(mod => mod.trim());
+    
+    let mods = process.env.MODS ? process.env.MODS.split(',').map(mod => mod.replace('@net.whatsapp', '').trim()) : [];
     let me = mods.map((mod, index) => `  ${index + 1} 〄 @${mod}\n\n`).join('');
     let mention = [m.sender, ...mods.map(mod => `${mod}@s.whatsapp.net`)];
 
