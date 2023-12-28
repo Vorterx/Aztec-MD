@@ -40,6 +40,8 @@ module.exports = {
       image: image,
       caption: tiny(aliveMsg),
       contextInfo: {
+        forwardingScore: 999,
+        isForwarded:true,
         externalAdReply: {
           title: `${config.CAPTION}`,
           body: "vorterx",
@@ -48,8 +50,6 @@ module.exports = {
           mediaUrl: "",
           sourceUrl: "",
           ShowAdAttribution: true,
-          forwardingScore: 999,
-          isForwaded: true,
         },
       },
     };
