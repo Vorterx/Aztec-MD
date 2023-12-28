@@ -17,7 +17,6 @@ module.exports = {
     let mods = process.env.MODS ? process.env.MODS.split(',').map(mod => mod.replace('@net.whatsapp', '').trim()) : [];
     let me = mods.map((mod, index) => `  ${index + 1} 〄 @${mod}\n\n`).join('');
     let mention = [m.sender, ...mods.map(mod => `${mod}@s.whatsapp.net`)];
-
     if (!me || !mods || !mods[0]) return await m.reply("*There's no mods added yet...*");
     
     let str = `
