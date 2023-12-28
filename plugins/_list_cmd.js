@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { tiny } = require('@viper-x/fancytext');
 const config = require('../config.js');
+const { getBuffer } = require('../../lib/_getBuffer.js');
 const path = require('path');
 
 module.exports = {
@@ -62,8 +63,7 @@ module.exports = {
           title: `${config.CAPTION}`,
           body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
           mediaType,
-          thumbnail: {
-            url: getLogo,
+          thumbnail: await getBuffer(getLogo),
           },
           sourceUrl: `${process.env.MODS}`,
           mediaUrl: '',
