@@ -47,6 +47,8 @@ module.exports = {
       image: { url: 'https://i.ibb.co/s3LzSFJ/931684-7660.jpg' },
       caption: tiny(AztecBot),
       contextInfo: {
+        forwardingScore: 999,
+        isForwarded:true,
         externalAdReply: {
           title: `${config.CAPTION}`,
           body: "vorterx",
@@ -55,8 +57,6 @@ module.exports = {
           mediaUrl: '',
           sourceUrl: '',
           ShowAdAttribution: true,
-          forwardingScore: 999,
-          isForwaded: true,
         },
       },
     };
