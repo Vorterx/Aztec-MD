@@ -85,7 +85,7 @@ ${bottomSection}\n\n${getCommands}\n*${config.CAPTION || ''}*`;
       caption: tiny(amarok),
       headerType: 2,
       contextInfo: {
-        forwardingScore: 999,
+        forwardingScore: 6,
           isForwarded: true,
           discountCode: 'CHATGPT20',
         externalAdReply: {
