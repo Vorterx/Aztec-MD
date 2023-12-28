@@ -1,3 +1,9 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD
+*/
+
+const fetch = async (url) => (await import('node-fetch')).default(url);
 const config = require('../../config.js');
 
 module.exports = {
