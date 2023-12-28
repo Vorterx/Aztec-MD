@@ -20,7 +20,7 @@ module.exports = {
     if (!me || !mods || !mods[0]) return await m.reply("*There's no mods added yet...*");
     
     let str = `
-    👤 *${config.BotName.toUpperCase().trim()} MODS* 👤\n\n${me}`.trim();
+    👤 *${config.botName.toUpperCase().trim()} MODS* 👤\n\n${me}`.trim();
     
     return await m.reply("https://telegra.ph/file/5fd51597b0270b8cff15b.png", {
       caption: str,
