@@ -2,6 +2,7 @@ const axios = require('axios');
 const { tiny } = require("@viper-x/fancytext");
 const fs = require("fs");
 const config = require("../config.js");
+const { getBuffer } = require('../../lib/_getBuffer.js');
 const path = require("path");
 
 const pluginDir = path.join(__dirname);
@@ -86,7 +87,9 @@ ${bottomSection}\n\n${getCommands}\n\n*${config.CAPTION || ''}*`;
         externalAdReply: {
           title: `${config.CAPTION || ''}`,
           body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
-          thumbnail: { mediaType: 'image', mediaUrl: 'https://i.ibb.co/vx1YRtp/original-356944951abd408e6ff5e1b4a988c4c9.png' },
+          thumbnail: await getBuffer(config.LOGOS),
+          mediaType: 1,
+          mediaUrl: '',
           sourceUrl: `${process.env.MODS || ''}`,
           forwardingScore: 999,
           isForwarded: true,
