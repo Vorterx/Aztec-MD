@@ -21,8 +21,7 @@ module.exports = {
     if (!me || !mods || !mods[0]) return await vorterx.sendMessage(m.from, "*There's no mods added yet...*", 'text', { quoted: m });
 
     let str = `
-👤 *${config.botName.toUpperCase().trim()} MODS* 👤\n\n${me}`.trim();
-
+${tiny('👤 *AZTEC-MD MODS* 👤')}\n\n${me}`.trim();
     await vorterx.sendMessage(m.from, {
       image: { url: "https://telegra.ph/file/5fd51597b0270b8cff15b.png" },
       caption: str,
