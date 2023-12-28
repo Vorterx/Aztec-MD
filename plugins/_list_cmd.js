@@ -59,7 +59,7 @@ module.exports = {
       caption: tiny(list_md),
       headerType: 2,
       contextInfo: {
-        forwardingScore: 999,
+        forwardingScore: 5,
         isForwarded: true,
        externalAdReply: {
           title: `${config.CAPTION}`,
