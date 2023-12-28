@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { tiny } = require('@viper-x/fancytext');
 const config = require('../config.js');
-const { getBuffer } = require('../../lib/_getBuffer.js');
+const { getBuffer } = require('../lib/_getBuffer.js');
 const path = require('path');
 
 module.exports = {
