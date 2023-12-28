@@ -11,7 +11,7 @@ module.exports = {
   alias: ['sudo'],
   description: 'To check mods admins to the bot',
   category: 'Owner',
-  async client(vorterx, m, { text, args, quoted, connect }) {
+  async client(vorterx, m, {  args, quoted, connect }) {
     await connect('✔️');
 
     let mods = process.env.MODS ? process.env.MODS.split(',').map(mod => mod.replace('@net.whatsapp', '').trim()) : [];
