@@ -76,7 +76,7 @@ ${midSection} Runtime: ${process.uptime()} seconds
 ${midSection} Time: ${new Date().toLocaleTimeString()}
 ${midSection} Date: ${new Date().toLocaleDateString()}
 ${midSection} From: ${country || ''}
-${bottomSection}\n\n${getCommands}\n\n*${config.CAPTION || ''}*`;
+${bottomSection}\n\n${getCommands}\n*${config.CAPTION || ''}*`;
 
     const chatBot = {
       [isImage ? 'image' : 'video']: {
