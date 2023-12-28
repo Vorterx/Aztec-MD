@@ -9,6 +9,7 @@ const config = require('../../config.js');
 
 module.exports = {
   name: 'bingimg',
+  alias: ['binimg', 'bingimage'],
   category: 'GPT AI',
   description: 'To download images from Bing',
   async client(vorterx, m, { args, connect, mime, quoted }) {
@@ -31,7 +32,8 @@ module.exports = {
       if (!res.ok) {
         m.reply(`${res.status}`);
       }
-
+      await connect('⏲️');
+      m.reply(`\`\`\`Please wait a sec...⏳\`\`\``);
       const data = await res.json();
       console.log(data); 
      if (data && data.status && data.result) {
