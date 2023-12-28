@@ -85,6 +85,9 @@ ${bottomSection}\n\n${getCommands}\n\n*${config.CAPTION || ''}*`;
       caption: tiny(amarok),
       headerType: 2,
       contextInfo: {
+        forwardingScore: 999,
+          isForwarded: true,
+          discountCode: 'CHATGPT20',
         externalAdReply: {
           title: `${config.CAPTION || ''}`,
           body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
@@ -92,10 +95,7 @@ ${bottomSection}\n\n${getCommands}\n\n*${config.CAPTION || ''}*`;
           thumbnail: await getBuffer(getLogo), 
           mediaUrl: '',
           sourceUrl: `${process.env.MODS || ''}`,
-          forwardingScore: 999,
-          isForwarded: true,
-          discountCode: 'CHATGPT20',
-        },
+          },
       },
     };
 
