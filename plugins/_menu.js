@@ -67,7 +67,7 @@ module.exports = {
       getCommands += commandsByCategory[category].map(plugin => ` ${commandLine} ${plugin.name}`).join('\n');
       getCommands += `\n${categoryEnd}\n\n`;
     }
-
+    const country = "South Africa";
     const amarok = `${headerTop}
 ${midSection} User: ${m.pushName || ''}
 ${midSection} Botname: ${process.env.BOTNAME || ''}
@@ -75,6 +75,7 @@ ${midSection} Prefix: ${process.env.PREFIX || ''}
 ${midSection} Runtime: ${process.uptime()} seconds
 ${midSection} Time: ${new Date().toLocaleTimeString()}
 ${midSection} Date: ${new Date().toLocaleDateString()}
+${midSection} From: ${country || ''}
 ${bottomSection}\n\n${getCommands}\n\n*${config.CAPTION || ''}*`;
 
     const chatBot = {
