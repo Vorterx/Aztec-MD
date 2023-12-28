@@ -21,7 +21,8 @@ let config = {
     'https://i.ibb.co/frX9YvD/OIG.jpg',
     'https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg',
     'https://i.imgur.com/hpH9wbL.jpg',
-    'https://i.imgur.com/lXaEnBt.mp4',
+    'https://i.imgur.com/iO8JNjl.jpg',
+    'https://i.imgur.com/5B2QhVw.jpg',
   ],
 };
 
