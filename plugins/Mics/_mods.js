@@ -3,7 +3,8 @@
 * @BotName: Aztec-MD 
 */
 
-const { tiny } = require('@viper-x/fancytext');
+const { fancytext } = require('@viper-x/fancytext'); // Changed 'tiny' to 'fancytext'
+const config = require('../../config.js');
 
 module.exports = {
   name: 'mods',
@@ -11,48 +12,20 @@ module.exports = {
   description: 'To check mods admins to the bot',
   category: 'Owner',
   async client(vorterx, m, { text, args, quoted, connect }) {
-    
-    await connect('✔️');
-    
-    let azteci = '*👤 VORTERX MODS 👤*\n\n';
-    const mods = process.env.MODS || '';
-    let sudo = [];
+   await connect ('✔️');
+    let mods = config.mods.split(",").filter(mod => mod && mod !== "null").map(mod => mod.trim());
+    let me = mods.map((mod, index) => `  ${index + 1} 〄 @${mod}\n\n`).join('');
+    let mention = [m.sender, ...mods.map(mod => `${mod}@s.whatsapp.net`)];
 
-    if (mods) {
-      sudo = mods.split(',');
-      for (let i = 0; i < sudo.length; i++) {
-        azteci += `*#${i + 1} 〄* @${sudo[i]}\n`;
-      }
-    } else {
-      azteci += '`No mods are set for now`';
-    }
+    if (!me || !mods || !mods[0]) return await m.reply("*There's no mods added yet...*");
     
-    azteci = azteci.trim();
+    let str = `
+    👤 *${config.BotName.toUpperCase().trim()} MODS* 👤\n\n${me}`.trim();
     
-    const img = 'https://i.ibb.co/2dvDgBd/464318-5149318-823730-thumbnail.png';
-
-    const mentions = sudo.map((x, index) => ({
-      tag: x.split('@')[0],
-      id: {
-        _serialized: x
-      },
-      num: index + 1
-    }));
-
-    await vorterx.sendMessage(
-      m.from,
-      {
-        image: {
-          url: img
-        },
-        caption: tiny(azteci),
-        mentionedJidList: mentions.map((mention) => ({
-          ...mention.id,
-          num: mention.num
-        }))
-      },
-      m
-    );
+    return await m.reply("https://telegra.ph/file/5fd51597b0270b8cff15b.png", {
+      caption: str,
+      mentions: mention
+    }, "img", m);
   }
 };
-    
+      
