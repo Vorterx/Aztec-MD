@@ -1,6 +1,7 @@
 /*
 * @Author: DiegosonTech
 * @BotName: Aztec-MD
+* @MadeBy: Diegoson
 */
 
 const fetch = async (url) => (await import('node-fetch')).default(url);
@@ -28,30 +29,31 @@ module.exports = {
       });
 
       if (!res.ok) {
-        return m.reply(`${res.status}`);
+        m.reply(`${res.status}`);
       }
 
-      const data = await res.json();
-      console.log(data);
-
-      if (data && Array.isArray(data) && data.length > 0) {
-        const get_img = data[0];
-
-        await vorterx.sendMessage(m.from, {
+      const data = await response.json();
+      console.log(data); 
+     if (data && data.status && data.result) {
+          const get_img = data.result;
+       await vorterx.sendMessage(m.from, {
           image: {
             url: get_img,
             mimetype: mime.getType(get_img.split('.').pop()),
           },
           caption: `*Name*: ${args}\n\n*${config.CAPTION}*`,
-        });
+           });
       } else {
-       await connect('❌');
+          console.log('No image URL found in the query...'); 
+        await connect('❌');
         return m.reply('No images found for the given args...');
       }
     } catch (error) {
       console.error(error.message || error);
-     return m.reply('Please try again later...');
+      return m.reply('Please try again later..');
     }
   }
+};
+
 };
       
