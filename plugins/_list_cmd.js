@@ -64,7 +64,6 @@ module.exports = {
           body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
           mediaType,
           thumbnail: await getBuffer(getLogo),
-          },
           sourceUrl: `${process.env.MODS}`,
           mediaUrl: '',
         },
