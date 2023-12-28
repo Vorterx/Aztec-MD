@@ -5,9 +5,15 @@ const config = require('../../config.js');
 module.exports = {
   name: 'tourl',
   category: 'Convert',
-  async client(vorterx, m, { args, connect }) {
-    const res = m.quoted ? m.quoted : m;
-    const mimeType = (res.msg || res).mimetype || '';
+  async client(vorterx, m, { args, connect, mime, quoted }) {
+    if (!m.quoted) {
+      await connect('❌');
+      return m.reply('Please reply to a message with an image or video...');
+    }
+
+    const res = m.quoted;
+    const mimeType = res.mimetype || '';
+
     if (!mimeType) {
       await connect('❌');
       return m.reply('Please reply to a video or an image...');
@@ -20,8 +26,10 @@ module.exports = {
     }
     await connect('✔️');
 
-    const isImageOrVideo = /image\/(png|jpe?g|gif)|video\/mp4/.test(mimeType);
-    if (isImageOrVideo) {
+    const isImage = /image/.test(mimeType);
+    const isVideo = /video/.test(mimeType);
+
+    if (isImage || isVideo) {
       const link = await uploadToImgur(convertedMedia);
       const fileSizeMB = (convertedMedia.length / (1024 * 1024)).toFixed(2);
       m.reply(
@@ -35,3 +43,4 @@ module.exports = {
     }
   },
 };
+        
