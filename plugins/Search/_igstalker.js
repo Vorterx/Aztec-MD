@@ -21,6 +21,7 @@ module.exports = {
       await connect('✔️');
       const get_user = await fetch(`https://api.botcahx.eu.org/api/stalk/ig?username=${args}&apikey=${aztec}`);
       const data = await get_user.json();
+       console.log(data);
 
       let caption = `${tiny('*INSTAGRAM STALKER*')}\n\n
 ${tiny('*Username*:')} ${data.result.username}
