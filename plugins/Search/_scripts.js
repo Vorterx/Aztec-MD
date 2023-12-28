@@ -1,5 +1,6 @@
 const axios = require('axios');
 const config = require('../../config.js');
+const { getBuffer } = require('../../lib/_getBuffer.js');
 const fs = require('fs');
 
 module.exports = {
@@ -15,15 +16,13 @@ module.exports = {
   let cap = `
   *乂 AZTEC-MD MD INFO 乂*
           
-  *〄 _Stars*: ${data?.stargazers_count || "120+"  }
+  *〄Stars*: ${data?.stargazers_count || "120+"  }
   
-  *〄 _Forks*: ${data?.forks_count || "1000+"}
+  *〄Forks*: ${data?.forks_count || "1000+"}
   
-  *〄 _Name*: ${process.env.OWNER_NAME}
+  *〄Name*: ${process.env.OWNER_NAME}
   
-  *〄 _Updated_At*: ${new Date(data?.updated_at).toLocaleDateString()||"undefined"}
-  
-  *〄 _Scrip_URL*: ${data?.html_url}\n\n*${config.CAPTION}*
+  *〄Scrip*: ${data?.html_url}\n\n*${config.CAPTION}*
 
 `;
 
@@ -34,13 +33,13 @@ module.exports = {
       caption: cap,
       headerType: 2,
       contextInfo: {
+        forwardingScore: 5,
+        isForwarded:true,
         externalAdReply: {
           title: `${config.CAPTION}`,
           body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
           mediaType: 2,
-          thumbnail: {
-            url: v_chat
-          },
+          thumbnail: await getBuffer(v_chat),
           sourceUrl: 'wa.me/27686881509',
           mediaUrl: '',
         },
