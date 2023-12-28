@@ -1,4 +1,11 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD
+*/
+
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
+const aztec = '('_')';
+const { tiny } = require('@viper-x/fancytext');
 
 module.exports = {
   name: 'igstalk',
@@ -10,30 +17,27 @@ module.exports = {
       await connect('❌');
       return m.reply('Provide a valid Instagram username');
     }
+    await connect('✔️');
+    const get_user = await fetch(`https://api.botcahx.eu.org/api/stalk/ig?username=${args}&apikey=${aztec}`);
+    const data = await get_user.json();
+    
+    let caption = `${tiny('*INSTAGRAM STALKER*')}\n\n
+${tiny('*Username*:')} ${data.result.username}
+${tiny('*Full Name*:')} ${data.result.full_name}
+${tiny('*Followers*:')} ${data.result.followers}
+${tiny('*Followings*:')} ${data.result.followings}
+${tiny('*Biog*:')} ${data.result.biography}
+${tiny('*Business Account*:')} ${data.result.is_business_account ? 'Yes' : 'No'}
+${tiny('*Private Account*:')} ${data.result.is_private ? 'Yes' or 'No'}
+${tiny('*Verified Account*:')} ${data.result.is_verified ? 'Yes' or 'No'}
+${tiny('*Pronouns*:')} ${data.result.pronouns.join(', ')}
+${tiny('*Post Count*:')} ${data.result.post_count}
+`;
 
-    const insta_stalk = `https://api.caliph.biz.id/api/igstalk?username=${args}&apikey=lykoUzNh`;
-    const anu = await fetch(insta_stalk);
-    if (anu.ok) {
-      const userData = await anu.json();
-
-      if (!userData || !userData.username) {
-        return m.reply('Invalid Instagram username...');
-      }
-
-      await connect('✔️');
-      const get_user =
-        '*Instagram Stalker*:\n' +
-        '*Username*: ' + userData.username + '\n' +
-        '*Full Name*: ' + userData.full_name + '\n' +
-        '*Total Posts*: ' + userData.total_posts + '\n' +
-        '*Bio*: ' + userData.bio  + '\n' +
-        '*Pronouns*: ' + userData.pronouns;
-
-        const getPP = userData.profile_pic_url || '';
-        vorterx.sendMessage(m.from, { image: { url: getPP }, caption: get_user });
-    } else {
-      console.error('Error:', anu.status);
-      return m.reply('Please try again later...');
-    }
-  },
+    await vorterx.sendMessage(m.from, {
+      image: { url: data.result.profile_pic_url_hd },
+      caption,
+      quoted: m
+    });
+  }
 };
