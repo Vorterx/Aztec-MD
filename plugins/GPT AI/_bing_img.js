@@ -39,9 +39,8 @@ module.exports = {
        await vorterx.sendMessage(m.from, {
           image: {
             url: get_img,
-            mimetype: mime.lookup(get_img),
           },
-          caption: `*Name*: ${args}\n\n*${config.CAPTION}*`,
+             caption: `*Name*: ${args}\n\n*${config.CAPTION}*`,
            });
       } else {
           console.log('No image URL found in the query...'); 
