@@ -20,12 +20,12 @@ module.exports = {
     if (!me || !mods || !mods[0]) return await m.reply("*There's no mods added yet...*");
     
     let str = `
-    👤 *${config.botName.toUpperCase().trim()} MODS* 👤\n\n${me}`.trim();
-    
-    return await m.reply("https://telegra.ph/file/5fd51597b0270b8cff15b.png", {
-      caption: str,
-      mentions: mention
-    }, "img", m);
-  }
-};
-      
+👤 *${config.botName.toUpperCase().trim()} MODS* 👤\n\n${me}`.trim();
+
+return await m.reply({
+  url: "https://telegra.ph/file/5fd51597b0270b8cff15b.png",
+  caption: str,
+  mentions: mention
+}, "image", m);
+    }
+}
