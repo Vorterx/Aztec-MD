@@ -7,7 +7,7 @@
 //                     |
 //                     -------------------
 let config = {
-  botName: process.env.BOTNAME || 'AZTEC MD',
+  botName: process.env.BOTNAME || 'AZTEC-MD',
   prefix: process.env.PREFIX || '.',
   name: process.env.OWNER_NAME || '',
   owner_number: process.env.OWNER_NUMBER || '27686881509',
