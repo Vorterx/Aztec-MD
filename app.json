@@ -1,5 +1,5 @@
 {
-  "name": "WhatsApp Chatbot",
+  "name": "Aztec MD",
   "description": "multi bot with rich features made by Vorterx team",
   "keywords": [
     "aztec",
@@ -12,11 +12,8 @@
       "description": "Prefix of your bot Ex: . , / , # , & etc. Put anything except @ (Default is .)",
       "required": false
     },
-    "BOTNAME": {
-      "description": "Put your bot name here as it's required."
-    },
     "MONGODB": {
-      "description": "Add your mongourl, url to get connected to the bot"
+    "description": "Add your mongourl, url to get connected to the bot"
     },
     "OWNER_NAME": {
       "description": "Add your name (e.g. diegosonTech or suhailTechInfo)"
