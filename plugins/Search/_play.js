@@ -1,6 +1,7 @@
 const { getBuffer } = require("../../lib/_getBuffer.js");
 const yts = require("youtube-yts");
 const config = require('../../config.js');
+const { Zenith } = require ('../../lib/_cmd_sxntax.js');
 
 Zenith (
   {
