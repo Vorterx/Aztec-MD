@@ -1,27 +1,28 @@
-module.exports = {
-    name: "tagall",
-    description: "tag members",
+Zenith(
+    {
+    usage: "tagall",
     category: "Group",
-    async client(vorterx, m, { args, connect, isBotAdmin, isAdmin, isMedia, participants }) {
+    desc: "tag members",
+    filename: __filename
+    }, async (vorterx, coax, args, react, isBotAdmin, isAdmin, isMedia, participants) => {
       
         if (!isMedia) {
-            var message2 = m.quoted
-                ? m.quoted.msg
+            var message2 = coax.quoted
+                ? coax.quoted.msg
                 : args || "";
         } else {
             message2 = "";
         }
 
-        let mess = `╭─❮❮| Tᴀɢɢɪɴɢ Aʟʟ |❯❯\n`;
+        let mess = `╭─❮❮ Tᴀɢɢɪɴɢ Aʟʟ ❯❯\n`;
         for (let mem of participants) {
             mess += `│ @${mem.id.split("@")[0]}\n`;
         }
         mess += `╰────────────⦿\n\n`;
 
-        await connect("📇");
-        vorterx.sendMessage(m.from,
+        await react("📇");
+        vorterx.sendMessage(coax.from,
             { text: mess, mentions: participants.map((a) => a.id) },
-            { quoted: m }
+            { quoted: coax }
         );
-    },
-};
+    });
