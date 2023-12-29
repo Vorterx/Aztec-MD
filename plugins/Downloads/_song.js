@@ -1,3 +1,4 @@
+const { Zenith } = require ('../../lib/_cmd_sxntax.js');
 const ytdl = require('ytdl-core');
 const fs = require('fs');
 const path = require('path');
