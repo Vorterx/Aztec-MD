@@ -1,4 +1,5 @@
 const config = require('../../config.js');
+const { Zenith } = require ('../../lib/_cmd_sxntax.js');
 const gFx = Array.from({ length: 13 }, (_, i) => `gfx${i + 1}`);
 let lolkeysapi = '5c250069e8936d6bf70295b8';
 const caliphkey = 'lykoUzNh';
