@@ -30,7 +30,6 @@ Zenith(
     const uptime = process.uptime();
     const startTime = Date.now();
     const version = '3.0.0';
-    const owner = process.env.OWNER_NAME;
     const additionalInfo = 'Just do what is the best:';
     
     const ram = `${(os.totalmem() / 1e9).toFixed(2)}GB`;
@@ -43,7 +42,6 @@ Zenith(
 *〄_Speed:* ${latency} ms
 *〄_Uptime:* ${uptimeText}
 *〄_Version:* ${version}
-*〄_Owner:* ${owner}
 *〄_RAM:* \`${ram}\`
 *〄_Additional Info:* ${additionalInfo}\n\n*${config.CAPTION}*`;
 
