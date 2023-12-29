@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'atts',
+  name: 'attp',
   category: 'Convert',
   async client(vorterx,m, { args, connect, quoted }) {
 
