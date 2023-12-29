@@ -162,7 +162,7 @@ async function startAztec() {
       if (connection === "open") {
         console.log('Plugins loaded♻️');
         console.log('WhatsApp chatbot has connected✔️');
-        const toxic = `𝐶𝛩𝛮𝛮𝛯𝐶𝑇𝛯𝐷 𝑇𝛩 𝛥𝛧𝑇𝛯𝐶\n\n_BotName_: ${process.env.BOTNAME}\n_Owner_Name_: ${process.env.OWNER_NAME}\n_Prefix_: ${process.env.PREFIX}\n_Mumber_: ${process.MODS}\n\n${config.CAPTION}`;
+        const toxic = `𝐶𝛩𝛮𝛮𝛯𝐶𝑇𝛯𝐷 𝑇𝛩 𝛥𝛧𝑇𝛯𝐶\n\n_Owner_Name_: ${process.env.OWNER_NAME}\n_Prefix_: ${process.env.PREFIX}\n_Mumber_: ${process.MODS}\n\n${config.CAPTION}`;
         vorterx.sendMessage(vorterx.user.id, { text: toxic });
 
         await saveCreds();
