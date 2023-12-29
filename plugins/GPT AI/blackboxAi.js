@@ -6,16 +6,19 @@
 const fetch = async (url) => (await import('node-fetch')).default(url);
 const config = require('../../config.js');
 
-module.exports = {
-  name: 'blackbox',
+Zenith(
+  {
+  usage: 'blackbox',
   alias: ['black'],
   category: 'GPT AI',
-  async client(vorterx, m, { args, connect }) {
+  desc: 'Black box',
+  filename: __filename
+  }, async (vorterx, coax, args, react) => {
     
     try {
       if (!args) {
-        await connect('❌');
-        return m.reply(
+        await react('❌');
+        return coax.reply(
           "```\nError 404: Text not found. Please provide text to get results...\n```"
         );
       }
@@ -25,7 +28,7 @@ module.exports = {
       const res = await fetch(getBlack);
 
       if (!res.ok) {
-        m.reply(`Error: ${res.status}`);
+        coax.reply(`Error: ${res.status}`);
         return;
       }
 
@@ -33,8 +36,8 @@ module.exports = {
       console.log(result);
 
     if (!result || !result.response) {
-        await connect('❌');
-        return m.reply(
+        await react('❌');
+        return coax.reply(
           "```\nError 404: Search not found.for the provided text...\n```"
         );
       }
@@ -42,17 +45,16 @@ module.exports = {
       const getRes = result.response;
       const getFinal = `*BLACKBOX AI*\n\n${getRes}\n\n*${config.CAPTION}*`;
 
-      await vorterx.sendMessage(m.from, {
+      await vorterx.sendMessage(coax.from, {
         image: { url: 'https://i.ibb.co/DLyfLjq/BLACKBOX-AI-BY-DIEGOSON-TECH.png' },
         caption: getFinal,
       });
 
-      await connect('🤖');
+      await react('🤖');
     } catch (error) {
       console.error(error);
-      await connect('❌');
-      return m.reply("```\nAn error occurred. Please try again...\n```");
+      await react('❌');
+      return coax.reply("```\nAn error occurred. Please try again...\n```");
     }
-  },
-};
+  });
           
