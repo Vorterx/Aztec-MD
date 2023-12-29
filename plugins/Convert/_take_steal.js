@@ -4,6 +4,7 @@
 * @BotName: Aztec-MD
 */
 
+const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter");
 const config = require('../../config.js');
 
 Zenith(
