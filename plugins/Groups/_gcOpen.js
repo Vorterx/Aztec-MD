@@ -1,3 +1,6 @@
+const { Zenith } = require ('../../lib/_cmd_sxntax.js');
+
+
 Zenith( 
   {
 usage:"gcopen",
