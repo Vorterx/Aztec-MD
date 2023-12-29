@@ -5,6 +5,7 @@
 
 const { tiny } = require('@viper-x/fancytext');
 const config = require('../../config.js');
+const { Zenith } = require ('../../lib/_cmd_sxntax.js');
 
 Zenith(
   {
