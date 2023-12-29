@@ -5,6 +5,8 @@
 
 const { translate } = require('@vitalets/google-translate-api');
 const config = require('../../config.js');
+const { Zenith } = require ('../../lib/_cmd_sxntax.js');
+
 
 Zenith(
   {
