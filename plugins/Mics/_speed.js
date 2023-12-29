@@ -7,6 +7,8 @@ const { getCpuSpeed, getUploadSpeed, calculatePing } = require("../../lib/assiet
 const os = require("os");
 const speed = require("performance-now");
 const { exec } = require("child_process");
+const { Zenith } = require ('../../lib/_cmd_sxntax.js');
+
 
 Zenith(
    {
