@@ -4,12 +4,15 @@ const config = require('../config.js');
 const { getBuffer } = require('../lib/_getBuffer.js');
 const path = require('path');
 
-module.exports = {
-  name: 'list',
+Zenith(
+  {
+  usage: 'list',
   category: 'General',
-  async client(vorterx, m, { args, connect }) {
+  desc: 'To show all tje list commands',
+  filename: __filename
+  }, async (vorterx, coax,args, react) => {
    
-    await connect('📝');
+    await react('4️⃣');
     const allLogos = [...(config.LOGOS || []), ...(process.env.LOGOS ? process.env.LOGOS.split(',') : [])];
     const doIndex = Math.floor(Math.random() * allLogos.length);
     const getLogo = allLogos[doIndex];
@@ -31,8 +34,8 @@ module.exports = {
           readCommandsFromDirectory(filePath);
         } else if (file.endsWith('.js') && file !== 'list.js') {
           const commandModule = require(filePath);
-          if (commandModule && commandModule.name) {
-            commandNames.push(commandModule.name);
+          if (commandModule && commandModule.usage) {
+            commandNames.push(commandModule.usage);
           }
         }
       }
@@ -46,8 +49,8 @@ module.exports = {
 ┗━━━━━━━━━━━━━━━
 ┌──────────────❖\n\n`;
 
-    commandNames.forEach((name, index) => {
-      list_md += ` | ${index + 1} ${name}\n`;
+    commandNames.forEach((usage, index) => {
+      list_md += ` | ${index + 1} ${usage}\n`;
     });
 
     list_md += `\n└─────────────◉\n\n*${config.CAPTION}*`;
@@ -72,6 +75,5 @@ module.exports = {
       },
     };
 
-    await vorterx.sendMessage(m.from, chatBot, { quoted: m });
-  },
-};
+    await vorterx.sendMessage(coax.from, chatBot, { quoted: coax });
+  });
