@@ -1,15 +1,16 @@
-module.exports = {
-name:"gcopen",
+Zenith( 
+  {
+usage:"gcopen",
 alias: ['unmute'],
-description: "To Open the group",
 category: "Group",
-async client(vorterx, m, { connect, isAdmin, isBotAdmin, isGroup}) {
+desc: "To Open the group",
+filename: __filename
+  }, async (vorterx, coax, react, isAdmin, isBotAdmin, isGroup) => {
 
-if(!m.isGroup) { 
-await connect("❌"); return m.reply("*👋 Sorry this command is for admins only*");
+if(!coax.isGroup) { 
+await react ("❌"); return coax.reply("*👋 Sorry this command is for admins only*");
 }
-await connect("🔉");
-  m.reply(`『 GROUP SETTINGS 』\n\nGroup has been opened by admin,All participants can now send messagez`);
-return await vorterx.groupSettingUpdate(m.from, "not_announcement");
-  }
-};
+await react("🔉");
+  coax.reply(`『 GROUP SETTINGS 』\n\nGroup has been opened by admin,All participants can now send messagez`);
+return await vorterx.groupSettingUpdate(coax.from, "not_announcement");
+  });
