@@ -1,10 +1,9 @@
-const { Zenith } = require ('../lib/_cmd_sxntax.js');
+const { Zenith } = require('../lib/_cmd_sxntax.js');
+const config = require('../config.js');
 const axios = require('axios');
-const { tiny } = require("@viper-x/fancytext");
-const fs = require("fs");
-const config = require("../config.js");
-const { getBuffer } = require('../lib/_getBuffer.js');
-const path = require("path");
+const { tiny } = require('@viper-x/fancytext');
+const fs = require('fs');
+const path = require('path');
 
 const pluginDir = path.join(__dirname);
 const commandsByCategory = {};
@@ -33,15 +32,20 @@ function readCommandsFromDirectory(directory) {
 
 readCommandsFromDirectory(pluginDir);
 
+const configFile = path.join(__dirname, '../lib/config.json');
+const configData = fs.readFileSync(configFile);
+const configJson = JSON.parse(configData);
+
 Zenith(
   {
-  usage: 'menu',
-  alias: ['h', 'help'],
-  desc: 'Reveals menu categories commands',
-  filename: __filename
-  }, async (vorterx, coax, args, react) =>  {
-    
+    usage: 'menu',
+    alias: ['h', 'help'],
+    desc: 'Reveals menu categories commands',
+    filename: __filename,
+  },
+  async (vorterx, coax, args, react) => {
     await react('Ⓜ️');
+
     const allLogos = [...(config.LOGOS || []), ...(process.env.LOGOS ? process.env.LOGOS.split(',') : [])];
     const doIndex = Math.floor(Math.random() * allLogos.length);
     const getLogo = allLogos[doIndex];
@@ -51,10 +55,12 @@ Zenith(
     let headerTop, midSection, bottomSection, categoryLeft, categoryRight, commandLine, categoryEnd;
     let randomMenu = 0;
 
-    if (!process.env.MENU) { randomMenu = Math.floor(Math.random() * 2) + 1; }
+    if (!process.env.MENU) {
+      randomMenu = Math.floor(Math.random() * 2) + 1;
+    }
 
-    if (randomMenu == 1 || process.env.MENU.trim().startsWith("1") || process.env.MENU.toLowerCase().includes("aztec-md")) {
-      headerTop = `┏━━⟪ *${process.env.BOTNAME || ''}* ⟫━━⦿`;
+    if (randomMenu == 1 || process.env.MENU.trim().startsWith('1') || process.env.MENU.toLowerCase().includes('aztec-md')) {
+      headerTop = `┏━━⟪ *${configJson.Bots[0].BotName || ''}* ⟫━━⦿`;
       midSection = `┃ ✗`;
       bottomSection = `┗━━━━━━━━━━━━━━⦿`;
       categoryLeft = `┌──『`;
@@ -67,13 +73,15 @@ Zenith(
 
     for (const category in commandsByCategory) {
       getCommands += `${categoryLeft} *${category}* ${categoryRight}\n`;
-      getCommands += commandsByCategory[category].map(plugin => ` ${commandLine} ${plugin.usage}`).join('\n');
+      getCommands += commandsByCategory[category].map((plugin) => ` ${commandLine} ${plugin.usage}`).join('\n');
       getCommands += `\n${categoryEnd}\n\n`;
     }
-    const country = "South Africa";
+
+    const country = 'South Africa';
     const amarok = `${headerTop}
 ${midSection} User: ${m.pushName || ''}
-${midSection} Botname: ${process.env.BOTNAME || ''}
+${midSection} Botname: ${configJson.Bots[0].BotName || ''}
+${midSection} Owner: ${configJson.Bots[0].Owner || ''}
 ${midSection} Prefix: ${process.env.PREFIX || ''}
 ${midSection} Runtime: ${process.uptime()} seconds
 ${midSection} Time: ${new Date().toLocaleTimeString()}
@@ -83,24 +91,26 @@ ${bottomSection}\n\n${getCommands}*${config.CAPTION || ''}*`;
 
     const chatBot = {
       [isImage ? 'image' : 'video']: {
-        url: getLogo
+        url: getLogo,
       },
       caption: tiny(amarok),
       headerType: 2,
       contextInfo: {
         forwardingScore: 6,
-          isForwarded: true,
-          discountCode: 'CHATGPT20',
+        isForwarded: true,
+        discountCode: 'CHATGPT20',
         externalAdReply: {
           title: `${config.CAPTION || ''}`,
           body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
           mediaType,
-          thumbnail: await getBuffer(getLogo), 
+          thumbnail: await getBuffer(getLogo),
           mediaUrl: '',
           sourceUrl: `${process.env.MODS || ''}`,
-          },
+        },
       },
     };
 
     await vorterx.sendMessage(coax.from, chatBot, { quoted: coax });
-  });
+  }
+);
+  
