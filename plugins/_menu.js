@@ -1,3 +1,4 @@
+const { Zenith } = require ('../lib/_cmd_sxntax.js');
 const axios = require('axios');
 const { tiny } = require("@viper-x/fancytext");
 const fs = require("fs");
