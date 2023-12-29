@@ -10,7 +10,7 @@ Zenith(
     
   if (!args) {
       await react('❌');
-      return m.reply('_Please provide binary code._');
+      return coax.reply('_Please provide binary code._');
     }
 
     await react('✔️');   
