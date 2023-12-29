@@ -1,16 +1,19 @@
 const config = require('../../config.js');
 
-module.exports = {
-  name: 'runtime',
+Zenith(
+  {
+  usage: 'runtime',
   category: 'Owner',
-  async client(vorterx, m, { isDev, args, connect }) {
+  desc: 'Fir the owner time',
+  filename: _filename
+  }, async (vorterx, coax, isDev, args, react) => {
     try {
       if (!isDev) {
-        await connect('❌');
-        return m.reply('This command is for my Dev only');
+        await react('❌');
+        return coax.reply('This command is for my Dev only');
       }
 
-      await connect('🕦');
+      await react('🕦');
 
       const currentHour = new Date().getHours();
       const greeting =
@@ -32,12 +35,11 @@ module.exports = {
 ┆ *⏱️Time:* ${formattedTime}
 ╰–––––––––––––––༓\n\n*${config.CAPTION}*`;
 
-      await vorterx.sendMessage(m.from, { caption: cap });
+      await vorterx.sendMessage(coax.from, { caption: cap });
     } catch (error) {
       console.error(error);
       await connect('❌');
-      return m.reply('An error occurred while processing the command.');
+      return coax.reply('An error occurred while processing the command.');
     }
-  },
-};
+  });
         
