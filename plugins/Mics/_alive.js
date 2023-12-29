@@ -9,14 +9,16 @@ const config = require("../../config.js");
 const { getBuffer } = require('../../lib/_getBuffer.js');
 const prefix = config.prefix;
 
-module.exports = {
-  name: 'alive',
-  alias: ['bot'],
-  description: 'To check the bot alive or off',
-  category: 'Mics',
-  async client(vorterx, m, {  connect }) {
+Zenith(
+  {
+    usage: 'alive',
+    alias: ['on'],
+    desc: 'To check the bot alive or off',
+    category: 'Mics',
+    filename: __filename
+  }, async(vorterx, coax, react) => {
    
-    await connect('🧘');
+    await react('🧘');
     const image = {
       url: "https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg",
       mimetype: "image/jpeg",
@@ -54,6 +56,5 @@ module.exports = {
       },
     };
 
-    await vorterx.sendMessage(m.from, messageOptions, { quoted: m });
-  }
-  }
+    await vorterx.sendMessage(coax.from, messageOptions, { quoted: coax });
+  })
