@@ -8,13 +8,15 @@ const os = require("os");
 const speed = require("performance-now");
 const { exec } = require("child_process");
 
-module.exports = {
-   name: 'ping',
+Zenith(
+   {
+   usage: 'ping',
    category: 'Mics',
-   description: 'Check the speedy',
-   async client(vorterx, m, { connect }) {
+   desc: 'Check the speedy',
+   filename: __filename
+   }, async (vorterx, coax, react ) => {
      
-      await connect("🏇");
+      await react("🏇");
       const cpuSpeedResult = { speed: getCpuSpeed() }; 
       const uploadSpeedInMbps = getUploadSpeed(); 
 
@@ -26,10 +28,9 @@ module.exports = {
          const child = stdout.toString("utf-8");
          const aztec = child.replace(/Memory:/, "Ram:");
          
-         m.reply(`${aztec}*🛑 Performance:* ${latency.toFixed(4)} ms
+         coax.reply(`${aztec}*🛑 Performance:* ${latency.toFixed(4)} ms
 *💻 CPU Speed:* ${cpuSpeedResult.speed} GHz
 *📤 Upload Speed:* ${uploadSpeedInMbps} Mbps
 *📍 Ping:* ${calculatePing(m.messageTimestamp, Date.now())} _second(s)_`);
       });
-   }
-};
+   });
