@@ -2,25 +2,24 @@ const axios = require("axios");
 const config = require('../../config.js');
 const fs = require("fs");
 
-module.exports = {
-  name: "xnxxsh",
-  description: "18 videos only",
+Zenith( 
+  {  
+  usage: "xnxxsh",
+  desc: "18 videos only",
   category: "Downloads",
-  async client(vorterx, m, { connect, args }) {
+  filename: __filename
+  }, async (vorterx, coax, react, args) => {
  
-    let me = fs.readFileSync("./lib/imogs.jpg");
     if (!args) {
-      await connect("❌");
-      return m.reply("Please provide a search term.");
+      await react("❌");
+      return coax.reply("Please provide a search term.");
     }
-    await connect("🍑");
+    await react("🍑");
 
     const res = (await axios(
       `https://raganork-network.vercel.app/api/xvideos/search?query=${args}`
     )).data;
-
     let textt = `🔎 *XNXXV SEARCH RESULTS* 🔎\n\n🔍 Search Term: ${args}\n\n`;
-
     for (const [index, video] of res.result.entries()) {
       const videoInfo = `
 📽️ *Video ${index + 1}*
@@ -31,9 +30,8 @@ module.exports = {
     }
 
     await vorterx.sendMessage(
-      m.from,
+      coax.from,
       {
-        image: me,
         caption: textt,
         captionType: 1,
         captionInfo: {
@@ -47,7 +45,6 @@ module.exports = {
           },
         },
       },
-      { quoted: m }
+      { quoted: coax }
     ); 
-  },
-};              
+  });              
