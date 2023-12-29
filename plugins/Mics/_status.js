@@ -8,12 +8,15 @@ const speed = require('performance-now');
 const { tiny } = require('@viper-x/fancytext');
 const config = require('../../config.js');
 const { getBuffer } = require('../../lib/_getBuffer.js');
-module.exports = {
-  name: 'status',
-  alias: ['sx'],
-  category: 'Mics',
-  async client(vorterx, m, { args, connect }) {
-    
+
+Zenith(
+   {
+   usage: 'status',
+   category: 'Mics',
+   desc: 'Check the status',
+   filename: __filename
+   }, async (vorterx, coax, react ) => {
+         
     const getUptimeText = (uptime) => {
       const hours = Math.floor(uptime / 3600);
       const minutes = Math.floor((uptime % 3600) / 60);
@@ -21,7 +24,7 @@ module.exports = {
       return `${hours}h ${minutes}m ${seconds}s`;
     };
 
-    await connect('🤖');
+    await react('🤖');
 
     const uptime = process.uptime();
     const startTime = Date.now();
@@ -61,6 +64,5 @@ module.exports = {
       },
     };
 
-    await vorterx.sendMessage(m.from, getStatus, { quoted: m });
-  }
-};                    
+    await vorterx.sendMessage(coax.from, getStatus, { quoted: coax });
+  });                    
