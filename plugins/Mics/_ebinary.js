@@ -5,16 +5,19 @@
 
 const { eBinary } = require('../../lib/_getBinary.js');
 
-module.exports = {
-  name: 'ebinary',
+Zenith(
+  {
+  usage: 'ebinary',
   category: 'Mics',
-  async client(vorterx, m, { args, connect }) {
+  desc: 'For Funny',
+  filename: __filename
+  }, async(vorterx, coax, args, react) => {
+   
     if (!args) {
-      await connect('❌');
-      return m.reply('Provide a text to encode in binary...');
+      await react('❌');
+      return coax.reply('Provide a text to encode in binary...');
     }
 
-    await connect('🔄');
-    m.reply(await eBinary(args));
-  }
-};
+    await react('🔄');
+    coax.reply(await eBinary(args));
+  });
