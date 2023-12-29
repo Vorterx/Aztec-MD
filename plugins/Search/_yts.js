@@ -1,5 +1,7 @@
 const axios = require("axios");
 const yts = require('yt-search');
+const { Zenith } = require ('../../lib/_cmd_sxntax.js');
+
 
 Zenith (
   {
