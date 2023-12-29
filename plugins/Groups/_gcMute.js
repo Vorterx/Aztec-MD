@@ -1,15 +1,16 @@
-module.exports = {
-name:"gcclose",
+Zenith(
+    {
+usage: "gcclose",
 alias: ["mute"],
-description: "To close the group",
+desc: "To close the group",
 category: "Group",
-async client(vorterx, m, { connect, isGroup }) {
+filename: __filename
+}, async (vorterx, coax, react, isGroup) => {
 
-if(!m.isGroup) { 
-await connect("❌"); return m.reply("*👋 Sorry this command is for admins*");
+if(!coax.isGroup) { 
+await react("❌"); return coax.reply("*👋 Sorry this command is for admins*");
 }
-await connect("🔉");
-    m.reply(`『 GROUP SETTINGS 』\n\nGroup has been closed by admin,All participants cannot send messagez`);
-return await vorterx.groupSettingUpdate(m.from, "announcement");
-  }
-};
+await react("🔉");
+    coax.reply(`『 GROUP SETTINGS 』\n\nGroup has been closed by admin,All participants cannot send messagez`);
+return await vorterx.groupSettingUpdate(coax.from, "announcement");
+  });
