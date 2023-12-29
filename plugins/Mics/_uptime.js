@@ -3,7 +3,7 @@ Zenith(
   usage: 'uptime',
   category: 'Mics',
   filename: __filename
-}, async (vorterx, m, react) => {
+}, async (vorterx, coax, react) => {
 
   await react('⏲️');
   const uptime = process.uptime();
