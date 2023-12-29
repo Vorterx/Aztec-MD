@@ -1,19 +1,20 @@
-module.exports = {
-	name: "kick",
+Zenith(
+	{
+	usage: "kick",
 	alias: ["remove", "sick"],
-	description: "remove Member from group",
+	desc: "remove Member from group",
 	category: "Group",
-  async client(vorterx, m, {  connect, isBotAdmin, isAdmin, mentionByTag}) {
+        filename: __filename
+	}, async (vorterx, coax, react, isBotAdmin, isAdmin, mentionByTag) => {
 		
-    if(!isAdmin) { await connect("❌"); return m.reply(`*🔌This is admin command*`);
+    if(!isAdmin) { await react("❌"); return coax.reply(`*🔌This is admin command*`);
         }
-		if(!isBotAdmin) { await connect("😭"); return m.reply(`*🔌I need to be an admin in order to use this command*`);
+		if(!isBotAdmin) { await react("😭"); return coax.reply(`*🔌I need to be an admin in order to use this command*`);
         }
 		const mention = await mentionByTag
-		if(!mention[0]) { await connect("❌"); return m.reply(`*🤔No user found*`);
+		if(!mention[0]) { await react("❌"); return coax.reply(`*🤔No user found*`);
         }
-		await connect("🎊");
-		await vorterx.groupParticipantsUpdate(m.from, [mention[0]], "remove")
-		await vorterx.sendMessage(m.from,{text:`*🎊User has been removed by ${pushName}*`},{quoted:m})
-	},
-                    }
+		await react("🙄");
+		await vorterx.groupParticipantsUpdate(coax.from, [mention[0]], "remove")
+		await vorterx.sendMessage(coax.from,{text:`*🎊User has been removed by ${coax.pushName}*`},{quoted: coax})
+	});
