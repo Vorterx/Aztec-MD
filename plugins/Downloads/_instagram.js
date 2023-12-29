@@ -2,38 +2,39 @@ const { igdl } = require('btch-downloader');
 const { tiny } = require('@viper-x/fancytext');
 const config = require('../../config.js');
 
-module.exports = {
-  name: 'insta',
+Zenith(
+  {
+  usage: 'insta',
   alias: ['ig'],
   category: 'Downloads',
-  async client(vorterx, m, { args, connect }) {
+  decs: 'to download insta vids',
+  filename: __filename
+  }, async (vorterx, coax, args, react) => {
    
     if (!args) {
-      await connect('❌');
-      return m.reply('Please provide a valid Instagram URL.');
+      await react('❌');
+      return coax.reply('Please provide a valid Instagram URL.');
     }
 
     try {
       const url = args;
       const data = await igdl(url);
-
       if (!data || data.length === 0) {
-        return m.reply('Failed to download the video.');
+        return coax.reply('Failed to download the video.');
       }
 
       console.log(data);
-      await connect('📤');
-      m.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
+      await react('📤');
+      coax.reply(`\`\`\`Downloading your video, please wait...⏳\`\`\``);
 
       for (let i of data) {
         const { quality, size, url } = i;
-        const vidi = `*Size* : N/A\n*Quality* : 420p\n\n*${config.CAPTION}*`;
+        const vidi = `*Quality* : 420p\n\n*${config.CAPTION}*`;
 
-        vorterx.sendMessage(m.from, { video: { url }, caption: tiny(vidi)}, {quoted: m });
+        vorterx.sendMessage(coax.from, { video: { url }, caption: tiny(vidi)}, {quoted: coax });
       }
     } catch (error) {
       console.error(error);
-      return m.reply('Failed to download the video.');
+      return coax.reply('Failed to download the video.');
     }
-  },
-};
+  });
