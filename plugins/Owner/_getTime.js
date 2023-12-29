@@ -1,45 +1,56 @@
 const config = require('../../config.js');
+const { Zenith } = require('../../lib/_cmd_syntax.js');
+const moment = require('moment-timezone');
 
 Zenith(
   {
-  usage: 'runtime',
-  category: 'Owner',
-  desc: 'Fir the owner time',
-  filename: _filename
-  }, async (vorterx, coax, isDev, args, react) => {
-    try {
-      if (!isDev) {
-        await react('❌');
-        return coax.reply('This command is for my Dev only');
-      }
+    usage: 'runtime',
+    category: 'Owner',
+    desc: 'For the owner time',
+    filename: _filename
+  },
+  async (vorterx, coax, isDev, args, react) => {
+   
+    if (!isDev) {
+      await react('❌');
+      return coax.reply('This command is for my Dev only');
+    }
+     await react('⌚');
+    const userTime = 'Africa/Johannesburg';
+    const time2 = moment().tz(userTime).format('HH:mm:ss');
+    let aztec;
 
-      await react('🕦');
+    if (time2 < '23:59:00') {
+aztec = 'Good Night 🌌';
+    }
+      else if (time2 < '19:00:00') {
+  aztec = 'Good Evening 🌃';
+    } 
+       else if (time2 < '18:00:00') {
+aztec = 'Good Evening 🌃';
+    } 
+      else if (time2 < '15:00:00') {
+  aztec = 'Good Afternoon 🌅';
+    } 
+        else if (time2 < '11:00:00') {
+   aztec = 'Good Morning 🌄';
+    }  
+        else if (time2 < '05:00:00') {
+ aztec = 'Good Morning 🌄';
+    }
 
-      const currentHour = new Date().getHours();
-      const greeting =
-        currentHour < 12 ? 'Morning' : currentHour < 18 ? 'Afternoon' : 'Night';
+    const time = moment.tz(userTime).format('HH:mm:ss');
+    const date = moment.tz(userTime).format('DD/MM/YYYY');
 
-      const runtimeInMilliseconds = Date.now() - m.timestamp;
-      const seconds = Math.floor(runtimeInMilliseconds / 1000);
-      const minutes = Math.floor(seconds / 60);
-      const hours = Math.floor(minutes / 60);
-
-      const runtime = `${hours} hours, ${minutes % 60} minutes, ${seconds % 60} seconds`;
-
-      const formattedTime = new Date().toLocaleTimeString();
-
-      const cap = `
-╭–– 『 *GET TIME* 』
-┆ *🌅DayType:* ${greeting}!
+    const res = `
+╭–– 『 *RUN TIME* 』
+┆ ${aztec}
 ┆ *⏳Runtime:* ${runtime}
-┆ *⏱️Time:* ${formattedTime}
+┆ *⏱️Time:* ${time}
+┆ *⌚Date:* ${date}
 ╰–––––––––––––––༓\n\n*${config.CAPTION}*`;
 
-      await vorterx.sendMessage(coax.from, { caption: cap });
-    } catch (error) {
-      console.error(error);
-      await connect('❌');
-      return coax.reply('An error occurred while processing the command.');
-    }
-  });
-        
+    coax.reply(res);
+  }
+);
+                        
