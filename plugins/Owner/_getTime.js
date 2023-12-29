@@ -15,36 +15,38 @@ Zenith(
       await react('❌');
       return coax.reply('This command is for my Dev only');
     }
-     await react('⌚');
+
+    await react('⌚');
     const userTime = 'Africa/Johannesburg';
     const time2 = moment().tz(userTime).format('HH:mm:ss');
     let aztec;
 
     if (time2 < '23:59:00') {
-aztec = 'Good Night 🌌';
-    }
-      else if (time2 < '19:00:00') {
-  aztec = 'Good Evening 🌃';
+      aztec = 'Good Night 🌌';
     } 
-       else if (time2 < '18:00:00') {
-aztec = 'Good Evening 🌃';
+       else if (time2 < '19:00:00') {
+      aztec = 'Good Evening 🌃';
     } 
-      else if (time2 < '15:00:00') {
-  aztec = 'Good Afternoon 🌅';
-    } 
-        else if (time2 < '11:00:00') {
-   aztec = 'Good Morning 🌄';
+         else if (time2 < '18:00:00') {
+      aztec = 'Good Evening 🌃';
     }  
-        else if (time2 < '05:00:00') {
- aztec = 'Good Morning 🌄';
+         else if (time2 < '15:00:00') {
+      aztec = 'Good Afternoon 🌅';
+    }  
+         else if (time2 < '11:00:00') {
+      aztec = 'Good Morning 🌄';
+    } 
+         else if (time2 < '05:00:00') {
+      aztec = 'Good Morning 🌄';
     }
 
+    const runtime = calculateRuntime(moment());
     const time = moment.tz(userTime).format('HH:mm:ss');
     const date = moment.tz(userTime).format('DD/MM/YYYY');
 
     const res = `
-╭–– 『 *RUN TIME* 』
-┆ ${aztec}
+╭–– *『 RUN TIME 』*
+┆ *${aztec}*
 ┆ *⏳Runtime:* ${runtime}
 ┆ *⏱️Time:* ${time}
 ┆ *⌚Date:* ${date}
@@ -53,4 +55,11 @@ aztec = 'Good Evening 🌃';
     coax.reply(res);
   }
 );
-                        
+
+function calculateRuntime(currentTime) {
+  const midnight = moment(currentTime).startOf('day').add(1, 'day');
+  const runtimeMilliseconds = midnight.diff(currentTime);
+  const runtime = moment.duration(runtimeMilliseconds).humanize();
+  return runtime;
+}
+        
