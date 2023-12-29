@@ -2,26 +2,27 @@ const config = require('../../config.js');
 const axios = require('axios');
 const { Buffer } = require('buffer');
 
-module.exports = {
-  name: 'lyrics',
+Zenith(
+  {
+  usage: 'lyrics',
   category: 'Search',
-  async client(vorterx, m, { args, connect }) {
+  filename: __filename
+  }, async (vorterx, coax, args, react) => {
   
     try {
       if (!args || typeof args !== 'string') {
-        await connect('❌');
-        return m.reply(`Please provide a song name or artist. For example, "Dior by Pop Smoke"`);
+        await react('❌');
+        return coax.reply(`Please provide a song name or artist. For example, "Dior by Pop Smoke"`);
       }
-
       const search = encodeURIComponent(args.trim());
       const { data } = await axios.get(`https://weeb-api.vercel.app/genius?query=${search}`);
 
       if (!data || data.length === 0) {
-        return m.reply('Lyrics not found for the given song or artist.');
+        return coax.reply('Lyrics not found for the given song or artist.');
       }
 
       console.log(data);
-      await connect('📝');
+      await react('📝');
 
       const title = data[0].title;
       const artist = data[0].artist;
@@ -46,10 +47,9 @@ module.exports = {
         data: [0, ...(data[0].data || [])].map(JSON.stringify)
       };
 
-      return vorterx.sendMessage(m.from, msgData);
+      return vorterx.sendMessage(coax.from, msgData);
     } catch (error) {
       console.error(error);
-      return m.reply('An error occurred while processing...');
+      return coax.reply('An error occurred while processing...');
     }
-  }
-};
+  });
