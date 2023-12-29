@@ -45,5 +45,4 @@ Zenith(
       }
       await coax.reply(errorMessage);
     }
-  },
-};
+  });
