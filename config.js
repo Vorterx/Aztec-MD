@@ -23,6 +23,8 @@ let config = {
     'https://i.imgur.com/hpH9wbL.jpg',
     'https://i.imgur.com/iO8JNjl.jpg',
     'https://i.imgur.com/5B2QhVw.jpg',
+    'https://i.imgur.com/UwN0XxL.jpg',
+    'https://i.imgur.com/BLfpwym.jpg',
   ],
 };
 
