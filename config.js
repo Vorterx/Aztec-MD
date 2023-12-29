@@ -22,6 +22,19 @@ let config = {
     'https://i.imgur.com/5B2QhVw.jpg',
     'https://i.imgur.com/UwN0XxL.jpg',
     'https://i.imgur.com/BLfpwym.jpg',
+    'https://i.imgur.com/b2hxyEv.jpg',
+    'https://i.imgur.com/Uz0dhe0.jpg',
+    'https://i.imgur.com/q3JQMYi.jpg',
+    'https://i.imgur.com/8nIF6dX.jpg',
+    'https://i.imgur.com/yvg67ya.jpg',
+    'https://i.imgur.com/51FVug1.jpg',
+    'https://i.imgur.com/KiEvvNC.jpg',
+    'https://i.imgur.com/JhGlSkY.jpg',
+    'https://i.imgur.com/9BgK9VL.jpg',
+    'https://i.imgur.com/QqOODkW.jpg',
+    'https://i.imgur.com/jDqb6bN.jpg',
+    'https://i.imgur.com/Auv1lTF.jpg',
+    
   ],
 };
 
