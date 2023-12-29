@@ -5,6 +5,8 @@
 
 const config = require('../../config.js');
 const gis = require('g-i-s');
+const { Zenith } = require ('../../lib/_cmd_sxntax.js');
+
 
 function gisPromise(args) {
   return new Promise((resolve, reject) => {
