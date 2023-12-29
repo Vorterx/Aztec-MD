@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { Zenith } = require ('../../lib/_cmd_sxntax.js');
 
 Zenith (
   {
