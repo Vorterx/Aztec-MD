@@ -6,13 +6,15 @@
 const config = require('../../config.js');
 const { getBuffer } = require('../../lib/_getBuffer.js');
 
-module.exports = {
-  name: "owner",
-  description: "Get owner information",
+Zenith(
+  {
+  usage: "owner",
+  desc: "Get owner information",
   category: "Mics",
-  async client(vorterx, m, { connect }) {
+  filename: __filename
+  }, async (vorterx, coax, react) => {
    
-    await connect('👤');
+    await react('👤');
     const userNumber = config.mods;
     const ownerName = process.env.OWNER_NAME;
     const logo = "https://i.ibb.co/mCv3k97/original-e792fa6c963f76bc381b82ae539e68cc.png";
@@ -30,7 +32,7 @@ module.exports = {
       contextInfo: {
         externalAdReply: {
           title: `${config.CAPTION}`,
-          body: `${m.pushName}`,
+          body: `${coax.pushName}`,
           thumbnail: await getBuffer("https://i.ibb.co/mCv3k97/original-e792fa6c963f76bc381b82ae539e68cc.png"),
           mediaType: 1, 
           mediaUrl: '',
@@ -41,6 +43,5 @@ module.exports = {
       },
     };
 
-    await vorterx.sendMessage(m.from, buttonMessage, { quoted: m });
-  },
-};
+    await vorterx.sendMessage(coax.from, buttonMessage, { quoted: coax });
+  });
