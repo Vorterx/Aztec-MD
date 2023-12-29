@@ -5,10 +5,9 @@
 
 const fs = require("fs");
 const { tiny } = require("@viper-x/fancytext");
-const config = require("../../config.js");
+const { Zenith } = require('../../lib/_cmd_sxntax.js');
 const { getBuffer } = require('../../lib/_getBuffer.js');
-const { Zenith } = require ('../../lib/_cmd_sxntax.js');
-const prefix = config.prefix;
+const config = require('../../config.js');
 
 Zenith(
   {
@@ -17,13 +16,18 @@ Zenith(
     desc: 'To check the bot alive or off',
     category: 'Mics',
     filename: __filename
-  }, async (vorterx, coax, react) => {
+  },
+  async (vorterx, coax, react) => {
    
     await react('🧘');
     const image = {
       url: "https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg",
       mimetype: "image/jpeg",
     };
+
+    const configFile = path.join(__dirname, '../../lib/config.json');
+    const configData = fs.readFileSync(configFile);
+    const configJson = JSON.parse(configData);
 
     let aliveMsg = ` 
 ╭––『 *CHAT ON* 』 
@@ -33,12 +37,13 @@ Zenith(
 ┆✑  *Alive now🌷*
 ╰–––––––––––––––༓ 
 ╭–– 『 *Bot Status* 』      
-┆ *Name* : ${process.env.BOTNAME}
-┆ *Owner* : ${process.env.OWNER_NAME}
-┆ *Prefix* :  ${prefix}
+┆ *Name* : ${configJson.Bots[0].BotName || ''}
+┆ *Owner* : ${configJson.Bots[0].Owner || ''}
+┆ *Prefix* :  ${config.Prefix || ''}
 ┆ *Time* : ${new Date().toLocaleTimeString()}
-╰–––––––––––––––༓\n\n*${config.CAPTION}*
+╰–––––––––––––––༓\n\n*${config.CAPTION || ''}*
 `;
+
     const messageOptions = {
       image: image,
       caption: tiny(aliveMsg),
@@ -46,7 +51,7 @@ Zenith(
         forwardingScore: 999,
         isForwarded:true,
         externalAdReply: {
-          title: `${config.CAPTION}`,
+          title: `${config.CAPTION || ''}`,
           body: "vorterx",
           thumbnail: await getBuffer("https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg"),
           mediaType: 1,
@@ -58,4 +63,6 @@ Zenith(
     };
 
     await vorterx.sendMessage(coax.from, messageOptions, { quoted: coax });
-  })
+  }
+);
+      
