@@ -1,5 +1,5 @@
 const { getBinary } = require('../../lib/_getBinary');
-const { Zenith } = require ('../../lib/_cmd_sxnax.js');
+const { Zenith } = require ('../../lib/_cmd_sxntax.js');
 
 Zenith(
 {
