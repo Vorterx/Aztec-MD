@@ -5,6 +5,8 @@
 
 const fetch = async (url) => (await import('node-fetch')).default(url);
 const config = require('../../config.js');
+const { Zenith } = require ('../../lib/_cmd_sxntax.js');
+
 
 Zenith(
   {
