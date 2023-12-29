@@ -7,16 +7,18 @@
 const fetch = async (url) => (await import('node-fetch')).default(url);
 const config = require('../../config.js');
 
-module.exports = {
-  name: 'bingimg',
+Zenith(
+  {
+  usage: 'bingimg',
   alias: ['binimg', 'bingimage'],
   category: 'GPT AI',
-  description: 'To download images from Bing',
-  async client(vorterx, m, { args, connect, mime, quoted }) {
+  desc: 'To download images from Bing',
+  filename: __filename
+  }, async (vorterx, coax, args, react, mime, quoted) => {
 
     if (!args) {
-      await connect('❌');
-      return m.reply('Please provide an image name, e.g., bingimg Goku...');
+      await react('❌');
+      return coax.reply('Please provide an image name, e.g., bingimg Goku...');
     }
 
     const get_bing = `https://aemt.me/bingimg?text=${encodeURIComponent(args)}`;
@@ -30,15 +32,15 @@ module.exports = {
       });
 
       if (!res.ok) {
-        m.reply(`${res.status}`);
+        coax.reply(`${res.status}`);
       }
-      await connect('⏲️');
-      m.reply(`\`\`\`Please wait a sec...⏳\`\`\``);
+      await react('⏲️');
+      coax.reply(`\`\`\`Please wait a sec...⏳\`\`\``);
       const data = await res.json();
       console.log(data); 
      if (data && data.status && data.result) {
           const get_img = data.result;
-       await vorterx.sendMessage(m.from, {
+       await vorterx.sendMessage(coax.from, {
           image: {
             url: get_img,
           },
@@ -46,13 +48,12 @@ module.exports = {
            });
       } else {
           console.log('No image URL found in the query...'); 
-        await connect('❌');
-        return m.reply('No images found for the given args...');
+        await react('❌');
+        return coax.reply('No images found for the given args...');
       }
     } catch (error) {
       console.error(error.message || error);
-      return m.reply('Please try again later..');
+      return coax.reply('Please try again later..');
     }
-  }
-};
+  });
       
