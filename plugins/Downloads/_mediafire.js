@@ -6,6 +6,7 @@
 const { mediafiredl } = require('@bochilteam/scraper');
 const { tiny } = require('@viper-x/fancytext');
 const config = require('../../config.js');
+const { Zenith } = require ('../../lib/_cmd_sxntax.js');
 
 function isValidUrl(string) {
   const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
