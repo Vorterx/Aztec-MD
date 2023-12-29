@@ -1,29 +1,31 @@
 const fetch = async (url) => (await import('node-fetch')).default(url);
 const { getBuffer } = require('../../lib/_getBuffer.js');
 
-module.exports = {
-  name: 'bing',
+Zenith (
+  {
+  usage: 'bing',
   alias: ['bang'],
-  async client(vorterx, m, { args, connect }) {
+  desc: 'To search',
+  filename: __filename
+  }, async (vorterx, coax, args, react) => {
     try {
       if (!args) {
-        await connect('❌');
-        return m.reply('Please provide a query, e.g., `bing hello how are you`');
+        await react('❌');
+        return coax.reply('Please provide a query, e.g., `bing hello how are you`');
       }
-      await connect('💡');
-
+      await react('💡');
       const aztec_api = 'xTnfXtBK';
       const API_BING = `https://api.betabotz.eu.org/api/search/bing-chat?text=${encodeURIComponent(args)}&apikey=${aztec_api}`;
       const res = await fetch(API_BING);
 
       if (!res.ok) {
-        return m.reply(`${res.status}`);
+        return coax.reply(`${res.status}`);
       }
       const data = await res.json();
       if (data && data.status && data.message) {
         const get_results = data.message;
 
-        vorterx.sendMessage(m.from, {
+        vorterx.sendMessage(coax.from, {
           text: get_results,
           contextInfo: {
             externalAdReply: {
@@ -37,12 +39,11 @@ module.exports = {
           },
         });
       } else {
-        await connect('❌');
-        m.reply('No Bing chat response found for the given query.');
+        await react('❌');
+        coax.reply('No Bing chat response found for the given query.');
       }
     } catch (error) {
-      m.reply(error.message);
+      coax.reply(error.message);
     }
-  }
-};
+  });
                                                                                                    
