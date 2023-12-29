@@ -6,13 +6,15 @@
 const { getDare } = require('../../lib/getTruth_Dare.js');
 const config = require('../../config.js');
 
-module.exports = {
-  name: 'dare',
+Zenith(
+  {
+  usage: 'dare',
   category: 'Fun',
-  async client(vorterx, m, { args, connect }) {
+  desc: 'For funny',
+  filename: __filename
+  }, async (vorterx, coax, args, react) => {
    
-    await connect('🤡');
+    await react('🤡');
     const dare = getDare();
-    vorterx.sendMessage(m.from, { text:` *Dare*: ${dare}\n\n*${config.CAPTION}*`});
-  },
-};
+    vorterx.sendMessage(coax.from, { text:` *Dare*: ${dare}\n\n*${config.CAPTION}*`});
+  });
