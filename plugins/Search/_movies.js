@@ -1,24 +1,25 @@
 const axios = require('axios');
 
-module.exports = {
-  name: 'movie',
+Zenith (
+  {
+  usage: 'movie',
   alias: ['imdb'],
   category: 'Search',
-  description: 'Get movie info',
-  async client(vorterx, m, { text, args, connect }) {
+  desc: 'Get movie info',
+  filename: __filename
+  }, async (vorterx, coax, args, react) => {
     
     try {
       if (!args) {
-        await connect('❌');
-        return m.reply(`Please provide a movie name, e.g., "Dragon Ball".`);
+        await react('❌');
+        return coax.reply(`Please provide a movie name, e.g., "Dragon Ball".`);
       }
-
-      await connect('🔍');
+      await react('🔍');
       const movieInfo = await axios.get(`http://www.omdbapi.com/?apikey=742b2d09&t=${args}&plot=full`);
 
       if (!movieInfo.data || movieInfo.data.Response === 'False') {
-        await connect('❌');
-        return m.reply(`Sorry, couldn't retrieve data for the provided movie name.`);
+        await react('❌');
+        return coax.reply(`Sorry, couldn't retrieve data for the provided movie name.`);
       }
 
       const {
@@ -61,11 +62,10 @@ module.exports = {
 *🌟imdbRating*: ${imdbRating}
 *✅imdbVotes*: ${imdbVotes}`;
 
-await vorterx.sendMessage(m.from, { image: { url: Poster }, caption: movieDetails }, { quoted: m });
+await vorterx.sendMessage(coax.from, { image: { url: Poster }, caption: movieDetails }, { quoted: coax });
     } catch (error) {
       console.error(error);
-      await connect('❌');
-      return m.reply(`❌ An error occurred while processing the request.`);
+      await react('❌');
+      return coax.reply(`❌ An error occurred while processing the request...`);
     }
-  },
-};
+  });
