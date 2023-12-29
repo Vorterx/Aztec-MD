@@ -1,19 +1,21 @@
 const malScraper = require('mal-scraper');
 
-module.exports = {
-  name: 'anime',
+Zenith(
+  {
+  usage: 'anime',
   category: 'Anime',
-  async client(vorterx, m, { args, connect }) {
+  filename: __filename
+  }, async (vorterx, coax, args, react) => {
     
     try {
       if (!args) {
-        await connect('❌');
-        return m.reply(`🚫 Please provide the name of an anime, e.g., "Dragon Ball"`);
+        await react('❌');
+        return coax.reply(`🚫 Please provide the name of an anime, e.g., "Dragon Ball"`);
      }
       const animeInfo = await malScraper.getInfoFromName(args).catch(() => null);
       if (!animeInfo) {
-        await connect('❌');
-        return m.reply(`❗ Sorry, couldn't retrieve data for the provided anime name.`);
+        await react('❌');
+        return coax.reply(`❗ Sorry, couldn't retrieve data for the provided anime name.`);
       }
 
       const {
@@ -49,11 +51,10 @@ module.exports = {
 *-🎃Trailer*: ${trailer}
 *-❄Description*: ${synopsis}`;
 
-await vorterx.sendMessage(m.from, { image: { url: picture }, caption: list }, { quoted: m });
+await vorterx.sendMessage(coax.from, { image: { url: picture }, caption: list }, { quoted: coax });
     } catch (error) {
       console.error(error);
-      await connect('❌');
-      return m.reply(`❌ An error occurred while processing the request.`);
+      await react('❌');
+      return coax.reply(`❌ An error occurred while processing the request.`);
     }
-  },
-};          
+  });          
