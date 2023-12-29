@@ -1,23 +1,25 @@
-module.exports = {
-  name: "leave",
-  description: "Leave the group you are currently in",
-  category: "Group",
-  async client(vorterx, m, { isDev, isGroup, connect }) {
+Zenith(
+  {
+   usage: "leave",
+   desc: "Leave the group you are currently in",
+   category: "Group",
+   filename: __filename
+}, async (vorterx, coax, isDev, isGroup, react) => {
     
     if (!isDev) {
-      await connect('❌');
-      return m.reply('This cmd is for my Dev only...');
+      await react('❌');
+      return coax.reply('This cmd is for my Dev only...');
     } else {
-      if (!m.isGroup) {
+      if (!coax.isGroup) {
         const reactAztec = ["❌", "🚫", "🙅‍♀️", "🤷‍♂️"];
         const vorterx_react = reactAztec[Math.floor(Math.random() * reactAztec.length)];
-        await connect(vorterx_react);
-        return m.reply("*🤔 Where are you heading? This command is for group only.*");
+        await react(vorterx_react);
+        return coax.reply("*🤔 Where are you heading? This command is for group only.*");
       }
 
       const reactAztec = ["👋", "👋🏼", "🤚", "✌️", "👋🏽"];
       const vorterx_react = reactAztec[Math.floor(Math.random() * reactAztec.length)];
-      await connect(vorterx_react);
+      await react(vorterx_react);
 
       const Diegoson = [
         "👋 Farewell, mates! Until we meet again! 👋",
@@ -30,8 +32,7 @@ module.exports = {
       const vorterx_cap = Diegoson[Math.floor(Math.random() * Diegoson.length)];
       const caption = `*${vorterx_cap}*`;
 
-      await m.reply(caption);
-      await vorterx.groupLeave(m.from, { quoted: m });
+      await coax.reply(caption);
+      await vorterx.groupLeave(coax.from, { quoted: coax });
     }
-  } 
-};
+  });
