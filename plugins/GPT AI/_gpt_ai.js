@@ -6,16 +6,18 @@
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 const { getBuffer } = require('../../lib/_getBuffer.js');
 
-module.exports = {
-  name: "gpt",
+Zenith(
+  {
+  usage: "gpt",
   alias: ["ai", "openai", "chatgpt"],
   category: "GPT AI",
-  description: "Randomly search",
-  async client(vorterx, m, { connect, args }) {
+  desc: "Randomly search",
+  filename: __filename
+  }, async (vorterx, coax, react, args) => {
   
     if (!args) {
-      await connect("❌");
-      return m.reply(`*Provide me a query, e.g., "Who made Aztec?"`);
+      await react("❌");
+      return coax.reply(`*Provide me a query, e.g., "Who made Aztec?"`);
     }
 
     const gpt_api = `https://api.caliph.biz.id/api/ai/oai-gpt?q=${encodeURIComponent(args)}&apikey=lykoUzNh`;
@@ -26,9 +28,9 @@ module.exports = {
     console.log(result);
 
     if (result.status === 200) {
-      await connect("💡");
+      await react("💡");
 
-      await vorterx.sendMessage(m.from, {
+      await vorterx.sendMessage(coax.from, {
         text: result.result,
         image: { url: "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png" },
         contextInfo: {
@@ -43,9 +45,8 @@ module.exports = {
         },
       });
     } else {
-      await connect("❌");
-      m.reply(`Error: ${result.result}`);
+      await react("❌");
+      coax.reply(`${result.result}`);
     }
-  }
-};
+  });
       
