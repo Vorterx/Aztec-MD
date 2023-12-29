@@ -1,23 +1,25 @@
 const config = require('../../config.js');
 
-module.exports = {
-  name: 'attp',
+Zenith ( 
+  {
+  usage: 'attp',
   category: 'Convert',
-  async client(vorterx, m, { args, connect, quoted }) {
+  desc: 'attps',
+  filename: __filename
+  }, async (vorterx, coax, args, react) => {
 
     if (!args) {
-      await connect('❌');
-      return m.reply('Please provide a text e.g attp Vorterx...');
+      await react('❌');
+      return coax.reply('Please provide a text e.g attp Vorterx...');
     }
 
-    await connect('✔️');
-    vorterx.sendMessage(m.from, {
+    await react('✔️');
+    vorterx.sendMessage(coax.from, {
       sticker: {
         url: `https://api.lolhuman.xyz/api/attp?apikey=GataDios&text=${args}`,
         pack: config.CAPTION
       }
-    }, { quoted: m });
+    }, { quoted: coax });
 
-  }
-};
+  });
       
