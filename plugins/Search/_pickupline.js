@@ -6,20 +6,22 @@
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 const config = require('../../config.js');
 
-module.exports = {
-  name: 'pickupline',
+Zenith(
+  {
+  usage: 'pickupline',
   category: 'Fun',
-  async client(vortex, m, { args, connect }) {
+  desc: 'For funny',
+  filename: __filename
+  }, async (vortex, coax, react) => {
    
     const get = await fetch('https://api.popcat.xyz/pickuplines');    
     if (!get.ok) {
-      await connect('❌');
-      return m.reply('Sorry, an error occurred while processing...');
+      await react('❌');
+      return coax.reply('Sorry, an error occurred while processing...');
     }
 
-    await connect('✔️');
+    await react('😂');
     const { pickupline } = await get.json();
     const msg = `*PICKUP LINE IS:*\n\n*${pickupline}*\n\n*${config.CAPTION}*`;
-    m.reply(msg);
-  }
-};
+    coax.reply(msg);
+  });
