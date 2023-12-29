@@ -3,13 +3,16 @@ const config = require('../../config.js');
 const { getBuffer } = require('../../lib/_getBuffer.js');
 const fs = require('fs');
 
-module.exports = {
-  name: 'script',
+Zenith( 
+   {
+  usage: 'script',
   alias: ['sc'],
   category: 'Search',
-  async client(vorterx, m, {  args, connect }) {
+  desc: 'To get script',
+  filename: __filename
+}, async (vorterx, coax, args, react) => {
    
-  await connect('🌲');
+  await react('🌲');
   const v_chat = "https://i.ibb.co/k3tGtpf/360-F-426466645-EAg-Vxq-HG2-XK22-Ys2-Pm-LLPgml-EDC3-Sn3-X.jpg";
   const chat_v = "https://i.ibb.co/p0RmTf2/comdlpng6934979.jpg";
   let { data } = await axios.get('https://api.github.com/repos/Vorterx/Aztec-MD')
@@ -46,6 +49,5 @@ module.exports = {
       },
     };
 
-    await vorterx.sendMessage(m.from, chatBot, { quoted: m });
-  }
-};
+    await vorterx.sendMessage(coax.from, chatBot, { quoted: coax });
+  });
