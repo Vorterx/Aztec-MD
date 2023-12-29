@@ -1,4 +1,5 @@
 const malScraper = require('mal-scraper');
+const { Zenith } = require ('../../lib/_cmd_sxntax.js');
 
 Zenith(
   {
