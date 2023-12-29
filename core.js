@@ -1,3 +1,8 @@
+/*
+* @Author: DiegosonTech
+* @BotName: Aztec-MD
+*/
+
 const { MongoClient } = require('mongodb');
 const { DisconnectReason, makeInMemoryStore, makeCacheableSignalKeyStore, useMultiFileAuthState, fetchLatestBaileysVersion, makeWASocket, makeMongoStore, useMongoDBAuthState } = require('@iamrony777/baileys');
 const { Boom } = require('@hapi/boom');
@@ -157,14 +162,14 @@ async function startAztec() {
       if (connection === "open") {
         console.log('Plugins loaded♻️');
         console.log('WhatsApp chatbot has connected✔️');
-        const toxic = `𝐶𝛩𝛮𝛮𝛯𝐶𝑇𝛯𝐷 𝑇𝛩 𝛥𝛧𝑇𝛯𝐶\n\n𝐵𝛩𝑇_𝛮𝛥𝛭𝛯: ${process.env.BOTNAME}\n𝛩𝑊𝛮𝛯𝑅_𝛮𝛥𝛭𝛯: ${process.env.OWNER_NAME}\n𝛲𝑅𝛯𝐹𝛪𝛸: ${process.env.PREFIX}\n𝑈𝑆𝛯𝑅_𝛮𝑈𝛭𝐵𝛯𝑅: ${process.MODS}\n\n${config.CAPTION}`;
+        const toxic = `𝐶𝛩𝛮𝛮𝛯𝐶𝑇𝛯𝐷 𝑇𝛩 𝛥𝛧𝑇𝛯𝐶\n\n_BotName_: ${process.env.BOTNAME}\n_Owner_Name_: ${process.env.OWNER_NAME}\n_Prefix_: ${process.env.PREFIX}\n_Mumber_: ${process.MODS}\n\n${config.CAPTION}`;
         vorterx.sendMessage(vorterx.user.id, { text: toxic });
 
         await saveCreds();
       }
     });
 
-app.listen(PORT, () => {
+  app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
@@ -173,11 +178,6 @@ vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(up
 
 } catch (error) {
   console.error("Error in startAztec:", error);
-
-  vorterx.sendMessage(vorterx.user.id, {
-    text: '──*『 ERROR FOUND 』*\n*ERROR*: ' + error.message
-  });
-
   process.exit(1);
   }
 }
