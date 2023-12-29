@@ -16,7 +16,7 @@ Zenith(
     desc: 'To check the bot alive or off',
     category: 'Mics',
     filename: __filename
-  }, async(vorterx, coax, react) => {
+  }, async (vorterx, coax, react) => {
    
     await react('🧘');
     const image = {
