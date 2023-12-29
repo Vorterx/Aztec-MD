@@ -32,13 +32,15 @@ function readCommandsFromDirectory(directory) {
 
 readCommandsFromDirectory(pluginDir);
 
-module.exports = {
-  name: 'menu',
+Zenith(
+  {
+  usage: 'menu',
   alias: ['h', 'help'],
-  description: 'Reveals menu categories commands',
-  async client(vorterx, m, { args, connect }) {
-    await connect('Ⓜ️');
-
+  desc: 'Reveals menu categories commands',
+  filename: __filename
+  }, async (vorterx, coax, args, react) =>  {
+    
+    await react('Ⓜ️');
     const allLogos = [...(config.LOGOS || []), ...(process.env.LOGOS ? process.env.LOGOS.split(',') : [])];
     const doIndex = Math.floor(Math.random() * allLogos.length);
     const getLogo = allLogos[doIndex];
@@ -64,7 +66,7 @@ module.exports = {
 
     for (const category in commandsByCategory) {
       getCommands += `${categoryLeft} *${category}* ${categoryRight}\n`;
-      getCommands += commandsByCategory[category].map(plugin => ` ${commandLine} ${plugin.name}`).join('\n');
+      getCommands += commandsByCategory[category].map(plugin => ` ${commandLine} ${plugin.usage}`).join('\n');
       getCommands += `\n${categoryEnd}\n\n`;
     }
     const country = "South Africa";
@@ -76,7 +78,7 @@ ${midSection} Runtime: ${process.uptime()} seconds
 ${midSection} Time: ${new Date().toLocaleTimeString()}
 ${midSection} Date: ${new Date().toLocaleDateString()}
 ${midSection} From: ${country || ''}
-${bottomSection}\n\n${getCommands}\n*${config.CAPTION || ''}*`;
+${bottomSection}\n\n${getCommands}*${config.CAPTION || ''}*`;
 
     const chatBot = {
       [isImage ? 'image' : 'video']: {
@@ -99,6 +101,5 @@ ${bottomSection}\n\n${getCommands}\n*${config.CAPTION || ''}*`;
       },
     };
 
-    await vorterx.sendMessage(m.from, chatBot, { quoted: m });
-  }
-};
+    await vorterx.sendMessage(coax.from, chatBot, { quoted: coax });
+  });
