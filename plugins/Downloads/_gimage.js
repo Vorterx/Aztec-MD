@@ -18,25 +18,26 @@ function gisPromise(args) {
   });
 }
 
-module.exports = {
-  name: 'gimage',
+Zenith(
+  {
+  usage: 'gimage',
   alias: ['googleimg'],
   category: 'Downloads',
-
-  async client(vorterx, m, { args, connect }) {
+  desc: 'To Download with gimage',
+  filename: __filename
+  }, async (vorterx, coax, args, react) => {
+    
     if (!args) {
-      await connect('❌');
-      return m.reply('Please provide an image name...');
+      await react('❌');
+      return coax.reply('Please provide an image name...');
     }
-
-    await connect('✔️');
+    await react('✔️');
 
     try {
       const search = await gisPromise(args);
-
       if (!search || search.length === 0) {
-        await connect('❌');
-        return m.reply('_No images found for the given term...');
+        await react('❌');
+        return coax.reply('_No images found for the given term...');
       }
 
       const random_img = search[Math.floor(Math.random() * search.length)].url;
@@ -45,12 +46,11 @@ module.exports = {
         caption: `*GIMAGE DOWNLD*\n\n*TERM*: ${args}\n\n*${config.CAPTION}*`
       };
 
-      vorterx.sendMessage(m.from, res, { quoted: m });
+      vorterx.sendMessage(coax.from, res, { quoted: coax });
     } catch (error) {
-      console.error('Error in gisPromise:', error);
-      await connect('❌');
-      return m.reply('An error occurred while fetching images.');
+      console.error(error);
+      await react('❌');
+      return coax.reply('An error occurred while fetching images...');
     }
-  }
-};
+  });
     
