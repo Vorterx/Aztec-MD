@@ -2,15 +2,21 @@ const ytdl = require('ytdl-core');
 const fs = require('fs');
 const path = require('path');
 const search = require('yt-search');
-const { Zenith } = require('../../lib/client.js');
+//const { Zenith } = require('../../lib/client.js');
 
-Zenith({
+/*Zenith({
   usage: `${prefix}song`,
   alias: ['audio', 'mp3'],
   category: 'Downloads',
   desc: 'To download music',
   isOwner: false,
 }).client = async (vorterx, m, { args, connect }) => {
+*/
+module.exports = {
+  name: 'song',
+  category: 'Downloads',
+  async client(vorterx,m, { args, connect }) {
+  
   if (!args) {
     await connect('❌');
     return m.reply('Provide a song name, please...');
@@ -48,5 +54,6 @@ Zenith({
   writeStream.on('error', (err) => {
     m.reply(`${err.message}`);
   });
-};
+}
+                               }
   
