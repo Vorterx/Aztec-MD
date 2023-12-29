@@ -7,7 +7,7 @@ const fs = require("fs");
 const { tiny } = require("@viper-x/fancytext");
 const config = require("../../config.js");
 const { getBuffer } = require('../../lib/_getBuffer.js');
-const { Zenith } = require ('../../lib/cmd_sxnax.js');
+const { Zenith } = require ('../../lib/_cmd_sxnax.js');
 const prefix = config.prefix;
 
 Zenith(
