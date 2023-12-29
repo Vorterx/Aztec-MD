@@ -10,7 +10,7 @@ const config = require('./config.js');
 const qr = require("qr-image");
 const contact = require('./connects/contact.js');
 const vorterx = require('./lib/client.js');
-const MessageHandler = require('./lib/client.js');
+const Aztec = require('./lib/client.js');
 const path = require('path');
 
 const app = express();
@@ -168,7 +168,7 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx));
+vorterx.ev.on('messages.upsert', async (messages) => await Aztec(messages, vorterx));
 vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
 
 } catch (error) {
