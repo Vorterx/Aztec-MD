@@ -2,16 +2,19 @@ const axios = require('axios');
 const google = require('google-it');
 const chalk = require('chalk');
 
-module.exports = {
-  name: 'google',
+Zenith(
+  {
+  usage: 'google',
   category: 'Search',
-  async client(vorterx, m, { args, text, connect }) {
+  desc: 'To search any',
+  filename: __filename
+  }, async (vorterx, coax, args , react) => {
 
     if(!args) {
-      await connect('❌');
-      return m.reply(`\`\`\`Please provide a query\`\`\``);
+      await react('❌');
+      return coax.reply(`\`\`\`Please provide a query\`\`\``);
     }     
-    await connect("🔍");
+    await react("🔍");
         google({ query: args }).then(res => {
           let aztec = `🔎 *GOOGLE SEARCH RESULTS* 🔍\n\n${args}\n\n`;
 
@@ -24,10 +27,9 @@ module.exports = {
           const formattedAztec = chalk.bold(aztec);
 
           const img = "https://i.ibb.co/B3KNxyk/6351f5da506d8f7635f2be3feb6950c6.jpg";
-          vorterx.sendMessage(m.from, { image: { url: img }, caption: formattedAztec }, { quoted: m });
+          vorterx.sendMessage(coax.from, { image: { url: img }, caption: formattedAztec }, { quoted: coax });
         }).catch(err => {
           console.error(err);
         });
-      }
-          }
+      })
           
