@@ -1,27 +1,28 @@
-module.exports = {
-  name: "xnxxdn",
-  description: "Download XNXX videos",
+Zenith(
+  {
+  usage: "xnxxdn",
+  desc: "Download XNXX videos",
   category: "Downloads",
-  async client(vorterx, m, { connect,  args }) {
+  filename: __filename
+  }, async (vorterx, coax, react, args) => {
    
     const axios = require("axios");
     const config = require('../../config.js');
     const { tiny } = require('@viper-x/fancytext');
     if (!args) {
-      await connect("❌");
-      m.reply("*Missing XNXX link, please provide one.*");
+      await react("❌");
+      coax.reply("*Missing XNXX link, please provide one.*");
       return;
     }
 
     let urlYt = args;
     if (!urlYt.startsWith("https")) {
-      await connect("❌");
-      m.reply("*😏 Provide me with an XNXXVD link.*");
+      await react("❌");
+      coax.reply("*😏 Provide me with an XNXXVD link.*");
       return;
     }
 
-    await connect("🍑");
-
+    await react("🍑");
     const res = await axios(`https://raganork-network.vercel.app/api/xvideos/download?url=${args}`);
     const video = res.data;
 
@@ -49,6 +50,5 @@ module.exports = {
       },
     };
 
-    return await vorterx.sendMessage(m.from, buttonMessage, { quoted: m });
-  },
-};
+    return await vorterx.sendMessage(coax.from, buttonMessage, { quoted: coax });
+  });
