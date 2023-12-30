@@ -3,4 +3,4 @@ RUN git clone https://github.com/Vorterx/Aztec-MD /root/vorterx
 WORKDIR /root/vorterx/
 RUN npm install
 EXPOSE 5000
-CMD ["npm", "start"]
+CMD ["node", "core.js"]
