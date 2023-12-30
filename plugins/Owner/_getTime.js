@@ -7,7 +7,7 @@ Zenith(
     usage: 'runtime',
     category: 'Owner',
     desc: 'For the owner time',
-    filename: _filename
+    filename: __filename
   },
   async (vorterx, coax, isDev, args, react) => {
    
