@@ -1,5 +1,5 @@
 const config = require('../../config.js');
-const { Zenith } = require('../../lib/_cmd_syntax.js');
+const { Zenith } = require('../../lib/_cmd_sxntax.js');
 const moment = require('moment-timezone');
 
 Zenith(
