@@ -9,7 +9,7 @@ Zenith(
     desc: "To download Facebook",
     category: "Downloads",
     filename: __filename
-    }, async (vorterx, coax, react, args) => {
+    }, async (vorterx, coax, react, {args}) => {
        
         try {
             if (!args) {
@@ -37,3 +37,5 @@ Zenith(
             });
         }
     });
+
+  //---------------------------------------------------------------------------
