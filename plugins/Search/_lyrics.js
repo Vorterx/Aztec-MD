@@ -8,7 +8,7 @@ Zenith(
   usage: 'lyrics',
   category: 'Search',
   filename: __filename
-  }, async (vorterx, coax, args, react) => {
+  }, async (vorterx, coax, react, {args}) => {
   
     try {
       if (!args || typeof args !== 'string') {
