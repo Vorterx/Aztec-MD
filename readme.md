@@ -21,7 +21,7 @@ Welcome to ***Aztec MD***, a versatile and feature-packed WhatsApp bot designed 
 To add ***Aztec MD*** to your WhatsApp Bot, simply click on one of the following buttons to deploy the bot:
 
 - **Heroku**:
-- [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://github.com/Vorterx/Aztec-MD)
+- [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Vorterx/Aztec-MD)
 - 
 - **Replit**:
 - [![Run on Replit](https://replit.com/badge/github/your-username/your-repo)](https://replit.com/github/Vorterx/Aztec-MD)
