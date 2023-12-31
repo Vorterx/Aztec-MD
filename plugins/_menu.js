@@ -43,7 +43,7 @@ Zenith(
     desc: 'Reveals menu categories commands',
     filename: __filename,
   },
-  async (vorterx, coax, args, react) => {
+  async (vorterx, coax, react, { args  } ) => {
     await react('Ⓜ️');
 
     const allLogos = [...(config.LOGOS || []), ...(process.env.LOGOS ? process.env.LOGOS.split(',') : [])];
