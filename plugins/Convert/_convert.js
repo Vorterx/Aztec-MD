@@ -10,8 +10,8 @@ const { Zenith } = require ('../../lib/_cmd_sxntax.js');
 
 Zenith(
   {
-    pattern: "steal",
-    alias: ['steal'],
+    pattern: "sticker",
+    alias: ['s'],
     category: "Convert",
     filename: __filename,
  }, async (vorterx, coax, react, {args}) => {
@@ -64,7 +64,7 @@ Zenith (
     vorterx.sendMessage(coax.from, {
       sticker: {
         url: `https://api.lolhuman.xyz/api/attp?apikey=GataDios&text=${args}`,
-        pack: config.CAPTION
+        packname: config.CAPTION
       }
     }, { quoted: coax });
 
