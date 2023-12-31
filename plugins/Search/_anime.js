@@ -6,7 +6,7 @@ Zenith(
   usage: 'anime',
   category: 'Anime',
   filename: __filename
-  }, async (vorterx, coax, args, react) => {
+  }, async (vorterx, coax, react,{args}) => {
     
     try {
       if (!args) {
