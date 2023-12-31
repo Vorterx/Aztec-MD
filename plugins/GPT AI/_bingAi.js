@@ -8,7 +8,7 @@ Zenith (
   alias: ['bang'],
   desc: 'To search',
   filename: __filename
-  }, async (vorterx, coax, args, react) => {
+  }, async (vorterx, coax, react, { args}) => {
     try {
       if (!args) {
         await react('❌');
