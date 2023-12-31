@@ -65,7 +65,7 @@ Zenith(
   category: 'Downloads',
   desc: 'To Download with gimage',
   filename: __filename
-  }, async (vorterx, coax, react {args}) => {
+  }, async (vorterx, coax, react, {args}) => {
     
     if (!args) {
       await react('❌');
