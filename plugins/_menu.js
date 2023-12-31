@@ -79,7 +79,7 @@ Zenith(
 
     const country = 'South Africa';
     const amarok = `${headerTop}
-${midSection} User: ${m.pushName || ''}
+${midSection} User: ${coax.pushName || ''}
 ${midSection} Botname: ${configJson.Bots[0].BotName || ''}
 ${midSection} Owner: ${configJson.Bots[0].Owner || ''}
 ${midSection} Prefix: ${process.env.PREFIX || ''}
