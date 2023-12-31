@@ -14,7 +14,7 @@ Zenith(
   desc: 'To check mods admins to the bot',
   category: 'Owner',
   filename: __filename
-  }, async (vorterx, coax, args, quoted, react) => {
+  }, async (vorterx, coax, react, {args, quoted}) => {
     
     await react('✔️');
     let mods = process.env.MODS ? process.env.MODS.split(',').map(mod => mod.replace('@net.whatsapp', '').trim()) : [];
