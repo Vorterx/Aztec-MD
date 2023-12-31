@@ -15,7 +15,7 @@ Zenith(
   category: 'GPT AI',
   desc: 'To Download images using dalle E',
   filename: __filename
-  }, async (vorterx, coax, args, react) => {
+  }, async (vorterx, coax, react, {args}) => {
     try {
         if (!args) {
         await react('❌');
