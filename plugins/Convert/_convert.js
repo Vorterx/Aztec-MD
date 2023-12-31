@@ -14,7 +14,7 @@ Zenith(
     alias: ['steal'],
     category: "Convert",
     filename: __filename,
- }, async (vorterx, coax, args, react) => {
+ }, async (vorterx, coax, react, {args}) => {
             
        if (!coax.quoted) {
         await react('❌');
@@ -44,3 +44,6 @@ Zenith(
                 const buffer = await sticker.toBuffer();
           return vorterx.sendMessage(coax.from, {sticker: buffer }, {quoted: coax });
          })
+
+  //---------------------------------------------------------------------------
+
