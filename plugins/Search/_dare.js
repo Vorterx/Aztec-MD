@@ -13,7 +13,7 @@ Zenith(
   category: 'Fun',
   desc: 'For funny',
   filename: __filename
-  }, async (vorterx, coax, args, react) => {
+  }, async (vorterx, coax, react) => {
    
     await react('🤡');
     const dare = getDare();
