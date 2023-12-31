@@ -19,7 +19,7 @@ Zenith(
   category: 'Downloads',
   desc: 'Download files from MediaFire links',
   filename: __filename
-}, async (vorterx, coax, react,{args} => {
+}, async (vorterx, coax, react,{args}) => {
     try {
       if (args.length === 0 || !isValidUrl(args[0])) {
         await react('❌');
