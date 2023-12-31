@@ -8,7 +8,7 @@ Zenith(
   category: 'Search',
   desc: 'Searches for an npm package',
   filename: __filename
-  }, async (vorterx, coax, args, react) => {
+  }, async (vorterx, coax, react, {args}) => {
     
     if (!args) {
       await react('❌');
