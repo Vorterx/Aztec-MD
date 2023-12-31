@@ -7,7 +7,7 @@ Zenith(
   category: "Group",
   desc: "Change the group name",
   filename: __filename
-}, async (vorterx, coax, args, isBotAdmin, isGroup, react) => {
+}, async (vorterx, coax, react, {args, isBotAdmin, isGroup}) => {
     
     if (!isGroup) {
       await react("❌");
