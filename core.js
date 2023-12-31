@@ -83,7 +83,7 @@ async function startAztec() {
       for (const file of cmdFiles) {
         const filePath = path.join(pluginsDir, file);
         const command = require(`.${path.sep}${filePath}`);
-        vorterx.cmd.set(command.usage, command);
+        vorterx.cmd.set(command.name, command);
       }
     }
 
@@ -94,7 +94,7 @@ async function startAztec() {
       for (const file of cmdFiles) {
         const filePath = path.join(pluginsDir, file);
         const command = require(`.${path.sep}${filePath}`);
-        vorterx.cmd.set(command.usage, command);
+        vorterx.cmd.set(command.name, command);
       }
     }
 
