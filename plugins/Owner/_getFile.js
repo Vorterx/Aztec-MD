@@ -3,11 +3,11 @@ const { Zenith } = require('../../lib/_cmd_sxntax.js');
 Zenith(
   {
     usage: "file",
-    desc: "to get exact file",
+    desc: "to get the exact file",
     category: "Owner",
     filename: __filename
   },
-  async (vorterx, coax, react, { args, text, isDev}) => {
+  async (vorterx, coax, react, { args, text, isDev }) => {
     const { commands } = require('../../lib/_cmd_sxntax.js');
 
     if (!isDev) {
@@ -16,6 +16,12 @@ Zenith(
     }
 
     let aztec = [];
+    
+    if (!text) {
+      await react('❌');
+      return await coax.reply("_No text provided_");
+    }
+
     const cmd = commands.find((cmd) => cmd.usage === text.split(" ")[0].toLowerCase());
 
     if (!cmd) {
@@ -32,4 +38,4 @@ Zenith(
 
     return coax.reply(aztec.join('\n'));
   }
-);      
+);
