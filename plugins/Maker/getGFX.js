@@ -11,7 +11,7 @@ Zenith(
   alias: [...gFx],
   desc: 'Create logos using gfx',
   filename: __filename
-  }, async (vorterx, coax, getCMD, args, react) => {
+  }, async (vorterx, coax,react,{getCMD, args}) => {
 
     switch (getCMD) {
       case 'gfx1':
