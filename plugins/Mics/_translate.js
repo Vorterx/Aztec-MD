@@ -15,7 +15,7 @@ Zenith(
   desc: 'Translate any usable language',
   category: 'Mics',
   filename: __filename
-  }, async (vorterx, coax, args, react) => {
+  }, async (vorterx, coax, react, {args}) => {
     
     if (!args) {
       await react('❌');
