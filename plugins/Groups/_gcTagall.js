@@ -7,7 +7,7 @@ Zenith(
     category: "Group",
     desc: "tag members",
     filename: __filename
-    }, async (vorterx, coax, args, react, isBotAdmin, isAdmin, isMedia, participants) => {
+    }, async (vorterx, coax, react, {args,isBotAdmin, isAdmin, isMedia, participants}) => {
       
         if (!isMedia) {
             var message2 = coax.quoted
