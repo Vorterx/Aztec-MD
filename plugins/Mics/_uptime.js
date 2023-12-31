@@ -6,7 +6,7 @@ Zenith(
   category: 'Mics',
   filename: __filename
 }, async (vorterx, coax, react) => {
-
+ 
   await react('⏲️');
   const uptime = process.uptime();
   const uptimeString = formatUptime(uptime);

@@ -21,14 +21,14 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || '3000';
 
-if (!process.env.MONGODB) {
+if (!config.MONGODB) {
   console.error("Mongodb URL has not been provided yet...");
   process.exit(1);
 }
 
 async function startMongoDB() {
   try {
-    const mongo = new MongoClient(process.env.MONGODB, {
+    const mongo = new MongoClient(config.MONGODB, {
       socketTimeoutMS: 100000,
       connectTimeoutMS: 100000,
       waitQueueTimeoutMS: 100000,
@@ -44,7 +44,7 @@ async function startMongoDB() {
 
 async function startAztec() {
   try {
-    if (!process.env.MONGODB) {
+    if (!config.MONGODB) {
       console.error("Mongodb URL has not been provided yet...");
       process.exit(1);
     }
