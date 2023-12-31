@@ -8,7 +8,7 @@ alias: ['unmute'],
 category: "Group",
 desc: "To Open the group",
 filename: __filename
-  }, async (vorterx, coax, react, isAdmin, isBotAdmin, isGroup) => {
+  }, async (vorterx, coax, react, {isAdmin, isBotAdmin, isGroup}) => {
 
 if(!coax.isGroup) { 
 await react ("❌"); return coax.reply("*👋 Sorry this command is for admins only*");
