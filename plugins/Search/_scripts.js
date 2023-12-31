@@ -11,7 +11,7 @@ Zenith(
   category: 'Search',
   desc: 'To get script',
   filename: __filename
-}, async (vorterx, coax, args, react) => {
+}, async (vorterx, coax, react) => {
    
   await react('🌲');
   const v_chat = "https://i.ibb.co/k3tGtpf/360-F-426466645-EAg-Vxq-HG2-XK22-Ys2-Pm-LLPgml-EDC3-Sn3-X.jpg";
@@ -20,14 +20,10 @@ Zenith(
   let cap = `
   *乂 AZTEC-MD MD INFO 乂*
           
-  *〄Stars*: ${data?.stargazers_count || "120+"  }
-  
-  *〄Forks*: ${data?.forks_count || "1000+"}
-  
-  *〄Name*: ${process.env.OWNER_NAME}
-  
+  *〄Stars*: ${data?.stargazers_count || "120+"  }  
+  *〄Forks*: ${data?.forks_count || "1000+"} 
+  *〄Name*: ${process.env.OWNER_NAME} 
   *〄Scrip*: ${data?.html_url}\n\n*${config.CAPTION}*
-
 `;
 
  const chatBot = {
