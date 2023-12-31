@@ -8,6 +8,7 @@ const { tiny } = require("@viper-x/fancytext");
 const { Zenith } = require('../../lib/_cmd_sxntax.js');
 const { getBuffer } = require('../../lib/_getBuffer.js');
 const config = require('../../config.js');
+const path = require('path');
 
 Zenith(
   {
