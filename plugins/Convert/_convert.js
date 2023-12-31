@@ -18,7 +18,7 @@ Zenith(
             
        if (!coax.quoted) {
         await react('❌');
-        return coax.reply(`_Reply to a sticker_`);
+        return coax.reply(`_Reply to a vid or image_`);
        }
       let mime = coax.quoted.mtype
           var pack;
