@@ -7,7 +7,7 @@ Zenith(
     category: "Owner",
     filename: __filename
   },
-  async (vorterx, coax, react, { args, text, isDev) => {
+  async (vorterx, coax, react, { args, text, isDev}) => {
     const { commands } = require('../../lib/_cmd_sxntax.js');
 
     if (!isDev) {
