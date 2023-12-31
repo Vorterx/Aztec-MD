@@ -16,7 +16,7 @@ Zenith(
   category: 'GPT AI',
   desc: 'To download images from Bing',
   filename: __filename
-  }, async (vorterx, coax, react, { args, mime, quoted{) => {
+  }, async (vorterx, coax, react, { args, mime, quoted}) => {
 
     if (!args) {
       await react('❌');
