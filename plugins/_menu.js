@@ -74,7 +74,7 @@ Zenith(
 
     for (const category in commandsByCategory) {
       getCommands += `${categoryLeft} *${category}* ${categoryRight}\n`;
-      getCommands += commandsByCategory[category].map((plugin) => ` ${commandLine} ${plugin.usage}`).join('\n');
+      getCommands += commandsByCategory[category].map((plugin) => ` ${commandLine} ${plugin.name}`).join('\n');
       getCommands += `\n${categoryEnd}\n\n`;
     }
 
