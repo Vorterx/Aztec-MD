@@ -9,7 +9,7 @@ Zenith(
     desc: 'For the owner time',
     filename: __filename
   },
-  async (vorterx, coax, isDev, args, react) => {
+  async (vorterx, coax, react, {isDev, args}) => {
    
     if (!isDev) {
       await react('❌');
