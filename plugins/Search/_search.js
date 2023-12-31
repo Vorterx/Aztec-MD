@@ -10,7 +10,7 @@ Zenith(
   category: 'Search',
   desc: 'To search any',
   filename: __filename
-  }, async (vorterx, coax, args , react) => {
+  }, async (vorterx, coax, react, {args}) => {
 
     if(!args) {
       await react('❌');
