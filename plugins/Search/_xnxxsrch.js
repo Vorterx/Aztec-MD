@@ -9,7 +9,7 @@ Zenith(
   desc: "18 videos only",
   category: "Downloads",
   filename: __filename
-  }, async (vorterx, coax, react, args) => {
+  }, async (vorterx, coax, react, {args}) => {
  
     if (!args) {
       await react("❌");
