@@ -7,7 +7,7 @@ Zenith(
   category: 'Mics',
   desc: 'For funny',
   filename: __filename
-}, async (vorterx, coax, args, react) => {
+}, async (vorterx, coax, react, {args}) => {
     
   if (!args) {
       await react('❌');
