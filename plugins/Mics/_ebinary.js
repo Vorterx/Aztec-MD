@@ -11,8 +11,9 @@ Zenith({
   category: 'Mics',
   desc: 'For Funny',
   filename: __filename
-}, async (vorterx, coax, args, react) => {
-  if (!args) {
+}, async (vorterx, coax, react,{args}) => {
+  
+if (!args) {
     await react('❌');
     return coax.reply('Provide a text to encode in binary...');
   }
