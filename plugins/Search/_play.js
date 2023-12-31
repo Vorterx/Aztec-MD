@@ -9,7 +9,7 @@ Zenith (
   desc: "Search for music link",
   category: "Downloads",
   filename: __filename
-  }, async (vorterx, coax, args, react) => {
+  }, async (vorterx, coax, react, {args}) => {
     
     if (!args) {
       await react("❌");
