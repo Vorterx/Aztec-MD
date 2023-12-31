@@ -8,7 +8,7 @@ Zenith (
   category: 'Search',
   desc: 'Get movie info',
   filename: __filename
-  }, async (vorterx, coax, args, react) => {
+  }, async (vorterx, coax, react, { args}) => {
     
     try {
       if (!args) {
