@@ -1,5 +1,5 @@
 const { YTM3 } = require('../../lib/YTM3.js');
-const { Zenith } = require('../../lib/');
+const { Zenith } = require('../../lib/functions.js');
 const ytdl = require('ytdl-core');
 
 Zenith(
