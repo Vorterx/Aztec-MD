@@ -6,7 +6,7 @@ Zenith(
    desc: "Leave the group you are currently in",
    category: "Group",
    filename: __filename
-}, async (vorterx, coax, isDev, isGroup, react) => {
+}, async (vorterx, coax,react, {isDev, isGroup}) => {
     
     if (!isDev) {
       await react('❌');
