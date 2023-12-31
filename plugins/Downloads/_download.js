@@ -5,7 +5,8 @@ const config = require('../../config.js');
 const { YTM3 } = require('../../lib/YTM3.js');
 const ytdl = require('ytdl-core');
 const gis = require('g-i-s');
-const { ttdl, igdl } = require('btch-downloader');
+const { igdl } = require('btch-downloader');
+const { ttdl } = require('btch-downloader');
 const axios = require('axios');
 
 
