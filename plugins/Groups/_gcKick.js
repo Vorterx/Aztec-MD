@@ -7,7 +7,7 @@ Zenith(
 	desc: "remove Member from group",
 	category: "Group",
         filename: __filename
-	}, async (vorterx, coax, react, isBotAdmin, isAdmin, mentionByTag) => {
+	}, async (vorterx, coax, react, {isBotAdmin, isAdmin, mentionByTag}) => {
 		
     if(!isAdmin) { await react("❌"); return coax.reply(`*🔌This is admin command*`);
         }
