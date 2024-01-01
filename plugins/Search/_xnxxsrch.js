@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { Zenith } = require('../../lib/_cmd_sxntax.js');
+const prefix = process.env.PREFIX;
 
 Zenith(
   {
@@ -22,10 +23,24 @@ Zenith(
         console.log(response.data);
 
         if (response.data && response.data.result.length > 0) {
-          const resultList = response.data.result.map((result, index) => {
-            return `:fire: **xnxx ${index + 1}**\n:clapper: *Title:* ${result.title}\n:link: *Link:* ${result.url}\n\n`;
+          const pollOptions = response.data.result.map((result, index) => ({
+            text: `Xnxx ${index + 1}\nTitle: ${result.title}\nLink: ${result.url}`,
+            value: result.url
+          }));
+
+          vorterx.sendMessage(coax.from, {
+            poll: {
+              question: 'Which video do you want to download?',
+              options: pollOptions,
+              multiselect: false,
+              selectableCount: 1,
+              isAnonymous: false,
+              closeAfterVoting: true,
+              footer: 'React with your choice to download the corresponding video.'
+            }
           });
-          return coax.reply(resultList.join('\n'));
+
+          return;
         } else {
           return coax.reply(":x: No results found.");
         }
@@ -36,4 +51,4 @@ Zenith(
       });
   }
 );
-      
+        
