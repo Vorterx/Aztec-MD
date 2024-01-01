@@ -20,18 +20,20 @@ Zenith(
     axios.get(xnxx_vid)
       .then(response => {
         console.log(response.data);
-        if (response.data && response.data.length > 0) {
-          const resultList = response.data.map((result, index) => `${index + 1}. [${result.title}](${result.link})`);
+
+        if (response.data && response.data.result.length > 0) {
+          const resultList = response.data.result.map((result, index) => `${index + 1}. [${result.title}](${result.url})`);
           return coax.reply(resultList.join('\n'));
         } else {
-          return coax.reply("_No results found_");
+          
+          return coax.reply("No results found.");
         }
       })
       .catch(error => {
-        console.error(error);
-
-        return coax.reply("An error occurred while fetching the data...");
+        console.error("Error fetching data:", error);
+        
+        return coax.reply("An error occurred while fetching the data.");
       });
   }
 );
-      
+            
