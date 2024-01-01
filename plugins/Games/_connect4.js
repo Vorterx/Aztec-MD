@@ -14,16 +14,16 @@ Zenith(
     const userId = coax.sender;
 
     if (!args || (args[0] && args[0].toLowerCase() !== 'join')) {
-      if (activeGames.has(userId)) {
-        coax.reply('You are already in a game. Wait for the other player to make a move.');
-      } else {
+      if (!activeGames.has(userId)) {
         const gameId = userId;
         activeGames.set(userId, { board: createBoard(6, 7), currentPlayer: 1 });
         coax.reply('Game started! Type "Join" to join the game.');
       }
     } else if (args[0] && args[0].toLowerCase() === 'join') {
       if (activeGames.has(userId)) {
-        coax.reply('You are already in a game. Wait for the other player to make a move.');
+        const game = activeGames.get(userId);
+        const emojiBoard = game.board.map(row => row.map(cell => getEmojiForPlayer(cell)).join(' | ')).join('\n');
+        coax.reply(emojiBoard);
       } else {
         const gameId = userId;
         activeGames.set(userId, { board: createBoard(6, 7), currentPlayer: 1 });
@@ -125,5 +125,5 @@ function askUserInput(question) {
       resolve(answer);
     });
   });
-    }
-          
+         }
+  
