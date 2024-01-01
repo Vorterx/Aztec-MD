@@ -21,15 +21,22 @@ Zenith(
       const res = await axios.get(`https://raganork-network.vercel.app/api/xvideos/search?query=${args}`);
       const result = res.data.result;
 
+      if (!result || !Array.isArray(result) || result.length === 0) {
+        await react("❌");
+        return coax.reply("No results found for the given search term.");
+      }
+
       let textt = `🔎 *XNXXV SEARCH RESULTS* 🔎\n\n🔍 Search Term: ${args}\n\n`;
       
       result.forEach((video, index) => {
-        const videoInfo = `
+        if (video.title && video.duration && video.url) {
+          const videoInfo = `
 📽️ *Video ${index + 1}*
 🎬 *Title: ${video.title}*
 ⏰ *Duration: ${video.duration}*
 🔗 *[Watch]*(${video.url})\n\n*${config.CAPTION}*`;
-        textt += `${videoInfo}\n\n`;
+          textt += `${videoInfo}\n\n`;
+        }
       });
 
       await vorterx.sendMessage(coax.from, textt, { quoted: coax, markdown: true });
