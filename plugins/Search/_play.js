@@ -11,17 +11,18 @@ Zenith(
     category: "Downloads",
     filename: __filename,
   },
-  async (vorterx, coax, react, { args,text }) => {
-    let getVideo; 
+  async (vorterx, coax, react, { args, text }) => {
+    let getVideo;
 
-    if (!args) {
+    if (!args && !text) {
       await react("❌");
       return coax.reply("Please provide a search term. Example: play Dubula by Emoh");
     }
     await react("🎵");
 
     try {
-      const search = await yts(args);
+      const searchTerm = args || text; // Use args if available, otherwise use text
+      const search = await yts(searchTerm);
       getVideo = search.videos[Math.floor(Math.random() * search.videos.length)];
 
       const thumbnails = await getBuffer(getVideo.thumbnail);
@@ -43,8 +44,8 @@ Zenith(
       return coax.reply("An error occurred while searching for music.");
     }
 
-    if (coax.text) {
-      const lowerText = coax.text.toLowerCase();
+    if (args || text) {
+      const lowerText = (args || text).toLowerCase();
 
       if (lowerText === '1') {
         return vorterx.sendMessage(coax.from, `${prefix}audio ${getVideo.url}`);
@@ -55,9 +56,8 @@ Zenith(
         return coax.reply('Invalid selection. Please choose 1 or 2.');
       }
     } else {
-      console.error("coax.text is undefined");
+      console.error("args and text are undefined");
       return coax.reply("An error occurred. Please try again.");
     }
   }
 );
-  
