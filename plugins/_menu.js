@@ -72,12 +72,12 @@ Zenith(
 
     let getCommands = '';
 
-    for (const category in commandsByCategory) {
-      getCommands += `${categoryLeft} *${category}* ${categoryRight}\n`;
-      getCommands += commandsByCategory[category].map((plugin) => ` ${commandLine} ${plugin.usage}`).join('\n');
-      getCommands += `\n${categoryEnd}\n\n`;
-    }
-
+for (const category in commandsByCategory) {
+  getCommands += `${categoryLeft} *${category}* ${categoryRight}\n`;
+  getCommands += commandsByCategory[category].map((plugin) => ` ${commandLine} ${plugin.usage || 'Undefined'}`).join('\n');
+  getCommands += `\n${categoryEnd}\n\n`;
+}
+  
     const country = 'South Africa';
     const amarok = `${headerTop}
 ${midSection} User: ${coax.pushName || ''}
