@@ -19,6 +19,7 @@ Zenith(
 
     axios.get(xnxx_vid)
       .then(response => {
+        console.log(response.data);
         if (response.data && response.data.length > 0) {
           const resultList = response.data.map((result, index) => `${index + 1}. [${result.title}](${result.link})`);
           return coax.reply(resultList.join('\n'));
