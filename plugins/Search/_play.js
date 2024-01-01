@@ -37,18 +37,17 @@ Zenith(
 
       vorterx.sendMessage(coax.from, { image: thumbnails, caption: get_vid }, { quoted: coax });
 
-     const ytmp4Command = `ytmp4 ${getVideo.url}`;
-      const audioCommand = `audio ${getVideo.url}`;
+      const userChoice = text.toLowerCase();
 
-      const userChoice = args.toLowerCase();
-      if (userChoice === '1' && !ytmp4Command.includes("1")) {
+      if (userChoice === '1') {
+              await coax.reply(`${prefix}ytmp4 ${getVideo.url}`);
         await react('📤');
         return coax.reply('__Downloading your video wait__');
-      } else if (userChoice === '2' && !audioCommand.includes("2")) {
+      } else if (userChoice === '2') {
+            await coax.reply(`${prefix}audio ${getVideo.url}`);
         return coax.reply('__Downloading your song wait__');
       } else {
-
-        return;
+        return coax.reply('_Sorry invalid number reply provide 1 or 2__');
       }
     } catch (error) {
       console.error("Error in music search:", error);
