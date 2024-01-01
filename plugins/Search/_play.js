@@ -2,7 +2,7 @@ const { getBuffer } = require("../../lib/_getBuffer.js");
 const yts = require("youtube-yts");
 const config = require('../../config.js');
 const { Zenith } = require('../../lib/_cmd_sxntax.js');
-const prefix = process.env.PREFIX; 
+const prefix = process.env.PREFIX;
 
 Zenith(
   {
@@ -12,6 +12,8 @@ Zenith(
     filename: __filename,
   },
   async (vorterx, coax, react, { args }) => {
+ 
+    let getVideo;
     if (!args) {
       await react("❌");
       return coax.reply("Please provide a search term. Example: play Dubula by Emoh");
@@ -20,7 +22,7 @@ Zenith(
 
     try {
       const search = await yts(args);
-      const getVideo = search.videos[Math.floor(Math.random() * search.videos.length)];
+      getVideo = search.videos[Math.floor(Math.random() * search.videos.length)];
 
       const thumbnails = await getBuffer(getVideo.thumbnail);
 
@@ -40,18 +42,17 @@ Zenith(
       await react("❌");
       return coax.reply("An error occurred while searching for music.");
     }
+
+    const lowerText = coax.text.toLowerCase();
+
+    if (lowerText === '1') {
+      return vorterx.sendMessage(coax.from, `${prefix}audio ${getVideo.url}`);
+    } else if (lowerText === '2') {
+      return vorterx.sendMessage(coax.from, `${prefix}ytmp4 ${getVideo.url}`);
+    } else {
+      await react('❌');
+      return coax.reply('Invalid selection. Please choose 1 or 2.');
+    }
   }
 );
-
-Zenith({ on: 'text' }, async (vorterx, coax, react) => {
-  const lowerText = coax.text.toLowerCase();
-
-  if (lowerText === '1') {
-    return vorterx.sendMessage(coax.from, `${prefix}audio ${getVideo.url}`);
-  } else if (lowerText === '2') {
-        return vorterx.sendMessage(coax.from, `${prefix}ytmp4 ${getVideo.url}`);
-  } else {
-    await react('❌');
-    return coax.reply('Invalid selection. Please choose 1 or 2.');
-  }
-});
+  
