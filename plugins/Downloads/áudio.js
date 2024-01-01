@@ -25,28 +25,34 @@ Zenith(
         return coax.reply('No matching video found.');
       }
 
-      const audioInfo = await YTM3.mp3(video.url);
-      const audioMsg = {
-        audio: fs.readFileSync(audioInfo.path),
-        fileName: `${video.title}.mp3`,
-        mimetype: 'audio/mp4',
-        contextInfo: {
-          externalAdReply: {
-            title: video.title,
-            body: '',
-            thumbnail: await getBuffer(audioInfo.meta.image),
-            mediaType: 2,
-            mediaUrl: video.url,
-          }
-        },
-      };
+      try {
+        const audioInfo = await YTM3.mp3(video.url);
+        const audioMsg = {
+          audio: fs.readFileSync(audioInfo.path),
+          fileName: `${video.title}.mp3`,
+          mimetype: 'audio/mp4',
+          contextInfo: {
+            externalAdReply: {
+              title: video.title,
+              body: '',
+              thumbnail: await getBuffer(audioInfo.meta.image),
+              mediaType: 2,
+              mediaUrl: video.url,
+            }
+          },
+        };
 
-      await vorterx.sendMessage(coax.from, audioMsg, { quoted: coax });
-      await fs.unlinkSync(audioInfo.path);
-    } catch (error) {
-      console.error(error);
+        await vorterx.sendMessage(coax.from, audioMsg, { quoted: coax });
+        await fs.unlinkSync(audioInfo.path);
+      } catch (downloadError) {
+        console.error('Error during audio download:', downloadError);
+        await react('❌');
+        return coax.reply('An error occurred during audio download. Check the console for details.');
+      }
+    } catch (searchError) {
+      console.error('Error during YouTube search:', searchError);
       await react('❌');
-      return coax.reply('An error occurred while processing your request...');
+      return coax.reply('An error occurred while searching for the video. Check the console for details.');
     }
   }
 );
