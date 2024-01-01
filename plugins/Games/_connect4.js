@@ -1,4 +1,5 @@
 const { Zenith } = require('../../lib/functions.js');
+
 const activeGames = new Map();
 
 Zenith(
@@ -11,6 +12,29 @@ Zenith(
   async (vorterx, coax, react, { args }) => {
     const userId = coax.sender;
 
+    const printBoard = (userId, message) => {
+      const game = activeGames.get(userId);
+      const emojiBoard = game.board.map(row => row.map(cell => getEmojiForPlayer(cell)).join(' | ')).join('\n');
+      react(userId, `${message}\n${emojiBoard}`);
+    };
+
+    const getEmojiForPlayer = (player) => {
+      switch (player) {
+        case 1:
+          return '🔴'; 
+        default:
+          return '⚪'; 
+      }
+    };
+
+    const createBoard = (rows, columns) => {
+      const board = [];
+      for (let i = 0; i < rows; i++) {
+        board.push(Array(columns).fill(0));
+      }
+      return board;
+    };
+
     if (!activeGames.has(userId)) {
       const gameId = userId;
       activeGames.set(userId, { board: createBoard(6, 7), currentPlayer: 1 });
@@ -19,23 +43,10 @@ Zenith(
     } else {
       const game = activeGames.get(userId);
 
-      const printBoard = (userId, message) => {
-        const emojiBoard = game.board.map(row => row.map(cell => getEmojiForPlayer(cell)).join(' | ')).join('\n');
-        coax.reply(userId, `${message}\n${emojiBoard}`);
-      };
-
-      const getEmojiForPlayer = (player) => {
-        switch (player) {
-          case 1:
-            return '🔴'; 
-          default:
-            return '⚪'; 
-        }
-      };
-
       const askForMove = async () => {
-        const column = await coax.ask('Choose a column (1-7): ');
-        return parseInt(column, 10) - 1; 
+        const msg = `Player ${game.currentPlayer}, choose a column (1-7): `;
+        const res = await coax.ask(msg);
+        return parseInt(res, 10) - 1; 
       };
 
       const dropPiece = (column) => {
@@ -48,15 +59,6 @@ Zenith(
         return -1;
       };
 
-      const checkWin = (row, col) => {
-  
-        return false;
-      };
-
-      const isBoardFull = () => {
-        return game.board.every(row => row.every(cell => cell !== 0));
-      };
-
       const switchPlayer = () => {
         game.currentPlayer = game.currentPlayer === 1 ? 2 : 1;
       };
@@ -65,29 +67,12 @@ Zenith(
       const row = dropPiece(column);
 
       if (row === -1) {
-        printBoard(userId, 'Column is full. Choose another column.');
+        printBoard(userId, '_..Column is full. Choose another column..._');
       } else {
-        if (checkWin(row, column)) {
-          printBoard(userId, 'Congratulations! You won!');
-          activeGames.delete(userId);
-        } else if (isBoardFull()) {
-          printBoard(userId, 'It\'s a draw! The board is full.');
-          activeGames.delete(userId);
-        } else {
-          switchPlayer();
-          printBoard(userId, 'Move successful. Make your next move...');
-        }
+        printBoard(userId, 'Move successful. Waiting for the other player...');
+        switchPlayer();
       }
     }
   }
 );
-
-function createBoard(rows, columns) {
-  const board = [];
-  for (let i = 0; i < rows; i++) {
-    board.push(Array(columns).fill(0));
-  }
-  return board;
-
-}
         
