@@ -44,20 +44,15 @@ Zenith(
       return coax.reply("An error occurred while searching for music.");
     }
 
-    if (args || text) {
-      const lowerText = (args || text).toLowerCase();
-
-      if (lowerText === '1') {
+    switch ((args || text).toLowerCase()) {
+      case '1':
         return vorterx.sendMessage(coax.from, `${prefix}audio ${getVideo.url}`);
-      } else if (lowerText === '2') {
+      case '2':
         return vorterx.sendMessage(coax.from, `${prefix}ytmp4 ${getVideo.url}`);
-      } else {
+      default:
         await react('❌');
         return coax.reply('Invalid selection. Please choose 1 or 2.');
-      }
-    } else {
-      console.error("args and text are undefined");
-      return coax.reply("An error occurred. Please try again.");
     }
   }
 );
+    
