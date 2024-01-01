@@ -37,7 +37,7 @@ Zenith(
 
       vorterx.sendMessage(coax.from, { image: thumbnails, caption: get_vid }, { quoted: coax });
 
-       const ytmp4Command = `ytmp4 ${getVideo.url}`;
+     const ytmp4Command = `ytmp4 ${getVideo.url}`;
       const audioCommand = `audio ${getVideo.url}`;
 
       const userChoice = args.toLowerCase();
@@ -47,7 +47,8 @@ Zenith(
       } else if (userChoice === '2' && !audioCommand.includes("2")) {
         return coax.reply('__Downloading your song wait__');
       } else {
-        return coax.reply('_Sorry invalid number reply provide 1 or 2__');
+
+        return;
       }
     } catch (error) {
       console.error("Error in music search:", error);
@@ -56,4 +57,4 @@ Zenith(
     }
   }
 );
-                    
+          
