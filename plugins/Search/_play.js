@@ -12,18 +12,16 @@ Zenith(
     filename: __filename,
   },
   async (vorterx, coax, react, { args, text }) => {
-    let getVideo;
-
-    if (!args && !text) {
-      await react("❌");
-      return coax.reply("Please provide a search term. Example: play Dubula by Emoh");
-    }
-    await react("🎵");
-
     try {
-      const searchTerm = args || text; // Use args if available, otherwise use text
+      if (!args && !text) {
+        await react("❌");
+        return coax.reply("Please provide a search term. Example: play Dubula by Emoh");
+      }
+      await react("🎵");
+
+      const searchTerm = args || text;
       const search = await yts(searchTerm);
-      getVideo = search.videos[Math.floor(Math.random() * search.videos.length)];
+      const getVideo = search.videos[Math.floor(Math.random() * search.videos.length)];
 
       const thumbnails = await getBuffer(getVideo.thumbnail);
 
@@ -38,21 +36,23 @@ Zenith(
       `;
 
       vorterx.sendMessage(coax.from, { image: thumbnails, caption: get_vid }, { quoted: coax });
+
+      const ytmp4Command = `ytmp4 ${getVideo.url}`;
+      const audioCommand = `audio ${getVideo.url}`;
+
+      if (!ytmp4Command.includes("1")) {
+        await react('📤');
+        await coax.reply('__Downloading your video wait__');
+      } else if (!audioCommand.includes("2")) {
+        await coax.reply('__Downloading your song wait__');
+      } else {
+        await coax.reply('_Sorry invalid number reply provide 1 or 2__');
+      }
     } catch (error) {
       console.error("Error in music search:", error);
       await react("❌");
       return coax.reply("An error occurred while searching for music.");
     }
-
-    switch ((args || text).toLowerCase()) {
-      case '1':
-        return vorterx.sendMessage(coax.from, `${prefix}audio ${getVideo.url}`);
-      case '2':
-        return vorterx.sendMessage(coax.from, `${prefix}ytmp4 ${getVideo.url}`);
-      default:
-        await react('❌');
-        return coax.reply('Invalid selection. Please choose 1 or 2.');
-    }
   }
 );
-    
+      
