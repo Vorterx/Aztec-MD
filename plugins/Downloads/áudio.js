@@ -11,7 +11,6 @@ Zenith(
     filename: __filename
   },
   async (vorterx, coax, react, { args }) => {
-   
     try {
       if (!args) {
         await react('❌');
@@ -42,8 +41,7 @@ Zenith(
         },
       };
 
-      await vorterx.sendMessage(coax.from, audioMsg, { quoted: m });
-
+      await vorterx.sendMessage(coax.from, audioMsg, { quoted: coax });
       await fs.unlinkSync(audioInfo.path);
     } catch (error) {
       console.error(error);
@@ -52,4 +50,4 @@ Zenith(
     }
   }
 );
-        
+          
