@@ -36,7 +36,7 @@ Zenith(
          else if (time2 < '11:00:00') {
       aztec = 'Good Morning 🌄';
     } 
-         else if (time2 < '05:00:00') {
+         else if (time2 < '00:00:00') {
       aztec = 'Good Morning 🌄';
     }
 
