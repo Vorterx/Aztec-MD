@@ -11,9 +11,9 @@ Zenith(
     category: "Downloads",
     filename: __filename,
   },
-  async (vorterx, coax, react, { args }) => {
- 
-    let getVideo;
+  async (vorterx, coax, react, { args,text }) => {
+    let getVideo; 
+
     if (!args) {
       await react("❌");
       return coax.reply("Please provide a search term. Example: play Dubula by Emoh");
@@ -43,15 +43,20 @@ Zenith(
       return coax.reply("An error occurred while searching for music.");
     }
 
-    const lowerText = coax.text.toLowerCase();
+    if (coax.text) {
+      const lowerText = coax.text.toLowerCase();
 
-    if (lowerText === '1') {
-      return vorterx.sendMessage(coax.from, `${prefix}audio ${getVideo.url}`);
-    } else if (lowerText === '2') {
-      return vorterx.sendMessage(coax.from, `${prefix}ytmp4 ${getVideo.url}`);
+      if (lowerText === '1') {
+        return vorterx.sendMessage(coax.from, `${prefix}audio ${getVideo.url}`);
+      } else if (lowerText === '2') {
+        return vorterx.sendMessage(coax.from, `${prefix}ytmp4 ${getVideo.url}`);
+      } else {
+        await react('❌');
+        return coax.reply('Invalid selection. Please choose 1 or 2.');
+      }
     } else {
-      await react('❌');
-      return coax.reply('Invalid selection. Please choose 1 or 2.');
+      console.error("coax.text is undefined");
+      return coax.reply("An error occurred. Please try again.");
     }
   }
 );
