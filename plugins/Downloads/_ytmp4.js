@@ -30,5 +30,5 @@ Zenith(
     await react('❌');
     return coax.reply(`${error.message}`);
   }
-      }
+      })
                                                    
