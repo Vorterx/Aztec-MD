@@ -1,4 +1,6 @@
 const { Zenith } = require('../../lib/functions.js');
+const readline = require('readline');
+
 const activeGames = new Map();
 
 Zenith(
@@ -48,9 +50,8 @@ Zenith(
 
     const askForMove = async () => {
       const game = activeGames.get(userId);
-      const msg = `Player ${game.currentPlayer}, choose a column (1-7): `;
-      const res = await coax.ask(msg);
-      return parseInt(res, 10) - 1; 
+      const column = await askUserInput(`Player ${game.currentPlayer}, choose a column (1-7): `);
+      return parseInt(column, 10) - 1; 
     };
 
     const dropPiece = (column) => {
@@ -111,4 +112,18 @@ function createBoard(rows, columns) {
   }
   return board;
 }
+
+function askUserInput(question) {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  return new Promise((resolve) => {
+    rl.question(question, (answer) => {
+      rl.close();
+      resolve(answer);
+    });
+  });
+    }
           
