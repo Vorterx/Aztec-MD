@@ -1,5 +1,4 @@
 const { Zenith } = require('../../lib/functions.js');
-
 const activeGames = new Map();
 
 Zenith(
@@ -15,7 +14,7 @@ Zenith(
     const printBoard = (userId, message) => {
       const game = activeGames.get(userId);
       const emojiBoard = game.board.map(row => row.map(cell => getEmojiForPlayer(cell)).join(' | ')).join('\n');
-      react(userId, `${message}\n${emojiBoard}`);
+      react(userId, `${message}\n\`\`\`\n${emojiBoard}\n\`\`\``);
     };
 
     const getEmojiForPlayer = (player) => {
