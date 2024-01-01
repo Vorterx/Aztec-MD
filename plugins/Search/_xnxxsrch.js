@@ -22,18 +22,18 @@ Zenith(
         console.log(response.data);
 
         if (response.data && response.data.result.length > 0) {
-          const resultList = response.data.result.map((result, index) => `${index + 1}. [${result.title}](${result.url})`);
+          const resultList = response.data.result.map((result, index) => {
+            return `:fire: **xnxx ${index + 1}**\n:clapper: *Title:* ${result.title}\n:link: *Link:* ${result.url}\n\n`;
+          });
           return coax.reply(resultList.join('\n'));
         } else {
-          
-          return coax.reply("No results found.");
+          return coax.reply(":x: No results found.");
         }
       })
       .catch(error => {
-        console.error("Error fetching data:", error);
-        
-        return coax.reply("An error occurred while fetching the data.");
+        console.error(error);
+        return coax.reply(":warning: An error occurred while fetching the data.");
       });
   }
 );
-            
+      
