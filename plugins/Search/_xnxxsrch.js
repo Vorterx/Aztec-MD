@@ -23,11 +23,11 @@ Zenith(
         console.log(response.data);
 
         if (response.data && response.data.result.length > 0) {
-          const pollOptions = response.data.result.map((result, index) => ({
-            text: `Xnxx ${index + 1}\nTitle: ${result.title}\nLink: ${result.url}`,
-            value: result.url
-          }));
+          const pollOptions = response.data.result.map((result, index) => (
+            `Xnxx ${index + 1}\nTitle: ${result.title}\nLink: ${result.url}`
+          ));
 
+          
           vorterx.sendMessage(coax.from, {
             poll: {
               question: 'Which video do you want to download?',
@@ -51,4 +51,4 @@ Zenith(
       });
   }
 );
-        
+      
