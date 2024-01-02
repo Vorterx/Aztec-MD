@@ -49,6 +49,7 @@ Zenith(
 ╰–––––––––––––––༓\n\n*${config.CAPTION}*`;
 
     const getConent = {
+      caption: res,
       contextInfo: {
         mention: [coax.sender],
         forwardingScore: 23,
