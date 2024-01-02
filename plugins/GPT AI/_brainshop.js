@@ -1,10 +1,11 @@
 async (vorterx, coax, react) => {
   const ChatBot = require('../../lib/_dbase/_brainshop.js');
+  const { cmd } = require('../../lib/client.js');
   const checkBot = await ChatBot.findOne({ userId: 'chatbot' }) || await new ChatBot({ userId: 'chatbot' }).save();
   let isBotOn = checkBot.preferences.isBotOn;
 
-  if (icmd) {
-    const command = icmd.toLowerCase();
+  if (cmd) {
+    const command = cmd.toLowerCase();
     if (command === 'bot on') {
       await react('🙂');
       isBotOn = true;
@@ -20,10 +21,10 @@ async (vorterx, coax, react) => {
     }
   }
 
-  if (isBotOn && !icmd) {
+  if (isBotOn && !cmd) {
     const doQuiz = coax.text.length;
     try {
-      if (coax.isGroup && !coax.quoted && !icmd) return;
+      if (coax.isGroup && !coax.quoted && !cmd) return;
       if (coax.text && !coax.isGroup) {
         if (doQuiz < 60) {
           vorterx.sendPresenceUpdate('composing', coax.from);
