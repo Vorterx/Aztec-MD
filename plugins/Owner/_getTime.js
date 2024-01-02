@@ -9,7 +9,7 @@ Zenith(
     desc: 'For the owner time',
     filename: __filename
   },
-  async (vorterx, coax, react, { isDev, args, sender }) => { // Add sender as a parameter
+  async (vorterx, coax, react, { isDev, args }) => { 
     if (!isDev) {
       await react('❌');
       return coax.reply('This command is for my Dev only');
