@@ -29,13 +29,11 @@ async (vorterx, coax, react) => {
         if (doQuiz < 60) {
           vorterx.sendPresenceUpdate('composing', coax.from);
           const users = coax.sender.split("@")[0];
-          const fe = require("node-fetch");
-          const textuser = budy;
-
-          const fetchtext = await fe(`http://api.brainshop.ai/get?bid=176554&key=2ISncNBhocwGt3Cw&uid=[${users}]&msg=[${textuser}]`);
-          const json = await fetchtext.json();
+          const fetch = async (url) => (await import('node-fetch')).default(url);
+          const results = budy;
+          const fetch = await fe(`http://api.brainshop.ai/get?bid=176554&key=2ISncNBhocwGt3Cw&uid=[${users}]&msg=[${results}]`);
+          const json = await fetch.json();
           const { aztec } = json;
-
           coax.reply(aztec);
           return;
         }
