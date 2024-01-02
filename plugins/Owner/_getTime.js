@@ -1,4 +1,4 @@
-const axios = require('axios');
+const config = require('../../config.js');
 const { Zenith, getBuffer } = require('../../lib/functions.js');
 const moment = require('moment-timezone');
 
