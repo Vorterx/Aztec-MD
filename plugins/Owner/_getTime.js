@@ -51,7 +51,7 @@ Zenith(
           title: `${config.CAPTION}`,
           body: 'runtime',
           thumbnail: await getBuffer('https://i.imgur.com/Umf9Bio.jpg'),
-          renderLarger: true,
+          renderLargerThumbnail: true,
           mediaType: 1,
           mediaUrl: '',
           sourceUrl: '',
