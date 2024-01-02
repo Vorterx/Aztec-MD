@@ -41,7 +41,11 @@ Zenith(
 
       vorterx.sendMessage(coax.from, { image: thumbnails, caption: quotedMsg }, { quoted: coax });
 
+      console.log("Sent initial message with video info");
+
       Zenith({ on: 'text', desc: 'Downloading from media' }, async (vorterx, coax, react, { args }) => {
+        console.log("Received text event");
+
         if (getVideo.url && (args[0] === "1" || args[0] === "2")) {
           const url = getVideo.url;
 
@@ -50,12 +54,14 @@ Zenith(
             const doVideo = path.join(__dirname, '..', '..', 'lib', 'downloads', 'video.mp4');
             videoStream.pipe(fs.createWriteStream(doVideo)).on('finish', () => {
               vorterx.sendMessage(coax.from, { video: doVideo }, { quoted: coax });
+              console.log("Sent video");
             });
           } else if (args[0] === "2") {
             const audioStream = ytdl(url, { quality: 'highestaudio' });
             const getMusic = path.join(__dirname, '..', '..', 'lib', 'downloads', 'audio.mp3');
             audioStream.pipe(fs.createWriteStream(getMusic)).on('finish', () => {
               vorterx.sendMessage(coax.from, { audio: getMusic }, { quoted: coax });
+              console.log("Sent audio");
             });
           }
         }
@@ -66,3 +72,4 @@ Zenith(
     }
   }
 );
+      
