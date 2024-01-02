@@ -1,6 +1,11 @@
-const config = require('../../config.js');
-const { Zenith } = require('../../lib/_cmd_sxntax.js');
+ const config = require('../../config.js');
+const { Zenith, getBuffer } = require('../../lib/functions.js');
 const moment = require('moment-timezone');
+const images = [
+  'https://i.imgur.com/Umf9Bio.jpg',
+  'https://i.imgur.com/CgnL0Nl.jpg',
+  'https://i.imgur.com/4zBLRMb.jpg'
+];
 
 Zenith(
   {
@@ -9,8 +14,8 @@ Zenith(
     desc: 'For the owner time',
     filename: __filename
   },
-  async (vorterx, coax, react, {isDev, args}) => {
-   
+  async (vorterx, coax, react, { isDev, args }) => {
+
     if (!isDev) {
       await react('❌');
       return coax.reply('This command is for my Dev only');
@@ -29,6 +34,8 @@ Zenith(
       aztec = 'Good Night 🌌';
     }
 
+    const getLogo = images[Math.floor(Math.random() * images.length)];
+
     const runtime = calculateRuntime(time);
     const formattedTime = time.format('HH:mm:ss');
     const date = time.format('DD/MM/YYYY');
@@ -39,9 +46,25 @@ Zenith(
 ┆ *⏳Runtime:* ${runtime}
 ┆ *⏱️Time:* ${formattedTime}
 ┆ *⌚Date:* ${date}
+┆ *🖼️Random Image:* [Click here](${randomImageUrl})
 ╰–––––––––––––––༓\n\n*${config.CAPTION}*`;
 
-    coax.reply(res);
+    const getConent = {
+      contextInfo: {
+        mention: [coax.sender],
+        forwardingScore: 23,
+        isForwarded: true,
+        externalAdReply: {
+          title: `${config.CAPTION}`,
+          body: 'runtime',
+          thumbnail: await getBuffer('getLogo'),
+          renderLarger: true,
+          mediaType: 1,
+          mediaUrl: '',
+          sourceUrl: '',
+        },
+      },
+    };
   }
 );
 
@@ -50,5 +73,4 @@ function calculateRuntime(currentTime) {
   const runtimeMilliseconds = midnight.diff(currentTime);
   const runtime = moment.duration(runtimeMilliseconds).humanize();
   return runtime;
-  }
-    
+ }
