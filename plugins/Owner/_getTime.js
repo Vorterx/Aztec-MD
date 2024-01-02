@@ -1,4 +1,4 @@
-const config = require('../../config.js');
+const axios = require('axios');
 const { Zenith, getBuffer } = require('../../lib/functions.js');
 const moment = require('moment-timezone');
 
@@ -39,24 +39,23 @@ Zenith(
 ┆ *⌚Date:* ${date}
 ╰–––––––––––––––༓\n\n*${config.CAPTION}*`;
 
-    vorterx.sendMessage(coax.from, {
-      contextInfo: {
-        caption: res,
-        mentionedJid: [coax.sender],
-        forwardingScore: 23,
-        isForwarded: true,
-        externalAdReply: {
-          title: `${config.CAPTION}`,
-          body: 'runtime',
-          thumbnail: await getBuffer('https://i.imgur.com/Umf9Bio.jpg'),
-          renderLargerThumbnail: true,
-          mediaType: 1,
-          mediaUrl: '',
-          sourceUrl: '',
-          ShowAdAttribution: true,
-        },
+    const contextInfo = {
+      mentionedJid: [coax.sender],
+      forwardingScore: 23,
+      isForwarded: true,
+      externalAdReply: {
+        title: `${config.CAPTION}`,
+        body: 'runtime',
+        thumbnail: await getBuffer('https://i.imgur.com/Umf9Bio.jpg'),
+        renderLargerThumbnail: true,
+        mediaType: 2, 
+        mediaUrl: '', 
+        sourceUrl: '',
+        ShowAdAttribution: true,
       },
-    });
+    };
+
+    vorterx.sendMessage(coax.from, res, 'text', { contextInfo });
   }
 );
-        
+      
