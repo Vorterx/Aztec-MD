@@ -1,4 +1,4 @@
- const config = require('../../config.js');
+const config = require('../../config.js');
 const { Zenith, getBuffer } = require('../../lib/functions.js');
 const moment = require('moment-timezone');
 const images = [
@@ -56,7 +56,7 @@ Zenith(
         externalAdReply: {
           title: `${config.CAPTION}`,
           body: 'runtime',
-          thumbnail: await getBuffer('getLogo'),
+          thumbnail: await getBuffer(getLogo), 
           renderLarger: true,
           mediaType: 1,
           mediaUrl: '',
@@ -64,7 +64,8 @@ Zenith(
         },
       },
     };
-  }
+
+           }
 );
 
 function calculateRuntime(currentTime) {
@@ -72,4 +73,4 @@ function calculateRuntime(currentTime) {
   const runtimeMilliseconds = midnight.diff(currentTime);
   const runtime = moment.duration(runtimeMilliseconds).humanize();
   return runtime;
- }
+}
