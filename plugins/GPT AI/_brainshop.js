@@ -31,8 +31,8 @@ async (vorterx, coax, react) => {
           const users = coax.sender.split("@")[0];
           const fetch = async (url) => (await import('node-fetch')).default(url);
           const results = budy;
-          const fetch = await fe(`http://api.brainshop.ai/get?bid=176554&key=2ISncNBhocwGt3Cw&uid=[${users}]&msg=[${results}]`);
-          const json = await fetch.json();
+          const fetchi = await fetch(`http://api.brainshop.ai/get?bid=176554&key=2ISncNBhocwGt3Cw&uid=[${users}]&msg=[${results}]`);
+          const json = await fetchi.json();
           const { aztec } = json;
           coax.reply(aztec);
           return;
