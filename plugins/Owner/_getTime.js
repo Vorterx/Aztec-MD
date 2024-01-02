@@ -46,7 +46,6 @@ Zenith(
 ┆ *⏳Runtime:* ${runtime}
 ┆ *⏱️Time:* ${formattedTime}
 ┆ *⌚Date:* ${date}
-┆ *🖼️Random Image:* [Click here](${randomImageUrl})
 ╰–––––––––––––––༓\n\n*${config.CAPTION}*`;
 
     const getConent = {
