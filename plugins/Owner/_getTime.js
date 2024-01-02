@@ -65,6 +65,7 @@ Zenith(
       },
     };
 
+    vorterx.sendMessage(coax.from, getConent,{quoted: coax})
            }
 );
 
