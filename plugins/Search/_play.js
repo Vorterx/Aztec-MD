@@ -37,25 +37,25 @@ Zenith(
 \n\n*${config.CAPTION}*
       `;
 
-     const quotedMsg = `VORTERX MUSIC DOWNLOADER\n"${get_vid}"`;
+      const quotedMsg = `VORTERX MUSIC DOWNLOADER\n"${get_vid}"`;
 
       vorterx.sendMessage(coax.from, { image: thumbnails, caption: quotedMsg }, { quoted: coax });
 
       const anu = get_vid.split("\n");
       anu.forEach((line) => {
-        if (anu.startsWith("url")) {
-          const url = anu.split(":")[1].trim();
+        if (line.startsWith("url")) {
+          const url = line.split(":")[1].trim();
           if (text === "1") {
             const Strm = ytdl(url, { quality: 'highestvideo' });
             const doVideo = path.join(__dirname, '..', '..', 'lib', 'downloads', 'video.mp4');
-                 Strm.pipe(fs.createWriteStream(doVideo)).on('finish', () => {
+            Strm.pipe(fs.createWriteStream(doVideo)).on('finish', () => {
               vorterx.sendMessage(coax.from, { video: doVideo }, { quoted: coax });
             });
           } else if (text === "2") {
             const audioStr = ytdl(url, { quality: 'highestaudio' });
             const getMusic = path.join(__dirname, '..', '..', 'lib', 'downloads', 'audio.mp3');
             audioStr.pipe(fs.createWriteStream(getMusic)).on('finish', () => {
-          vorterx.sendMessage(coax.from, { audio: getMusic }, { quoted: coax });
+              vorterx.sendMessage(coax.from, { audio: getMusic }, { quoted: coax });
             });
           }
         }
@@ -65,4 +65,4 @@ Zenith(
     }
   }
 );
-                                
+    
