@@ -49,8 +49,8 @@ Zenith(
 ╰–––––––––––––––༓\n\n*${config.CAPTION}*`;
 
     const getConent = {
-      caption: res,
       contextInfo: {
+        caption: res,  
         mention: [coax.sender],
         forwardingScore: 23,
         isForwarded: true,
@@ -59,7 +59,7 @@ Zenith(
           body: 'runtime',
           thumbnail: await getBuffer(getLogo),
           renderLarger: true,
-          mediaType: 2,  
+          mediaType: 2,
           mediaUrl: '',
           sourceUrl: '',
         },
@@ -76,4 +76,4 @@ function calculateRuntime(currentTime) {
   const runtime = moment.duration(runtimeMilliseconds).humanize();
   return runtime;
     }
-                                                                              
+      
