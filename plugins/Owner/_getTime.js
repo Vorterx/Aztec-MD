@@ -9,7 +9,7 @@ Zenith(
     desc: 'For the owner time',
     filename: __filename
   },
-  async (vorterx, coax, react, { isDev, args }) => { 
+  async (vorterx, coax, react, { isDev, args }) => {
     if (!isDev) {
       await react('❌');
       return coax.reply('This command is for my Dev only');
@@ -28,22 +28,21 @@ Zenith(
       aztec = 'Good Night 🌌';
     }
 
-    const runtime = calculateRuntime(time);
     const formattedTime = time.format('HH:mm:ss');
     const date = time.format('DD/MM/YYYY');
 
     const res = `
 ╭–– *『 RUN TIME 』*
 ┆ *${aztec}*
-┆ *⏳Runtime:* ${runtime}
+┆ *⏳Owner:* ${config.MODS}
 ┆ *⏱️Time:* ${formattedTime}
 ┆ *⌚Date:* ${date}
 ╰–––––––––––––––༓\n\n*${config.CAPTION}*`;
 
-    const getConent = {
+    vorterx.sendMessage(coax.from, {
       contextInfo: {
         caption: res,
-    //    mentionedJid: [sender],
+        mentionedJid: [coax.sender],
         forwardingScore: 23,
         isForwarded: true,
         externalAdReply: {
@@ -51,21 +50,13 @@ Zenith(
           body: 'runtime',
           thumbnail: await getBuffer('https://i.imgur.com/Umf9Bio.jpg'),
           renderLargerThumbnail: true,
-          mediaType: 2,
-          mediaUrl: '', 
+          mediaType: 1,
+          mediaUrl: '',
           sourceUrl: '',
           ShowAdAttribution: true,
         },
       },
-    };
-
-    await vorterx.sendMessage(coax.from, getConent, { quoted: coax });
+    });
   }
 );
-    function calculateRuntime(currentTime) {
-  const midnight = moment(currentTime).startOf('day').add(1, 'day');
-  const runtimeMilliseconds = midnight.diff(currentTime);
-  const runtime = moment.duration(runtimeMilliseconds).humanize();
-  return runtime;
-  }
-      
+        
