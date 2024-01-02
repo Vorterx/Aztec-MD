@@ -43,7 +43,7 @@ Zenith(
     const getConent = {
       contextInfo: {
         caption: res,
-        mentionedJid: [sender],
+    //    mentionedJid: [sender],
         forwardingScore: 23,
         isForwarded: true,
         externalAdReply: {
