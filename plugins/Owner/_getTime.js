@@ -34,28 +34,30 @@ Zenith(
     const res = `
 ╭–– *『 RUN TIME 』*
 ┆ *${aztec}*
-┆ *⏳Owner:* ${config.MODS}
+┆ *⏳Owner:* ${process.env.MODS}
 ┆ *⏱️Time:* ${formattedTime}
 ┆ *⌚Date:* ${date}
 ╰–––––––––––––––༓\n\n*${config.CAPTION}*`;
 
-    const contextInfo = {
-      text: res,
-      mentionedJid: [coax.sender],
-      forwardingScore: 23,
-      isForwarded: true,
-      externalAdReply: {
-        title: `${config.CAPTION}`,
-        body: 'runtime',
-        thumbnail: await getBuffer('https://i.imgur.com/Umf9Bio.jpg'),
-        renderLargerThumbnail: true,
-        mediaType: 2, 
-        mediaUrl: '',
-        sourceUrl: '',
-        ShowAdAttribution: true,
+    const context = {
+      contextInfo: {
+        caption: res,
+        mentionedJid: [coax.sender],
+        forwardingScore: 23,
+        isForwarded: true,
+        externalAdReply: {
+          title: `${config.CAPTION}`,
+          body: 'runtime',
+          thumbnail: await getBuffer('https://i.imgur.com/Umf9Bio.jpg'),
+          renderLargerThumbnail: true,
+          mediaType: 2, 
+          mediaUrl: '',
+          sourceUrl: '',
+          ShowAdAttribution: true,
+        },
       },
     };
 
-    vorterx.sendMessage(coax.from, contextInfo);
+    vorterx.sendMessage(coax.from, context);
   }
 );
