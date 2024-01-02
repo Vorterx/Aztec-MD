@@ -52,9 +52,10 @@ Zenith(
           body: 'runtime',
           thumbnail: await getBuffer('https://i.imgur.com/Umf9Bio.jpg'),
           renderLarger: true,
-          mediaType: 2,
+          mediaType: 1,
           mediaUrl: '',
           sourceUrl: '',
+          ShowAdAttribution: true,
         },
       },
     };
