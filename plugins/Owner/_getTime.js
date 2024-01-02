@@ -9,8 +9,7 @@ Zenith(
     desc: 'For the owner time',
     filename: __filename
   },
-  async (vorterx, coax, react, { isDev, args }) => {
-
+  async (vorterx, coax, react, { isDev, args, sender }) => { // Add sender as a parameter
     if (!isDev) {
       await react('❌');
       return coax.reply('This command is for my Dev only');
@@ -44,7 +43,7 @@ Zenith(
     const getConent = {
       contextInfo: {
         caption: res,
-        mentionedJid: [coax.sender],
+        mentionedJid: [sender],
         forwardingScore: 23,
         isForwarded: true,
         externalAdReply: {
@@ -52,19 +51,18 @@ Zenith(
           body: 'runtime',
           thumbnail: await getBuffer('https://i.imgur.com/Umf9Bio.jpg'),
           renderLargerThumbnail: true,
-          mediaType: 1,
-          mediaUrl: '',
+          mediaType: 2,
+          mediaUrl: '', 
           sourceUrl: '',
           ShowAdAttribution: true,
         },
       },
     };
 
-   await vorterx.sendMessage(coax.from, getConent, { quoted: coax });
+    await vorterx.sendMessage(coax.from, getConent, { quoted: coax });
   }
 );
-
-function calculateRuntime(currentTime) {
+    function calculateRuntime(currentTime) {
   const midnight = moment(currentTime).startOf('day').add(1, 'day');
   const runtimeMilliseconds = midnight.diff(currentTime);
   const runtime = moment.duration(runtimeMilliseconds).humanize();
