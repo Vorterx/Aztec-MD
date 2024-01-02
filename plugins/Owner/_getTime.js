@@ -56,17 +56,17 @@ Zenith(
         externalAdReply: {
           title: `${config.CAPTION}`,
           body: 'runtime',
-          thumbnail: await getBuffer(getLogo), 
+          thumbnail: await getBuffer(getLogo),
           renderLarger: true,
-          mediaType: 1,
+          mediaType: 2,  
           mediaUrl: '',
           sourceUrl: '',
         },
       },
     };
 
-    vorterx.sendMessage(coax.from, getConent,{quoted: coax})
-           }
+    vorterx.sendMessage(coax.from, getConent, { quoted: coax });
+  }
 );
 
 function calculateRuntime(currentTime) {
@@ -74,4 +74,5 @@ function calculateRuntime(currentTime) {
   const runtimeMilliseconds = midnight.diff(currentTime);
   const runtime = moment.duration(runtimeMilliseconds).humanize();
   return runtime;
-}
+    }
+                                                                              
