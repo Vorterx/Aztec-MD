@@ -44,7 +44,7 @@ Zenith(
     const getConent = {
       contextInfo: {
         caption: res,
-        mention: [coax.sender],
+        mentionedJid: [coax.sender],
         forwardingScore: 23,
         isForwarded: true,
         externalAdReply: {
@@ -59,7 +59,7 @@ Zenith(
       },
     };
 
-    vorterx.sendMessage(coax.from, getConent, { quoted: coax });
+   await vorterx.sendMessage(coax.from, getConent, { quoted: coax });
   }
 );
 
