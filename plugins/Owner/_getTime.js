@@ -1,11 +1,6 @@
 const config = require('../../config.js');
 const { Zenith, getBuffer } = require('../../lib/functions.js');
 const moment = require('moment-timezone');
-const images = [
-  'https://i.imgur.com/Umf9Bio.jpg',
-  'https://i.imgur.com/CgnL0Nl.jpg',
-  'https://i.imgur.com/4zBLRMb.jpg'
-];
 
 Zenith(
   {
@@ -34,8 +29,6 @@ Zenith(
       aztec = 'Good Night 🌌';
     }
 
-    const getLogo = images[Math.floor(Math.random() * images.length)];
-
     const runtime = calculateRuntime(time);
     const formattedTime = time.format('HH:mm:ss');
     const date = time.format('DD/MM/YYYY');
@@ -50,14 +43,14 @@ Zenith(
 
     const getConent = {
       contextInfo: {
-        caption: res,  
+        caption: res,
         mention: [coax.sender],
         forwardingScore: 23,
         isForwarded: true,
         externalAdReply: {
           title: `${config.CAPTION}`,
           body: 'runtime',
-          thumbnail: await getBuffer(getLogo),
+          thumbnail: await getBuffer('https://i.imgur.com/Umf9Bio.jpg'),
           renderLarger: true,
           mediaType: 2,
           mediaUrl: '',
@@ -75,5 +68,5 @@ function calculateRuntime(currentTime) {
   const runtimeMilliseconds = midnight.diff(currentTime);
   const runtime = moment.duration(runtimeMilliseconds).humanize();
   return runtime;
-    }
+  }
       
