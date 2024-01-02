@@ -1,8 +1,10 @@
+const ytdl = require('ytdl-core');
+const fs = require('fs');
+const path = require('path');
 const { getBuffer } = require("../../lib/_getBuffer.js");
 const yts = require("youtube-yts");
 const config = require('../../config.js');
 const { Zenith } = require('../../lib/_cmd_sxntax.js');
-const prefix = process.env.PREFIX;
 
 Zenith(
   {
@@ -28,32 +30,39 @@ Zenith(
       const get_vid = `
 *${getVideo.title}*
 
-1. ⬢ audio
-2. ⬢ video
+1. audio
+2. video
 
 *Send a number 1 or 2*
 \n\n*${config.CAPTION}*
       `;
 
-      vorterx.sendMessage(coax.from, { image: thumbnails, caption: get_vid }, { quoted: coax });
+     const quotedMsg = `VORTERX MUSIC DOWNLOADER\n"${get_vid}"`;
 
-      const userChoice = text.toLowerCase();
+      vorterx.sendMessage(coax.from, { image: thumbnails, caption: quotedMsg }, { quoted: coax });
 
-      if (userChoice === '1') {
-              await coax.reply(`${prefix}ytmp4 ${getVideo.url}`);
-        await react('📤');
-        return coax.reply('__Downloading your video wait__');
-      } else if (userChoice === '2') {
-            await coax.reply(`${prefix}audio ${getVideo.url}`);
-        return coax.reply('__Downloading your song wait__');
-      } else {
-        return coax.reply('_Sorry invalid number reply provide 1 or 2__');
-      }
+      const anu = get_vid.split("\n");
+      anu.forEach((line) => {
+        if (anu.startsWith("url")) {
+          const url = anu.split(":")[1].trim();
+          if (text === "1") {
+            const Strm = ytdl(url, { quality: 'highestvideo' });
+            const doVideo = path.join(__dirname, '..', '..', 'lib', 'downloads', 'video.mp4');
+                 Strm.pipe(fs.createWriteStream(doVideo)).on('finish', () => {
+              vorterx.sendMessage(coax.from, { video: doVideo }, { quoted: coax });
+            });
+          } else if (text === "2") {
+            const audioStr = ytdl(url, { quality: 'highestaudio' });
+            const getMusic = path.join(__dirname, '..', '..', 'lib', 'downloads', 'audio.mp3');
+            audioStr.pipe(fs.createWriteStream(getMusic)).on('finish', () => {
+          vorterx.sendMessage(coax.from, { audio: getMusic }, { quoted: coax });
+            });
+          }
+        }
+      });
     } catch (error) {
-      console.error("Error in music search:", error);
-      await react("❌");
-      return coax.reply("An error occurred while searching for music.");
+      console.error(error);
     }
   }
 );
-          
+                                
