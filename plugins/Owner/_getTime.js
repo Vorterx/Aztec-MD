@@ -40,6 +40,7 @@ Zenith(
 ╰–––––––––––––––༓\n\n*${config.CAPTION}*`;
 
     const contextInfo = {
+      text: res,
       mentionedJid: [coax.sender],
       forwardingScore: 23,
       isForwarded: true,
@@ -49,13 +50,12 @@ Zenith(
         thumbnail: await getBuffer('https://i.imgur.com/Umf9Bio.jpg'),
         renderLargerThumbnail: true,
         mediaType: 2, 
-        mediaUrl: '', 
+        mediaUrl: '',
         sourceUrl: '',
         ShowAdAttribution: true,
       },
     };
 
-    vorterx.sendMessage(coax.from, res, 'text', { contextInfo });
+    vorterx.sendMessage(coax.from, contextInfo);
   }
 );
-      
