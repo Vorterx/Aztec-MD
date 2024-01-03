@@ -31,7 +31,7 @@ Zenith(
     if (result.status === 200) {
       await react("💡");
       await vorterx.sendMessage(coax.from, {
-        text: result.data,
+        text: result.data.message,
         image: { url: "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png" },
         contextInfo: {
           externalAdReply: {
