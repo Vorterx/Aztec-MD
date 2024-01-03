@@ -8,8 +8,8 @@ Zenith(
         on: "text",
         isOwner: true,
     },
-    async ({
-        vorterx, coax, args, react
+    async (
+        vorterx, coax, react, { args
     }) => {
         if (args.startsWith(">")) {
             try {
