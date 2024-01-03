@@ -22,8 +22,7 @@ Zenith(
     }
 
     const encodedArgs = encodeURIComponent(args);
-    const gpt_api = `https://api.fgmods.xyz/api/info/openai?prompt=Tu%20nombre%20es%20DyLux&text=${encodedArgs}&apikey=qqdvVVub`;
-
+    const gpt_api = `https://api.neoxr.eu/api/gpt-pro?q=${encodedArgs}&apikey=Hze7nK`;
     const res = await fetch(gpt_api);
     const result = await res.json();
 
@@ -31,9 +30,8 @@ Zenith(
 
     if (result.status === 200) {
       await react("💡");
-
       await vorterx.sendMessage(coax.from, {
-        text: result.result,
+        text: result.message,
         image: { url: "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png" },
         contextInfo: {
           externalAdReply: {
@@ -47,8 +45,6 @@ Zenith(
         },
       });
     } else {
-      await react("❌");
-      coax.reply(`${result.result}`);
     }
   });
     
