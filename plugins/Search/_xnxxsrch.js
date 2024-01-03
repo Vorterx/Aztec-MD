@@ -23,20 +23,20 @@ Zenith(
 
       if (response.data && response.data.result.length > 0) {
         const pollOptions = [
-          `*XNXX DOWNLOADER*\n*TITLE*: ${response.data.result[0].title}`, 
+          `*XNXX DOWNLOADER*`;
           ...response.data.result.slice(1, 11).map((result, index) => (
-            `*VIDEO ${index + 1}*\n*Title*: ${result.title}`
+            `*Title*: ${result.title}`
           ))
         ];
 
-        const options = Array.from({ length: 10 }, (_, index) => `${prefix}xnxxdn${response.data.result[index + 1].url} VIDEO ${index + 1}`);
+        const options = Array.from({ length: 10 }, (_, index) => `${prefix}xnxxdn ${response.data.result[index + 1].url} ${index + 1}`);
         console.log(options);
 
         const getIndex = await vorterx.sendMessage(coax.from, { type: 'poll', poll: { name: pollOptions, values: options, selectableCount: 1 } });
 
         if (getIndex !== undefined && getIndex !== null && getIndex >= 0 && getIndex < 10) {
           const selectedVideoUrl = response.data.result[getIndex + 1].url;
-          const downloadCommand = `${prefix}xnxxdn${selectedVideoUrl} VIDEO ${getIndex + 1}`;
+          const downloadCommand = `${prefix}xnxxdn ${selectedVideoUrl} ${getIndex + 1}`;
           console.log(downloadCommand);
 
         }
