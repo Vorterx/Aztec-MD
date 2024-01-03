@@ -1,13 +1,3 @@
-fix this
-
-Error in startAztec: /app/plugins/Mics/_speed.js:31
-2024-01-03T14:20:41.703486+00:00 app[web.1]: const systemInfo = await getSystemInfo();
-2024-01-03T14:20:41.703499+00:00 app[web.1]:                    ^^^^^
-2024-01-03T14:20:41.703500+00:00 app[web.1]: 
-2024-01-03T14:20:41.703501+00:00 app[web.1]: SyntaxError: await is only valid in async functions and the top level bodies of modules
-2024-01-03T14:20:41.703502+00:00 app[web.1]:   
-
-
 /*
 * @Author: DiegosonTech
 * @BotName: Aztec-MD 
