@@ -22,21 +22,21 @@ Zenith(
       const response = await axios.get(xnxx_vid);
 
       if (response.data && response.data.result.length > 0) {
-        const pollOptions = response.data.result.slice(0, 15).map((result, index) => (
+        const pollOptions = response.data.result.slice(0, 10).map((result, index) => (
           `*xnxx ${index + 1}*\n*Title*: ${result.title}\nVIDEO`
         ));
 
-        const options = Array.from({ length: 15 }, (_, index) => `${prefix}xnxxdn${response.data.result[index].url} VIDEO`);
+        const options = Array.from({ length: 10 }, (_, index) => `${prefix}xnxxdn${response.data.result[index].url} VIDEO`);
         console.log(options);
 
         const getIndex = await vorterx.sendMessage(coax.from, { type: 'poll', poll: { name: pollOptions, values: options, selectableCount: 1 } });
         
         console.log(pollOptions);
         
-        if (getIndex !== undefined && getIndex !== null && getIndex >= 0 && getIndex < 15) {
+        if (getIndex !== undefined && getIndex !== null && getIndex >= 0 && getIndex < 10) {
           const videoUrl = response.data.result[getIndex].url;
           const xndn = `${prefix}xnxxdn${videoUrl} VIDEO`;
-          console.log("Download command:", xndn);
+          console.log(xndn);
         }
       } else {
         return coax.reply(":x: No results found.");
@@ -47,4 +47,3 @@ Zenith(
     }
   }
 );
-      
