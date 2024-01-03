@@ -1,3 +1,5 @@
+const { Zenith } = require('../../lib/functions.js');
+
 Zenith(
   {
     usage: "xnxxsh",
