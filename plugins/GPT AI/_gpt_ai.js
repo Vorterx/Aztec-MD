@@ -22,7 +22,7 @@ Zenith(
     }
 
     const encodedArgs = encodeURIComponent(args);
-    const gpt_api = `https://api.neoxr.eu/api/gpt-pro?q=${encodedArgs}&apikey=Hze7nK`;
+    const gpt_api = `https://api.neoxr.eu/api/gpt-pro?q=${encodedArgs}&apikey=roXNse`;
     const res = await fetch(gpt_api);
     const result = await res.json();
 
