@@ -60,6 +60,7 @@
     "neofetch": "^7.1.0",
     "node-youtube-music": "^0.8.3",
     "slot-machine": "^2.1.0",
+    "systeminformation": "5.21.22",
     "whatsapp-web.js": "^1.23.0",
     "stream": "^0.0.2",
     "tmp-promise": "^3.0.3",
