@@ -23,7 +23,7 @@ Zenith(
 
       if (response.data && response.data.result.length > 0) {
         const pollOptions = [
-          `*XNXX DOWNLOADER*`;
+       //   `*XNXX DOWNLOADER*`;
           ...response.data.result.slice(1, 11).map((result, index) => (
             `*Title*: ${result.title}`
           ))
