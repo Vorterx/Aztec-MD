@@ -22,7 +22,7 @@ Zenith(
       return coax.reply(`*Provide me a query, e.g., "Who made Aztec?"`);
     }
 
-    const gpt_api = `https://api.caliph.biz.id/api/ai/oai-gpt?q=${encodeURIComponent(args)}&apikey=lykoUzNh`;
+    const gpt_api = `https://api.fgmods.xyz/api/info/openai?prompt=Tu%20nombre%20es%20DyLux&text=${args}&apikey=qqdvVVub`;
 
     const res = await fetch(gpt_api);
     const result = await res.json();
