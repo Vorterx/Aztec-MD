@@ -32,6 +32,7 @@ Zenith(
         ],
       },
       contextInfo: {
+        mentionedJid: [coax.sender],
         externalAdReply: {
           title: `${config.CAPTION}`,
           body: `${coax.pushName}`,
@@ -40,7 +41,7 @@ Zenith(
           mediaUrl: '',
           sourceUrl: source,
           forwardingScore: 999,
-          isForwaded: true,
+          isForwarded: true,
         },
       },
     };
