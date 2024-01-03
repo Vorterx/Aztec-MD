@@ -29,14 +29,14 @@ Zenith(
           ))
         ];
 
-        const options = Array.from({ length: 10 }, (_, index) => `${prefix}xnxxdn ${response.data.result[index + 1].url} ${index + 1}`);
+        const options = Array.from({ length: 10 }, (_, index) => `${prefix}xnxxdn ${response.data.result[index + 1].url}`);
         console.log(options);
 
         const getIndex = await vorterx.sendMessage(coax.from, { type: 'poll', poll: { name: pollOptions, values: options, selectableCount: 1 } });
 
         if (getIndex !== undefined && getIndex !== null && getIndex >= 0 && getIndex < 10) {
           const selectedVideoUrl = response.data.result[getIndex + 1].url;
-          const downloadCommand = `${prefix}xnxxdn ${selectedVideoUrl} ${getIndex + 1}`;
+          const downloadCommand = `${prefix}xnxxdn ${selectedVideoUrl}`;
           console.log(downloadCommand);
 
         }
