@@ -28,7 +28,7 @@ Zenith(
 
     console.log(result);
 
-    if (result.status === 200) {
+    if (result.status === true) {
       await react("💡");
       await vorterx.sendMessage(coax.from, {
         text: result.data.message,
