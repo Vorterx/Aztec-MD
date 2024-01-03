@@ -1,4 +1,5 @@
 const { Zenith } = require('../../lib/functions.js');
+const prefix = process.env.PREFIX;
 
 Zenith(
   {
