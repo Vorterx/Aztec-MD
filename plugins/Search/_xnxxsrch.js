@@ -15,40 +15,28 @@ Zenith(
       await react("❌");
       return coax.reply("Please provide a search term.");
     }
-
     const xnxx_vid = `https://raganork-network.vercel.app/api/xvideos/search?query=${args}`;
+    try {
+      const response = await axios.get(xnxx_vid);
 
-    axios.get(xnxx_vid)
-      .then(response => {
-        console.log(response.data);
+      if (response.data && response.data.result.length > 0) {
+        const pollOptions = response.data.result.slice(0, 15).map((result, index) => (
+          `*xnxx ${index + 1}*\n*Title*: ${result.title}\nVIDEO`
+        ));
 
-        if (response.data && response.data.result.length > 0) {
-          const pollOptions = response.data.result.map((result, index) => (
-            `Xnxx ${index + 1}\nTitle: ${result.title}\nLink: ${result.url}`
-          ));
-
-          
-          vorterx.sendMessage(coax.from, {
-            poll: {
-              question: 'Which video do you want to download?',
-              options: pollOptions,
-              multiselect: false,
-              selectableCount: 1,
-              isAnonymous: false,
-              closeAfterVoting: true,
-              footer: 'React with your choice to download the corresponding video.'
-            }
-          });
-
-          return;
-        } else {
-          return coax.reply(":x: No results found.");
+        const options = Array.from({ length: 15 }, (_, index) => `${prefix}xnxxdn${response.data.result[index].url} VIDEO`);
+        const getIndex = await vorterx.sendMessage(coax.from, { poll: { name: pollOptions, values: options, selectableCount: 1 } });
+        if (getIndex >= 0 && getIndex < 15) {
+          const videoUrl = response.data.result[getIndex].url;
+          const xndn = `${prefix}xnxxdn${videoUrl} VIDEO`;
         }
-      })
-      .catch(error => {
-        console.error(error);
-        return coax.reply(":warning: An error occurred while fetching the data.");
-      });
+      } else {
+        return coax.reply(":x: No results found.");
+      }
+    } catch (error) {
+      console.error(error);
+      return coax.reply(":warning: An error occurred while fetching the data.");
+    }
   }
 );
-      
+    
