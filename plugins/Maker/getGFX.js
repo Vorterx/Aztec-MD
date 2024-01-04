@@ -19,6 +19,7 @@ Zenith({
 });
 
 // ....................................................
+// ....................................................
 
 Zenith({
   usage: 'gfx2',
@@ -32,10 +33,11 @@ Zenith({
   }
   await react('🛡️');
   let [text1, text2] = args[0].split('|');
-  let image2 = `https://api.caliph.biz.id/api/girlneko?nama1=${encodeURIComponent(text1)}&nama2=${encodeURIComponent(text2)}&apikey=caliphkey`;
+  let image2 = `https://api.caliph.biz.id/api/girlneko2?nama1=${encodeURIComponent(text1)}&nama2=${encodeURIComponent(text2)}&apikey=caliphkey`;
   vorterx.sendMessage(m.chat, { image: { url: image2 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
 
+// ....................................................
 // ....................................................
 
 Zenith({
@@ -54,6 +56,7 @@ Zenith({
 });
 
 // ....................................................
+// ....................................................
 
 Zenith({
   usage: 'gfx4',
@@ -70,6 +73,7 @@ Zenith({
   vorterx.sendMessage(m.chat, { image: { url: image4 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
 
+// ....................................................
 // ....................................................
 
 Zenith({
@@ -88,6 +92,7 @@ Zenith({
 });
 
 // ....................................................
+// ....................................................
 
 Zenith({
   usage: 'gfx6',
@@ -105,6 +110,7 @@ Zenith({
   vorterx.sendMessage(m.chat, { image: { url: image6 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
 
+// ....................................................
 // ....................................................
 
 Zenith({
@@ -125,6 +131,7 @@ Zenith({
 });
 
 // ....................................................
+// ....................................................
 
 Zenith({
   usage: 'gfx8',
@@ -144,6 +151,7 @@ Zenith({
 });
 
 // ....................................................
+// ....................................................
 
 Zenith({
   usage: 'gfx9',
@@ -160,6 +168,7 @@ Zenith({
   vorterx.sendMessage(m.chat, { image: { url: image9 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
 
+// ....................................................
 // ....................................................
 
 Zenith({
@@ -178,6 +187,7 @@ Zenith({
 });
 
 // ....................................................
+// ....................................................
 
 Zenith({
   usage: 'gfx11',
@@ -194,6 +204,7 @@ Zenith({
   vorterx.sendMessage(m.chat, { image: { url: image11 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
 
+// ....................................................
 // ....................................................
 
 Zenith({
