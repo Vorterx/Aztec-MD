@@ -10,11 +10,11 @@ Zenith(
   category: 'Search',
   desc: 'To search any',
   filename: __filename
-  }, async (vorterx, coax, react, {args}) => {
+  }, async (vorterx, m, react, {args}) => {
 
     if(!args) {
       await react('❌');
-      return coax.reply(`\`\`\`Please provide a query\`\`\``);
+      return m.reply(`\`\`\`Please provide a query\`\`\``);
     }     
     await react("🔍");
         google({ query: args }).then(res => {
@@ -29,7 +29,7 @@ Zenith(
           const formattedAztec = chalk.bold(aztec);
 
           const img = "https://i.ibb.co/B3KNxyk/6351f5da506d8f7635f2be3feb6950c6.jpg";
-          vorterx.sendMessage(coax.from, { image: { url: img }, caption: formattedAztec }, { quoted: coax });
+          vorterx.sendMessage(m.chat, { image: { url: img }, caption: formattedAztec }, { quoted: chat });
         }).catch(err => {
           console.error(err);
         });
