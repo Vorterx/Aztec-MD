@@ -5,12 +5,12 @@ Zenith(
   usage: 'uptime',
   category: 'Mics',
   filename: __filename
-}, async (vorterx, coax, react) => {
+}, async (vorterx, m, react) => {
  
   await react('⏲️');
   const uptime = process.uptime();
   const uptimeString = formatUptime(uptime);
-  coax.reply(`*Uptime*: ${uptimeString}`);
+  m.reply(`*Uptime*: ${uptimeString}`);
 });
 
 function formatUptime(seconds) {
