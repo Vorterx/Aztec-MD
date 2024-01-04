@@ -7,12 +7,12 @@ alias: ["mute"],
 desc: "To close the group",
 category: "Group",
 filename: __filename
-}, async (vorterx, coax, react, {isGroup}) => {
+}, async (vorterx, m, react, {isGroup}) => {
 
-if(!coax.isGroup) { 
-await react("❌"); return coax.reply("*👋 Sorry this command is for admins*");
+if(!m.isGroup) { 
+await react("❌"); return m.reply("*👋 Sorry this command is for admins*");
 }
 await react("🔉");
-    coax.reply(`『 GROUP SETTINGS 』\n\nGroup has been closed by admin,All participants cannot send messagez`);
-return await vorterx.groupSettingUpdate(coax.from, "announcement");
+    m.reply(`『 GROUP SETTINGS 』\n\nGroup has been closed by admin,All participants cannot send messagez`);
+return await vorterx.groupSettingUpdate(m.chat, "announcement");
   });
