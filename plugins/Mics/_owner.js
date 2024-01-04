@@ -14,7 +14,7 @@ Zenith(
   desc: "Get owner information",
   category: "Mics",
   filename: __filename
-  }, async (vorterx, coax, react) => {
+  }, async (vorterx, m, react) => {
    
     await react('👤');
     const userNumber = config.mods;
@@ -32,7 +32,9 @@ Zenith(
         ],
       },
       contextInfo: {
-        mentionedJid: [coax.sender],
+        mentionedJid: [m.sender],
+        forwardingScore: 999,
+          isForwarded: true,
         externalAdReply: {
           title: `${config.CAPTION}`,
           body: `${coax.pushName}`,
@@ -40,11 +42,9 @@ Zenith(
           mediaType: 1, 
           mediaUrl: '',
           sourceUrl: source,
-          forwardingScore: 999,
-          isForwarded: true,
         },
       },
     };
 
-    await vorterx.sendMessage(coax.from, buttonMessage, { quoted: coax });
+    await vorterx.sendMessage(m.chat, buttonMessage, { quoted: m });
   });
