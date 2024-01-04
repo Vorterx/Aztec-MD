@@ -7,21 +7,21 @@ Zenith(
   category: "Group",
   desc: "Change the group name",
   filename: __filename
-}, async (vorterx, coax, react, {args, isBotAdmin, isGroup}) => {
+}, async (vorterx,m, react, {args, isBotAdmin, isGroup}) => {
     
-    if (!isGroup) {
+    if (!m.isGroup) {
       await react("❌");
-      return coax.reply("⛔️*This command is only for group admins.*");
+      return m.reply("⛔️*This command is only for group admins.*");
     }
 
     if (!isBotAdmin) {
       await react("❌");
-      return coax.reply("⛔️ *I need to be an admin to use this command.*");
+      return m.reply("⛔️ *I need to be an admin to use this command.*");
     }
 
       if (!args) {
       await react("❌");
-      return coax.reply("⛔️ *Please provide the new group name you want to update to.*");
+      return m.reply("⛔️ *Please provide the new group name you want to update to.*");
     }
 
     await react("🔉");
@@ -37,6 +37,6 @@ Zenith(
     const random_D3centX = D3centX[Math.floor(Math.random() * D3centX.length)];
     const caption = `*${random_D3centX}*\n\n🏷️ New group name: ${args}`;
 
-    await vorterx.groupUpdateSubject(coax.from, text);
-    await coax.reply(caption);
+    await vorterx.groupUpdateSubject(m.chat, text);
+    await m.reply(caption);
    });
