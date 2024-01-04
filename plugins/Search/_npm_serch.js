@@ -8,18 +8,18 @@ Zenith(
   category: 'Search',
   desc: 'Searches for an npm package',
   filename: __filename
-  }, async (vorterx, coax, react, {args}) => {
+  }, async (vorterx,m, react, {args}) => {
     
     if (!args) {
       await react('❌');
-      return coax.reply('_Please provide an npm package name, e.g., npm aztec-md-ytdl_');
+      return m.reply('_Please provide an npm package name, e.g., npm aztec-md-ytdl_');
     }
     try {
       const decentX = await axios.get(`http://registry.npmjs.com/-/v1/search?text=${args}`);
       const { objects: results } = decentX.data;
       if (!results.length) {
         await react('❌');
-        return coax.reply(`Your research for "${args}" not found :/`);
+        return m.reply(`Your research for "${args}" not found :/`);
       }
       await react('🔍');
       const pkgInfo = results.map(async ({ package: pkg }) => {
@@ -30,12 +30,12 @@ Zenith(
       const master_publisher = results[0].package?.publisher;
       if (master_publisher && master_publisher.avatar) {
         const master_avatar = master_publisher.avatar;
-        await vorterx.sendMessage(coax.from, { image: { url: master_avatar, caption: xtext, quoted: coax } });
+        await vorterx.sendMessage(m.chat, { image: { url: master_avatar, caption: xtext, quoted: m } });
       } else {
-        coax.reply(xtext);
+        m.reply(xtext);
       }
     } catch (error) {
       console.error(error);
-      coax.reply('_An error occurred while searching for the npm package._');
+      m.reply('_An error occurred while searching for the npm package._');
     }
   });
