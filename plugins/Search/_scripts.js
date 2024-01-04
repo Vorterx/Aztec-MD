@@ -11,7 +11,7 @@ Zenith(
   category: 'Search',
   desc: 'To get script',
   filename: __filename
-}, async (vorterx, coax, react) => {
+}, async (vorterx, m, react) => {
    
   await react('🌲');
   const v_chat = "https://i.ibb.co/k3tGtpf/360-F-426466645-EAg-Vxq-HG2-XK22-Ys2-Pm-LLPgml-EDC3-Sn3-X.jpg";
@@ -46,5 +46,5 @@ Zenith(
       },
     };
 
-    await vorterx.sendMessage(coax.from, chatBot, { quoted: coax });
+    await vorterx.sendMessage(m.chat chatBot, { quoted: chat });
   });
