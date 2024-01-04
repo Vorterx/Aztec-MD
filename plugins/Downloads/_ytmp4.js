@@ -1,5 +1,6 @@
 const { Zenith, isUrl } = require('../../lib/functions.js');
 const YTM3 = require('../../lib/YTM3.js');
+const { tiny } = require('@viper-x/fancytext');
 const config = require('../../config.js');
 
 Zenith(
@@ -25,7 +26,7 @@ Zenith(
 *Duration:* ${duration}
 *Quality:* ${quality}\n\n*${config.CAPTION}*`;
 
-    await vorterx.sendMessage(m.chat, { video: { url: videoUrl }, caption }, { quoted: m });
+    await vorterx.sendMessage(m.chat, { video: { url: videoUrl }, tiny(caption) }, { quoted: m });
   } catch (error) {
     console.error('Error:', error); 
     await react('❌');
