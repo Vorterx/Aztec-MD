@@ -8,19 +8,19 @@ Zenith (
   category: 'Search',
   desc: 'Get movie info',
   filename: __filename
-  }, async (vorterx, coax, react, { args}) => {
+  }, async (vorterx,m, react, { args}) => {
     
     try {
       if (!args) {
         await react('❌');
-        return coax.reply(`Please provide a movie name, e.g., "Dragon Ball".`);
+        return m.reply(`Please provide a movie name, e.g., "Dragon Ball".`);
       }
       await react('🔍');
       const movieInfo = await axios.get(`http://www.omdbapi.com/?apikey=742b2d09&t=${args}&plot=full`);
 
       if (!movieInfo.data || movieInfo.data.Response === 'False') {
         await react('❌');
-        return coax.reply(`Sorry, couldn't retrieve data for the provided movie name.`);
+        return m.reply(`Sorry, couldn't retrieve data for the provided movie name.`);
       }
 
       const {
@@ -63,10 +63,10 @@ Zenith (
 *🌟imdbRating*: ${imdbRating}
 *✅imdbVotes*: ${imdbVotes}`;
 
-await vorterx.sendMessage(coax.from, { image: { url: Poster }, caption: movieDetails }, { quoted: coax });
+await vorterx.sendMessage(m.chat, { image: { url: Poster }, caption: movieDetails }, { quoted: m });
     } catch (error) {
       console.error(error);
       await react('❌');
-      return coax.reply(`❌ An error occurred while processing the request...`);
+      return m.reply(`❌ An error occurred while processing the request...`);
     }
   });
