@@ -15,12 +15,12 @@ Zenith(
   category: 'GPT AI',
   desc: 'Black box',
   filename: __filename
-  }, async (vorterx, coax, react, {args}) => {
+  }, async (vorterx,m, react, {args}) => {
     
     try {
       if (!args) {
         await react('❌');
-        return coax.reply(
+        return m.reply(
           "```\nError 404: Text not found. Please provide text to get results...\n```"
         );
       }
@@ -30,7 +30,7 @@ Zenith(
       const res = await fetch(getBlack);
 
       if (!res.ok) {
-        coax.reply(`Error: ${res.status}`);
+        m.reply(`Error: ${res.status}`);
         return;
       }
 
@@ -39,7 +39,7 @@ Zenith(
 
     if (!result || !result.response) {
         await react('❌');
-        return coax.reply(
+        return m.reply(
           "```\nError 404: Search not found.for the provided text...\n```"
         );
       }
@@ -47,7 +47,7 @@ Zenith(
       const getRes = result.response;
       const getFinal = `*BLACKBOX AI*\n\n${getRes}\n\n*${config.CAPTION}*`;
 
-      await vorterx.sendMessage(coax.from, {
+      await vorterx.sendMessage(m.chat, {
         image: { url: 'https://i.ibb.co/DLyfLjq/BLACKBOX-AI-BY-DIEGOSON-TECH.png' },
         caption: getFinal,
       });
@@ -56,7 +56,7 @@ Zenith(
     } catch (error) {
       console.error(error);
       await react('❌');
-      return coax.reply("```\nAn error occurred. Please try again...\n```");
+      return m.reply("```\nAn error occurred. Please try again...\n```");
     }
   });
           
