@@ -11,27 +11,27 @@ const { Zenith } = require ('../../lib/_cmd_sxntax.js');
 Zenith(
   {
     pattern: "sticker",
-    alias: ['s'],
+    alias: ['take,steal'],
     category: "Convert",
     filename: __filename,
- }, async (vorterx, coax, react, {args}) => {
+ }, async (vorterx, m, react, {args}) => {
             
-       if (!coax.quoted) {
+       if (!m.quoted) {
         await react('❌');
-        return coax.reply(`_Reply to a vid or image_`);
+        return m.reply(`_Reply to a vid or image_`);
        }
-      let mime = coax.quoted.mtype
+      let mime = m.quoted.mtype
           var pack;
           var author;
           if (!args) {
                  anu = args.split("|");
-                 pack = anu[0] !== "" ? anu[0] : coax.pushName + '';
+                 pack = anu[0] !== "" ? anu[0] : m.pushName + '';
                  author = anu[1] !== "" ? anu[1] : config.CAPTION;
              } else {
-            pack = coax.pushName;
+            pack = m.pushName;
             author = "";
              }
-           let media = await coax.quoted.download();
+           let media = await m.quoted.download();
            let sticker = new Sticker(media, {
                     pack: pack, 
                     author: author, 
@@ -42,7 +42,7 @@ Zenith(
                     background: "transparent",
                 });
                 const buffer = await sticker.toBuffer();
-          return vorterx.sendMessage(coax.from, {sticker: buffer }, {quoted: coax });
+          return vorterx.sendMessage(m.chat, {sticker: buffer }, {quoted: m });
          })
 
   //---------------------------------------------------------------------------
@@ -53,20 +53,20 @@ Zenith (
   category: 'Convert',
   desc: 'attps',
   filename: __filename
-  }, async (vorterx, coax, react, { args}) => {
+  }, async (vorterx, m, react, { args}) => {
 
     if (!args) {
       await react('❌');
-      return coax.reply('Please provide a text e.g attp Vorterx...');
+      return m.reply('Please provide a text e.g attp Vorterx...');
     }
 
     await react('✔️');
-    vorterx.sendMessage(coax.from, {
+    vorterx.sendMessage(m.chat, {
       sticker: {
         url: `https://api.lolhuman.xyz/api/attp?apikey=GataDios&text=${args}`,
         packname: config.CAPTION
       }
-    }, { quoted: coax });
+    }, { quoted: m });
 
   });
       
