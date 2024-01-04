@@ -15,11 +15,11 @@ Zenith(
   category: 'GPT AI',
   desc: 'To Download images using dalle E',
   filename: __filename
-  }, async (vorterx, coax, react, {args}) => {
+  }, async (vorterx, m, react, {args}) => {
     try {
         if (!args) {
         await react('❌');
-        return coax.reply('__Provide a name___...');
+        return m.reply('__Provide a name___...');
       }
 
       await react('✔️');
@@ -30,15 +30,15 @@ Zenith(
       const aztec = `*Name*: ${search}\n\n*${config.CAPTION}*`;
 
       const get_img = dalle_img[Math.floor(Math.random() * dalle_img.length)];
-      await vorterx.sendMessage(coax.from, {
+      await vorterx.sendMessage(m.chat, {
         image: { url: get_img },
         caption: aztec
-      }, { quoted: coax });
+      }, { quoted: m });
 
     } catch (error) {
       console.error(error.message);
       await react('❌');
-      coax.reply('An unexpected error occurred. Please try again later...');
+      m.reply('An unexpected error occurred. Please try again later...');
     }
   });
     
