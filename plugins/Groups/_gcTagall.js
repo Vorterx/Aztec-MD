@@ -7,11 +7,11 @@ Zenith(
     category: "Group",
     desc: "tag members",
     filename: __filename
-    }, async (vorterx, coax, react, {args,isBotAdmin, isAdmin, isMedia, participants}) => {
+    }, async (vorterx,m, react, {args,isBotAdmin, isAdmin, isMedia, participants}) => {
       
         if (!isMedia) {
-            var message2 = coax.quoted
-                ? coax.quoted.msg
+            var message2 = m.quoted
+                ? m.quoted.msg
                 : args || "";
         } else {
             message2 = "";
@@ -24,8 +24,8 @@ Zenith(
         mess += `╰────────────⦿\n\n`;
 
         await react("📇");
-        vorterx.sendMessage(coax.from,
+        vorterx.sendMessage(m.chat,
             { text: mess, mentions: participants.map((a) => a.id) },
-            { quoted: coax }
+            { quoted: m }
         );
     });
