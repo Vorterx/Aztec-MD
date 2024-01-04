@@ -15,7 +15,7 @@ Zenith(
       category: 'Mics',
       desc: 'Check the speedy',
       filename: __filename
-   }, async (vorterx, coax, react) => {
+   }, async (vorterx, m, react) => {
       
       await react("🏇");
       const cpuSpeedResult = { speed: getCpuSpeed() }; 
@@ -27,7 +27,7 @@ Zenith(
          const child = stdout.toString("utf-8");
          const aztec = child.replace(/Memory:/, "Ram:");
          
-         const cpuSpeedDescription = getCPUSpeedDescription(cpuSpeedResult.speed);
+         const cpuSpeedDescription = await getCPUSpeedDescription(cpuSpeedResult.speed);
          const systemInfo = await getSystemInfo();
          const uploadSpeedDescription = getUploadSpeedDescription(uploadSpeedInMbps);                 
          const osInfo = getOSInfo();        
@@ -35,17 +35,16 @@ Zenith(
          const networkInfo = await getNetworkInfo();
          const storageInfo = await getStorageInfo();
 
-  coax.reply(`
+  m.reply(`
  ${aztec}*🛑 Performance:* ${latency.toFixed(4)} ms
  *💻 CPU Speed:* ${cpuSpeedResult.speed} GHz
  *🚀 CPU Power:* ${cpuSpeedDescription}
- *🖥️ System:* ${systemInfo} 
- *💿 OS Info:* ${osInfo}
+ *🖥️ System:* ${systemInfo}
  *🔍 Addit-Info:* ${additionalInfo}
  *🌐 Network:* ${networkInfo} 
  *💽 Storage:* ${storageInfo}
  *📤 Upload Speed:* ${uploadSpeedInMbps} Mbps
- *📍 Ping:* ${calculatePing(coax.messageTimestamp, Date.now())} _second(s)_`);
+ *📍 Ping:* ${calculatePing(m.messageTimestamp, Date.now())} _second(s)_`);
             
       });
    });
