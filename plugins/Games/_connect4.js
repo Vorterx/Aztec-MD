@@ -1,4 +1,4 @@
-const { Zenith } = require('../../lib/functions.js');
+/*const { Zenith } = require('../../lib/functions.js');
 const activeGames = new Map();
 
 Zenith(
@@ -73,5 +73,5 @@ Zenith(
       }
     }
   }
-);
+);*/
         
