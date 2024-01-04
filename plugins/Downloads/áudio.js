@@ -5,16 +5,17 @@ const fs = require('fs');
 
 Zenith(
   {
-    usage: 'audio',
+    usage: 'song',
+    alias: ['audio'],
     category: 'Downloads',
     desc: 'audio',
     filename: __filename
   },
-  async (vorterx, coax, react, { args }) => {
+  async (vorterx, m, react, { args }) => {
     try {
       if (!args) {
         await react('❌');
-        return coax.reply('Please provide a song name.');
+        return m.reply('Please provide a song name.');
       }
 
       const searchR = await yts(args);
@@ -22,7 +23,7 @@ Zenith(
 
       if (!video) {
         await react('❌');
-        return coax.reply('No matching video found.');
+        return m.reply('No matching video found.');
       }
 
       try {
@@ -42,17 +43,17 @@ Zenith(
           },
         };
 
-        await vorterx.sendMessage(coax.from, audioMsg, { quoted: coax });
+        await vorterx.sendMessage(m.chat, audioMsg, { quoted: m });
         await fs.unlinkSync(audioInfo.path);
       } catch (downloadError) {
         console.error('Error during audio download:', downloadError);
         await react('❌');
-        return coax.reply('An error occurred during audio download. Check the console for details.');
+        return m.reply('An error occurred during audio download. Check the console for details.');
       }
     } catch (searchError) {
       console.error('Error during YouTube search:', searchError);
       await react('❌');
-      return coax.reply('An error occurred while searching for the video. Check the console for details.');
+      return m.reply('An error occurred while searching for the video. Check the console for details.');
     }
   }
 );
