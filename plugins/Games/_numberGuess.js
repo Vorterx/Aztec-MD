@@ -1,4 +1,4 @@
-const { Zenith } = require('../../lib/functions.js');
+/*const { Zenith } = require('../../lib/functions.js');
 
 Zenith({ usage: 'number-guess', desc: 'Guess the correct number', category: 'GAMES 3D' }, async (vorterx,coax,react) => {
   const minNum = 0;
@@ -56,5 +56,5 @@ Zenith({ usage: 'number-guess', desc: 'Guess the correct number', category: 'GAM
       collector.stop();
     }
   });
-});
+});*/
        
