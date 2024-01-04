@@ -44,7 +44,7 @@ Zenith(
     desc: 'Reveals menu categories commands',
     filename: __filename,
   },
-  async (vorterx, coax, react, { args  } ) => {
+  async (vorterx, m, react, { args  } ) => {
     await react('Ⓜ️');
 
     const allLogos = [...(config.LOGOS || []), ...(process.env.LOGOS ? process.env.LOGOS.split(',') : [])];
@@ -80,7 +80,7 @@ for (const category in commandsByCategory) {
   
     const country = 'South Africa';
     const amarok = `${headerTop}
-${midSection} User: ${coax.pushName || ''}
+${midSection} User: ${m.pushName || ''}
 ${midSection} Botname: ${configJson.Bots[0].BotName || ''}
 ${midSection} Owner: ${configJson.Bots[0].Owner || ''}
 ${midSection} Prefix: ${process.env.PREFIX || ''}
@@ -111,7 +111,7 @@ ${bottomSection}\n\n${getCommands}*${config.CAPTION || ''}*`;
       },
     };
 
-    await vorterx.sendMessage(coax.from, chatBot, { quoted: coax });
+    await vorterx.sendMessage(m.chat chatBot, { quoted: m });
   }
 );
 
@@ -124,7 +124,7 @@ Zenith(
   category: 'General',
   desc: 'To show all tje list commands',
   filename: __filename
-  }, async (vorterx, coax, react, {args}) => {
+  }, async (vorterx, m, react, {args}) => {
    
     await react('4️⃣');
     const allLogos = [...(config.LOGOS || []), ...(process.env.LOGOS ? process.env.LOGOS.split(',') : [])];
@@ -189,5 +189,5 @@ Zenith(
       },
     };
 
-    await vorterx.sendMessage(coax.from, chatBot, { quoted: coax });
+    await vorterx.sendMessage(m.chat chatBot, { quoted: m });
   });
