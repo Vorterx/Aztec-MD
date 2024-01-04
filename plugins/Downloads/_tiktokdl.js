@@ -1,4 +1,5 @@
 const { Zenith } = require('../../lib/functions.js');
+const { tiny } = require('@viper-x/fancytext');
 const { ttdl } = require('btch-downloader');
 const config = require('../../config.js');
 
