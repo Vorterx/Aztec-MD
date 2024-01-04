@@ -18,7 +18,7 @@ Zenith(
     category: 'Mics',
     filename: __filename
   },
-  async (vorterx, coax, react) => {
+  async (vorterx, m, react) => {
    
     await react('🧘');
     const image = {
@@ -63,7 +63,7 @@ Zenith(
       },
     };
 
-    await vorterx.sendMessage(coax.from, messageOptions, { quoted: coax });
+    await vorterx.sendMessage(m.chat, messageOptions, { quoted: m});
   }
 );
       
