@@ -18,6 +18,8 @@ Zenith({
   vorterx.sendMessage(m.chat, { image: { url: image1 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
 
+// ....................................................
+
 Zenith({
   usage: 'gfx2',
   category: 'GFX 3D',
@@ -34,6 +36,8 @@ Zenith({
   vorterx.sendMessage(m.chat, { image: { url: image2 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
 
+// ....................................................
+
 Zenith({
   usage: 'gfx3',
   category: 'GFX 3D',
@@ -48,6 +52,8 @@ Zenith({
   let image3 = `https://api.caliph.biz.id/api/textpro/matrix?text=${encodeURIComponent(args)}&apikey=caliphkey`;
   vorterx.sendMessage(m.chat, { image: { url: image3 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
+
+// ....................................................
 
 Zenith({
   usage: 'gfx4',
@@ -64,6 +70,8 @@ Zenith({
   vorterx.sendMessage(m.chat, { image: { url: image4 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
 
+// ....................................................
+
 Zenith({
   usage: 'gfx5',
   category: 'GFX 3D',
@@ -78,6 +86,8 @@ Zenith({
   let image5 = `https://api.caliph.biz.id/api/textpro/matrix?text=${encodeURIComponent(args)}&apikey=caliphkey`;
   vorterx.sendMessage(m.chat, { image: { url: image5 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
+
+// ....................................................
 
 Zenith({
   usage: 'gfx6',
@@ -94,6 +104,8 @@ Zenith({
   let image6 = `https://api.lolhuman.xyz/api/textprome2/lionlogo?apikey=${lolkeysapi}&text1=${encodeURIComponent(text1_gfx6)}&text2=${encodeURIComponent(text2_gfx6)}`;
   vorterx.sendMessage(m.chat, { image: { url: image6 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
+
+// ....................................................
 
 Zenith({
   usage: 'gfx7',
@@ -112,6 +124,8 @@ Zenith({
   vorterx.sendMessage(m.chat, { image: { url: image7 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
 
+// ....................................................
+
 Zenith({
   usage: 'gfx8',
   category: 'GFX 3D',
@@ -129,6 +143,8 @@ Zenith({
   vorterx.sendMessage(m.chat, { image: { url: image8 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
 
+// ....................................................
+
 Zenith({
   usage: 'gfx9',
   category: 'GFX 3D',
@@ -143,6 +159,8 @@ Zenith({
   let image9 = `https://api.lolhuman.xyz/api/ephoto1/anonymhacker?apikey=${lolkeysapi}&text=${encodeURIComponent(args)}`;
   vorterx.sendMessage(m.chat, { image: { url: image9 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
+
+// ....................................................
 
 Zenith({
   usage: 'gfx10',
@@ -159,6 +177,8 @@ Zenith({
   vorterx.sendMessage(m.chat, { image: { url: image10 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
 
+// ....................................................
+
 Zenith({
   usage: 'gfx11',
   category: 'GFX 3D',
@@ -174,6 +194,8 @@ Zenith({
   vorterx.sendMessage(m.chat, { image: { url: image11 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
 
+// ....................................................
+
 Zenith({
   usage: 'gfx12',
   category: 'GFX 3D',
@@ -182,5 +204,25 @@ Zenith({
 }, async (vorterx, m, react, { args }) => {
   if (!args || !args[0]) {
     await react('❌');
-    return m.reply('Please provide two texts separated by "|" e.g gfx12 Text1|Text
-  
+    return m.reply('Please provide two texts separated by "|" e.g gfx12 Text1|Text2');
+  }
+  await react('🛡️');
+  let [text1_gfx12, text2_gfx12] = args[0].split('|');
+  let image12 = `https://api.lolhuman.xyz/api/ephoto2/codwarzone?apikey=${lolkeysapi}&text1=${encodeURIComponent(text1_gfx12)}&text2=${encodeURIComponent(text2_gfx12)}`;
+  vorterx.sendMessage(m.chat, { image: { url: image12 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
+});
+
+Zenith({
+  usage: 'gfx13',
+  category: 'GFX 3D',
+  desc: 'Create ephoto1 freefire',
+  filename: __filename
+}, async (vorterx, m, react, { args }) => {
+  if (!args) {
+    await react('❌');
+    return m.reply('Please provide a text e.g gfx13 YourTextHere');
+  }
+  await react('🛡️');
+  let image13 = `https://api.lolhuman.xyz/api/ephoto1/freefire?apikey=${lolkeysapi}&text=${encodeURIComponent(args)}`;
+  vorterx.sendMessage(m.chat, { image: { url: image13 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
+});
