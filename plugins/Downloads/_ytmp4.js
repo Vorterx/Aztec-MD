@@ -9,12 +9,12 @@ Zenith(
     desc: 'Download YouTube videos',
     filename: __filename
   },
-  async (vorterx, coax, react, { args }) => {
+  async (vorterx, m, react, { args }) => {
   
     try {
     if (args.length < 1 || !isUrl(args) || !YTM3.isYTUrl(args)) {
       await react('❌');
-      return coax.reply('Please provide a valid YouTube video link.');
+      return m.reply('Please provide a valid YouTube video link.');
     }
 
     const video = await YTM3.mp4(args);
@@ -25,11 +25,11 @@ Zenith(
 *Duration:* ${duration}
 *Quality:* ${quality}\n\n*${config.CAPTION}*`;
 
-    await vorterx.sendMessage(coax.from, { video: { url: videoUrl }, caption }, { quoted: coax });
+    await vorterx.sendMessage(m.chat, { video: { url: videoUrl }, caption }, { quoted: m });
   } catch (error) {
     console.error('Error:', error); 
     await react('❌');
-    return coax.reply(`${error.message}`);
+    return m.reply(`${error.message}`);
       }
     }
  )
