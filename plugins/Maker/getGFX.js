@@ -223,6 +223,9 @@ Zenith({
   vorterx.sendMessage(m.chat, { image: { url: image12 }, caption: `\n\n*${config.CAPTION}*` }, { quoted: m });
 });
 
+// ....................................................
+// ....................................................
+
 Zenith({
   usage: 'gfx13',
   category: 'GFX 3D',
