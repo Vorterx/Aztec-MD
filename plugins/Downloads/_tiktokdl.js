@@ -1,5 +1,6 @@
 const { Zenith } = require('../../lib/functions.js');
-
+const { ttdl } = require('btch-downloader');
+const config = require('../../config.js');
 
 Zenith (
   {
