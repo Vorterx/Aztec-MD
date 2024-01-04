@@ -8,11 +8,11 @@ Zenith(
     category: "Downloads",
     filename: __filename,
   },
-  async (vorterx, coax, react, { args }) => {
+  async (vorterx, m, react, { args }) => {
 
     if (!args) {
       await react("❌");
-      return coax.reply("Please provide a search term.");
+      return m.reply("Please provide a search term.");
     }
     const axios = require('axios');
 
@@ -32,7 +32,7 @@ Zenith(
         const options = Array.from({ length: 10 }, (_, index) => `${prefix}xnxxdn ${response.data.result[index + 1].url}`);
         console.log(options);
 
-        const getIndex = await vorterx.sendMessage(coax.from, { type: 'poll', poll: { name: pollOptions, values: options, selectableCount: 1 } });
+        const getIndex = await vorterx.sendMessage(m.chat, { type: 'poll', poll: { name: pollOptions, values: options, selectableCount: 1 } });
 
         if (getIndex !== undefined && getIndex !== null && getIndex >= 0 && getIndex < 10) {
           const selectedVideoUrl = response.data.result[getIndex + 1].url;
@@ -41,11 +41,11 @@ Zenith(
 
         }
       } else {
-        return coax.reply(":x: No results found.");
+        return m.reply(":x: No results found.");
       }
     } catch (error) {
       console.error(error);
-      return coax.reply(":warning: An error occurred while fetching the data.");
+      return m.reply(":warning: An error occurred while fetching the data.");
     }
   }
 );
