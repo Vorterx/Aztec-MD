@@ -6,17 +6,17 @@ Zenith(
   usage: 'anime',
   category: 'Anime',
   filename: __filename
-  }, async (vorterx, coax, react,{args}) => {
+  }, async (vorterx,m, react,{args}) => {
     
     try {
       if (!args) {
         await react('❌');
-        return coax.reply(`🚫 Please provide the name of an anime, e.g., "Dragon Ball"`);
+        return m.reply(`🚫 Please provide the name of an anime, e.g., "Dragon Ball"`);
      }
       const animeInfo = await malScraper.getInfoFromName(args).catch(() => null);
       if (!animeInfo) {
         await react('❌');
-        return coax.reply(`❗ Sorry, couldn't retrieve data for the provided anime name.`);
+        return m.reply(`❗ Sorry, couldn't retrieve data for the provided anime name.`);
       }
 
       const {
@@ -52,10 +52,10 @@ Zenith(
 *-🎃Trailer*: ${trailer}
 *-❄Description*: ${synopsis}`;
 
-await vorterx.sendMessage(coax.from, { image: { url: picture }, caption: list }, { quoted: coax });
+await vorterx.sendMessage(m.chat, { image: { url: picture }, caption: list }, { quoted: m});
     } catch (error) {
       console.error(error);
       await react('❌');
-      return coax.reply(`❌ An error occurred while processing the request.`);
+      return m.reply(`❌ An error occurred while processing the request.`);
     }
   });          
