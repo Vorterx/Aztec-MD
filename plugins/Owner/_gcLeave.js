@@ -6,17 +6,17 @@ Zenith(
    desc: "Leave the group you are currently in",
    category: "Group",
    filename: __filename
-}, async (vorterx, coax,react, {isDev, isGroup}) => {
+}, async (vorterx,m,react, {isDev, isGroup}) => {
     
     if (!isDev) {
       await react('❌');
-      return coax.reply('This cmd is for my Dev only...');
+      return m.reply('This cmd is for my Dev only...');
     } else {
-      if (!coax.isGroup) {
+      if (!m.isGroup) {
         const reactAztec = ["❌", "🚫", "🙅‍♀️", "🤷‍♂️"];
         const vorterx_react = reactAztec[Math.floor(Math.random() * reactAztec.length)];
         await react(vorterx_react);
-        return coax.reply("*🤔 Where are you heading? This command is for group only.*");
+        return m.reply("*🤔 Where are you heading? This command is for group only.*");
       }
 
       const reactAztec = ["👋", "👋🏼", "🤚", "✌️", "👋🏽"];
@@ -34,7 +34,7 @@ Zenith(
       const vorterx_cap = Diegoson[Math.floor(Math.random() * Diegoson.length)];
       const caption = `*${vorterx_cap}*`;
 
-      await coax.reply(caption);
-      await vorterx.groupLeave(coax.from, { quoted: coax });
+      await m.reply(caption);
+      await vorterx.groupLeave(m.chat, { quoted: m });
     }
   });
