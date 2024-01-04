@@ -14,11 +14,11 @@ Zenith(
     category: "GPT AI",
     desc: "Randomly search",
     filename: __filename
-  }, async (vorterx, coax, react, { args }) => {
+  }, async (vorterx, m, react, { args }) => {
   
     if (!args) {
       await react("❌");
-      return coax.reply(`*Provide me a query, e.g., "Who made Aztec?"`);
+      return m.reply(`*Provide me a query, e.g., "Who made Aztec?"`);
     }
 
     const encodedArgs = encodeURIComponent(args);
@@ -30,7 +30,7 @@ Zenith(
 
     if (result.status === true) {
       await react("💡");
-      await vorterx.sendMessage(coax.from, {
+      await vorterx.sendMessage(m.chat, {
         text: result.data.message,
         image: { url: "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png" },
         contextInfo: {
