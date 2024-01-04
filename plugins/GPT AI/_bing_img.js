@@ -16,11 +16,11 @@ Zenith(
   category: 'GPT AI',
   desc: 'To download images from Bing',
   filename: __filename
-  }, async (vorterx, coax, react, { args, mime, quoted}) => {
+  }, async (vorterx, m, react, { args, mime, quoted}) => {
 
     if (!args) {
       await react('❌');
-      return coax.reply('Please provide an image name, e.g., bingimg Goku...');
+      return m.reply('Please provide an image name, e.g., bingimg Goku...');
     }
 
     const get_bing = `https://aemt.me/bingimg?text=${encodeURIComponent(args)}`;
@@ -34,15 +34,15 @@ Zenith(
       });
 
       if (!res.ok) {
-        coax.reply(`${res.status}`);
+        m.reply(`${res.status}`);
       }
       await react('⏲️');
-      coax.reply(`\`\`\`Please wait a sec...⏳\`\`\``);
+      m.reply(`\`\`\`Please wait a sec...⏳\`\`\``);
       const data = await res.json();
       console.log(data); 
      if (data && data.status && data.result) {
           const get_img = data.result;
-       await vorterx.sendMessage(coax.from, {
+       await vorterx.sendMessage(m.chat{
           image: {
             url: get_img,
           },
@@ -51,11 +51,11 @@ Zenith(
       } else {
           console.log('No image URL found in the query...'); 
         await react('❌');
-        return coax.reply('No images found for the given args...');
+        return m.reply('No images found for the given args...');
       }
     } catch (error) {
       console.error(error.message || error);
-      return coax.reply('Please try again later..');
+      return m.reply('Please try again later..');
     }
   });
       
