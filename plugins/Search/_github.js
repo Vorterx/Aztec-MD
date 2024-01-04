@@ -8,11 +8,11 @@ Zenith(
   alias: ['git'],
   category: 'Search',
   filename: __filename
-  }, async (vorterx, coax, react, {args}) => {
+  }, async (vorterx, m, react, {args}) => {
    
     if (!args) {
       await react('❌');
-      return coax.reply(`*Please provide a git user name e.g github DiegosonTech*`);
+      return m.reply(`*Please provide a git user name e.g github DiegosonTech*`);
     }
     await react('📊');
     try {
@@ -34,9 +34,9 @@ Zenith(
       const repoNames = userRepos.data.map(repo => repo.name);
       const repoList = repoNames.join('\n');
 
-      vorterx.sendMessage(coax.from, { image: { url: avatar_url, mimetype: 'image/jpeg' }, caption: rezText8 + '\n\n*📚 Repositories:*\n' + repoList }, { quoted: coax });
+      vorterx.sendMessage(m.chat, { image: { url: avatar_url, mimetype: 'image/jpeg' }, caption: rezText8 + '\n\n*📚 Repositories:*\n' + repoList }, { quoted:m});
     } catch (error) {
       console.error(error);
-      coax.reply('An error occurred');
+      m.reply('An error occurred');
     }
   });
