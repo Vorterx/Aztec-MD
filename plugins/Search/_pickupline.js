@@ -13,16 +13,16 @@ Zenith(
   category: 'Fun',
   desc: 'For funny',
   filename: __filename
-  }, async (vortex, coax, react) => {
+  }, async (vortex, m, react) => {
    
     const get = await fetch('https://api.popcat.xyz/pickuplines');    
     if (!get.ok) {
       await react('❌');
-      return coax.reply('Sorry, an error occurred while processing...');
+      return m.reply('Sorry, an error occurred while processing...');
     }
 
     await react('😂');
     const { pickupline } = await get.json();
     const msg = `*PICKUP LINE IS:*\n\n*${pickupline}*\n\n*${config.CAPTION}*`;
-    coax.reply(msg);
+    m.reply(msg);
   });
