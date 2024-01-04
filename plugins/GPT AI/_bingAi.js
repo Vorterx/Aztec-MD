@@ -8,11 +8,11 @@ Zenith (
   alias: ['bang'],
   desc: 'To search',
   filename: __filename
-  }, async (vorterx, coax, react, { args}) => {
+  }, async (vorterx,m, react, { args}) => {
     try {
       if (!args) {
         await react('❌');
-        return coax.reply('Please provide a query, e.g., `bing hello how are you`');
+        return m.reply('Please provide a query, e.g., `bing hello how are you`');
       }
       await react('💡');
       const aztec_api = 'xTnfXtBK';
@@ -20,13 +20,13 @@ Zenith (
       const res = await fetch(API_BING);
 
       if (!res.ok) {
-        return coax.reply(`${res.status}`);
+        return m.reply(`${res.status}`);
       }
       const data = await res.json();
       if (data && data.status && data.message) {
         const get_results = data.message;
 
-        vorterx.sendMessage(coax.from, {
+        vorterx.sendMessage(m.chat, {
           text: get_results,
           contextInfo: {
             externalAdReply: {
@@ -41,10 +41,10 @@ Zenith (
         });
       } else {
         await react('❌');
-        coax.reply('No Bing chat response found for the given query.');
+        m.reply('No Bing chat response found for the given query.');
       }
     } catch (error) {
-      coax.reply(error.message);
+      m.reply(error.message);
     }
   });
                                                                                                    
