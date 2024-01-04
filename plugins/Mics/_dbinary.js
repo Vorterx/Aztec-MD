@@ -7,11 +7,11 @@ Zenith(
   category: 'Mics',
   desc: 'For funny',
   filename: __filename
-}, async (vorterx, coax, react, {args}) => {
+}, async (vorterx, m, react, {args}) => {
     
   if (!args) {
       await react('❌');
-      return coax.reply('_Please provide binary code._');
+      return m.reply('_Please provide binary code._');
     }
 
     await react('✔️');   
@@ -21,5 +21,5 @@ Zenith(
       text: `🔢 *Binary Conversion Result* 🔢\n\n${searchBn}`
     };
 
-    vorterx.sendMessage(coax.from, v_binary, { quoted: coax });
+    vorterx.sendMessage(m.chat, v_binary, { quoted: m });
   });
