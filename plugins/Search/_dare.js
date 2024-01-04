@@ -3,7 +3,7 @@
 * @BotName: Aztec-MD
 */
 
-const { getDare } = require('../../lib/getTruth_Dare.js');
+const TruthOrDare = require('../../lib/getTruth_Dare.js');
 const config = require('../../config.js');
 const { Zenith } = require ('../../lib/_cmd_sxntax.js');
 
@@ -13,9 +13,9 @@ Zenith(
   category: 'Fun',
   desc: 'For funny',
   filename: __filename
-  }, async (vorterx, coax, react) => {
+  }, async (vorterx, m, react) => {
    
     await react('🤡');
-    const dare = getDare();
-    vorterx.sendMessage(coax.from, { text:` *Dare*: ${dare}\n\n*${config.CAPTION}*`});
+    const dare = TruthOrDare.getDare();
+    vorterx.sendMessage(m.chat, { text:` *Dare*: ${dare}\n\n*${config.CAPTION}*`});
   });
