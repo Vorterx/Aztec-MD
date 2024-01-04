@@ -1,20 +1,16 @@
 const config = require('../../config.js');
 const { Zenith } = require ('../../lib/_cmd_sxntax.js');
-const gFx = Array.from({ length: 13 }, (_, i) => `gfx${i + 1}`);
 let lolkeysapi = '5c250069e8936d6bf70295b8';
 const caliphkey = 'lykoUzNh';
 
 Zenith(
   {
-  usage: 'graphics',
+  usage: 'gfx1',
   category: 'GFX 3D',
-  alias: [...gFx],
   desc: 'Create logos using gfx',
   filename: __filename
-  }, async (vorterx, coax,react,{getCMD, args}) => {
+  }, async (vorterx, m,react,{args}) => {
 
-    switch (getCMD) {
-      case 'gfx1':
         if (!args) {
           await react('❌');
           return coax.reply('Please provide a text e.g gfx1 DiegosonTech');
@@ -22,9 +18,16 @@ Zenith(
         await react('🛡️');
         let image1 = `https://api.caliph.biz.id/api/kaneki?nama=${encodeURIComponent(args)}&apikey=caliphkey`;
         vorterx.sendMessage(coax.from, { image: { url: image1 }, caption: `\n\n*${config.CAPTION}*`}, { quoted: coax });
-        break;
+  })
+        
 
-      case 'gfx2':
+      Zenith(
+        {
+          usage: 'gfx2',
+          category: 'GFX 3D',
+          desc: 'Create gfx logo',
+          filename: __filename
+        }, async (vorterx,m,react,{args}) => {
         if (!args || !args[0]) {
           await react('❌');
           return coax.reply('Please provide two texts separated by "|" e.g gfx2 DiegosonTech|Aztec');
@@ -33,7 +36,8 @@ Zenith(
         let [text1, text2] = args[0].split('|');
         let image2 = `https://api.caliph.biz.id/api/girlneko?nama1=${encodeURIComponent(text1)}&nama2=${encodeURIComponent(text2)}&apikey=caliphkey`;
         vorterx.sendMessage(coax.from, { image: { url: image2 }, caption: `\n\n*${config.CAPTION}*`}, { quoted: coax });
-        break;
+}
+)
 
       case 'gfx3':
         if (!args) {
