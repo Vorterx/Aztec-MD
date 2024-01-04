@@ -1,5 +1,7 @@
 const { Zenith } = require('../../lib/functions.js');
-
+const bocil = require('@bochilteam/scraper');
+const { tiny } = require('@viper-x/fancytext');
+const config = require('../../config.js');
 
 Zenith(
     {
