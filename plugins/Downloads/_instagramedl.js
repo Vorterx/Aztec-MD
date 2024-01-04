@@ -1,3 +1,7 @@
+const { igdl } = require('btch-downloader');
+const { Zenith } = require('../../lib/functions.js');
+const config = require('../../config.js');
+
 Zenith(
   {
   usage: 'insta',
@@ -11,7 +15,6 @@ Zenith(
       await react('❌');
       return m.reply('Please provide a valid Instagram URL.');
     }
-
     try {
       const url = args;
       const data = await igdl(url);
