@@ -1,4 +1,5 @@
 const { igdl } = require('btch-downloader');
+const { tiny } = require('@viper-x/fancytext');
 const { Zenith } = require('../../lib/functions.js');
 const config = require('../../config.js');
 
