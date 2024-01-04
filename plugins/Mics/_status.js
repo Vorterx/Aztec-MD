@@ -16,7 +16,7 @@ Zenith(
    category: 'Mics',
    desc: 'Check the status',
    filename: __filename
-   }, async (vorterx, coax, react ) => {
+   }, async (vorterx, m, react ) => {
          
     const getUptimeText = (uptime) => {
       const hours = Math.floor(uptime / 3600);
@@ -43,7 +43,7 @@ Zenith(
 *〄_Uptime:* ${uptimeText}
 *〄_Version:* ${version}
 *〄_RAM:* \`${ram}\`
-*〄_Additional Info:* ${additionalInfo}\n\n*${config.CAPTION}*`;
+*〄_Addit-Info:* ${additionalInfo}\n\n*${config.CAPTION}*`;
 
     const getStatus = {
       image: { url: 'https://i.ibb.co/s3LzSFJ/931684-7660.jpg' },
@@ -63,5 +63,5 @@ Zenith(
       },
     };
 
-    await vorterx.sendMessage(coax.from, getStatus, { quoted: coax });
+    await vorterx.sendMessage(m.chat, getStatus, { quoted: m });
   });                    
