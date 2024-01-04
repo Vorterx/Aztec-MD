@@ -9,10 +9,10 @@ Zenith(
     desc: 'For the owner time',
     filename: __filename
   },
-  async (vorterx, coax, react, { isDev, args }) => {
+  async (vorterx, m, react, { isDev, args }) => {
     if (!isDev) {
       await react('❌');
-      return coax.reply('This command is for my Dev only');
+      return m.reply('This command is for my Dev only');
     }
 
     await react('⌚');
@@ -58,6 +58,6 @@ Zenith(
       },
     };
 
-    vorterx.sendMessage(coax.from, context);
+    vorterx.sendMessage(m.chat, context);
   }
 );
