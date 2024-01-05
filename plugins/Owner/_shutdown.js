@@ -11,8 +11,8 @@ function sleep(ms) {
 
 Zenith(
   {
-    usage: 'shutdown',
-    desc: 'To shut down the bot',
+    usage: 'restart',
+    desc: 'To reboot the bot',
     category: 'Owner',
     filename: __filename
   },
@@ -24,7 +24,7 @@ Zenith(
               }
 
                   await react('🌀');
-                      m.reply('_Shutting down_');
+                      m.reply('_Rebooting the bot_');
                         await sleep(3000);
                             process.exit();
              }
