@@ -37,7 +37,7 @@ Zenith(
           isForwarded: true,
         externalAdReply: {
           title: `${config.CAPTION}`,
-          body: `${coax.pushName}`,
+          body: `${m.pushName}`,
           thumbnail: await getBuffer("https://i.ibb.co/mCv3k97/original-e792fa6c963f76bc381b82ae539e68cc.png"),
           mediaType: 1, 
           mediaUrl: '',
