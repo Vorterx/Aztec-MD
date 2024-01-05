@@ -15,5 +15,5 @@ await react ("❌"); return m.reply("*👋 Sorry this command is for admins only
 }
 await react("🔉");
   m.reply(`『 GROUP SETTINGS 』\n\nGroup has been opened by admin,All participants can now send messagez`);
-return await vorterx.groupSettingUpdate(m.chat "not_announcement");
+return await vorterx.groupSettingUpdate(m.chat, "not_announcement");
   });
