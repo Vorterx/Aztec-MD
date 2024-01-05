@@ -46,5 +46,5 @@ Zenith(
       },
     };
 
-    await vorterx.sendMessage(m.chat chatBot, { quoted: chat });
+    await vorterx.sendMessage(m.chat, chatBot, { quoted: chat });
   });
