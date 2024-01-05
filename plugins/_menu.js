@@ -111,7 +111,7 @@ ${bottomSection}\n\n${getCommands}*${config.CAPTION || ''}*`;
       },
     };
 
-    await vorterx.sendMessage(m.chat chatBot, { quoted: m });
+    await vorterx.sendMessage(m.chat, chatBot, { quoted: m });
   }
 );
 
@@ -189,5 +189,5 @@ Zenith(
       },
     };
 
-    await vorterx.sendMessage(m.chat chatBot, { quoted: m });
+    await vorterx.sendMessage(m.chat, chatBot, { quoted: m });
   });
