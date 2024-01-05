@@ -42,7 +42,7 @@ Zenith(
       console.log(data); 
      if (data && data.status && data.result) {
           const get_img = data.result;
-       await vorterx.sendMessage(m.chat{
+       await vorterx.sendMessage(m.chat,{
           image: {
             url: get_img,
           },
