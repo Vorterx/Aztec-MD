@@ -4,7 +4,7 @@
 */
 
 const { eBinary } = require('../../lib/_getBinary.js');
-const { Zenith } = require ('../../lib/_cmd_sxntax.js');
+const { Zenith } = require('../../lib/_cmd_sxntax.js');
 
 Zenith({
   usage: 'ebinary',
