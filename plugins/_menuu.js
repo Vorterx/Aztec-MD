@@ -13,7 +13,7 @@ Zenith(
   async (vorterx, m, react, { args }) => {
     await react('🌀');
 
-    const pluginsPath = path.join(__dirname);
+    const pluginsPath = path.join('plugins');
     let messageToSend = '';
 
     try {
@@ -31,33 +31,40 @@ Zenith(
         },
       };
 
-      const commandFiles = fs.readdirSync(pluginsPath, { withFileTypes: true })
+      const categoryFolders = fs.readdirSync(pluginsPath, { withFileTypes: true })
         .filter(file => file.isDirectory())
-        .flatMap(category => {
-          const categoryPath = path.join(pluginsPath, category.name);
-          return fs.readdirSync(categoryPath)
-            .filter(file => file.endsWith('.js'))
-            .map(file => path.join(categoryPath, file));
-        });
+        .map(folder => path.join(pluginsPath, folder.name));
 
-      for (const filePath of commandFiles) {
-        const commandModule = require(filePath);
+      for (const categoryPath of categoryFolders) {
+        console.log('Checking category folder:', categoryPath);
         
-        if (commandModule && commandModule.Zenith) {
-          const commandInfo = commandModule.Zenith;
+        const jsFiles = fs.readdirSync(categoryPath)
+          .filter(file => file.endsWith('.js'))
+          .map(file => path.join(categoryPath, file));
 
-          if (commandInfo.usage) {
-            if (messageToSend === '') {
-              messageToSend += `
+        for (const filePath of jsFiles) {
+          console.log('Checking command file:', filePath);
+
+          const commandModule = require(filePath);
+
+          if (commandModule && commandModule.Zenith) {
+            console.log('Command Module:', commandModule);
+
+            const commandInfo = commandModule.Zenith;
+
+            if (commandInfo.usage) {
+              if (messageToSend === '') {
+                messageToSend += `
 ${menuDesign.header.left}${menuDesign.header.right}
 *NAME*: ${m.pushName}
 *PREFIX*: ${prefix}
 ${menuDesign.header.down}`;
-            }
+              }
 
-            messageToSend += `
+              messageToSend += `
 ${menuDesign.body.left}${menuDesign.body.up}『${commandInfo.category || 'Uncategorized'}』${menuDesign.body.right}
 ${menuDesign.body.down} ${commandInfo.usage}`;
+            }
           }
         }
       }
@@ -69,8 +76,8 @@ ${menuDesign.body.down} ${commandInfo.usage}`;
       }
 
     } catch (error) {
-      console.error(`Error the cmds: ${error}`);
+      console.error(`Error ending the menu: ${error}`);
     }
   }
 );
-        
+      
