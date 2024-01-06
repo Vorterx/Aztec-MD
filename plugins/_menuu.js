@@ -78,8 +78,13 @@ ${menuDesign.body.down} ${commandInfo.usage}
         }
       }
 
-      vorterx.sendMessage(m.chat, messageToSend, { quoted: m });
-        
+
+  if (messageToSend.trim() !== '') {
+  vorterx.sendMessage(m.chat, { text: messageToSend }, { quoted: m });
+} else {
+  console.log('Message content is empty. Skipping sending message.');           
+  }
+                                            
     } catch (error) {
       console.error(`Error reading commands: ${error}`);
     }
