@@ -79,8 +79,8 @@ ${menuDesign.body.down} ${commandInfo.usage}
         }
       }
 
-      vorterx.sendMessage(m.chat, { caption: messageToSend}, {quoted: m });
-
+      vorterx.sendMessage(m.chat, { caption: messageToSend, quoted: m });
+        
     } catch (error) {
       console.error(`Error reading commands: ${error}`);
     }
