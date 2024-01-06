@@ -60,13 +60,13 @@ Zenith(
 
 Zenith(
   {
-  usage: "xnxxdn",
-  desc: "Download XNXX videos",
-  category: "Downloads",
-  filename: __filename
+    usage: "xnxxdn",
+    desc: "Download XNXX videos",
+    category: "Downloads",
+    filename: __filename
   }, async (vorterx, m, react, {args}) => {
    
-   if (!args) {
+    if (!args) {
       await react("❌");
       m.reply("*Missing XNXX link, please provide one.*");
       return;
@@ -108,4 +108,6 @@ Zenith(
     };
 
     return await vorterx.sendMessage(m.chat, buttonMessage, { quoted: m });
-  });
+  }
+);
+      
