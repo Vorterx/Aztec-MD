@@ -1,7 +1,8 @@
 const { Zenith } = require('../lib/functions');
 const fs = require('fs');
 const path = require('path');
-const prefix = process.env.PREFIX;
+
+const prefix = process.env.PREFIX || 'default-prefix';
 
 Zenith(
   {
@@ -11,18 +12,11 @@ Zenith(
   }, 
   async (vorterx, m, react, { args }) => {
     await react('🌀');
+
     const pluginsPath = path.join(__dirname);
+    let messageToSend = '';
 
     try {
-      let headInfoPrinted = false;
-      let messageToSend = '';
-
-      const configPath = path.join(__dirname, '../lib/config.json');
-      const configJson = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-
-      const randomIndex = Math.floor(Math.random() * configJson.Bots.length);
-      const randomBot = configJson.Bots[randomIndex];
-
       const menuDesign = {
         header: {
           left: '┏',
@@ -37,57 +31,43 @@ Zenith(
         },
       };
 
-      for (const category of fs.readdirSync(pluginsPath, { withFileTypes: true })) {
-        if (category.isDirectory()) {
+      const commandFiles = fs.readdirSync(pluginsPath, { withFileTypes: true })
+        .filter(file => file.isDirectory())
+        .flatMap(category => {
           const categoryPath = path.join(pluginsPath, category.name);
-          const jsFiles = fs.readdirSync(categoryPath)
-            .filter(file => file.endsWith('.js'));
+          return fs.readdirSync(categoryPath)
+            .filter(file => file.endsWith('.js'))
+            .map(file => path.join(categoryPath, file));
+        });
 
-          const commandsInCategory = [];
+      for (const filePath of commandFiles) {
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const commandInfo = eval(`(${fileContent.trim()})`);
 
-          for (const file of jsFiles) {
-            const filePath = path.join(categoryPath, file);
-            const fileContent = fs.readFileSync(filePath, 'utf8');
-
-            if (fileContent.trim().startsWith('Zenith(')) {
-              const commandInfo = eval(`(${fileContent.trim()})`);
-
-              if (!headInfoPrinted) {
-                messageToSend += `
+        if (commandInfo.usage) {
+          if (messageToSend === '') {
+            messageToSend += `
 ${menuDesign.header.left}${menuDesign.header.right}
 *NAME*: ${m.pushName}
 *PREFIX*: ${prefix}
-*OWNER*: ${randomBot.Owner || ''}
 ${menuDesign.header.down}`;
-                headInfoPrinted = true;
-              }
-
-              if (commandInfo.usage) {
-                commandsInCategory.push(`
-${menuDesign.body.left}${menuDesign.body.up}『${category.name}』${menuDesign.body.right}
-${menuDesign.body.down} ${commandInfo.usage}
-`);
-              }
-            }
           }
 
-          if (commandsInCategory.length > 0) {
-            messageToSend += commandsInCategory.join('\n');
-            messageToSend += '\n';
-          }
+          messageToSend += `
+${menuDesign.body.left}${menuDesign.body.up}『${commandInfo.category || 'Uncategorized'}』${menuDesign.body.right}
+${menuDesign.body.down} ${commandInfo.usage}`;
         }
       }
 
+      if (messageToSend !== '') {
+        vorterx.sendMessage(m.chat, messageToSend, { quoted: m });
+      } else {
+        console.log('No commands found to display.');
+      }
 
-  if (messageToSend.trim() !== '') {
-  vorterx.sendMessage(m.chat, { text: messageToSend }, { quoted: m });
-} else {
-  console.log('Message content is empty. Skipping sending message.');           
-  }
-                                            
     } catch (error) {
-      console.error(`Error reading commands: ${error}`);
+      console.error(`Error building or sending the menu: ${error}`);
     }
   }
 );
-  
+          
