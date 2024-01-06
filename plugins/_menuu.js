@@ -11,8 +11,7 @@ Zenith(
     usage: 'menu',
     desc: 'To get all the commands',
     category: 'Mics',
-  }, 
-  async (vorterx, m, react, { args, text }) => {
+  }, async (vorterx, m, react, { args }) => {
     await react('🌀');
     const pluginsPath = path.join(__dirname);
 
