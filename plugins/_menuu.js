@@ -41,21 +41,24 @@ Zenith(
         });
 
       for (const filePath of commandFiles) {
-        const fileContent = fs.readFileSync(filePath, 'utf8');
-        const commandInfo = eval(`(${fileContent.trim()})`);
+        const commandModule = require(filePath);
+        
+        if (commandModule && commandModule.Zenith) {
+          const commandInfo = commandModule.Zenith;
 
-        if (commandInfo.usage) {
-          if (messageToSend === '') {
-            messageToSend += `
+          if (commandInfo.usage) {
+            if (messageToSend === '') {
+              messageToSend += `
 ${menuDesign.header.left}${menuDesign.header.right}
 *NAME*: ${m.pushName}
 *PREFIX*: ${prefix}
 ${menuDesign.header.down}`;
-          }
+            }
 
-          messageToSend += `
+            messageToSend += `
 ${menuDesign.body.left}${menuDesign.body.up}『${commandInfo.category || 'Uncategorized'}』${menuDesign.body.right}
 ${menuDesign.body.down} ${commandInfo.usage}`;
+          }
         }
       }
 
@@ -66,8 +69,8 @@ ${menuDesign.body.down} ${commandInfo.usage}`;
       }
 
     } catch (error) {
-      console.error(`Error building or sending the menu: ${error}`);
+      console.error(`Error the cmds: ${error}`);
     }
   }
 );
-          
+        
