@@ -1,7 +1,7 @@
 const config = require('../../config.js');
 const axios = require('axios');
 const { Buffer } = require('buffer');
-const { Zenith } = require ('../../lib/_cmd_sxntax.js');
+const { Zenith } = require('../../lib/_cmd_sxntax.js');
 
 Zenith(
   {
