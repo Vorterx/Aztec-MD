@@ -17,7 +17,7 @@ Zenith(
       let headInfoPrinted = false;
       let messageToSend = '';
 
-      const configPath = path.join(__dirname, 'config.json');
+      const configPath = path.join(__dirname, '../lib/config.json');
       const configJson = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
       const randomIndex = Math.floor(Math.random() * configJson.Bots.length);
