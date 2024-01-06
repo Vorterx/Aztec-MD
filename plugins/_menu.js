@@ -6,7 +6,7 @@ const { tiny } = require('@viper-x/fancytext');
 const fs = require('fs');
 const path = require('path');
 
-const pluginDir = path.join(__dirname);
+/*const pluginDir = path.join(__dirname);
 const commandsByCategory = {};
 
 function readCommandsFromDirectory(directory) {
@@ -114,7 +114,7 @@ ${bottomSection}\n\n${getCommands}*${config.CAPTION || ''}*`;
     await vorterx.sendMessage(m.chat, chatBot, { quoted: m });
   }
 );
-
+*/
 //_____________________________________________________________________
 
 
