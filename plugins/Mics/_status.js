@@ -8,7 +8,7 @@ const speed = require('performance-now');
 const { tiny } = require('@viper-x/fancytext');
 const config = require('../../config.js');
 const { getBuffer } = require('../../lib/_getBuffer.js');
-const { Zenith } = require ('../../lib/_cmd_sxntax.js');
+const { Zenith } = require('../../lib/_cmd_sxntax.js');
 
 Zenith(
    {
