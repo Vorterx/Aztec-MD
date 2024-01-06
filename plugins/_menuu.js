@@ -1,4 +1,4 @@
-const { Zenith } = require('../../lib/functions');
+const { Zenith } = require('../lib/functions');
 const fs = require('fs');
 const path = require('path');
 
