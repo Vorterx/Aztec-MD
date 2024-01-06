@@ -1,17 +1,15 @@
-//
 const { Zenith } = require('../lib/functions');
 const fs = require('fs');
 const path = require('path');
-
 const prefix = process.env.PREFIX;
-let country = 'South Africa';
 
 Zenith(
   {
     usage: 'menu',
     desc: 'To get all the commands',
     category: 'Mics',
-  }, async (vorterx, m, react, { args }) => {
+  }, 
+  async (vorterx, m, react, { args }) => {
     await react('🌀');
     const pluginsPath = path.join(__dirname);
 
@@ -60,7 +58,6 @@ ${menuDesign.header.left}${menuDesign.header.right}
 *NAME*: ${m.pushName}
 *PREFIX*: ${prefix}
 *OWNER*: ${randomBot.Owner || ''}
-*FROM*: ${country}
 ${menuDesign.header.down}`;
                 headInfoPrinted = true;
               }
@@ -88,3 +85,4 @@ ${menuDesign.body.down} ${commandInfo.usage}
     }
   }
 );
+  
