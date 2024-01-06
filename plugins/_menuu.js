@@ -1,6 +1,10 @@
+//
 const { Zenith } = require('../lib/functions');
 const fs = require('fs');
 const path = require('path');
+
+const prefix = process.env.PREFIX;
+let country = 'South Africa';
 
 Zenith(
   {
@@ -9,7 +13,6 @@ Zenith(
     category: 'Mics',
   }, 
   async (vorterx, m, react, { args, text }) => {
-  
     await react('🌀');
     const pluginsPath = path.join(__dirname);
 
@@ -79,7 +82,7 @@ ${menuDesign.body.down} ${commandInfo.usage}
         }
       }
 
-      vorterx.sendMessage(m.chat, { caption: messageToSend, quoted: m });
+      vorterx.sendMessage(m.chat, messageToSend, { quoted: m });
         
     } catch (error) {
       console.error(`Error reading commands: ${error}`);
