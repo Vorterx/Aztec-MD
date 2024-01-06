@@ -1,7 +1,6 @@
 const { Zenith } = require('../lib/functions');
 const fs = require('fs');
 const path = require('path');
-
 const prefix = process.env.PREFIX;
 
 Zenith(
@@ -13,7 +12,7 @@ Zenith(
   async (vorterx, m, react, { args }) => {
     await react('🌀');
 
-    const pluginsPath = path.join('plugins');  
+    const pluginsPath = path.join('plugins');
     let messageToSend = '';
 
     try {
@@ -33,14 +32,14 @@ Zenith(
 
       const categoryFolders = fs.readdirSync(pluginsPath, { withFileTypes: true })
         .filter(file => file.isDirectory())
-        .map(folder => path.join(process.cwd(), pluginsPath, folder.name));
+        .map(folder => path.join(pluginsPath, folder.name)); 
 
       for (const categoryPath of categoryFolders) {
         console.log('Checking category folder:', categoryPath);
         
         const jsFiles = fs.readdirSync(categoryPath)
           .filter(file => file.endsWith('.js'))
-          .map(file => path.join(process.cwd(), categoryPath, file)); 
+          .map(file => path.join(categoryPath, file));
 
         for (const filePath of jsFiles) {
           console.log('Checking command file:', filePath);
@@ -80,4 +79,4 @@ ${menuDesign.body.down} ${commandInfo.usage}`;
     }
   }
 );
-  
+    
