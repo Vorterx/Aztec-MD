@@ -1,7 +1,7 @@
 const axios = require('axios');
 const google = require('google-it');
 const chalk = require('chalk');
-const { Zenith } = require ('../../lib/_cmd_sxntax.js');
+const { Zenith } = require('../../lib/_cmd_sxntax.js');
 
 
 Zenith(
