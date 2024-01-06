@@ -36,7 +36,7 @@ Zenith(
 
       for (const categoryPath of categoryFolders) {
         console.log('Checking category folder:', categoryPath);
-        
+
         const jsFiles = fs.readdirSync(categoryPath)
           .filter(file => file.endsWith('.js'))
           .map(file => path.join(categoryPath, file));
@@ -50,9 +50,9 @@ Zenith(
 
             if (commandInfoMatch) {
               const commandInfoString = commandInfoMatch[1];
-              const commandInfo = eval(`(${commandInfoString})`);
+              const commandInfo = new Function(`return ${commandInfoString}`)();
 
-              if (commandInfo.usage) {
+              if (commandInfo && commandInfo.usage) {
                 if (messageToSend === '') {
                   messageToSend += `
 ${menuDesign.header.left}${menuDesign.header.right}
@@ -67,7 +67,7 @@ ${menuDesign.body.down} ${commandInfo.usage}`;
               }
             }
           } catch (error) {
-            console.error(`Error reading command file ${filePath}: ${error}`);
+            console.error(`Error reading or processing command file ${filePath}: ${error}`);
           }
         }
       }
@@ -83,4 +83,4 @@ ${menuDesign.body.down} ${commandInfo.usage}`;
     }
   }
 );
-  
+      
