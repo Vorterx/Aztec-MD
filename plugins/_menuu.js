@@ -2,7 +2,7 @@ const { Zenith } = require('../lib/functions');
 const fs = require('fs');
 const path = require('path');
 
-const prefix = process.env.PREFIX || 'default-prefix';
+const prefix = process.env.PREFIX;
 
 Zenith(
   {
