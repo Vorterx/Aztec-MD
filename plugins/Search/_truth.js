@@ -5,7 +5,7 @@
 
 const TruthOrDare = require('../../lib/getTruth_Dare.js');
 const config = require('../../config.js');
-const { Zenith } = require ('../../lib/_cmd_sxntax.js');
+const { Zenith } = require('../../lib/_cmd_sxntax.js');
 
 Zenith (
   {
