@@ -1,7 +1,6 @@
 const { Zenith } = require('../lib/functions');
 const fs = require('fs');
 const path = require('path');
-
 const prefix = process.env.PREFIX;
 
 Zenith(
@@ -33,38 +32,42 @@ Zenith(
 
       const categoryFolders = fs.readdirSync(pluginsPath, { withFileTypes: true })
         .filter(file => file.isDirectory())
-        .map(folder => path.join(pluginsPath, folder.name));
+        .map(folder => path.join(pluginsPath, folder.name)); 
 
       for (const categoryPath of categoryFolders) {
         console.log('Checking category folder:', categoryPath);
         
         const jsFiles = fs.readdirSync(categoryPath)
           .filter(file => file.endsWith('.js'))
-          .map(file => path.join(categoryPath, file)); 
+          .map(file => path.join(categoryPath, file));
 
         for (const filePath of jsFiles) {
           console.log('Checking command file:', filePath);
 
-          const commandModule = require(filePath);
+          try {
+            const fileContent = fs.readFileSync(filePath, 'utf8');
+            const commandInfoMatch = fileContent.match(/Zenith\(([\s\S]*?)\);/);
 
-          if (commandModule && commandModule.Zenith) {
-            console.log('Command Module:', commandModule);
+            if (commandInfoMatch) {
+              const commandInfoString = commandInfoMatch[1];
+              const commandInfo = eval(`(${commandInfoString})`);
 
-            const commandInfo = commandModule.Zenith;
-
-            if (commandInfo.usage) {
-              if (messageToSend === '') {
-                messageToSend += `
+              if (commandInfo.usage) {
+                if (messageToSend === '') {
+                  messageToSend += `
 ${menuDesign.header.left}${menuDesign.header.right}
 *NAME*: ${m.pushName}
 *PREFIX*: ${prefix}
 ${menuDesign.header.down}`;
-              }
+                }
 
-              messageToSend += `
+                messageToSend += `
 ${menuDesign.body.left}${menuDesign.body.up}『${commandInfo.category || 'Uncategorized'}』${menuDesign.body.right}
 ${menuDesign.body.down} ${commandInfo.usage}`;
+              }
             }
+          } catch (error) {
+            console.error(`Error reading command file ${filePath}: ${error}`);
           }
         }
       }
@@ -76,7 +79,8 @@ ${menuDesign.body.down} ${commandInfo.usage}`;
       }
 
     } catch (error) {
-      console.error(`Error building or sending the menu: ${error}`);
+      console.error(`Error sending the menu: ${error}`);
     }
   }
 );
+  
