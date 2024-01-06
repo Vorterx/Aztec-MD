@@ -13,7 +13,7 @@ Zenith(
   async (vorterx, m, react, { args }) => {
     await react('🌀');
 
-    const pluginsPath = path.join('plugins');
+    const pluginsPath = path.join('plugins');  
     let messageToSend = '';
 
     try {
@@ -31,39 +31,44 @@ Zenith(
         },
       };
 
-for (const categoryPath of categoryFolders) {
-  console.log('Checking category folder:', categoryPath);
-  
-  const jsFiles = fs.readdirSync(categoryPath)
-    .filter(file => file.endsWith('.js'))
-    .map(file => path.join(process.cwd(), categoryPath, file)); 
+      const categoryFolders = fs.readdirSync(pluginsPath, { withFileTypes: true })
+        .filter(file => file.isDirectory())
+        .map(folder => path.join(process.cwd(), pluginsPath, folder.name));
 
-  for (const filePath of jsFiles) {
-    console.log('Checking command file:', filePath);
+      for (const categoryPath of categoryFolders) {
+        console.log('Checking category folder:', categoryPath);
+        
+        const jsFiles = fs.readdirSync(categoryPath)
+          .filter(file => file.endsWith('.js'))
+          .map(file => path.join(process.cwd(), categoryPath, file)); 
 
-    const commandModule = require(filePath);
+        for (const filePath of jsFiles) {
+          console.log('Checking command file:', filePath);
 
-    if (commandModule && commandModule.Zenith) {
-      console.log('Command Module:', commandModule);
+          const commandModule = require(filePath);
 
-      const commandInfo = commandModule.Zenith;
+          if (commandModule && commandModule.Zenith) {
+            console.log('Command Module:', commandModule);
 
-      if (commandInfo.usage) {
-        if (messageToSend === '') {
-          messageToSend += `
+            const commandInfo = commandModule.Zenith;
+
+            if (commandInfo.usage) {
+              if (messageToSend === '') {
+                messageToSend += `
 ${menuDesign.header.left}${menuDesign.header.right}
 *NAME*: ${m.pushName}
 *PREFIX*: ${prefix}
 ${menuDesign.header.down}`;
-        }
+              }
 
-        messageToSend += `
+              messageToSend += `
 ${menuDesign.body.left}${menuDesign.body.up}『${commandInfo.category || 'Uncategorized'}』${menuDesign.body.right}
 ${menuDesign.body.down} ${commandInfo.usage}`;
+            }
+          }
+        }
       }
-    }
-  }
-}
+
       if (messageToSend !== '') {
         vorterx.sendMessage(m.chat, messageToSend, { quoted: m });
       } else {
@@ -71,8 +76,8 @@ ${menuDesign.body.down} ${commandInfo.usage}`;
       }
 
     } catch (error) {
-      console.error(`Error ending the menu: ${error}`);
+      console.error(`Error sending the menu: ${error}`);
     }
   }
 );
-      
+  
