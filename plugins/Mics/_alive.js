@@ -62,4 +62,6 @@ Zenith(
       },
     };
 
-    await vorterx.sendMessage(m.chat, messageOptions, { quoted: m}
+    await vorterx.sendMessage(m.chat, messageOptions, { quoted: m});
+              }
+    )
