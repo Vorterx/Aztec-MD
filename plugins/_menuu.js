@@ -23,6 +23,10 @@ Zenith(
 
 `;
 
+const categoryFolders = fs.readdirSync(pluginsPath, { withFileTypes: true })
+  .filter(file => file.isDirectory())
+  .map(folder => path.join(pluginsPath, folder.name));
+
 for (const categoryPath of categoryFolders) {
   console.log('Checking category folder:', categoryPath);
 
@@ -53,12 +57,5 @@ for (const categoryPath of categoryFolders) {
     }
   }
 }
-
-if (messageToSend !== '') {
-  vorterx.sendMessage(m.chat, messageToSend, { quoted: m });
-} else {
-  console.log('No commands found to display.');
-  }
-  }
-    )
-  
+    }
+  )
