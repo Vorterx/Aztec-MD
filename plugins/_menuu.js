@@ -14,7 +14,7 @@ Zenith(
 
     const pluginsPath = path.join(__dirname);
     let messageToSend = `
-┏╼╾╼╾╼『YourBotName』╾╼⦿
+┏╼╾╼╾╼『BotName』╾╼⦿
 | *NAME*: ${m.pushName || 'Unknown'}
 | *PREFIX*: ${prefix || '!'}
 | *OWNER*: Random Owner
@@ -39,12 +39,12 @@ Zenith(
 
         try {
           const fileContent = fs.readFileSync(filePath, 'utf8');
-          const commandInfoMatches = fileContent.match(/Zenith\(([^;]+)\);/g);
+          const matches = fileContent.match(/Zenith\(([\s\S]*?)\);/g);
 
-          if (commandInfoMatches) {
-            for (const commandInfoMatch of commandInfoMatches) {
+          if (matches) {
+            for (const match of matches) {
               try {
-                const commandInfo = new Function(`return ${commandInfoMatch}`)();
+                const commandInfo = new Function(`return ${match}`)();
 
                 if (commandInfo && commandInfo.usage) {
                   messageToSend += `
@@ -66,4 +66,4 @@ Zenith(
     vorterx.sendMessage(m.chat, messageToSend, { quoted: m });
   }
 );
-      
+              
