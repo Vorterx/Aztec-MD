@@ -11,9 +11,9 @@ const { Zenith } = require('../../lib/_cmd_sxntax.js');
 Zenith(
   {
     pattern: "sticker",
-    alias: ['take,steal'],
+    alias: ['take','steal'],
     category: "Convert",
-    filename: __filename,
+    filename: __filename
  }, async (vorterx, m, react, {args}) => {
             
        if (!m.quoted) {
@@ -43,7 +43,7 @@ Zenith(
                 });
                 const buffer = await sticker.toBuffer();
           return vorterx.sendMessage(m.chat, {sticker: buffer }, {quoted: m });
-         })
+         });
 
   //---------------------------------------------------------------------------
 
