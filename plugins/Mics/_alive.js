@@ -53,7 +53,7 @@ Zenith(
         externalAdReply: {
           title: `${config.CAPTION || ''}`,
           body: tiny(aliveMsg),
-          thumbnail: await getBuffer("https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg"),
+          thumbnail: "https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg",
           mediaType: 1,
           mediaUrl: `${config.THUMB}`,
           sourceUrl: `${config.THUMB}`,
