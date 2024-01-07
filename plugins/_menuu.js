@@ -8,20 +8,23 @@ Zenith(
     usage: 'menu',
     desc: 'To get all the commands',
     category: 'Mics',
-  }, 
+  },
   async (vorterx, m, react, { args }) => {
     await react('🌀');
 
-    const pluginsPath = path.join(__dirname); 
-    let messageToSend = '';
+    const pluginsPath = path.join(__dirname);
+    let messageToSend = `
+┏╼╾╼╾╼『AZTEC MD』╾╼⦿
+| *NAME*: ${m.pushName}
+| *PREFIX*: ${prefix}
+| *OWNER*: DiegosonTech 
+| *FROM*: Earth
+┗╼╾╼╾╼╼╾╼╾╼╼╾╼╾╼⦿
+
+`;
 
     try {
       const menuDesign = {
-        header: {
-          left: '┏',
-          right: '╼╾╼╾╼⦿\n',
-          down: '┗╼╾╼╾╼╼╾╼╾╼╼╾╼╾╼⦿\n\n',
-        },
         body: {
           left: '┌',
           right: '╾╼❖',
@@ -32,7 +35,7 @@ Zenith(
 
       const categoryFolders = fs.readdirSync(pluginsPath, { withFileTypes: true })
         .filter(file => file.isDirectory())
-        .map(folder => path.join(pluginsPath, folder.name)); 
+        .map(folder => path.join(pluginsPath, folder.name));
 
       for (const categoryPath of categoryFolders) {
         console.log('Checking category folder:', categoryPath);
@@ -53,17 +56,10 @@ Zenith(
               const commandInfo = new Function(`return ${commandInfoString}`)();
 
               if (commandInfo && commandInfo.usage) {
-                if (messageToSend === '') {
-                  messageToSend += `
-${menuDesign.header.left}${menuDesign.header.right}
-*NAME*: ${m.pushName}
-*PREFIX*: ${prefix}
-${menuDesign.header.down}`;
-                }
-
                 messageToSend += `
 ${menuDesign.body.left}${menuDesign.body.up}『${commandInfo.category || 'Uncategorized'}』${menuDesign.body.right}
-${menuDesign.body.down} ${commandInfo.usage}`;
+│ ╰─ ${commandInfo.usage}
+${menuDesign.body.down}◉`;
               }
             }
           } catch (error) {
@@ -77,10 +73,9 @@ ${menuDesign.body.down} ${commandInfo.usage}`;
       } else {
         console.log('No commands found to display.');
       }
-
     } catch (error) {
       console.error(`Error sending the menu: ${error}`);
     }
   }
 );
-      
+  
