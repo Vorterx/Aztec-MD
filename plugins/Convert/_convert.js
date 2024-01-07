@@ -6,7 +6,7 @@
 
 const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter");
 const config = require('../../config.js');
-const { Zenith } = require ('../../lib/_cmd_sxntax.js');
+const { Zenith } = require('../../lib/_cmd_sxntax.js');
 
 Zenith(
   {
