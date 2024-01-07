@@ -18,7 +18,7 @@ Zenith(
     category: 'Mics',
     filename: __filename
   },
-  async (vorterx, m, react) => {
+  async (vorterx, m, react,{text}) => {
    
     await react('🧘');
     const image = {
@@ -46,24 +46,20 @@ Zenith(
 `;
 
     const messageOptions = {
-      image: image,
-      caption: tiny(aliveMsg),
       contextInfo: {
+         mentionedJid: [text],
         forwardingScore: 999,
         isForwarded:true,
         externalAdReply: {
           title: `${config.CAPTION || ''}`,
-          body: "vorterx",
+          body: tiny(aliveMsg),
           thumbnail: await getBuffer("https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg"),
           mediaType: 1,
-          mediaUrl: "",
-          sourceUrl: "",
+          mediaUrl: `${config.THUMB}`,
+          sourceUrl: `${config.THUMB}`,
           ShowAdAttribution: true,
         },
       },
     };
 
-    await vorterx.sendMessage(m.chat, messageOptions, { quoted: m});
-  }
-);
-      
+    await vorterx.sendMessage(m.chat, messageOptions, { quoted: m}
