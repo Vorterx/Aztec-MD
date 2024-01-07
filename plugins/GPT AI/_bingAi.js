@@ -1,6 +1,6 @@
 const fetch = async (url) => (await import('node-fetch')).default(url);
 const { getBuffer } = require('../../lib/_getBuffer.js');
-const { Zenith } = require ('../../lib/_cmd_sxntax.js');
+const { Zenith } = require('../../lib/_cmd_sxntax.js');
 
 Zenith (
   {
