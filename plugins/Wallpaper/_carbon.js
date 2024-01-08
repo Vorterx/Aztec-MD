@@ -10,13 +10,12 @@ Zenith({
  
   if (!args) {
     await react('❌');
-    return m.reply('Please provide a text e.g console.log(Hello World)');
+    return m.reply('Please provide a text e.g print("LoL Human")');
   }
 
   const encodedArgs = encodeURIComponent(args);
   const carbon_app = `https://api.lolhuman.xyz/api/carbon?apikey=GataDios&code=${encodedArgs}&language=python`;
   console.log(carbon_app);
-
   try {
     await react('✔️');
     const res = await axios.get(carbon_app);
@@ -27,7 +26,6 @@ Zenith({
       await react('❌');
       return m.reply('_Error generating carbon image._');
     }
-
     await vorterx.sendMessage(m.chat, {
       image: { url: gen_carbon.toString() },
       caption: config.CAPTION || '',
