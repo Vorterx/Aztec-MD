@@ -14,7 +14,7 @@ Zenith({
 
     const forQuote = `*Anime Quote:*\n${quote}\n\n*Character:* ${character}\n*Anime:* ${anime}\n*Episode:* ${episode}`;
 
-    await vorterx.sendMessage(m.chat, forQuote);
+    await vorterx.sendMessage(m.chat, {text: forQuote});
   } catch (error) {
     console.error(error.message);
 
