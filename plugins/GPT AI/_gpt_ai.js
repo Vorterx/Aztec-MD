@@ -30,7 +30,7 @@ Zenith(
     if (result.status === true) {
       await react("💡");
       await vorterx.sendMessage(m.chat, {
-        text: message.result,
+        text: result.result,
         image: { url: "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png" },
         contextInfo: {
           externalAdReply: {
@@ -44,6 +44,7 @@ Zenith(
         },
       });
     } else {
+
     }
   });
-    
+  
