@@ -14,7 +14,7 @@ Zenith(
     return m.reply('Please provide a text e.g console.log(Hello World)');
   }
 
-  const carbon_app = `https://api.lolhuman.xyz/api/carbon?apikey=GotaDios&code=${args}&language=javascript`;
+  const carbon_app = `https://api.lolhuman.xyz/api/carbon?apikey=GataDios&code=${args}&language=javascript`;
   try {
     await react('✔️');
     const res = await axios.get(carbon_app);
