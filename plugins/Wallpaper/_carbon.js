@@ -14,7 +14,7 @@ Zenith({
   }
 
   const encodedArgs = encodeURIComponent(args);
-  const carbon_app = `https://api.lolhuman.xyz/api/carbon?apikey=GataDios&code=${encodedArgs}&language=javascript`;
+  const carbon_app = `https://api.lolhuman.xyz/api/carbon?apikey=GataDios&code=${encodedArgs}&language=python`;
   console.log(carbon_app);
 
   try {
