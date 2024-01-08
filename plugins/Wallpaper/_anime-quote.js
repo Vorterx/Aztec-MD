@@ -17,7 +17,7 @@ Zenith({
       const { quote, character, anime, episode } = res.data.result;
       const formattedQuote = `*Anime Quote:*\n${quote}\n\n*_Character_:* ${character}\n\n*_Anime_:* ${anime}\n\n*_Episode_:* ${episode}`;
 
-      await vorterx.sendMessage(m.chat, { image: { url: cmd }, text: formattedQuote });
+      await vorterx.sendMessage(m.chat, { image: { url: cmd }, caption: formattedQuote });
     } else {
       console.error('Error fetching anime quote:', res && res.data && res.data.message);
       m.reply('Failed to fetch anime quote. Please try again later.');
