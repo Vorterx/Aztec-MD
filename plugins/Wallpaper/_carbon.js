@@ -14,10 +14,12 @@ Zenith({
   }
 
   const carbon_app = `https://api.lolhuman.xyz/api/carbon?apikey=GataDios&code=${args}&language=javascript`;
+    console.log(carbon_app);
   try {
     await react('✔️');
     const res = await axios.get(carbon_app);
     const gen_carbon = res.data.result;
+    console.log(gen_carbon);
 
     if (!gen_carbon) {
       await react('❌');
