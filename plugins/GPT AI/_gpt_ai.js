@@ -22,16 +22,15 @@ Zenith(
     }
 
     const encodedArgs = encodeURIComponent(args);
-    const gpt_api = `https://api.neoxr.eu/api/gpt-pro?q=${encodedArgs}&apikey=roXNse`;
+    const gpt_api = `https://api.lolhuman.xyz/api/openai-turbo?apikey=GataDios&text=${encodedArgs}`;                                                                                    
     const res = await fetch(gpt_api);
     const result = await res.json();
-
     console.log(result);
 
     if (result.status === true) {
       await react("💡");
       await vorterx.sendMessage(m.chat, {
-        text: result.data.message,
+        text: result.result,
         image: { url: "https://i.ibb.co/9bfjPyH/1-t-Y7-MK1-O-S4eq-YJ0-Ub4irg.png" },
         contextInfo: {
           externalAdReply: {
