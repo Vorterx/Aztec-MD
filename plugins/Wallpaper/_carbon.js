@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { Zenith } = require('../../lib/functions');
-const config = require('../../config);
+const config = require('../../config');
 
 Zenith(
   {
@@ -21,7 +21,7 @@ Zenith(
     const gen_carbon = res.data.result;
 
     await vorterx.sendMessage(m.chat, {
-      image: { URL: gen_carbon },
+      image: { url: gen_carbon },
       caption: config.CAPTION,
       quoted: m,
     });
