@@ -1,5 +1,6 @@
 const axios = require('axios');
 const { Zenith } = require('../../lib/functions');
+const config = require('../../config);
 
 Zenith(
   {
@@ -13,22 +14,21 @@ Zenith(
     return m.reply('Please provide a text e.g console.log(Hello World)');
   }
 
-  const apiKey = 'GatosDios8';
-  const apiUrl = `https://api.lolhuman.xyz/api/carbon?apikey=${apiKey}&code=${args}&language=javascript`;
-
+  const carbon_app = `https://api.lolhuman.xyz/api/carbon?apikey=GotaDios&code=${args}&language=javascript`;
   try {
-    const response = await axios.get(apiUrl);
-    const imageLink = response.data.result;
+    await react('✔️');
+    const res = await axios.get(carbon_app);
+    const gen_carbon = res.data.result;
 
     await vorterx.sendMessage(m.chat, {
-      image: { URL: imageLink },
-      caption: config.CAPTION, // Make sure config.CAPTION is defined
+      image: { URL: gen_carbon },
+      caption: config.CAPTION,
       quoted: m,
     });
   } catch (error) {
-    console.error('Error fetching Carbon image:', error.message);
+    console.error(error.message);
     await react('❌');
-    return m.reply('Failed to generate Carbon image. Please try again later.');
+    return m.reply('_Err occurred sorry_');
   }
 });
       
