@@ -1,4 +1,3 @@
-//
 const axios = require('axios');
 const { Zenith } = require('../../lib/functions');
 
@@ -12,7 +11,7 @@ Zenith({
   let cmd = "https://i.imgur.com/oGX8YvH.jpg";
 
   try {
-    const res = await axios.get('https://api.lolhuman.xyz/api/random/quotesnime?apikey=5c250069e8936d6bf70295b8');
+    const res = await axios.get('https://api.lolhuman.xyz/api/random/quotesnime?apikey=GataDios');
     
     if (res && res.data && res.data.status === 200) {
       const { quote, character, anime, episode } = res.data.result;
