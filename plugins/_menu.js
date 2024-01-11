@@ -64,10 +64,11 @@ Zenith(
       headerTop = `┏╼╾╼╾『 *${configJson.Bots[0].BotName || ''}* 』╾╼⦿`;
       midSection = `|`;
       bottomSection = `┗╼╾╼╾╼╼╾╼╾╼╼╾╼╾╼⦿`;
-      categoryLeft = `┌──『`;
-      categoryRight = `』──❖\n`;
-      commandLine = `| `;
-      categoryEnd = `\n└─────────◉\n`;
+      categoryLeft = `┌─╾╼╼『`;
+      categoryRight = `』╾╼❖\n`;
+      commandLine = `│ ╰─ `;
+      categoryEnd = `\n╰─────────────◉\n`;
+      
     }
 
     let getCommands = '';
