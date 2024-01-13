@@ -6,7 +6,7 @@ Zenith({
     usage: 'gcinfo',
     desc: 'Shows group information',
     category: 'Group',
-}, async (vorterx, m, react, { text, args, participants, groupAdmin, metadata, groupName }) => {
+}, async (vorterx, m, react, { text, args, participants, groupAdmin, metadata, gcName }) => {
    
     var get_cc = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg';
 
@@ -21,7 +21,7 @@ Zenith({
     var MADEDate = moment(metadata.creation * 1000).tz('Africa/Johannesburg').format('MMMM D, YYYY [at] h:mm A');
 
     var get_infor = ` *乂 GROUP GC INFO 乂*\n\n` +
-`*〄 NAME:* ${groupName}\n` +
+`*〄 NAME:* ${gcName}\n` +
 `*〄 GC ID:* ${m.chat}\n` +
 `*〄 MADE AT:* ${MADEDate}\n` +
 `*〄 GC OWNER:* @${metadata.owner.split('@')[0]}\n` +
