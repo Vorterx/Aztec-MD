@@ -6,10 +6,11 @@
 //                     |
 //                     |
 //                     -------------------
+// config::
 let config = {
   prefix: process.env.PREFIX || '.',
   name: process.env.OWNER_NAME || '',
-  ANTILINK: process.env.ANTILINK || 'true',
+  antilink: process.env.ANTILINK === 'true',
   CAPTION: process.env.CAPTION || 'ᴾᴼᵂᴱᴿᴱᴰ ᴮʸ ⱽᴼᴿᵀᴱᴿˣ⁶⁶⁵™',
   MENU: process.env.MENU || '',
   mods: process.env.MODS ? process.env.MODS.split(',').map(mod => mod.replace('@net.whatsapp', '')) : [],  
@@ -39,3 +40,5 @@ let config = {
 };
 
 module.exports = config;
+  
+
