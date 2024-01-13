@@ -8,13 +8,13 @@
 //                     -------------------
 // config::
 let config = {
-  prefix: process.env.PREFIX || '.',
-  name: process.env.OWNER_NAME || '',
+  prefix: process.env.PREFIX === undefined ? '.' : process.env.PREFIX,
+  name: process.env.OWNER_NAME === undefined ? '' : process.env.OWNER_NAME,
   antilink: process.env.ANTILINK === 'true',
-  CAPTION: process.env.CAPTION || 'ᴾᴼᵂᴱᴿᴱᴰ ᴮʸ ⱽᴼᴿᵀᴱᴿˣ⁶⁶⁵™',
-  MENU: process.env.MENU || '',
+  CAPTION: process.env.CAPTION === undefined ? 'ᴾᴼᵂᴱᴿᴱᴰ ᴮʸ ⱽᴼᴿᵀᴱᴿˣ⁶⁶⁵™' : process.env.CAPTION,
+  MENU: process.env.MENU === undefined ? '' : process.env.MENU,
   mods: process.env.MODS ? process.env.MODS.split(',').map(mod => mod.replace('@net.whatsapp', '')) : [],  
-  MONGODB:  'mongodb+srv://tshephang:ducky1@ducky.ummj1kc.mongodb.net/?retryWrites=true&w=majority', 
+  MONGODB: process.env.MONGODB === undefined ? 'mongodb+srv://tshephang:ducky1@ducky.ummj1kc.mongodb.net/?retryWrites=true&w=majority' : process.env.MONGODB, 
   LOGOS: [
     'https://i.ibb.co/frX9YvD/OIG.jpg',
     'https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg',
