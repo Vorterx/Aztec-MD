@@ -9,7 +9,7 @@ Zenith({
 }, async (vorterx, m, react, { participants, groupAdmins, gcMeta, gcName }) => {
 
     await react('📇');
-    var get_cc = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg';
+    var get_cc = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60';
 
     var get_invite = null;
     try {
