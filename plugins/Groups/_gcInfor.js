@@ -1,10 +1,11 @@
 const { Zenith } = require('../../lib/functions');
-const moment = require("moment-timezone");
+const moment = require('moment-timezone');
+const config = require('../../config');
 
 Zenith({
-    usage: "gcinfo",
-    desc: "Shows group information",
-    category: "Group",
+    usage: 'gcinfo',
+    desc: 'Shows group information',
+    category: 'Group',
 }, async (vorterx, m, react, { text, args, participants, groupAdmin, metadata, groupName }) => {
    
     var get_cc = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg';
@@ -19,14 +20,14 @@ Zenith({
 
     var MADEDate = moment(metadata.creation * 1000).tz('Africa/Johannesburg').format('MMMM D, YYYY [at] h:mm A');
 
-    var get_infor = `🔍 *Group Information* 🔍\n\n` +
-`*NAME:* ${groupName}\n` +
-`*GC ID:* ${m.chat}\n` +
-`*MADE AT:* ${MADEDate}\n` +
-`*GC OWNER:* @${metadata.owner.split('@')[0]}\n` +
-`*ADMINS:* ${groupAdmin.length}\n` +
-`*MEMBERS:* ${participants.length}\n\n` +
-`*DESC:*\n${metadata.desc}`;
+    var get_infor = ` *乂 GROUP GC INFO 乂*\n\n` +
+`*〄 NAME:* ${groupName}\n` +
+`*〄 GC ID:* ${m.chat}\n` +
+`*〄 MADE AT:* ${MADEDate}\n` +
+`*〄 GC OWNER:* @${metadata.owner.split('@')[0]}\n` +
+`*〄 ADMINS:* ${groupAdmin.length}\n` +
+`*〄 MEMBERS:* ${participants.length}\n\n` +
+`*〄 DESC:*\n${metadata.desc}\n\n*${config.CAPTION}*`;
 
     vorterx.sendMessage(m.chat, { image: { url: ppuser }, caption: get_infor, mentions: [metadata.owner] }, { quoted: m });
 });
