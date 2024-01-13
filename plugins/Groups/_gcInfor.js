@@ -6,8 +6,9 @@ Zenith({
     usage: 'gcinfo',
     desc: 'Shows group information',
     category: 'Group',
-}, async (vorterx, m, react, { text, args, participants, groupAdmin, metadata, gcName }) => {
-   
+}, async (vorterx, m, react, { participants, groupAdmins, gcMeta, gcName }) => {
+
+    await react('📇');
     var get_cc = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg';
 
     var get_invite = null;
@@ -18,16 +19,16 @@ Zenith({
         console.error(error);
     }
 
-    var MADEDate = moment(metadata.creation * 1000).tz('Africa/Johannesburg').format('MMMM D, YYYY [at] h:mm A');
+    var MADEDate = moment(gcMeta.creation * 1000).tz('Africa/Johannesburg').format('MMMM D, YYYY [at] h:mm A');
 
     var get_infor = ` *乂 GROUP GC INFO 乂*\n\n` +
 `*〄 NAME:* ${gcName}\n` +
 `*〄 GC ID:* ${m.chat}\n` +
 `*〄 MADE AT:* ${MADEDate}\n` +
-`*〄 GC OWNER:* @${metadata.owner.split('@')[0]}\n` +
-`*〄 ADMINS:* ${groupAdmin.length}\n` +
+`*〄 GC OWNER:* @${gcMeta.owner.split('@')[0]}\n` +
+`*〄 ADMINS:* ${groupAdmins.length}\n` +
 `*〄 MEMBERS:* ${participants.length}\n\n` +
-`*〄 DESC:*\n${metadata.desc}\n\n*${config.CAPTION}*`;
+`*〄 DESC:*\n${gcMeta.desc}\n\n*${config.CAPTION}*`;
 
-    vorterx.sendMessage(m.chat, { image: { url: get_cc }, caption: get_infor, mentions: [metadata.owner] }, { quoted: m });
+    vorterx.sendMessage(m.chat, { image: { url: get_cc }, caption: get_infor, mentions: [gcMeta.owner] }, { quoted: m });
 });
