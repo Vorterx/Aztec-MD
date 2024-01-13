@@ -29,5 +29,5 @@ Zenith({
 `*〄 MEMBERS:* ${participants.length}\n\n` +
 `*〄 DESC:*\n${metadata.desc}\n\n*${config.CAPTION}*`;
 
-    vorterx.sendMessage(m.chat, { image: { url: ppuser }, caption: get_infor, mentions: [metadata.owner] }, { quoted: m });
+    vorterx.sendMessage(m.chat, { image: { url: get_cc }, caption: get_infor, mentions: [metadata.owner] }, { quoted: m });
 });
