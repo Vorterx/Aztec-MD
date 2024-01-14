@@ -2,7 +2,7 @@
   "name": "vorterx",
   "version": "3.0.0",
   "engines": {
-  "node": "21.3.0"
+  "node": "21.5.0"
   },
   "main": "core.js",
   "scripts": {
@@ -12,8 +12,7 @@
   "author": "Diegoson",
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",
-    "@iamrony777/baileys": "^6.5.0-7",
-    "@whiskeysockets/baileys": "^6.5.0",
+    "@iamrony777/baileys": "npm:@iamrony777/baileys",
     "@consumet/extensions": "^1.5.2",
     "@hapi/boom": "^10.0.1",
     "@types/node": "^16.9.1",
