@@ -10,7 +10,8 @@
 let config = {
   prefix: process.env.PREFIX === undefined ? '.' : process.env.PREFIX,
   name: process.env.OWNER_NAME === undefined ? '' : process.env.OWNER_NAME,
-  antilink: process.env.ANTILINK === 'true',
+  antilink: process.env.ANTILINK === 'true', //false 
+  AUTO_BIO: process.env.AUTO_BIO === 'true', //false 
   CAPTION: process.env.CAPTION === undefined ? 'ᴾᴼᵂᴱᴿᴱᴰ ᴮʸ ⱽᴼᴿᵀᴱᴿˣ⁶⁶⁵™' : process.env.CAPTION,
   MENU: process.env.MENU === undefined ? '' : process.env.MENU,
   mods: process.env.MODS ? process.env.MODS.split(',').map(mod => mod.replace('@net.whatsapp', '')) : [],  
