@@ -20,7 +20,7 @@ Welcome to ***Aztec MD***, a versatile and feature-packed WhatsApp bot designed 
 
 To add ***Aztec MD*** to your WhatsApp Bot, simply click on one of the following buttons to deploy the bot:
 
-- **Heroku**:
+- **HEROKU**:
 [![](https://raw.githubusercontent.com/ZeroTwoInc/Media/main/logo/UPPER.png)]()
 - **DEPLOY**:
 [![Deploy](https://raw.githubusercontent.com/ZeroTwoInc/Media/main/logo/MIDDLE.png)](https://heroku.com/deploy?template=https://github.com/Vorterx/Aztec-MD)
