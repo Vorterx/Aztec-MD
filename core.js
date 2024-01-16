@@ -126,44 +126,25 @@ async function startAztec() {
 
     vorterx.ev.on('connection.update', async (update) => {
       const { connection, lastDisconnect } = update;
+      
+    if (connection === "close") {
+    let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
+    let getReconet = "[🐲AZTEC] Connection closed, reconnecting.";
 
-      if (connection === "close") {
-        let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
-        switch (reason) {
-          case DisconnectReason.connectionClosed:
-            console.log("[🐲AZTEC] Connection closed, reconnecting.");
-            startAztec();
+    switch (reason) {
+        case DisconnectReason.connectionLost:
+            getReconet = "[🐏AZTEC] Connection Lost from Server, reconnecting.";
             break;
+        default:
+            getReconet = "[🌬AZTEC] Server Disconnected: Maybe Your QR logged out.";
+    }
 
-          case DisconnectReason.connectionLost:
-            console.log("[🐏AZTEC] Connection Lost from Server, reconnecting.");
-            startAztec();
-            break;
-
-          case DisconnectReason.loggedOut:
-            console.log("[😭AZTEC] Device Logged Out, Please Delete Session and Scan Again.");
-            process.exit();
-            break;
-
-          case DisconnectReason.restartRequired:
-            console.log("[♻️AZTEC] Server starting.");
-            startAztec();
-            break;
-
-          case DisconnectReason.timedOut:
-            console.log("[🎰AZTEC] Connection Timed Out, Trying to Reconnect.");
-            startAztec();
-            break;
-
-          default:
-            console.log("[🌬AZTEC] Server Disconnected: Maybe Your WhatsApp Account got banned");
-        }
-      }
-
-      if (connection === "open") {
-        console.log('Plugins loaded♻️');
-        console.log('WhatsApp chatbot has connected✔️');
-    
+    console.log(getReconet);      
+    startAztec();
+} else if (connection === "open") {
+      
+    console.log('[🐲AZTEC] Connection opened. Plugins loaded♻️\nWhatsApp chatbot has connected✔️');
+          
       const text = 'AZTEC';
   const rainbow = {
     'A': 'red',
