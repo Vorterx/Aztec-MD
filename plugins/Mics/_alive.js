@@ -16,9 +16,8 @@ Zenith(
     alias: ['on'],
     desc: 'To check the bot alive or off',
     category: 'Mics',
-    filename: __filename
   },
-  async (vorterx, m, react,{text}) => {
+  async (vorterx, m, react) => {
    
     await react('🧘');
     const image = {
@@ -28,8 +27,9 @@ Zenith(
 
     const configFile = path.join(__dirname, '../../lib/config.json');
     const configData = fs.readFileSync(configFile);
-const configJson = JSON.parse(configData);
-let aliveMsg = ` 
+    const configJson = JSON.parse(configData);
+
+    let aliveMsg = ` 
 ╭––『 *CHAT ON* 』 
 ┆ ${m.pushName}
 ╰–❖ __
@@ -43,23 +43,26 @@ let aliveMsg = `
 ┆ *Time* : ${new Date().toLocaleTimeString()}
 ╰–––––––––––––––༓\n\n*${config.CAPTION || ''}*
 `;
-const messageOptions = {
-  image: image,
-  contextInfo: {
-  mentionedJid: m.sender,
-    forwardingScore: 999,
-    isForwarded:true,
-    externalAdReply: {
-      title: `${config.CAPTION || ''}`,
-      body: tiny(aliveMsg),
-      thumbnailUrl: "https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg",
-      mediaType: 1,
-      mediaUrl: `${config.THUMB}`,
-      sourceUrl: `${config.THUMB}`,
-      ShowAdAttribution: true,
-    },
-  },
-};
-await vorterx.sendMessage(m.chat, messageOptions, { quoted: m})
+
+    const messageOptions = {
+      image: image,
+      caption: tiny(aliveMsg),
+      contextInfo: {
+        forwardingScore: 999,
+        isForwarded:true,
+        externalAdReply: {
+          title: `${config.CAPTION || ''}`,
+          body: "",
+          thumbnail: await getBuffer("https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg"),
+          mediaType: 1,
+          mediaUrl: "",
+          sourceUrl: "",
+          ShowAdAttribution: true,
+        },
+      },
+    };
+
+    await vorterx.sendMessage(m.chat, messageOptions, { quoted: m});
   }
-  )
+);
+      
