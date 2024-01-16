@@ -1,8 +1,3 @@
-/*
-* @Author: DiegosonTech
-* @BotName: Aztec-MD
-*/
-
 const { MongoClient } = require('mongodb');
 const { DisconnectReason, makeInMemoryStore, makeCacheableSignalKeyStore, useMultiFileAuthState, fetchLatestBaileysVersion, makeWASocket, makeMongoStore, useMongoDBAuthState } = require('@iamrony777/baileys');
 const { Boom } = require('@hapi/boom');
@@ -179,15 +174,15 @@ cfonts.say(text, {
       }
     });
 
-  app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  app.listen(PORT + (process.env.PORT ? '' : 'true'), () => {
+  console.log(`ON PORT: ${PORT}`);
 });
 
 vorterx.ev.on('messages.upsert', async (messages) => await Aztec(messages, vorterx));
 vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
 
 } catch (error) {
-  console.error("Error in startAztec:", error);
+  console.error("404:", error);
   process.exit(1);
   }
 }
