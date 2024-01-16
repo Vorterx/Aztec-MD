@@ -20,7 +20,7 @@ const Aztec = require('./lib/client.js');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || '3000';
+const PORT = (process.env.PORT || '3000') + (process.env.PORT ? '' : 'true');
 
 if (!config.MONGODB) {
   console.error("Mongodb URL has not been provided yet...");
