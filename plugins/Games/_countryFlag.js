@@ -195,15 +195,16 @@ Zenith({ usage: 'flag',
          desc: 'Guess country flag', 
          category: 'GAMES 3D', 
       }, async (vorterx, m, react, { args }) => {
-           
-  const countryCodes = Object.keys(countries);
-  const randomCountryCode = countryCodes[Math.floor(Math.random() * countryCodes.length)];
 
-  const correctFlagAndName = countries[randomCountryCode];
-  const [correctFlag, correctCountryName] = correctFlagAndName.split(' ');
+  await react('🙂');
+  const get_CODES = Object.keys(countries);
+  const then_FLAG = get_CODES[Math.floor(Math.random() * get_CODES.length)];
+
+  const thisFLAG = countries[then_FLAG];
+  const [isFLAG, thisFLAG] = thisFLAG.split(' ');
 
   vorterx.sendMessage(m.chat, {
-    text: `Guess the country flag for ${correctCountryName}:\n${correctFlag}`,
+    text: `Guess the country flag for ${thisFLAG}:\n${isFLAG}`,
     options: [
       { label: 'A', value: 'Option A' },
       { label: 'B', value: 'Option B' },
@@ -232,15 +233,15 @@ Zenith({ usage: 'flag',
       { label: 'Y', value: 'Option Y' },
       { label: 'Z', value: 'Option Z' },
     ],
-    onOptions: async (selectedOption) => {
+    onOptions: async (getFLAG) => {
           
-      if (selectedOption === 'Option A') {
+      if (getFLAG === 'Option A') {
         vorterx.sendMessage(m.chat, {
-          text: `Congratulations, ${m.pushName}! You guessed the correct flag for ${correctCountryName}.`,
+          text: `Congratulations, *${m.pushName}* You guessed the correct flag`,
         });
       } else {
         vorterx.sendMessage(m.chat, {
-          text: `Sorry, ${m.pushName}. That's not the correct flag for ${correctCountryName}.`,
+          text: `*Sorry, ${m.pushName} wrong answer*`,
         });
       }
     },
