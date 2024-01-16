@@ -7,6 +7,7 @@ const { MongoClient } = require('mongodb');
 const { DisconnectReason, makeInMemoryStore, makeCacheableSignalKeyStore, useMultiFileAuthState, fetchLatestBaileysVersion, makeWASocket, makeMongoStore, useMongoDBAuthState } = require('@iamrony777/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
+const cfonts = require('cfonts');
 const express = require('express');
 const { QuickDB } = require('quick.db');
 const fs = require("fs");
@@ -162,7 +163,28 @@ async function startAztec() {
       if (connection === "open") {
         console.log('Plugins loaded♻️');
         console.log('WhatsApp chatbot has connected✔️');
-        const toxic = `╭–––––––––––––––༓ 
+    
+      const text = 'AZTEC';
+  const rainbow = {
+    'A': 'red',
+      'Z': 'orange',
+       'T': 'yellow',
+         'E': 'green',
+          'C': 'blue',
+           'M': 'indigo',
+             'D': 'violet',
+};
+const colors = Array.from(text).map(char => rainbow[char.toUpperCase()]);
+cfonts.say(text, {
+    font: 'block',
+      align: 'center',
+       colors,
+        background: 'transparent',
+         letterSpacing: 1,
+           lineHeight: 1,
+});
+  
+  const toxic = `╭–––––––––––––––༓ 
 ┆✑  Online now🌷
 ╰–––––––––––––––༓ 
 ╭–– 『 *CONNECTED* 』      
