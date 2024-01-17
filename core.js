@@ -65,15 +65,9 @@ fs.existsSync(session) || console.error(`Error: ${session} _Please provide creds
     vorterx.contactDB = new QuickDB().table('contacts');
     vorterx.contact = contact;
 
-    async function loadCommands(pluginsDir) {
-      const cmdFiles = getCommandFiles(pluginsDir);
-
-      for (const file of cmdFiles) {
-        const filePath = path.join(pluginsDir, file);
-        const command = require(`.${path.sep}${filePath}`);
-        vorterx.cmd.set(command.name, command);
-      }
-    }
+ const loadCommands = pluginsDir => getCommandFiles(pluginsDir)
+  .map(file => path.join(pluginsDir, file))
+  .forEach(file => vorterx.cmd.set(require(`.${path.sep}${file}`).name, require(`.${path.sep}${file}`));
 
     async function readCommands() {
       const pluginsDir = './plugins';
