@@ -17,10 +17,7 @@ const path = require('path');
 const app = express();
 const PORT = (process.env.PORT || '3000') + (process.env.PORT ? '' : 'true');
 
-if (!config.MONGODB) {
-  console.error("Mongodb URL has not been provided yet...");
-  process.exit(1);
-}
+config.MONGODB || (console.error("Error: _MongoDB URL is not provided_") && process.exit(1));
 
 async function startMongoDB() {
   try {
