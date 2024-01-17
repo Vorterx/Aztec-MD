@@ -8,15 +8,13 @@ const { QuickDB } = require('quick.db');
 const fs = require("fs");
 const { Collection } = require('discord.js');
 const config = require('./config.js');
-const qr = require("qr-image");
 const contact = require('./connects/contact.js');
 const vorterx = require('./lib/client.js');
 const Aztec = require('./lib/client.js');
 const path = require('path');
-
 const app = express();
-const PORT = (process.env.PORT || '3000') + (process.env.PORT ? '' : 'true');
 
+const PORT = (process.env.PORT || '3000') + (process.env.PORT ? '' : 'true');
 config.MONGODB || (console.error("Error: _MongoDB URL is not provided_") && process.exit(1));
 
 async function startMongoDB() {
