@@ -37,11 +37,9 @@ async function startMongoDB() {
 
 async function startAztec() {
   try {
-    if (!config.MONGODB) {
-      console.error("Mongodb URL has not been provided yet...");
-      process.exit(1);
-    }
 
+  !config.MONGODB ? console.error("Error: MongoDB URL is not provided") && process.exit(1) : null;
+    
     const session = './connects/session/creds.json';
     if (!fs.existsSync(session)) {
       console.error("creds.json file not found. Please provide creds json");
