@@ -39,12 +39,9 @@ async function startAztec() {
   try {
 
   !config.MONGODB ? console.error("Error: MongoDB URL is not provided") && process.exit(1) : null;
+     const session = './connects/session/creds.json';
+fs.existsSync(session) || console.error(`Error: ${session} _Please provide creds json_`) ?? process.exit(1);
     
-    const session = './connects/session/creds.json';
-    if (!fs.existsSync(session)) {
-      console.error("creds.json file not found. Please provide creds json");
-      process.exit(1);
-    }
 
     const mongo = await startMongoDB();
     const authC = mongo.db().collection("auth");
