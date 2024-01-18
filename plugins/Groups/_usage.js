@@ -1,12 +1,12 @@
 const fs = require('fs');
-let usageData = {
+
+let USEG_DATA = {
   groups: 0,
   privateChats: 0,
   totalUsers: 0,
   users: []
 };
-
-let chatsData = [];
+let CHATS_DETO = [];
 Zenith({
   usage: 'usage',
   desc: 'To check how many users have used the Aztec-MD bot',
@@ -17,15 +17,15 @@ Zenith({
  const _VOTE = /@whatsapp\.net$/;
   const CHATS = _VOTE.test(m.chat);
   if (CHATS) {
-    usageData.privateChats += 1;
+    USEG_DATA.privateChats += 1;
   } else {
-    usageData.groups += 1;
+    USEG_DATA.groups += 1;
   }
 
   const _MEMBERS = m.pushName;
-    if (!usageData.users.includes(_MEMBERS)) {
-        usageData.totalUsers += 1;
-       usageData.users.push(_MEMBERS);
+    if (!USEG_DATA.users.includes(_MEMBERS)) {
+        USEG_DATA.totalUsers += 1;
+       USEG_DATA.users.push(_MEMBERS);
   }
 
   const _USAGE_INFOR = {
@@ -34,19 +34,19 @@ Zenith({
     _MEMBERS,
     timestamp: Date.now()
   };
-  chatsData.push(_USAGE_INFOR);
+  CHATS_DETO.push(_USAGE_INFOR);
   saveUsageData();
       saveChatsData();
 
-  vorterx.sendMessage(m.chat, {text: `*💻 Group Chats*: ${usageData.groups}\n*Private Chats*: ${usageData.privateChats}\n*Total Users*: ${usageData.totalUsers}`});
+  vorterx.sendMessage(m.chat, {text: `*💻 Group Chats*: ${USEG_DATA.groups}\n*Private Chats*: ${USEG_DATA.privateChats}\n*Total Users*: ${USEG_DATA.totalUsers}`});
 });
 
 function SAVE_DATA() {
-  const json_DATA = JSON.stringify(usageData, null, 2);
+  const json_DATA = JSON.stringify(USEG_DATA, null, 2);
   fs.writeFileSync('../../lib/_dbase/usage.json', json_DATA, 'utf8');
 }
 
 function SAVE_DATA() {
-  const json_DATA = JSON.stringify(chatsData, null, 2);
+  const json_DATA = JSON.stringify(USEG_DATA, null, 2);
   fs.writeFileSync('../../lib/_dbase/chats.json', json_DATA, 'utf8');
 }
