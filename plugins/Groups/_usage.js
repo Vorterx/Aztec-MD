@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { Zenith } = require('../../lib/functions');
 
 let USEG_DATA = {
   groups: 0,
