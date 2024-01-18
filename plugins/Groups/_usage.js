@@ -45,8 +45,7 @@ function SAVE_DATA() {
   const json_DATA = JSON.stringify(USEG_DATA, null, 2);
   fs.writeFileSync('../../lib/_dbase/usage.json', json_DATA, 'utf8');
 }
-
 function SAVE_DATA() {
-  const json_DATA = JSON.stringify(USEG_DATA, null, 2);
-  fs.writeFileSync('../../lib/_dbase/chats.json', json_DATA, 'utf8');
+     const json_DATA = JSON.stringify(USEG_DATA, null, 2);
+   fs.writeFileSync('../../lib/_dbase/chats.json', json_DATA, 'utf8');
 }
