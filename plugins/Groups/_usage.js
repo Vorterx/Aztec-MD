@@ -35,8 +35,8 @@ Zenith({
     timestamp: Date.now()
   };
   CHATS_DETO.push(_USAGE_INFOR);
-  saveUsageData();
-      saveChatsData();
+  SAVE_DATA();
+      SAVE_DATA();
 
   vorterx.sendMessage(m.chat, {text: `*💻 Group Chats*: ${USEG_DATA.groups}\n*Private Chats*: ${USEG_DATA.privateChats}\n*Total Users*: ${USEG_DATA.totalUsers}`});
 });
