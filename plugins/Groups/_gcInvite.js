@@ -17,7 +17,8 @@ Zenith(
     const INVITE_CODE = await vorterx.groupInviteCode(m.chat);
 
     if (INVITE_CODE) {
-      const caption = `[${m.pushName}\n\n*HERE IS THE INVITE LINK*]\n\nhttps://chat.whatsapp.com/${INVITE_CODE}`;
+      const caption = `*乂 INVITED GC 乂*\n\n
+    ${m.pushName}\n\n*〄 HERE IS THE INVITE LINK*\n\n*〄 CODE: https://chat.whatsapp.com/${INVITE_CODE}`;
       m.reply('*_Please check your inbox for the group invitation link_*');
       vorterx.sendMessage(m.sender, { text: caption });
     } else {
