@@ -1,4 +1,4 @@
-const { Zenith, isUrl,shorten } = require('../../lib/functions');
+const { Zenith, isUrl, MOD_SHORTEN } = require('../../lib/functions');
 
 Zenith(
   {
@@ -21,7 +21,7 @@ Zenith(
     try {
       await react('⌛');
 
-      let RES_SHOTERN = await shorten(args);
+      let RES_SHOTERN = await MOD_SHORTEN(args);
 
       await react('✅');
       vorterx.sendMessage(m.chat, { text: RES_SHOTERN });
