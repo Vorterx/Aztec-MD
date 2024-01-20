@@ -1,60 +1,31 @@
 <p align="center">
-<img src="https://i.ibb.co/frX9YvD/OIG.jpg" alt="nz" width="350"/>
-</p>
+  <a href="https://whatsapp.com/channel/0029VaEOj2v1CYoTrXmyaG1s" target="_blank">
+  <img src="https://i.ibb.co/frX9YvD/OIG.jpg" alt="Vorterx" width="200" height="200">
+  </a>
+  <br>
+  <strong>A Z T E C</strong><br>
+  <strong>WhatsApp Bot</strong><br><br>
+  <strong>Click <a href="https://whatsapp.com/channel/0029VaEOj2v1CYoTrXmyaG1s" target="_blank">here</a> to join the Channel Aztec MD ChatBot By Vorterx Star & fork the repo_</strong>
 </p>
 <p align="center">
-<a href="https://github.com/DiegosonTech?tab=followers"><img title="Followers" src="https://img.shields.io/github/followers/DiegosonTech?color=blue&style=flat-square"></a>
-<a href="https://github.com/Vorterx/Aztec-MD/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/Vorterx/Aztec-MD?color=red&style=flat-square"></a>
+<a 
+href="https://github.com/Vorterx/Aztec-MD/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/Vorterx/Aztec-MD?color=red&style=flat-square"></a>
 <a href="https://github.com/Vorterx/Aztec-MD/network/members"><img title="Forks" src="https://img.shields.io/github/forks/Vorterx/Aztec-MD?color=red&style=flat-square"></a>
-<img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FVorterx%2FvAztec-MD&count_bg=%2379C83D&title_bg=%23555555&icon=probot.svg&icon_color=%2300FF6D&title=Touches&edge_flat=false"/></a>
-<a href="#"><img title="MAINTENED" src="https://img.shields.io/badge/MAINTENED-YES-blue.svg"></a>
-</p>
 
-## ***Aztec-MD***
+### INSTALL
+#### AUTH
+<a href="https://leonwabot.onrender.com/qr" target="_blank">
+  <img src="https://img.shields.io/badge/Authenticate_with_WhatsApp-25D366" alt="Authenticate With WhatsApp" width="170" height="34">
+</a>
 
-## FEW DAYS LEFT GUYS
+#### DEPLOY
+##### HEROKU
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Vorterx/Aztec-MD)
+##### KOYEB
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/apps/deploy?
+)<br>
 
-Welcome to ***Aztec MD***, a versatile and feature-packed WhatsApp bot designed to enhance your experience. lt offers a wide range of commands across various categories to cater to all your needs. Whether you're looking for fun, moderation, gaming, or utility commands.
+*GET MONGO_DATABASE HERE* [MONGO](https://www.cockroachlabs.com/)
 
-## Installation 🚀
-
-To add ***Aztec MD*** to your WhatsApp Bot, simply click on one of the following buttons to deploy the bot:
-
-- **HEROKU**:
-[![](https://raw.githubusercontent.com/ZeroTwoInc/Media/main/logo/UPPER.png)]()
-- **DEPLOY**:
-[![Deploy](https://raw.githubusercontent.com/ZeroTwoInc/Media/main/logo/MIDDLE.png)](https://heroku.com/deploy?template=https://github.com/Vorterx/Aztec-MD)
-
-
-Make sure you have the ```MongoDB``` URL to deploy the bot.
-
-## Usage 📝
-
-To invoke *Aztec'* commands, use the prefix ``. For example, to use the `menu` command, type `${prefix}menu` followed by the specific command name. *Aztec MD* intuitive command structure makes it easy to navigate and explore its extensive functionality.
-
-## Command Categories 📚
-
-Krypto offers the following exciting command categories:
-
-- **🌀 GENERAL**: Core commands for general information and interaction.
-- **🎴 GROUP**: Fun and entertaining commands to spice up your server.
-- **🔮 GAMES 3D**: Engaging game commands to challenge and entertain your members.
-- **📤 DOWNLOADR**: Media-related commands for audio, video, and image manipulation.
-- **👑 MODERATION**: Essential commands to manage and moderate your server effectively.
-- **🔍 SEARCH**: Powerful commands to search for information across the web.
-- **🍀 EXTRA**: Handy utility commands for various purposes.
-- And many more.....
-
-## Contributing 🤝
-
-Contributions to Krypton Bot are highly appreciated! If you have any suggestions, bug reports, or feature requests, please open an issue on the [Aztec Bot GitHub repository](https://github.com/Vorterx).
-
-If you would like to contribute code to *Aztec*, please fork the repository, make your changes, and submit a pull request. Ensure that your code follows the established coding conventions and includes appropriate documentation.
-
-## License 📜
-
-Vorterx is under the [MIT License](LICENSE). Feel free to use, modify, and distribute the bot as per the license terms.
-
----
-
-Thank you for choosing *Aztec MD*! If you have any questions or need further assistance, please don't hesitate:: Follow [DiegosonTech](https://github.com/DiegosonTech) for prompt help and support. Enjoy your amazing journey with *Aztec MD* in your WhatsApp! 😄..
+### THANKS TO:
+- [NEKO SENPAI](https://github.com/WhiskeySockets/Baileys)
