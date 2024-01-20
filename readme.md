@@ -4,7 +4,7 @@
   </a>
   <br>
   <strong>A Z T E C</strong><br>
-  <strong>WhatsApp Bot</strong><br><br>
+  <strong>WhatsChat Bot</strong><br><br>
   <strong>Click <a href="https://whatsapp.com/channel/0029VaEOj2v1CYoTrXmyaG1s" target="_blank">here</a> to join the Channel Aztec MD ChatBot By Vorterx Star & fork the repo_</strong>
 </p>
 <p align="center">
