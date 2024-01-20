@@ -28,8 +28,8 @@ href="https://github.com/Vorterx/Aztec-MD/stargazers/"><img title="Stars" src="h
 [![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/apps/deploy?
 )<br>
 
-*GET MONGO_DATABASE* *HERE*:
-[MONGO](https://www.mongodb.com/atlas/database/)
+## GET MONGO_DB:
+[Mongo](https://www.mongodb.com/atlas/database)
 
 ### THANKS TO:
 - [NEKO SENPAI](https://github.com/WhiskeySockets/Baileys)
