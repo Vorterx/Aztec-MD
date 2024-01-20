@@ -18,14 +18,14 @@ href="https://github.com/Vorterx/Aztec-MD/stargazers/"><img title="Stars" src="h
   <img src="https://img.shields.io/badge/Authenticate_with_WhatsApp-25D366" alt="Authenticate With WhatsApp" width="170" height="34">
 </a>
 
-#### DEPLOY
 ##### HEROKU
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Vorterx/Aztec-MD)
+
 ##### KOYEB
 [![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/apps/deploy?
 )<br>
 
-*GET MONGO_DATABASE HERE* [MONGO](https://www.cockroachlabs.com/)
+*GET MONGO_DATABASE HERE* [MONGO](https://www.mongodb.com/atlas/database/)
 
 ### THANKS TO:
 - [NEKO SENPAI](https://github.com/WhiskeySockets/Baileys)
