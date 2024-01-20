@@ -32,4 +32,4 @@ href="https://github.com/Vorterx/Aztec-MD/stargazers/"><img title="Stars" src="h
 [Mongo](https://www.mongodb.com/atlas/database)
 
 ### THANKS TO:
-- [NEKO SENPAI](https://github.com/WhiskeySockets/Baileys)
+- [NEKO SENPAI](https://github.com/NekoSenpai69)
