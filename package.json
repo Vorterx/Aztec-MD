@@ -55,6 +55,7 @@
     "mumaker": "^2.0.0",
     "moment-timezone": "^0.5.41",
     "mongoose": "^7.5.3",
+    "mime-to-extensions": "latest",
     "mal-scraper": "^2.11.4",
     "neofetch": "^7.1.0",
     "node-youtube-music": "^0.8.3",
