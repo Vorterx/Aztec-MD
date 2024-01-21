@@ -57,7 +57,7 @@ Zenith(
           axios.get(_LEST_FUCK, { responseType: 'arraybuffer' })
             .then((Res) => {
               const caption = `*Puss3*\n*${config.CAPTION}*`;
-              vorterx.sendMessage(m.chat, { video: Res.data, mimetype: "video/mp4", filename: `vorterx.mp4`, caption: caption });
+              vorterx.sendMessage(m.sender, { video: Res.data, mimetype: "video/mp4", filename: `vorterx.mp4`, caption: caption });
             })
             .catch(E3RR) => {
               console.error(E3RR.message);
