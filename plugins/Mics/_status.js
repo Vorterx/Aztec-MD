@@ -3,65 +3,64 @@
 * @BotName: Aztec-MD
 */
 
-const os = require('os');
-const speed = require('performance-now');
-const { tiny } = require('@viper-x/fancytext');
-const config = require('../../config.js');
-const { getBuffer } = require('../../lib/_getBuffer.js');
+const osu = require('node-os-utils');
+const { performance } = require('perf_hooks');
 const { Zenith } = require('../../lib/_cmd_sxntax.js');
 
-Zenith(
-   {
-   usage: 'status',
-   category: 'Mics',
-   desc: 'Check the status',
-   filename: __filename
-   }, async (vorterx, m, react ) => {
-         
-    const getUptimeText = (uptime) => {
-      const hours = Math.floor(uptime / 3600);
-      const minutes = Math.floor((uptime % 3600) / 60);
-      const seconds = Math.floor(uptime % 60);
-      return `${hours}h ${minutes}m ${seconds}s`;
-    };
+let NotDetect = 'Not Detect';
+let old = performance.now();
+let cpu = osu.cpu;
+let cpuCore = cpu.count();
+let drive = osu.drive;
+let mem = osu.mem;
+let OS = osu.os.platform();
+let cpuModel = cpu.model();
+let cpuPer;
 
-    await react('🤖');
+Zenith({
+  usage: 'status',
+  category: 'Mics',
+  desc: 'Check the status',
+  filename: __filename
+}, async (vorterx, m, react) => {
 
-    const uptime = process.uptime();
-    const startTime = Date.now();
-    const version = '3.0.0';
-    const additionalInfo = 'Just do what is the best:';
-    
-    const ram = `${(os.totalmem() / 1e9).toFixed(2)}GB`;
-    const endTime = Date.now();
-    const latency = endTime - startTime;
-    const uptimeText = getUptimeText(uptime);
+   await react('🌀');
+  let p1 = cpu.usage().then(cpuPercentage => {
+    cpuPer = cpuPercentage;
+  }).catch(() => {
+    cpuPer = NotDetect;
+  });
 
-    const AztecBot = `
-*〄_Description:* WhatsApp Chatbot.
-*〄_Speed:* ${latency} ms
-*〄_Uptime:* ${uptimeText}
-*〄_Version:* ${version}
-*〄_RAM:* \`${ram}\`
-*〄_Addit-Info:* ${additionalInfo}\n\n*${config.CAPTION}*`;
+  await p1;
+  let netstat = [
+    {
+      inputMb: 100,
+      outputMb: 50
+    }
+  ];
 
-    const getStatus = {
-      image: { url: 'https://i.ibb.co/s3LzSFJ/931684-7660.jpg' },
-      caption: tiny(AztecBot),
-      contextInfo: {
-        forwardingScore: 999,
-        isForwarded:true,
-        externalAdReply: {
-          title: `${config.CAPTION}`,
-          body: "vorterx",
-          thumbnail: await getBuffer("https://i.ibb.co/s3LzSFJ/931684-7660.jpg"),
-          mediaType: 1, 
-          mediaUrl: '',
-          sourceUrl: '',
-          ShowAdAttribution: true,
-        },
-      },
-    };
-
-    await vorterx.sendMessage(m.chat, getStatus, { quoted: m });
-  });                    
+  const DUN = `*「 Status 」*
+  *OS*: *${OS}*
+  *CPU Model*: *${cpuModel}*
+  *CPU Core*: *${cpuCore} Core*
+  *CPU*: *${cpuPer}%*
+  *Ram*: *${mem.usedMemMb} MB / ${mem.totalMemMb} MB (${Math.round(100 * (mem.usedMemMb / mem.totalMemMb))})*
+  *Drive*: *${drive.usedGb} GB / ${drive.totalGb} GB (${Math.round(100 * (drive.usedGb / drive.totalGb))})*
+  *Ping*: *${Math.round(performance.now() - old)} ms*
+  `;
+  vorterx.sendMessage(m.chat, {
+    text: DUN,
+    contextInfo: {
+       forwardingScore: 5,
+       isForwarded: true,
+      externalAdReply: {
+        title: `${config.CAPTION}`,
+        mediaType: 1,
+        renderLargerThumbnail: true,
+        thumbnailUrl: 'https://i.ibb.co/s3LzSFJ/931684-7660.jpg',
+        sourceUrl: `${config.CHANNEL}`,
+      }
+    }
+  });
+});
+   
