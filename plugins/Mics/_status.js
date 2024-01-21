@@ -5,7 +5,7 @@
 
 const osu = require('node-os-utils');
 const { performance } = require('perf_hooks');
-const { Zenith } = require('../../lib/_cmd_sxntax.js');
+const { Zenith,getBuffer } = require('../../lib/_cmd_sxntax.js');
 
 let NotDetect = 'Not Detect';
 let old = performance.now();
@@ -57,7 +57,7 @@ Zenith({
         title: `${config.CAPTION}`,
         mediaType: 1,
         renderLargerThumbnail: true,
-        thumbnailUrl: 'https://i.ibb.co/s3LzSFJ/931684-7660.jpg',
+        thumbnail: await getBuffer('https://i.ibb.co/s3LzSFJ/931684-7660.jpg'),
         sourceUrl: `${config.CHANNEL}`,
       }
     }
