@@ -5,6 +5,7 @@
 
 const osu = require('node-os-utils');
 const { performance } = require('perf_hooks');
+const config = require('../../config');
 const { Zenith,getBuffer } = require('../../lib/_cmd_sxntax.js');
 
 let NotDetect = 'Not Detect';
