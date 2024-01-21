@@ -122,7 +122,7 @@ fs.existsSync(session) || console.error(`Error: ${session} _Please provide creds
     startAztec();
 } else if (connection === "open") {
       
-    console.log('[🐲AZTEC] Connection opened. Plugins loaded♻️\nWhatsApp chatbot has connected✔️');
+    console.log('Plugins loaded♻️\nWhatsApp chatbot has connected✔️');
           
       const text = 'AZTEC';
   const rainbow = {
