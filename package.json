@@ -52,6 +52,7 @@
     "file-type": "^16.3.0",
     "form-data": "^4.0.0",
     "fs-extra": "^10.0.0",
+    "perf_hooks": "*",
     "mumaker": "^2.0.0",
     "moment-timezone": "^0.5.41",
     "mongoose": "^7.5.3",
