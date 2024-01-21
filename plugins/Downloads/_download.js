@@ -58,7 +58,7 @@ Zenith(
 //---------------------------------------------------------------------------                                                                                   
 //---------------------------------------------------------------------------                                
 
-Zenith(
+/*Zenith(
   {
     usage: "xnxxdn",
     desc: "Download XNXX videos",
@@ -110,4 +110,4 @@ Zenith(
     return await vorterx.sendMessage(m.chat, buttonMessage, { quoted: m });
   }
 );
-      
+    */  
