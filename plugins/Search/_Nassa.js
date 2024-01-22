@@ -1,5 +1,6 @@
 const { Zenith } = require('../lib/functions');
 const fetch = async (url) => import('node-fetch').then(module => module.default(url));
+const config = require('../../config');
 
 Zenith(
   {
