@@ -1,4 +1,4 @@
-const {Zenith } = require('../..lib/functions');
+const { Zenith, sleep } = require('../..lib/functions');
 
 Zenith({ usage: 'countdown', desc: 'Spooky countdown prank', category: 'Prank' }, async (vorterx, m, react) => {
  
