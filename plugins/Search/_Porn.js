@@ -1,4 +1,5 @@
 const { Zenith } = require('../../lib/functions');
+const fetch = async (url) => import('node-fetch').then(module => module.default(url));
 
 Zenith({ 
   usage: 'porn',
