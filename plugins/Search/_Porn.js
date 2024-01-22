@@ -4,7 +4,7 @@ const fetch = async (url) => import('node-fetch').then(module => module.default(
 Zenith({ 
   usage: 'porn',
   desc: '18+',
-  category: 'Downloads',
+  category: 'Search',
 }, async (vorterx, m, react, { args }) => {
 
   if (!args) {
