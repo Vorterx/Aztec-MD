@@ -1,4 +1,3 @@
-//
 const { Zenith } = require('../../lib/functions');
 const config = require('../../config');
 
@@ -8,14 +7,15 @@ Zenith({
   alias: ['pint'],
   category: 'Downloads',
 }, async (vorterx, m, react, { args }) => {
-  if (!args || !args.includes("https://pin.it")) {
-    console.error("BAKA!! Provide a valid pin link");
-    return m.reply('BAKA!! Provide a valid pin link');
+ 
+  if (!(args?.includes("https://pin.it"))) {
+    console.error("Provide a valid pin url");
+    await react('❌');
+    return m.reply('*_Pllease provide a valid Pinterest url_*');
   }
 
   await react("🍁");
-
-  const { data: responseData } = await axios.post(
+  const { data: RES_DATA } = await axios.post(
     'https://offeo.com/download/wp-json/aio-dl/video-data/',
     { url: args },
     {
@@ -26,13 +26,11 @@ Zenith({
     }
   );
 
-  let responseMessage = `*✨ Post Details: ✨*\n- *URL:* ${responseData.url}\n- *Title:* ${responseData.title}\n- *Duration:* ${responseData.duration}\n- *Source:* ${responseData.source}\n\n`;
-
-  responseData.medias.forEach(media => {
-    responseMessage += `*✨ Media: ✨*\n- *Quality:* ${media.quality}\n- *Extension:* ${media.extension}\n- *Size:* ${media.size}\n- *Formatted Size:* ${media.formattedSize}\n- *Video Available:* ${media.videoAvailable}\n- *Audio Available:* ${media.audioAvailable}\n- *Cached:* ${media.cached}\n\n`;
+    let PINTERS = `*Title:* ${RES_DATA.title}\n\n*${config.CAPTION}*`;
+    RES_DATA.medias.forEach(media => {
+    PINTERS += `*Quality:* ${media.quality}\n- *Size:* ${media.size}\n\n*${config.CAPTION}*`;
   });
 
-  const videoUrl = responseData.medias[0].url;
-
-  await vorterx.sendMessage(m.chat, { video: { url: videoUrl }, caption: `🚀 Powered by ${botName}\n\n${responseMessage}` }, { quoted: m });
+  const VERGAS = RES_DATA.medias[0].url;
+  await vorterx.sendMessage(m.chat, { video: { url: VERGAS }, caption: RES_DATA }, { quoted: m });
 });
