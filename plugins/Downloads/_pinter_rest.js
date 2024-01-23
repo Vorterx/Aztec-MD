@@ -9,12 +9,11 @@ Zenith({
 }, async (vorterx, m, react, { args }) => {
  
   if (!(args?.includes("https://pin.it"))) {
-    console.error("Provide a valid pin url");
     await react('❌');
     return m.reply('*_Pllease provide a valid Pinterest url_*');
   }
 
-  await react("🍁");
+  await react("🏜️");
   const { data: RES_DATA } = await axios.post(
     'https://offeo.com/download/wp-json/aio-dl/video-data/',
     { url: args },
