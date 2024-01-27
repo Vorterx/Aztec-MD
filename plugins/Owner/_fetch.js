@@ -1,4 +1,6 @@
 const axios = require('axios');
+const { Zenith } = require('../../lib/functions');
+const config = require('../../config');
 
 Zenith(
   {
