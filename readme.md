@@ -12,10 +12,9 @@
 href="https://github.com/Vorterx/Aztec-MD/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/Vorterx/Aztec-MD?color=red&style=flat-square"></a>
 <a href="https://github.com/Vorterx/Aztec-MD/network/members"><img title="Forks" src="https://img.shields.io/github/forks/Vorterx/Aztec-MD?color=red&style=flat-square"></a>
 
-### INSTALL
 #### AUTH
 <a href="https://leonwabot.onrender.com/qr" target="_blank">
-  <img src="https://img.shields.io/badge/Authenticate_with_WhatsApp-25D366" alt="Authenticate With WhatsApp" width="170" height="34">
+  <img src="https://img.shields.io/badge/SESSION ID-black?style=for-the-badge&logo=render" alt="Authenticate With WhatsApp" width="170" height="34">
 </a>
 
 ## Get updates:
