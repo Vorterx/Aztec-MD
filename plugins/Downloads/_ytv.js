@@ -24,8 +24,8 @@ Zenith({ usage: 'ytv',
     const _DETA = await yts({ videoId: ytdl.getURLVideoID(args) });
 
     const _INFO = `
- *Title:* ${DETA.title}
- *Author:* ${DETA.author.name}\n\n*${config.CAPTION}*
+ *Title:* ${_DETA.title}
+ *Author:* ${_DETA.author.name}\n\n*${config.CAPTION}*
 `;
 
     await vorterx.sendMessage(m.chat, { video: _INFOR, mimetype: 'video/mp4', caption: _INFO });
