@@ -21,7 +21,7 @@ Zenith(
     axios.get(isDiego, { responseType: 'arraybuffer' })
       .then((response) => {
         const to_IMG = Buffer.from(response.data, 'binary');
-        await react('✳️');
+        await react('✅');
 
         vorterx.sendMessage(
           m.chat,
