@@ -20,6 +20,7 @@ Zenith({ usage: 'ytv',
   _IS_VID.on('data', (chunk) => _EXT.push(chunk));
   _IS_VID.on('end', async () => {
     const _INFOR = Buffer.concat(_EXT);
+    const get3RR = (e) => (console.error(e), m.reply('*_E3RR 404_*'));
     const _DETA = await yts({ videoId: ytdl.getURLVideoID(args) });
 
     const _INFO = `
@@ -28,7 +29,7 @@ Zenith({ usage: 'ytv',
 `;
 
     await vorterx.sendMessage(m.chat, { video: _INFOR, mimetype: 'video/mp4', caption: _INFO });
-  }, (e) => 
-    console.error(e) 
-    m.reply('*_E3RR 404_*');
+  } else {
+    await react('❌');
+    }
 });
